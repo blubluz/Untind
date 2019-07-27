@@ -1,0 +1,6 @@
+framework module Pods_Untind {
+  umbrella header "Pods-Untind-umbrella.h"
+
+  export *
+  module * { export * }
+}

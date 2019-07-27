@@ -1,0 +1,6 @@
+framework module Pods_UntindTests {
+  umbrella header "Pods-UntindTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
