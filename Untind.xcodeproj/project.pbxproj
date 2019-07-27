@@ -97,11 +97,10 @@
 		0E17A38422EC8DF500390BA5 /* Untind */ = {
 			isa = PBXGroup;
 			children = (
+				0E17A3B522EC8E4700390BA5 /* Assets */,
+				0E17A3B422EC8E3A00390BA5 /* Storyboards */,
+				0E17A3B322EC8E3400390BA5 /* View Controllers */,
 				0E17A38522EC8DF500390BA5 /* AppDelegate.swift */,
-				0E17A38722EC8DF500390BA5 /* ViewController.swift */,
-				0E17A38922EC8DF500390BA5 /* Main.storyboard */,
-				0E17A38C22EC8DF600390BA5 /* Assets.xcassets */,
-				0E17A38E22EC8DF600390BA5 /* LaunchScreen.storyboard */,
 				0E17A39122EC8DF600390BA5 /* Info.plist */,
 			);
 			path = Untind;
@@ -123,6 +122,31 @@
 				0E17A3A722EC8DF600390BA5 /* Info.plist */,
 			);
 			path = UntindUITests;
+			sourceTree = "<group>";
+		};
+		0E17A3B322EC8E3400390BA5 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0E17A38722EC8DF500390BA5 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0E17A3B422EC8E3A00390BA5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0E17A38922EC8DF500390BA5 /* Main.storyboard */,
+				0E17A38E22EC8DF600390BA5 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0E17A3B522EC8E4700390BA5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0E17A38C22EC8DF600390BA5 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,15 +457,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 339G5DV22M;
 				INFOPLIST_FILE = Untind/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind;
+				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind.MVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -450,15 +476,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 339G5DV22M;
 				INFOPLIST_FILE = Untind/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind;
+				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind.MVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
