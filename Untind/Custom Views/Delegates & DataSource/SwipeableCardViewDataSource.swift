@@ -26,7 +26,7 @@ protocol SwipeableCardViewDataSource: class {
     ///
     /// - Parameter index: index of the card to be displayed
     /// - Returns: card view to display
-    func card(forItemAtIndex index: Int) -> SwipeableCardView
+    func card(forItemAtIndex index: Int) -> SwipeableCardViewCard
 
     /// Provides a View to be displayed underneath all of the
     /// cards when all cards have been swiped away.

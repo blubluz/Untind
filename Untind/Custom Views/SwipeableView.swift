@@ -54,6 +54,7 @@ class SwipeableView: UIView {
     }
 
     deinit {
+        print("Dealloc -> SwipeableView")
         if let panGestureRecognizer = panGestureRecognizer {
             removeGestureRecognizer(panGestureRecognizer)
         }
