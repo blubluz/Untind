@@ -101,6 +101,7 @@ class SwipeableView: UIView {
             transform = CATransform3DRotate(transform, rotationAngle, 0, 0, 1)
             transform = CATransform3DTranslate(transform, panGestureTranslation.x, panGestureTranslation.y, 0)
             layer.transform = transform
+            delegate?.didSwipe(onView: self, percent: dragPercentage)
         case .ended:
             endedPanAnimation()
             layer.shouldRasterize = false

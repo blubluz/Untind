@@ -17,7 +17,7 @@ extension UIView {
     /// - Parameter cornerRadius: the corner radius to apply to specified corners
     /// - Parameter corners: the corners to apply the cornerRadius to
 
-    func roundCorners(cornerRadius: Double, corners: UIRectCorner) {
+    func roundCorners(cornerRadius: CGFloat, corners: UIRectCorner) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let maskLayer = CAShapeLayer()
         maskLayer.frame = self.bounds
@@ -76,5 +76,5 @@ extension UIView {
                                constant: 0)
             ])
     }
-    
+
 }

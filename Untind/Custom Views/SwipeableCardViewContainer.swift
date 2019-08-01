@@ -9,6 +9,8 @@
 import UIKit
 
 class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
+   
+    
 
     static let horizontalInset: CGFloat = 12.0
 
@@ -85,12 +87,11 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
     ///   - cardView: card view to update frame on
     ///   - index: index used to apply horizontal and vertical insets
     private func setFrame(forCardView cardView: SwipeableCardViewCard, atIndex index: Int) {
-        
-        if index == 0 {
             let cardViewFrame = bounds
             cardView.frame = cardViewFrame
-        } else {
-            cardView.frame = CGRect(x: -1000, y: -1000, width: bounds.size.width, height: bounds.size.height)
+        if index > 0 {
+            cardView.transform = CGAffineTransform(scaleX: 0.55, y: 0.55)
+            cardView.alpha = 0.35
         }
     }
 
@@ -100,6 +101,12 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
 
 extension SwipeableCardViewContainer {
 
+    
+    func didSwipe(onView view: SwipeableView, percent: CGFloat) {
+      
+    }
+    
+    
     func didTap(view: SwipeableView) {
         if let cardView = view as? SwipeableCardViewCard,
             let index = cardViews.firstIndex(of: cardView) {
@@ -115,18 +122,28 @@ extension SwipeableCardViewContainer {
         guard let dataSource = dataSource else {
             return
         }
-
-        // Remove swiped card
-        view.removeFromSuperview()
+        
+        
+        
+        var newVisibleCardViews = visibleCardViews
+        newVisibleCardViews.removeLast()
         
         // Bring new card on top
-        for (cardIndex, cardView) in visibleCardViews.reversed().enumerated() {
-            UIView.animate(withDuration: 0.4, animations: {
+        for (cardIndex, cardView) in newVisibleCardViews.reversed().enumerated() {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 2, options: .curveLinear, animations: {
+                
                 cardView.center = self.center
+                cardView.transform = CGAffineTransform.identity
+                cardView.alpha = 1
                 self.setFrame(forCardView: cardView, atIndex: cardIndex)
+                
                 self.layoutIfNeeded()
-            })
+            }) { (success : Bool) in
+                // Remove swiped card
+                view.removeFromSuperview()
+            }
         }
+        
         
         // Only add a new card if there are cards remaining
         if remainingCards > 0 {
@@ -136,17 +153,6 @@ extension SwipeableCardViewContainer {
             
             // Add new card as Subview
             addCardView(cardView: dataSource.card(forItemAtIndex: newIndex), atIndex: 1)
-
-//            // Update all existing card's frames based on new indexes, animate frame change
-//            // to reveal new card from underneath the stack of existing cards.
-//            for (cardIndex, cardView) in visibleCardViews.reversed().enumerated() {
-//                UIView.animate(withDuration: 0.4, animations: {
-//                    cardView.center = self.center
-//                    self.setFrame(forCardView: cardView, atIndex: cardIndex)
-//                    self.layoutIfNeeded()
-//                })
-//            }
-
         }
     }
 

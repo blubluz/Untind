@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SwipeableViewDelegate: class {
 
@@ -15,5 +16,7 @@ protocol SwipeableViewDelegate: class {
     func didBeginSwipe(onView view: SwipeableView)
 
     func didEndSwipe(onView view: SwipeableView)
+    
+    func didSwipe(onView view: SwipeableView, percent: CGFloat)
 
 }

@@ -31,7 +31,7 @@ class FeedViewController: UIViewController {
 //MARK: - SwipeableCardViewDataSource
 extension FeedViewController: SwipeableCardViewDataSource {
     func numberOfCards() -> Int {
-        return 2
+        return 10
     }
     
     func card(forItemAtIndex index: Int) -> SwipeableCardViewCard {

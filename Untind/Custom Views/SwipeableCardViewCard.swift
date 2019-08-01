@@ -12,6 +12,7 @@ class SwipeableCardViewCard: SwipeableCardView {
 
    
     /// Outlets
+    @IBOutlet weak var topViewShadowContainer: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewBar: UIView!
     @IBOutlet weak var topViewOptions: UIView!
@@ -51,25 +52,28 @@ class SwipeableCardViewCard: SwipeableCardView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        topViewBar.roundCorners(cornerRadius: 40, corners: [.bottomLeft,.bottomRight])
-        bottomViewBar.roundCorners(cornerRadius: 40, corners: [.topLeft,.topRight])
+
+//        topViewBar.roundCorners(cornerRadius: 44, corners: [.bottomLeft,.bottomRight])
+//        bottomViewBar.roundCorners(cornerRadius: 44, corners: [.topLeft,.topRight])
         topViewOptions.alpha = 0 //start with questions first
         
-        topView.layer.cornerRadius = 20
         bottomView.layer.cornerRadius = 20
+        topView.layer.cornerRadius = 20
         
-        // set the shadow properties
-        topView.layer.shadowColor = UIColor.black.cgColor
-        topView.layer.shadowOffset = CGSize(width: 8, height: 15)
-        topView.layer.shadowOpacity = 0.4
-        topView.layer.shadowRadius = 8
+//        topViewShadowContainer.layer.cornerRadius = 20
+//        topViewShadowContainer.layer.shadowColor = UIColor.black.cgColor
+//        topViewShadowContainer.layer.shadowOffset = CGSize(width: 10.0, height: bounds.height/15)
+//        topViewShadowContainer.layer.shadowRadius = 12
+//        topViewShadowContainer.layer.shadowOpacity = 1
+//        topViewShadowContainer.layer.shadowPath = UIBezierPath(roundedRect: topViewShadowContainer.bounds, cornerRadius: 20).cgPath
+//        topViewShadowContainer.layer.masksToBounds = false
         
         // set the shadow properties
         bottomView.layer.shadowColor = UIColor.black.cgColor
         bottomView.layer.shadowOffset = CGSize(width: 6, height: 6)
         bottomView.layer.shadowOpacity = 0.2
         bottomView.layer.shadowRadius = 4.0
+        
     }
     
     
@@ -92,7 +96,7 @@ class SwipeableCardViewCard: SwipeableCardView {
                 self.topViewOptions.alpha = 1
                 self.topViewQuestions.alpha = 0
                 self.bottomViewTrailingConstraint.constant = 5
-                self.bottomViewBottomConstraint.constant = 35
+                self.bottomViewBottomConstraint.constant = self.bottomView.frame.origin.y - 10
                 self.layoutIfNeeded()
             }, completion: nil)
         }
@@ -112,18 +116,6 @@ class SwipeableCardViewCard: SwipeableCardView {
         insertSubview(shadowView, at: 0)
         self.shadowView = shadowView
         
-        // Roll/Pitch Dynamic Shadow
-        //        if motionManager.isDeviceMotionAvailable {
-        //            motionManager.deviceMotionUpdateInterval = 0.02
-        //            motionManager.startDeviceMotionUpdates(to: .main, withHandler: { (motion, error) in
-        //                if let motion = motion {
-        //                    let pitch = motion.attitude.pitch * 10 // x-axis
-        //                    let roll = motion.attitude.roll * 10 // y-axis
-        //                    self.applyShadow(width: CGFloat(roll), height: CGFloat(pitch))
-        //                }
-        //            })
-        //        }
-        self.applyShadow(width: CGFloat(0.0), height: CGFloat(0.0))
     }
     
     private func applyShadow(width: CGFloat, height: CGFloat) {
