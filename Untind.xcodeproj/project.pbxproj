@@ -40,6 +40,7 @@
 		0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */; };
 		0E61DD6A22EF8DC900C1C8C7 /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6922EF8DC900C1C8C7 /* SwipeableCardViewCard.swift */; };
 		0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */; };
+		0EFC0AEE22F5CD1D00DC8BBD /* UTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */; };
 		9BEF1F06E29B66E1012EF409 /* Pods_Untind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */; };
 		9D7472092E23377E3094DD16 /* Pods_UntindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */; };
 		B0DDED9204B14A0D7F50C79B /* Pods_UntindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EE0AE1F6BF96288417DC38 /* Pods_UntindTests.framework */; };
@@ -101,6 +102,7 @@
 		0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDataSource.swift; sourceTree = "<group>"; };
 		0E61DD6922EF8DC900C1C8C7 /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
 		0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeableCardViewCard.xib; sourceTree = "<group>"; };
+		0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTTextField.swift; sourceTree = "<group>"; };
 		11EE0AE1F6BF96288417DC38 /* Pods_UntindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UntindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1304353B4B53B382BC0262C3 /* Pods-Untind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Untind.release.xcconfig"; path = "Target Support Files/Pods-Untind/Pods-Untind.release.xcconfig"; sourceTree = "<group>"; };
 		25C1EEBC1C73143988562697 /* Pods-UntindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UntindUITests.release.xcconfig"; path = "Target Support Files/Pods-UntindUITests/Pods-UntindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				0E61DD6922EF8DC900C1C8C7 /* SwipeableCardViewCard.swift */,
 				0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */,
 				0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */,
+				0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				0E61DD6A22EF8DC900C1C8C7 /* SwipeableCardViewCard.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
+				0EFC0AEE22F5CD1D00DC8BBD /* UTTextField.swift in Sources */,
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,

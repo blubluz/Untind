@@ -25,6 +25,15 @@ extension UIView {
         self.layer.mask = maskLayer
     }
     
+    func shake() {
+        self.transform = CGAffineTransform(translationX: 10, y: 0)
+        self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            
+        UIView.animate(withDuration: 0.4 , delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            self.transform = CGAffineTransform.identity
+        }, completion: nil)
+    }
+    
     /// Adds a view as a subview and constrains it to the edges
     /// of its new containing view.
     ///
@@ -47,7 +56,7 @@ extension UIView {
                                attribute: .top,
                                relatedBy: .equal,
                                toItem: self,
-                               attribute: .top,
+                               attribute: .topMargin,
                                multiplier: 1.0,
                                constant: 0),
             // Bottom
@@ -55,7 +64,7 @@ extension UIView {
                                attribute: .bottom,
                                relatedBy: .equal,
                                toItem: self,
-                               attribute: .bottom,
+                               attribute: .bottomMargin,
                                multiplier: 1.0,
                                constant: 0),
             // Left
@@ -75,6 +84,14 @@ extension UIView {
                                multiplier: 1.0,
                                constant: 0)
             ])
+    }
+    
+    internal func activateConstraints(constraints: [NSLayoutConstraint]) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraints(constraints)
+        for constraint in self.constraints {
+            constraint.isActive = true
+        }
     }
 
 }

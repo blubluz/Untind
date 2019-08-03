@@ -19,9 +19,16 @@ class SwipeableCardViewCard: SwipeableCardView {
     @IBOutlet weak var topViewQuestions: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewBar: UIView!
+    @IBOutlet weak var answerButton: UIButton!
+    @IBOutlet weak var bottomBarImageView: UIImageView!
+    @IBOutlet weak var topBarImageView: UIImageView!
     
     @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var answerButtonBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var questionLabel: UILabel!
+    private var isInAnswerMode : Bool = false
     /// Inner Margin
     private static let kInnerMargin: CGFloat = 20.0
     
@@ -30,7 +37,6 @@ class SwipeableCardViewCard: SwipeableCardView {
     
     
     var isFlipped = false
-    
     
     //    var viewModel: SampleSwipeableCellViewModel? {
     //        didSet {
@@ -68,12 +74,13 @@ class SwipeableCardViewCard: SwipeableCardView {
 //        topViewShadowContainer.layer.shadowPath = UIBezierPath(roundedRect: topViewShadowContainer.bounds, cornerRadius: 20).cgPath
 //        topViewShadowContainer.layer.masksToBounds = false
         
+            answerButtonBottomConstraint.constant =  answerButton.frame.size.height/2 - bottomView.frame.origin.y/2 
+        
         // set the shadow properties
         bottomView.layer.shadowColor = UIColor.black.cgColor
         bottomView.layer.shadowOffset = CGSize(width: 6, height: 6)
         bottomView.layer.shadowOpacity = 0.2
         bottomView.layer.shadowRadius = 4.0
-        
     }
     
     
@@ -102,6 +109,29 @@ class SwipeableCardViewCard: SwipeableCardView {
         }
     }
     
+    @IBAction func answerButtonTapped(_ sender: Any) {
+        
+        if !isInAnswerMode {
+            isInAnswerMode = true
+            answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+                self.topBarImageView.tintColor = #colorLiteral(red: 0.2, green: 0.262745098, blue: 0.3058823529, alpha: 1)
+                self.bottomBarImageView.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                self.bottomView.backgroundColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
+                self.layoutIfNeeded()
+            }, completion: nil)
+            
+        } else {
+            isInAnswerMode = false
+            answerButton.setImage(UIImage(named: "answer-button"), for: .normal)
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+                self.topBarImageView.tintColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
+                self.bottomBarImageView.tintColor = #colorLiteral(red: 0.1294117647, green: 0.8156862745, blue: 0.7254901961, alpha: 1)
+                self.bottomView.backgroundColor = #colorLiteral(red: 0.2352941176, green: 0.3098039216, blue: 0.3607843137, alpha: 1)
+                self.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
     
     
     // MARK: - Shadow
