@@ -7,14 +7,15 @@
 //
 
 import UIKit
-
 class SwipeableCardViewCard: SwipeableCardView {
 
    
+    
     /// Outlets
     @IBOutlet weak var topViewShadowContainer: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewBar: UIView!
+    @IBOutlet weak var topViewBottomView: UIView!
     @IBOutlet weak var topViewOptions: UIView!
     @IBOutlet weak var topViewQuestions: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -23,12 +24,31 @@ class SwipeableCardViewCard: SwipeableCardView {
     @IBOutlet weak var bottomBarImageView: UIImageView!
     @IBOutlet weak var topBarImageView: UIImageView!
     
+    @IBOutlet weak var questionCardLine: UIImageView!
     @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var answerButtonBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var questionLabel: UILabel!
-    private var isInAnswerMode : Bool = false
+    
+    @IBOutlet weak var smallQuestionLabel: UILabel!
+    @IBOutlet weak var answerTextField: UTTextField!
+    
+    private var isInAnswerMode : Bool = false {
+        didSet {
+            let themeMode = isInAnswerMode ? ThemeMode.answer : ThemeMode.question
+            NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : themeMode])
+            if isInAnswerMode == true {
+                answerTextField.textField.becomeFirstResponder()
+                answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
+                animateAnswerOptions(onScreen: true)
+            } else {
+                answerButton.setImage(UIImage(named: "answer-button"), for: .normal)
+                animateAnswerOptions(onScreen: false)
+            }
+        }
+    }
+    
     /// Inner Margin
     private static let kInnerMargin: CGFloat = 20.0
     
@@ -38,50 +58,40 @@ class SwipeableCardViewCard: SwipeableCardView {
     
     var isFlipped = false
     
-    //    var viewModel: SampleSwipeableCellViewModel? {
-    //        didSet {
-    //            configure(forViewModel: viewModel)
-    //        }
-    //    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+      
+        
+    }
     
-    //    private func configure(forViewModel viewModel: SampleSwipeableCellViewModel?) {
-    //        if let viewModel = viewModel {
-    //            titleLabel.text = viewModel.title
-    //            subtitleLabel.text = viewModel.subtitle
-    //            imageBackgroundColorView.backgroundColor = viewModel.color
-    //            imageView.image = viewModel.image
-    //
-    //            backgroundContainerView.layer.cornerRadius = 14.0
-    //            addButton.layer.cornerRadius = addButton.frame.size.height/4
-    //        }
-    //    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+ 
     
     override func layoutSubviews() {
         super.layoutSubviews()
 
-//        topViewBar.roundCorners(cornerRadius: 44, corners: [.bottomLeft,.bottomRight])
-//        bottomViewBar.roundCorners(cornerRadius: 44, corners: [.topLeft,.topRight])
         topViewOptions.alpha = 0 //start with questions first
         
         bottomView.layer.cornerRadius = 20
         topView.layer.cornerRadius = 20
-        
-//        topViewShadowContainer.layer.cornerRadius = 20
-//        topViewShadowContainer.layer.shadowColor = UIColor.black.cgColor
-//        topViewShadowContainer.layer.shadowOffset = CGSize(width: 10.0, height: bounds.height/15)
-//        topViewShadowContainer.layer.shadowRadius = 12
-//        topViewShadowContainer.layer.shadowOpacity = 1
-//        topViewShadowContainer.layer.shadowPath = UIBezierPath(roundedRect: topViewShadowContainer.bounds, cornerRadius: 20).cgPath
-//        topViewShadowContainer.layer.masksToBounds = false
-        
-            answerButtonBottomConstraint.constant =  answerButton.frame.size.height/2 - bottomView.frame.origin.y/2 
+        answerButtonBottomConstraint.constant =  answerButton.frame.size.height/2 - bottomView.frame.origin.y/2 - 10
         
         // set the shadow properties
         bottomView.layer.shadowColor = UIColor.black.cgColor
         bottomView.layer.shadowOffset = CGSize(width: 6, height: 6)
         bottomView.layer.shadowOpacity = 0.2
         bottomView.layer.shadowRadius = 4.0
+        
+        
+        self.smallQuestionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
+        self.answerTextField.transform = CGAffineTransform(translationX: 0, y: 10 + self.frame.size.height)
+        
     }
+    
     
     
     // MARK: - Actions
@@ -113,23 +123,8 @@ class SwipeableCardViewCard: SwipeableCardView {
         
         if !isInAnswerMode {
             isInAnswerMode = true
-            answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-                self.topBarImageView.tintColor = #colorLiteral(red: 0.2, green: 0.262745098, blue: 0.3058823529, alpha: 1)
-                self.bottomBarImageView.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                self.bottomView.backgroundColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
-                self.layoutIfNeeded()
-            }, completion: nil)
-            
         } else {
             isInAnswerMode = false
-            answerButton.setImage(UIImage(named: "answer-button"), for: .normal)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-                self.topBarImageView.tintColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
-                self.bottomBarImageView.tintColor = #colorLiteral(red: 0.1294117647, green: 0.8156862745, blue: 0.7254901961, alpha: 1)
-                self.bottomView.backgroundColor = #colorLiteral(red: 0.2352941176, green: 0.3098039216, blue: 0.3607843137, alpha: 1)
-                self.layoutIfNeeded()
-            }, completion: nil)
         }
     }
     
@@ -157,6 +152,73 @@ class SwipeableCardViewCard: SwipeableCardView {
             shadowView.layer.shadowOffset = CGSize(width: width, height: height)
             shadowView.layer.shadowOpacity = 0.15
             shadowView.layer.shadowPath = shadowPath.cgPath
+        }
+    }
+    
+    //MARK: - ANIMATIONS
+    
+    private func animateAnswerOptions(onScreen: Bool) {
+        if onScreen == false {
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+                self.topBarImageView.tintColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
+                self.bottomBarImageView.tintColor = #colorLiteral(red: 0.1294117647, green: 0.8156862745, blue: 0.7254901961, alpha: 1)
+                self.bottomView.backgroundColor = #colorLiteral(red: 0.2352941176, green: 0.3098039216, blue: 0.3607843137, alpha: 1)
+                self.layoutIfNeeded()
+            }, completion: nil)
+            
+            //ANIMATE ANSWER OPTIONS OFF THE SCREEN
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
+                self.smallQuestionLabel.transform = CGAffineTransform(translationX: 0, y: -self.smallQuestionLabel.frame.size.height-self.smallQuestionLabel.frame.origin.y)
+                self.answerTextField.transform = CGAffineTransform(translationX: 0, y: 10 + self.frame.size.height)
+            }, completion: nil)
+            //END
+            
+            UIView.animate(withDuration: 0.4, delay: 0.25, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.questionLabel.transform = CGAffineTransform.identity
+                
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
+                self.topViewBottomView.transform = CGAffineTransform.identity
+                
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0.35, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
+                self.questionCardLine.transform = CGAffineTransform.identity
+                
+            }, completion: nil)
+            
+        } else {
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+                self.topBarImageView.tintColor = #colorLiteral(red: 0.2, green: 0.262745098, blue: 0.3058823529, alpha: 1)
+                self.bottomBarImageView.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                self.bottomView.backgroundColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
+                self.layoutIfNeeded()
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
+                self.smallQuestionLabel.transform = CGAffineTransform.identity
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.9, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
+                self.answerTextField.transform = CGAffineTransform.identity
+            }, completion: nil)
+            
+            
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 10, options: .curveEaseOut, animations: {
+                self.questionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
+                
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
+                self.topViewBottomView.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
+                
+            }, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 8, options: .curveLinear, animations: {
+                self.questionCardLine.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
+                
+            }, completion: nil)
         }
     }
     

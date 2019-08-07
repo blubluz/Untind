@@ -17,7 +17,7 @@ class UTTextField: UIView, UITextViewDelegate {
     var delegate : UITextFieldDelegate?
     var charactersLabel : UILabel!
     
-    @IBInspectable var lineSpacing : CGFloat = 15
+    private var lineSpacing : CGFloat = 37
     @IBInspectable var maxCharacters : Int = 10
     
     private var numberOfLines : Int = 0 {
@@ -45,6 +45,7 @@ class UTTextField: UIView, UITextViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.clipsToBounds = false
+        backgroundColor = UIColor.clear
         textField = UITextView(frame: CGRect.zero)
         addEdgeConstrainedSubView(view: textField)
         textField.textAlignment = .left
@@ -52,7 +53,6 @@ class UTTextField: UIView, UITextViewDelegate {
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
         textField.contentInset = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         textField.isScrollEnabled = false
-        
 
         let paraStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paraStyle.lineSpacing = 18
@@ -82,6 +82,10 @@ class UTTextField: UIView, UITextViewDelegate {
     }
     
     private func placeCharactersCounter() {
+        guard lines.count > numberOfLines-1 else {
+            return
+        }
+        
         let currentLineFrame = lines[max(0,numberOfLines-1)].frame
         UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.charactersLabel.frame = CGRect(x: currentLineFrame.origin.x+currentLineFrame.size.width-self.charactersLabel.frame.width, y: currentLineFrame.origin.y + 6, width: self.charactersLabel.frame.width, height: self.charactersLabel.frame.height)

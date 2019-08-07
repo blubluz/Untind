@@ -17,23 +17,25 @@ class TabBarViewController: UIViewController {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var profileNotificationsView: UIView!
     @IBOutlet weak var topBarView: UIView!
-    @IBOutlet weak var peachBackgroundImage: UIImageView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     private var selectedButton: UIButton?
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        circleView.center = tabBarButtons[0].center
-        peachBackgroundImage.roundCorners(cornerRadius: 35, corners: [.bottomLeft,.bottomRight])
+        
+            backgroundImage.roundCorners(cornerRadius: 35, corners: [.bottomLeft,.bottomRight])
+            circleView.center = tabBarButtons.first(where: { (button : UITabBarButton) -> Bool in
+                button.isSelected == true
+            })?.center ?? tabBarButtons[0].center
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarButtons[0].isSelected = true
         selectedButton = tabBarButtons[0]
-        circleView.backgroundColor = UIColor.peachOrange
+        circleView.backgroundColor = UIColor.lightOrange
         circleView.layer.cornerRadius = 22
         circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         
@@ -72,9 +74,59 @@ class TabBarViewController: UIViewController {
             }
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
+        
+    }
+    
+    @objc func didSwitchTheme(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: ThemeMode]
+        {
+            if let theme = data["theme"] {
+                switch theme {
+                case .answer :
+                    UIView.transition(with: backgroundImage,
+                                      duration: 0.75,
+                                      options: .transitionCrossDissolve,
+                                      animations: {
+                                        self.backgroundImage.image = UIImage(named: "teal-background")
+                                        self.circleView.backgroundColor = UIColor.lightTeal
+                                        self.tabBarButtons[0].setImage(UIImage(named: "questions-icon-teal"), for: .selected)
+                                        self.tabBarButtons[1].setImage(UIImage(named: "chat-icon-teal"), for: .selected)
+                                        self.tabBarButtons[2].setImage(UIImage(named: "notifications-icon-teal"), for: .selected)
+                                        self.tabBarButtons[3].setImage(UIImage(named: "profile-icon-teal"), for: .selected)
+                                        
+                    },
+                                      completion: nil)
+                case .question:
+                    UIView.transition(with: backgroundImage,
+                                      duration: 0.75,
+                                      options: .transitionCrossDissolve,
+                                      animations: {
+                                        self.backgroundImage.image = UIImage(named: "orange-background")
+                                        self.circleView.backgroundColor = UIColor.lightOrange
+                                        self.tabBarButtons[0].setImage(UIImage(named: "questions-icon-orange"), for: .selected)
+                                        self.tabBarButtons[1].setImage(UIImage(named: "chat-icon-orange"), for: .selected)
+                                        self.tabBarButtons[2].setImage(UIImage(named: "notifications-icon-orange"), for: .selected)
+                                        self.tabBarButtons[3].setImage(UIImage(named: "profile-icon-orange"), for: .selected)
+                    },
+                                      completion: nil)
+                }
+            }
+        }
     }
     
     //MARK: - Button Actions
+    @IBAction func topProfileButtonTapped(_ sender: Any) {
+        let questionsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyQuestionsViewController") as! MyQuestionsViewController
+        self.modalPresentationStyle = .overCurrentContext
+        questionsViewController.modalPresentationStyle = .overCurrentContext
+        
+        self.present(questionsViewController, animated: true) {
+                //completion block
+        }
+        
+    }
+    
     @IBAction func feedButtonTapped(_ sender: UITabBarButton) {
         moveCircle(toButton: sender)
     }

@@ -69,6 +69,12 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
         setFrame(forCardView: cardView, atIndex: index)
         cardViews.append(cardView)
         insertSubview(cardView, at: 0)
+        if index == 0 {
+            cardView.transform = CGAffineTransform(scaleX: 0, y: 0)
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: .curveLinear, animations: {
+                cardView.transform = CGAffineTransform.identity
+            }, completion: nil)
+        }
         remainingCards -= 1
     }
 
