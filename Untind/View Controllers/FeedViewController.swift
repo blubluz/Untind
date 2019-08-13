@@ -7,23 +7,25 @@
 //
 
 import UIKit
-
+import Firebase
+import SwiftyJSON
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var swipeableCardViewContainer: SwipeableCardViewContainer!
+    var questions : [Question] = []
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        swipeableCardViewContainer.dataSource = self
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -35,8 +37,21 @@ class FeedViewController: UIViewController {
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
+        
+        let db = Firestore.firestore()
+        
+        db.collection("questions").getDocuments { (querySnapshot : QuerySnapshot?, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let json = document.data()
+                    self.questions.append(Question(with: json))
+                    self.swipeableCardViewContainer.dataSource = self
+                }
+            }
+        }
     }
     
     //Calls this function when the tap is recognized.
@@ -62,11 +77,12 @@ class FeedViewController: UIViewController {
 //MARK: - SwipeableCardViewDataSource
 extension FeedViewController: SwipeableCardViewDataSource {
     func numberOfCards() -> Int {
-        return 10
+        return questions.count
     }
     
     func card(forItemAtIndex index: Int) -> SwipeableCardViewCard {
         let cardView = SwipeableCardViewCard()
+        cardView.question = questions[index]
         return cardView
     }
     

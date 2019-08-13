@@ -8,11 +8,15 @@
 
 import UIKit
 
-class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol DraggingDelegate : class{
+    func didCloseByDragging()
+}
 
-    
+class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     @IBOutlet weak var questionsCollectionView: UICollectionView!
+    weak var draggingDelegate : DraggingDelegate?
+    private var shouldClose = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +39,24 @@ class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 158, height: 273)
+        
+        let heightWidthRatio = 273.0/158.0
+        let width = max(130, UIScreen.main.bounds.size.width/2 - 30)
+        return CGSize(width: width, height: width * CGFloat(heightWidthRatio))
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == 0 {
+            shouldClose = true
+        }
+        
+        if shouldClose == true && scrollView.contentOffset.y <= 0{
+            if scrollView.contentOffset.y < -100 {
+                draggingDelegate?.didCloseByDragging()
+            }
+        } else {
+            shouldClose = false
+        }
+    }
+    
 }

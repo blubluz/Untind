@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, DraggingDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,6 +19,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var myQuestionsButton: UIButton!
     @IBOutlet weak var myAnswersButton: UIButton!
     @IBOutlet weak var selectorPointerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundViewTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +33,19 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         collectionView.dataSource = self
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("MyQuestionsViewController will disappear")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         backgroundView.roundCorners(cornerRadius: 30, corners: [.topLeft,.topRight])
         selectorView.layer.cornerRadius = 24
         selectorPointerView.layer.cornerRadius = 22
     }
+    
+    //MARK: - CollectionView Delegate & DataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -46,14 +54,15 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyQuestionsContainerCell", for: indexPath) as! MyQuestionsContainerCell
             cell.setQuestions()
+            cell.draggingDelegate = self
             return cell
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAnswersContainerCell", for: indexPath) as! MyAnswersContainerCell
             cell.setAnswers(withIndexPath: indexPath)
+            cell.draggingDelegate = self
             return cell
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -72,23 +81,41 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         
         let answersButtonColor = UIColor.fadeFromColor(fromColor: UIColor.white, toColor: UIColor.gray81, withPercentage: completionPercentage/100)
         myAnswersButton.setTitleColor(answersButtonColor, for: .normal)
-        
-        
-        print("Completion: \(completionPercentage)")
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : indexPath.row == 0 ? ThemeMode.answer : ThemeMode.question])
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - DraggingDelegate
+    func didCloseByDragging() {
+        if let parentVc = self.parent as? PresentationViewController {
+            parentVc.dismissContainerViewController(animated: true)
+        }
     }
-    */
-
+    
+    //MARK: - Button actions
+    @IBAction func myQuestionsTapped(_ sender: Any) {
+        if collectionView.contentOffset.x != 0 {
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)
+        } else {
+            if let cell = collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? MyQuestionsContainerCell {
+                cell.questionsCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func myAnswersTapped(_ sender: Any) {
+        if collectionView.contentOffset.x == 0 {
+            collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true)
+        } else {
+            if let cell = collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as? MyAnswersContainerCell {
+                cell.answersTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+        }
+    }
+    
+    deinit {
+        print("MyQuestionsViewController did deinit")
+    }
+    
 }

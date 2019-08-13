@@ -6,6 +6,9 @@ target 'Untind' do
   use_frameworks!
   pod 'Firebase/Analytics'
   pod 'pop'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'SwiftyJSON'
   # Pods for Untind
 
   target 'UntindTests' do

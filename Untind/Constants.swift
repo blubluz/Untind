@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+typealias JSONDictionary = Dictionary<String,Any>
 struct Constants {
     
 }

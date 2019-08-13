@@ -30,9 +30,22 @@ class SwipeableCardViewCard: SwipeableCardView {
     @IBOutlet weak var answerButtonBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var authorNameLabel: UILabel!
+    @IBOutlet weak var postDateLabel: UILabel!
+    @IBOutlet weak var authorAvatarImageView: UIImageView!
     
     @IBOutlet weak var smallQuestionLabel: UILabel!
     @IBOutlet weak var answerTextField: UTTextField!
+    
+    var question : Question? {
+        didSet {
+            questionLabel.text = question?.questionText
+            smallQuestionLabel.text = question?.questionText
+            authorNameLabel.text = question?.author.username
+            postDateLabel.text = question?.postDate.toFormattedString()
+            authorAvatarImageView.image = UIImage(named: question?.author.avatarType ?? "placeholder")
+        }
+    }
     
     private var isInAnswerMode : Bool = false {
         didSet {

@@ -8,10 +8,12 @@
 
 import UIKit
 
-class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
+class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
 
     @IBOutlet weak var answersTableView: UITableView!
     private var indexPath: IndexPath?
+    weak var draggingDelegate : DraggingDelegate?
+    private var shouldClose = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,5 +40,19 @@ class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == 0 {
+            shouldClose = true
+        }
+        
+        if shouldClose == true && scrollView.contentOffset.y <= 0{
+            if scrollView.contentOffset.y < -100 {
+                draggingDelegate?.didCloseByDragging()
+            }
+        } else {
+            shouldClose = false
+        }
     }
 }

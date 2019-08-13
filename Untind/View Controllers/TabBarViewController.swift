@@ -8,7 +8,10 @@
 
 import UIKit
 
-class TabBarViewController: UIViewController {
+protocol PresentationViewController {
+    func dismissContainerViewController(animated: Bool)
+}
+class TabBarViewController: UIViewController, PresentationViewController {
 
     @IBOutlet weak var controllerContainerView: UIView!
     @IBOutlet weak var tabBarView: UIView!
@@ -18,6 +21,18 @@ class TabBarViewController: UIViewController {
     @IBOutlet weak var profileNotificationsView: UIView!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var closeModalButton: UIButton!
+    @IBOutlet weak var presentationViewContainer: UIView!
+    @IBOutlet weak var presentationContainerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBarTopConstraint: NSLayoutConstraint!
+    weak var presentedContainerViewController : UIViewController?
+    
+    
+    private var isModalInContainer : Bool {
+            return presentationContainerBottomConstraint.constant == 0 && presentationViewContainer.subviews.count != 0
+    }
     
     private var selectedButton: UIButton?
     
@@ -28,25 +43,6 @@ class TabBarViewController: UIViewController {
             circleView.center = tabBarButtons.first(where: { (button : UITabBarButton) -> Bool in
                 button.isSelected == true
             })?.center ?? tabBarButtons[0].center
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarButtons[0].isSelected = true
-        selectedButton = tabBarButtons[0]
-        circleView.backgroundColor = UIColor.lightOrange
-        circleView.layer.cornerRadius = 22
-        circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        
-        profileNotificationsView.layer.cornerRadius = profileNotificationsView.frame.size.height/2
-        profileNotificationsView.layer.shadowOpacity = 0.3
-        profileNotificationsView.layer.shadowRadius = 4
-        profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
     }
     
@@ -76,7 +72,31 @@ class TabBarViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
         
+        closeModalButton.transform = CGAffineTransform(translationX: -300, y: 0)
+        presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarButtons[0].isSelected = true
+        selectedButton = tabBarButtons[0]
+        circleView.backgroundColor = UIColor.lightOrange
+        circleView.layer.cornerRadius = 22
+        circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        
+        profileNotificationsView.layer.cornerRadius = profileNotificationsView.frame.size.height/2
+        profileNotificationsView.layer.shadowOpacity = 0.3
+        profileNotificationsView.layer.shadowRadius = 4
+        profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+  
+
     
     @objc func didSwitchTheme(_ notification: Notification) {
         if let data = notification.userInfo as? [String: ThemeMode]
@@ -117,16 +137,22 @@ class TabBarViewController: UIViewController {
     
     //MARK: - Button Actions
     @IBAction func topProfileButtonTapped(_ sender: Any) {
-        let questionsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyQuestionsViewController") as! MyQuestionsViewController
-        self.modalPresentationStyle = .overCurrentContext
-        questionsViewController.modalPresentationStyle = .overCurrentContext
-        
-        self.present(questionsViewController, animated: true) {
-                //completion block
+        guard !isModalInContainer else {
+            return
         }
+        
+        self.presentedContainerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyQuestionsViewController")
+        self.modalPresentationStyle = .overCurrentContext
+        self.presentedContainerViewController?.modalPresentationStyle = .overCurrentContext
+        
+        self.present(self.presentedContainerViewController!, animated: true, completion: nil, inContainer: true)
         
     }
     
+    @IBAction func closeModalButtonTapped(_ sender: Any) {
+       self.dismissContainerViewController(animated: true)
+    }
+   
     @IBAction func feedButtonTapped(_ sender: UITabBarButton) {
         moveCircle(toButton: sender)
     }
@@ -142,6 +168,68 @@ class TabBarViewController: UIViewController {
     
     
     //MARK: - Helper functions
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil, inContainer: Bool) {
+        if !inContainer {
+            self.present(viewControllerToPresent, animated: flag, completion: completion)
+        } else {
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 4, options: .curveLinear, animations: {
+                self.closeModalButton.transform = CGAffineTransform.identity
+                self.profileButton.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileButton.center.x, y: 0)
+                self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -200)
+                self.filterButton.setImage(UIImage(named: "add-button-icon"), for: .normal)
+                self.profileNotificationsView.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileNotificationsView.center.x + 22, y: 0)
+            }, completion: nil)
+            
+            if let feedVcView = self.presentedContainerViewController!.view {
+                self.presentationViewContainer.addSubview(feedVcView)
+                
+                self.addChild(self.presentedContainerViewController!)
+                presentedContainerViewController?.didMove(toParent: self)
+                
+                feedVcView.translatesAutoresizingMaskIntoConstraints = false
+                presentationViewContainer.addConstraints([
+                    feedVcView.leadingAnchor.constraint(equalTo: presentationViewContainer.leadingAnchor),
+                    feedVcView.topAnchor.constraint(equalTo: presentationViewContainer.topAnchor),
+                    feedVcView.trailingAnchor.constraint(equalTo: presentationViewContainer.trailingAnchor),
+                    feedVcView.bottomAnchor.constraint(equalTo: presentationViewContainer.bottomAnchor)])
+                
+                for constraint in presentationViewContainer.constraints {
+                    constraint.isActive = true
+                }
+            }
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.presentationContainerBottomConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }) { (success: Bool) in
+                if let completion = completion {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func dismissContainerViewController(animated: Bool) {
+        if isModalInContainer {
+            UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 4, options: .curveLinear, animations: {
+                self.closeModalButton.transform = CGAffineTransform(translationX: -300, y: 0)
+                self.profileButton.transform = CGAffineTransform.identity
+                self.titleLabel.transform = CGAffineTransform.identity
+                self.filterButton.setImage(UIImage(named: "filter-icon"), for: .normal)
+                self.profileNotificationsView.transform = CGAffineTransform.identity
+            }, completion: nil)
+            
+            UIView.animate(withDuration: animated ? 0.3 : 0, delay: 0, options: .curveEaseOut, animations: {
+                self.presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
+                self.view.layoutIfNeeded()
+            }) { [weak self] (success: Bool) in
+                self?.presentedContainerViewController?.willMove(toParent: nil)
+                self?.presentedContainerViewController?.view.removeFromSuperview()
+                self?.presentedContainerViewController?.removeFromParent()
+            }
+        }
+    }
+    
     func moveCircle(toButton button: UIButton) {
         selectedButton?.isSelected = false
         selectedButton = button
