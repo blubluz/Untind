@@ -107,7 +107,7 @@ class SwipeableCardViewCard: SwipeableCardView {
     
     
     
-    // MARK: - Actions
+    // MARK: - Button Actions
     
     @IBAction func turnButtonTapped(_ sender: Any) {
         if isFlipped {
@@ -130,6 +130,14 @@ class SwipeableCardViewCard: SwipeableCardView {
                 self.layoutIfNeeded()
             }, completion: nil)
         }
+    }
+    @IBAction func seeMoreQuestionsTapped(_ sender: Any) {
+    }
+    @IBAction func seePublicAnswersTapped(_ sender: Any) {
+    }
+    @IBAction func reportButtonTapped(_ sender: Any) {
+    }
+    @IBAction func copySetQuestionsTapped(_ sender: Any) {
     }
     
     @IBAction func answerButtonTapped(_ sender: Any) {
