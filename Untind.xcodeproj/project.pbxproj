@@ -11,6 +11,8 @@
 		0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */; };
 		0E068A4B22FB558F00A9BDE9 /* MyAnswersContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4922FB558F00A9BDE9 /* MyAnswersContainerCell.swift */; };
 		0E068A4C22FB558F00A9BDE9 /* MyAnswersContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */; };
+		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
+		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
 		0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38522EC8DF500390BA5 /* AppDelegate.swift */; };
 		0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */; };
 		0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E17A38922EC8DF500390BA5 /* Main.storyboard */; };
@@ -26,6 +28,7 @@
 		0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */; };
 		0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */; };
 		0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */; };
+		0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */; };
 		0E47592B22EDE47300B2DE82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47592A22EDE47300B2DE82 /* LoginViewController.swift */; };
 		0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */; };
 		0E47592F22EDF0F300B2DE82 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */; };
@@ -54,6 +57,7 @@
 		0EFA5530230308260000E6F6 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552F230308260000E6F6 /* Answer.swift */; };
 		0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA55312303121B0000E6F6 /* DateExtension.swift */; };
 		0EFC0AEE22F5CD1D00DC8BBD /* UTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */; };
+		0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */; };
 		0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */; };
 		0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */; };
 		0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF6DA622F7523900A6A76B /* Constants.swift */; };
@@ -84,6 +88,8 @@
 		0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersTableViewCell.xib; sourceTree = "<group>"; };
 		0E068A4922FB558F00A9BDE9 /* MyAnswersContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersContainerCell.swift; sourceTree = "<group>"; };
 		0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersContainerCell.xib; sourceTree = "<group>"; };
+		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
+		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
 		0E17A38222EC8DF500390BA5 /* Untind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E17A38522EC8DF500390BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 		0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuestionsContainerCell.swift; sourceTree = "<group>"; };
 		0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsContainerCell.xib; sourceTree = "<group>"; };
+		0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		0E47592A22EDE47300B2DE82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +139,7 @@
 		0EFA552F230308260000E6F6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		0EFA55312303121B0000E6F6 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTTextField.swift; sourceTree = "<group>"; };
+		0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotificationExtension.swift; sourceTree = "<group>"; };
 		0EFF6DA622F7523900A6A76B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -239,6 +247,9 @@
 				0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */,
 				0E47593922EE1E4400B2DE82 /* FeedViewController.swift */,
 				0E1C8B3922F9EDBD0011A5D7 /* MyQuestionsViewController.swift */,
+				0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */,
+				0E09534C2310636600326172 /* WriteQuestionViewController.swift */,
+				0E09534E231069CA00326172 /* AddQuestionController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -317,6 +328,7 @@
 				0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */,
 				0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */,
 				0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */,
+				0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -603,6 +615,7 @@
 			files = (
 				0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */,
 				0E47593822EE1AE500B2DE82 /* UIViewExtension.swift in Sources */,
+				0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */,
 				0E61DD5222EF77F900C1C8C7 /* SwipeableView.swift in Sources */,
 				0EFA5530230308260000E6F6 /* Answer.swift in Sources */,
 				0EFA552C2303080A0000E6F6 /* Question.swift in Sources */,
@@ -612,6 +625,7 @@
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				0E61DD6A22EF8DC900C1C8C7 /* SwipeableCardViewCard.swift in Sources */,
+				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
 				0EFC0AEE22F5CD1D00DC8BBD /* UTTextField.swift in Sources */,
@@ -620,6 +634,7 @@
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
+				0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */,
 				0E1C8B3E22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.swift in Sources */,
 				0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */,
 				0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */,
@@ -636,6 +651,7 @@
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,
+				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
 				0E47593422EDFCD600B2DE82 /* UIImageExtension.swift in Sources */,
 				0E068A4B22FB558F00A9BDE9 /* MyAnswersContainerCell.swift in Sources */,
 			);

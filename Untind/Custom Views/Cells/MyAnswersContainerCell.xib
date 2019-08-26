@@ -26,13 +26,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="338" height="492"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1JO-Vb-cBY">
+                                <rect key="frame" x="159" y="236" width="20" height="20"/>
+                                <color key="color" red="0.12941176469999999" green="0.81568627449999997" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="OHC-Eq-cOB" secondAttribute="trailing" id="796-sB-czi"/>
                             <constraint firstItem="OHC-Eq-cOB" firstAttribute="top" secondItem="mR9-L8-Zl3" secondAttribute="top" id="DRB-K2-0o5"/>
+                            <constraint firstItem="1JO-Vb-cBY" firstAttribute="centerY" secondItem="mR9-L8-Zl3" secondAttribute="centerY" id="M5k-TY-Zky"/>
                             <constraint firstItem="OHC-Eq-cOB" firstAttribute="leading" secondItem="mR9-L8-Zl3" secondAttribute="leading" id="XGd-h3-h7K"/>
                             <constraint firstAttribute="bottom" secondItem="OHC-Eq-cOB" secondAttribute="bottom" id="gMp-zl-nQO"/>
+                            <constraint firstItem="1JO-Vb-cBY" firstAttribute="centerX" secondItem="mR9-L8-Zl3" secondAttribute="centerX" id="qBL-8k-iKH"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -47,6 +53,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="338" height="492"/>
             <connections>
+                <outlet property="activityIndicator" destination="1JO-Vb-cBY" id="4pQ-6B-k7w"/>
                 <outlet property="answersTableView" destination="OHC-Eq-cOB" id="DsV-AT-bUM"/>
             </connections>
             <point key="canvasLocation" x="340.57971014492756" y="301.33928571428572"/>

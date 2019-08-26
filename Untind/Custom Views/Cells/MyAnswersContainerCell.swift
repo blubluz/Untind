@@ -14,26 +14,34 @@ class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITable
     private var indexPath: IndexPath?
     weak var draggingDelegate : DraggingDelegate?
     private var shouldClose = true
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var answers : [Answer]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        activityIndicator.startAnimating()
     }
     
-    func setAnswers(withIndexPath: IndexPath) {
+    func set(answers: [Answer]?) {
+        self.answers = answers
+        
+        if answers != nil {
+            answersTableView.isHidden = false
+            activityIndicator.stopAnimating()
+        }
+        
         answersTableView.register(UINib(nibName: "MyAnswersTableViewCell", bundle: nil), forCellReuseIdentifier: "MyAnswersTableViewCell")
         answersTableView.delegate = self
         answersTableView.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return answers?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyAnswersTableViewCell") as! MyAnswersTableViewCell
-        if indexPath.row % 2 == 1 {
-            cell.configureDifferently()
-        }
+        cell.configureWith(answer: answers![indexPath.row])
         
         return cell
     }

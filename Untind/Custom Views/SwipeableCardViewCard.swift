@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 class SwipeableCardViewCard: SwipeableCardView {
 
    
@@ -141,11 +143,23 @@ class SwipeableCardViewCard: SwipeableCardView {
     }
     
     @IBAction func answerButtonTapped(_ sender: Any) {
-        
         if !isInAnswerMode {
             isInAnswerMode = true
         } else {
-            isInAnswerMode = false
+            SVProgressHUD.show()
+            let answer = Answer(with: User.loggedUser!, postDate: Date(), answerText: answerTextField.textField.text, upvotes: 0, rating: 0, question: question!)
+            question?.addAnswer(answer: answer, completion: { (error) in
+                if let err = error {
+                    print("There was an error:\(err)")
+                } else {
+                    
+                }
+                
+                self.answerTextField.textField.text = ""
+                SVProgressHUD.dismiss()
+                self.isInAnswerMode = false
+            })
+            
         }
     }
     

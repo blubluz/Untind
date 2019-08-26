@@ -20,6 +20,7 @@ class UTTextField: UIView, UITextViewDelegate {
     private var lineSpacing : CGFloat = 37
     @IBInspectable var maxCharacters : Int = 10
     
+    
     private var numberOfLines : Int = 0 {
         didSet {
             placeCharactersCounter()
@@ -79,6 +80,7 @@ class UTTextField: UIView, UITextViewDelegate {
         super.layoutSubviews()
         calculateLines()
         placeCharactersCounter()
+        charactersLabel.text = "( 0 / \(maxCharacters) characters)"
     }
     
     private func placeCharactersCounter() {

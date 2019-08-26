@@ -17,11 +17,32 @@ class OnboardingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let loggedInUserDict = UserDefaults.standard.dictionary(forKey: "loggedUser") {
+            let loggedUser = User(with: loggedInUserDict)
+            print("We have a logged user: \(loggedUser)")
+            
+            
+            let tabBarVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarViewController")
+            self.present(tabBarVc, animated: true, completion: nil)
+            
+            
+        } else {
+            print("We don't have a logged user.")
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

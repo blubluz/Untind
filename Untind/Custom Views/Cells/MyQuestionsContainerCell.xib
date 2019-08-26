@@ -32,11 +32,17 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NWh-bl-wsE">
+                                <rect key="frame" x="172.5" y="167.5" width="20" height="20"/>
+                                <color key="color" red="1" green="0.56470588235294117" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="fnH-eA-1SW" secondAttribute="bottom" id="Qr4-gB-lLl"/>
+                            <constraint firstItem="NWh-bl-wsE" firstAttribute="centerX" secondItem="b4T-pV-vDA" secondAttribute="centerX" id="RvR-Ru-vjY"/>
                             <constraint firstItem="fnH-eA-1SW" firstAttribute="leading" secondItem="b4T-pV-vDA" secondAttribute="leading" constant="20" id="eZh-0Q-wOI"/>
+                            <constraint firstItem="NWh-bl-wsE" firstAttribute="centerY" secondItem="b4T-pV-vDA" secondAttribute="centerY" id="eqb-Rs-AY8"/>
                             <constraint firstAttribute="trailing" secondItem="fnH-eA-1SW" secondAttribute="trailing" constant="20" id="gBv-7h-cyX"/>
                             <constraint firstItem="fnH-eA-1SW" firstAttribute="top" secondItem="b4T-pV-vDA" secondAttribute="top" id="qBj-qU-zEb"/>
                         </constraints>
@@ -52,6 +58,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="365" height="355"/>
             <connections>
+                <outlet property="activityIndicator" destination="NWh-bl-wsE" id="AdP-55-Flw"/>
                 <outlet property="questionsCollectionView" destination="fnH-eA-1SW" id="q4b-p9-hpI"/>
             </connections>
             <point key="canvasLocation" x="4" y="126"/>

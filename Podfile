@@ -9,6 +9,7 @@ target 'Untind' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'SwiftyJSON'
+  pod 'SVProgressHUD'
   # Pods for Untind
 
   target 'UntindTests' do

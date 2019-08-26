@@ -9,6 +9,7 @@
 import Foundation
 
 extension Date {
+    
     func toFormattedString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
@@ -22,4 +23,6 @@ extension Date {
             return dateFormatter.string(from: self)
         }
     }
+    
+    
 }

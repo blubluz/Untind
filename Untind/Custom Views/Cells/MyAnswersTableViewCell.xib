@@ -147,8 +147,8 @@
             <connections>
                 <outlet property="answerLabel" destination="EdN-EM-wVc" id="k19-dK-u5f"/>
                 <outlet property="avatarImageView" destination="zRF-HH-f9T" id="hGf-Ye-dmG"/>
+                <outlet property="questionAuthorLabel" destination="2MM-zy-Bg2" id="ZkL-Zr-YF2"/>
                 <outlet property="questionLabel" destination="WZd-Ny-JOR" id="xp0-oh-MkU"/>
-                <outlet property="usernameLabel" destination="2MM-zy-Bg2" id="qkM-3m-7Xi"/>
             </connections>
             <point key="canvasLocation" x="-33.333333333333336" y="230.69196428571428"/>
         </tableViewCell>

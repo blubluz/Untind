@@ -10,7 +10,7 @@ import UIKit
 
 class MyAnswersTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var questionAuthorLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -25,6 +25,20 @@ class MyAnswersTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configureWith(answer: Answer){
+        questionLabel.text = answer.question?.questionText
+        questionAuthorLabel.text = "\(answer.question!.author.username) rated"
+        avatarImageView.image = UIImage(named: answer.question!.author.avatarType)
+        answerLabel.text = answer.answerText
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        questionLabel.text = ""
+        questionAuthorLabel.text = ""
+        answerLabel.text = ""
     }
     
     func configureDifferently() {

@@ -16,24 +16,35 @@ class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, 
     
     @IBOutlet weak var questionsCollectionView: UICollectionView!
     weak var draggingDelegate : DraggingDelegate?
+    var questions : [Question]?
     private var shouldClose = true
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        activityIndicator.startAnimating()
     }
     
-    func setQuestions(){
+    func set(questions: [Question]?){
+        self.questions = questions
+        
+        if questions != nil {
+            questionsCollectionView.isHidden = false
+            activityIndicator.stopAnimating()
+            
+        }
         questionsCollectionView.register(UINib(nibName: "MyQuestionsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyQuestionsCollectionViewCell")
         questionsCollectionView.delegate = self
         questionsCollectionView.dataSource = self
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return questions?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyQuestionsCollectionViewCell", for: indexPath) as! MyQuestionsCollectionViewCell
+        cell.configureWith(question: questions![indexPath.row])
         cell.layer.cornerRadius = 20
         return cell
     }

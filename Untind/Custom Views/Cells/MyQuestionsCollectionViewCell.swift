@@ -10,9 +10,16 @@ import UIKit
 
 class MyQuestionsCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var questionLabel: VerticalAlignLabel!
+    @IBOutlet weak var newQuestionsLabel: UILabel!
+    @IBOutlet weak var answersNumberLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
+    func configureWith(question: Question) {
+        questionLabel.text = question.questionText
+        answersNumberLabel.text = "\(question.answers.count)"
+    }
 }

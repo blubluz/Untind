@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, DraggingDelegate {
 
@@ -21,6 +22,9 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var selectorPointerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var backgroundViewTopConstraint: NSLayoutConstraint!
     
+    var myQuestions : [Question]?
+    var myAnswers : [Answer]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +35,37 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let db = Firestore.firestore()
+        
+        db.collectionGroup("questions").whereField(FieldPath(["author", "username"]), isEqualTo: User.loggedUser?.username ?? "").getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            } else {
+                self.myQuestions = []
+                for document in snapshot!.documents {
+                    self.myQuestions?.append(Question(with: document.data()))
+                }
+                self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+            }
+        }
+        
+        db.collectionGroup("answers").whereField(FieldPath(["author", "username"]), isEqualTo: User.loggedUser?.username ?? "").getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            } else {
+                self.myAnswers = []
+                for document in snapshot!.documents {
+                    self.myAnswers?.append(Answer(with: document.data()))
+                }
+                self.collectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,13 +88,13 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyQuestionsContainerCell", for: indexPath) as! MyQuestionsContainerCell
-            cell.setQuestions()
+            cell.set(questions: self.myQuestions)
             cell.draggingDelegate = self
             return cell
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAnswersContainerCell", for: indexPath) as! MyAnswersContainerCell
-            cell.setAnswers(withIndexPath: indexPath)
+            cell.set(answers: self.myAnswers)
             cell.draggingDelegate = self
             return cell
         }
@@ -89,7 +124,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     //MARK: - DraggingDelegate
     func didCloseByDragging() {
         if let parentVc = self.parent as? PresentationViewController {
-            parentVc.dismissContainerViewController(animated: true)
+            parentVc.dismissContainerViewController(animated: true, completion: nil)
         }
     }
     

@@ -46,8 +46,8 @@ class FeedViewController: UIViewController {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    let json = document.data()
-                    self.questions.append(Question(with: json))
+                    let question = Question(with: document)
+                    self.questions.append(question)
                     self.swipeableCardViewContainer.dataSource = self
                 }
             }
