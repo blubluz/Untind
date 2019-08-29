@@ -50,8 +50,8 @@
 		0E61DD6422EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6322EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift */; };
 		0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6522EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift */; };
 		0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */; };
-		0E61DD6A22EF8DC900C1C8C7 /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6922EF8DC900C1C8C7 /* SwipeableCardViewCard.swift */; };
 		0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */; };
+		0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */; };
 		0EFA552C2303080A0000E6F6 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552B2303080A0000E6F6 /* Question.swift */; };
 		0EFA552E2303081A0000E6F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552D2303081A0000E6F6 /* User.swift */; };
 		0EFA5530230308260000E6F6 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552F230308260000E6F6 /* Answer.swift */; };
@@ -132,8 +132,8 @@
 		0E61DD6322EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewContainer.swift; sourceTree = "<group>"; };
 		0E61DD6522EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDelegate.swift; sourceTree = "<group>"; };
 		0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDataSource.swift; sourceTree = "<group>"; };
-		0E61DD6922EF8DC900C1C8C7 /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
 		0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeableCardViewCard.xib; sourceTree = "<group>"; };
+		0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
 		0EFA552B2303080A0000E6F6 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		0EFA552D2303081A0000E6F6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0EFA552F230308260000E6F6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 				0E61DD5F22EF7E3200C1C8C7 /* SwipeableCardView.swift */,
 				0E61DD6122EF7E4A00C1C8C7 /* SwipeableCardView.xib */,
 				0E61DD6322EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift */,
-				0E61DD6922EF8DC900C1C8C7 /* SwipeableCardViewCard.swift */,
+				0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */,
 				0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */,
 				0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */,
 				0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */,
@@ -618,13 +618,13 @@
 				0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */,
 				0E61DD5222EF77F900C1C8C7 /* SwipeableView.swift in Sources */,
 				0EFA5530230308260000E6F6 /* Answer.swift in Sources */,
+				0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */,
 				0EFA552C2303080A0000E6F6 /* Question.swift in Sources */,
 				0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */,
 				0E17A3BC22EC9E8700390BA5 /* GOTHICB.TTF in Sources */,
 				0E61DD6022EF7E3200C1C8C7 /* SwipeableCardView.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
-				0E61DD6A22EF8DC900C1C8C7 /* SwipeableCardViewCard.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,

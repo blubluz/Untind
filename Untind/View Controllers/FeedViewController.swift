@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import SwiftyJSON
+import IHKeyboardAvoiding
+
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var swipeableCardViewContainer: SwipeableCardViewContainer!
@@ -20,18 +22,6 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
@@ -54,6 +44,20 @@ class FeedViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        KeyboardAvoiding.avoidingView = self.swipeableCardViewContainer
+     
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -69,7 +73,7 @@ class FeedViewController: UIViewController {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        print("FeedViewController did deinit")
     }
 }
 

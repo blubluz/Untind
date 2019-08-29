@@ -16,13 +16,13 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
 
     static let verticalInset: CGFloat = 12.0
 
-    var dataSource: SwipeableCardViewDataSource? {
+    weak var dataSource: SwipeableCardViewDataSource? {
         didSet {
             reloadData()
         }
     }
 
-    var delegate: SwipeableCardViewDelegate?
+    weak var delegate: SwipeableCardViewDelegate?
 
     private var cardViews: [SwipeableCardViewCard] = []
 

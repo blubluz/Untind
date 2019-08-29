@@ -161,6 +161,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         
         
         //Remove old
+        currentDisplayedViewController?.willMove(toParent: nil)
         currentDisplayedViewController?.view.removeFromSuperview()
         self.currentDisplayedViewController?.removeFromParent()
         
@@ -194,6 +195,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         moveCircle(toButton: sender)
         
         //Remove old
+        currentDisplayedViewController?.willMove(toParent: nil)
         currentDisplayedViewController?.view.removeFromSuperview()
         self.currentDisplayedViewController?.removeFromParent()
         
@@ -237,6 +239,8 @@ class TabBarViewController: UIViewController, PresentationViewController {
     
     //MARK: - Helper functions
     func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil, inContainer: Bool) {
+        
+        self.currentDisplayedViewController?.viewWillDisappear(flag)
         if !inContainer {
             self.present(viewControllerToPresent, animated: flag, completion: completion)
         } else {
@@ -281,12 +285,15 @@ class TabBarViewController: UIViewController, PresentationViewController {
             }) { (success: Bool) in
                 if let completion = completion {
                     completion()
+                    self.currentDisplayedViewController?.viewDidDisappear(flag)
                 }
             }
         }
     }
     
     func dismissContainerViewController(animated: Bool, completion: ((Bool) -> Void)? = nil) {
+        
+        self.currentDisplayedViewController?.viewDidAppear(animated)
         if isModalInContainer {
             UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 4, options: .curveLinear, animations: {
                 self.closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
