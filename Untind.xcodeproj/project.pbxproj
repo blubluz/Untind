@@ -13,6 +13,7 @@
 		0E068A4C22FB558F00A9BDE9 /* MyAnswersContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */; };
 		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
 		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
+		0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0E045C2319C47200979E03 /* UTPageControl.swift */; };
 		0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38522EC8DF500390BA5 /* AppDelegate.swift */; };
 		0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */; };
 		0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E17A38922EC8DF500390BA5 /* Main.storyboard */; };
@@ -29,6 +30,12 @@
 		0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */; };
 		0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */; };
 		0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */; };
+		0E416C10231993B700EA3CA7 /* UTLoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */; };
+		0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */; };
+		0E416C142319AEF600EA3CA7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C132319AEF600EA3CA7 /* SignUpViewController.swift */; };
+		0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C152319BAD000EA3CA7 /* CreateProfileViewController.swift */; };
+		0E416C192319BBA500EA3CA7 /* CreateProfileFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C172319BBA500EA3CA7 /* CreateProfileFirstCell.swift */; };
+		0E416C1A2319BBA500EA3CA7 /* CreateProfileFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */; };
 		0E47592B22EDE47300B2DE82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47592A22EDE47300B2DE82 /* LoginViewController.swift */; };
 		0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */; };
 		0E47592F22EDF0F300B2DE82 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */; };
@@ -56,7 +63,7 @@
 		0EFA552E2303081A0000E6F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552D2303081A0000E6F6 /* User.swift */; };
 		0EFA5530230308260000E6F6 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552F230308260000E6F6 /* Answer.swift */; };
 		0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA55312303121B0000E6F6 /* DateExtension.swift */; };
-		0EFC0AEE22F5CD1D00DC8BBD /* UTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */; };
+		0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC0AED22F5CD1D00DC8BBD /* UTAnswerTextField.swift */; };
 		0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */; };
 		0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */; };
 		0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */; };
@@ -90,6 +97,7 @@
 		0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersContainerCell.xib; sourceTree = "<group>"; };
 		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
+		0E0E045C2319C47200979E03 /* UTPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTPageControl.swift; sourceTree = "<group>"; };
 		0E17A38222EC8DF500390BA5 /* Untind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E17A38522EC8DF500390BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +119,12 @@
 		0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuestionsContainerCell.swift; sourceTree = "<group>"; };
 		0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsContainerCell.xib; sourceTree = "<group>"; };
 		0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
+		0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTLoginTextView.swift; sourceTree = "<group>"; };
+		0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0E416C132319AEF600EA3CA7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		0E416C152319BAD000EA3CA7 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0E416C172319BBA500EA3CA7 /* CreateProfileFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileFirstCell.swift; sourceTree = "<group>"; };
+		0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateProfileFirstCell.xib; sourceTree = "<group>"; };
 		0E47592A22EDE47300B2DE82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +152,7 @@
 		0EFA552D2303081A0000E6F6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0EFA552F230308260000E6F6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		0EFA55312303121B0000E6F6 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTTextField.swift; sourceTree = "<group>"; };
+		0EFC0AED22F5CD1D00DC8BBD /* UTAnswerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAnswerTextField.swift; sourceTree = "<group>"; };
 		0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotificationExtension.swift; sourceTree = "<group>"; };
@@ -250,6 +264,9 @@
 				0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */,
 				0E09534C2310636600326172 /* WriteQuestionViewController.swift */,
 				0E09534E231069CA00326172 /* AddQuestionController.swift */,
+				0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */,
+				0E416C132319AEF600EA3CA7 /* SignUpViewController.swift */,
+				0E416C152319BAD000EA3CA7 /* CreateProfileViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -307,6 +324,8 @@
 				0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */,
 				0E068A4922FB558F00A9BDE9 /* MyAnswersContainerCell.swift */,
 				0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */,
+				0E416C172319BBA500EA3CA7 /* CreateProfileFirstCell.swift */,
+				0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -327,8 +346,10 @@
 				0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */,
 				0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */,
 				0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */,
-				0EFC0AED22F5CD1D00DC8BBD /* UTTextField.swift */,
+				0EFC0AED22F5CD1D00DC8BBD /* UTAnswerTextField.swift */,
 				0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */,
+				0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */,
+				0E0E045C2319C47200979E03 /* UTPageControl.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -496,6 +517,7 @@
 				0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */,
 				0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */,
 				0E17A39022EC8DF600390BA5 /* LaunchScreen.storyboard in Resources */,
+				0E416C1A2319BBA500EA3CA7 /* CreateProfileFirstCell.xib in Resources */,
 				0E17A38D22EC8DF600390BA5 /* Assets.xcassets in Resources */,
 				0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */,
 				0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */,
@@ -615,7 +637,9 @@
 			files = (
 				0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */,
 				0E47593822EE1AE500B2DE82 /* UIViewExtension.swift in Sources */,
+				0E416C10231993B700EA3CA7 /* UTLoginTextView.swift in Sources */,
 				0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */,
+				0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */,
 				0E61DD5222EF77F900C1C8C7 /* SwipeableView.swift in Sources */,
 				0EFA5530230308260000E6F6 /* Answer.swift in Sources */,
 				0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */,
@@ -628,16 +652,20 @@
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
-				0EFC0AEE22F5CD1D00DC8BBD /* UTTextField.swift in Sources */,
+				0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */,
 				0EFA552E2303081A0000E6F6 /* User.swift in Sources */,
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
+				0E416C142319AEF600EA3CA7 /* SignUpViewController.swift in Sources */,
 				0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */,
+				0E416C192319BBA500EA3CA7 /* CreateProfileFirstCell.swift in Sources */,
+				0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */,
 				0E1C8B3E22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.swift in Sources */,
 				0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */,
 				0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */,
+				0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */,
 				0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */,
 				0E5EC81C22F38A9A003C8C73 /* ShadowUIView.swift in Sources */,
 				0E47592B22EDE47300B2DE82 /* LoginViewController.swift in Sources */,

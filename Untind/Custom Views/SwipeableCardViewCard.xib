@@ -233,7 +233,7 @@ Give reasons.</string>
                                                 <constraint firstAttribute="trailing" secondItem="2JP-XB-krE" secondAttribute="trailing" constant="15" id="xCv-Ye-C4h"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ttl-9J-yJr" customClass="UTTextField" customModule="Untind" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ttl-9J-yJr" customClass="UTAnswerTextField" customModule="Untind" customModuleProvider="target">
                                             <rect key="frame" x="30" y="60" width="153" height="150"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>

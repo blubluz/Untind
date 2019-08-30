@@ -135,6 +135,24 @@ class OnboardingViewController: UIViewController {
     }
     
     //MARK: - Button Actions
+    @IBAction func facebookTapped(_ sender: Any) {
+        if currentMode == .signIn {
+            
+        } else if currentMode == .signUp {
+            
+        }
+    }
+    @IBAction func emailTapped(_ sender: Any) {
+        if currentMode == .signIn {
+            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInViewController"), animated: false)
+            
+            
+        } else if currentMode == .signUp {
+            
+            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpViewController"), animated: false)
+        }
+    }
+    
     @IBAction func rotateBackTapped(_ sender: Any) {
             currentMode = .None
     }

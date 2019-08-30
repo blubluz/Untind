@@ -9,7 +9,7 @@
 import UIKit
 
 //@IBDesignable
-class UTTextField: UIView, UITextViewDelegate {
+class UTAnswerTextField: UIView, UITextViewDelegate {
 
     var textField : UITextView!
     var quoteMark : UIImageView!

@@ -37,7 +37,7 @@ class SwipeableCardViewCard: SwipeableCardView {
     @IBOutlet weak var authorAvatarImageView: UIImageView!
     
     @IBOutlet weak var smallQuestionLabel: UILabel!
-    @IBOutlet weak var answerTextField: UTTextField!
+    @IBOutlet weak var answerTextField: UTAnswerTextField!
     
     var question : Question? {
         didSet {
