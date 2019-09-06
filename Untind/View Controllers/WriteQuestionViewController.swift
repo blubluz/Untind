@@ -34,7 +34,7 @@ class WriteQuestionViewController: UIViewController {
         
         db.collection("questions").addDocument(data: [
             "answers" : [],
-            "author" : User.loggedUser!.jsonValue(),
+            "author" : UTUser.loggedUser!.userProfile?.jsonValue(),
             "postDate" : Date(),
             "questionText" : textView.text ?? "No qusetion text"], completion: { error in
                 if error != nil {

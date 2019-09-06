@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import SVProgressHUD
+import FirebaseAuth
 
 enum OnboardingMode {
     case signIn
@@ -24,6 +27,8 @@ class OnboardingViewController: UIViewController {
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    var customInteractor : CustomInteractor?
     
     var currentMode : OnboardingMode = .None {
         didSet {
@@ -86,23 +91,23 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let loggedInUserDict = UserDefaults.standard.dictionary(forKey: "loggedUser") {
-            let loggedUser = User(with: loggedInUserDict)
-            print("We have a logged user: \(loggedUser)")
-            
-            
-            let tabBarVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarViewController")
-            self.present(tabBarVc, animated: true, completion: nil)
-            
-            
-        } else {
-            print("We don't have a logged user.")
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UTUser.loggedUser != nil {
+            UTUser.loggedUser?.getUserProfile()
+            
+            //Go to tab bar controller
+            let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = tabBarController
+        } else {
+            //Do nothing
+        }
+        
         self.signInSignUpView.alpha = 0
+        self.navigationController?.delegate = self
     }
     
     
@@ -136,20 +141,54 @@ class OnboardingViewController: UIViewController {
     
     //MARK: - Button Actions
     @IBAction func facebookTapped(_ sender: Any) {
-        if currentMode == .signIn {
-            
-        } else if currentMode == .signUp {
-            
+        let login = LoginManager()
+        login.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+            if error != nil {
+                print("\(error!.localizedDescription)")
+            } else if result!.isCancelled {
+                print("Cancelled")
+            } else {
+                SVProgressHUD.show()
+                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                FirebaseAuthManager.login(credential: credential, completionBlock: { (success) in
+                    if success == true {
+                        print("Succesfuly logged in on facebook & Firebase")
+                        UTUser.loggedUser?.getUserProfile(completion: { (success, error) in
+                            SVProgressHUD.dismiss()
+                            if success == true {
+                                UTUser.loggedUser?.saveUserProfile(locally: true)
+                                
+                                
+                                print("Go to feed")
+                                
+                                //Go to tab bar controller
+                                let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
+                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                appDelegate.window?.rootViewController = tabBarController
+                                
+                            } else {
+                                if error == GetUserProfileError.userNotFound{
+                                    self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
+                                }
+                            }
+                        })
+                    } else {
+                        SVProgressHUD.dismiss()
+                        print("Failed login with Facebook on Firebase")
+                    }
+                })
+            }
         }
     }
+    
     @IBAction func emailTapped(_ sender: Any) {
         if currentMode == .signIn {
-            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInViewController"), animated: false)
+            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInViewController"), animated: true)
             
             
         } else if currentMode == .signUp {
             
-            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpViewController"), animated: false)
+            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpViewController"), animated: true)
         }
     }
     
@@ -172,3 +211,22 @@ class OnboardingViewController: UIViewController {
     
 }
 
+extension OnboardingViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        let frame = self.containerView.frame
+        
+        switch operation {
+        case .push:
+            self.customInteractor = CustomInteractor(attachTo: toVC)
+            return CustomAnimator(duration: TimeInterval(0.35), isPresenting: true, originFrame: frame)
+        default:
+            return CustomAnimator(duration: TimeInterval(0.35), isPresenting: false, originFrame: frame)
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let ci = customInteractor else { return nil }
+        return ci.transitionInProgress ? customInteractor : nil
+    }
+}

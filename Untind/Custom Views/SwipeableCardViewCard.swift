@@ -147,7 +147,7 @@ class SwipeableCardViewCard: SwipeableCardView {
             isInAnswerMode = true
         } else {
             SVProgressHUD.show()
-            let answer = Answer(with: User.loggedUser!, postDate: Date(), answerText: answerTextField.textField.text, upvotes: 0, rating: 0, question: question!)
+            let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: answerTextField.textField.text, upvotes: 0, rating: 0, question: question!)
             question?.addAnswer(answer: answer, completion: { (error) in
                 if let err = error {
                     print("There was an error:\(err)")

@@ -95,7 +95,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         profileNotificationsView.layer.shadowRadius = 4
         profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
         
-        profileButton.setImage(UIImage(named: User.loggedUser?.avatarType ?? "anonymous-avatar"), for: .normal)
+        profileButton.setImage(UIImage(named: UTUser.loggedUser?.userProfile?.avatarType ?? "anonymous-avatar"), for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {

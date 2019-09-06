@@ -11,13 +11,47 @@ import UIKit
 class CreateProfileFirstCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nameLabel: UILabel!
+    weak var delegate: CreateProfileDelegate?
+    
+    var selectedAvatarIndex = 1
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    @IBAction func nextButtonTapped(_ sender: Any) {
+    @IBAction func previousAvatarTapped(_ sender: Any) {
+        selectedAvatarIndex = selectedAvatarIndex - 1
+        if selectedAvatarIndex < 1 {
+            selectedAvatarIndex = 50
+        }
         
+        avatarImageView.image = UIImage(named: "avatar-\(selectedAvatarIndex)")
+        
+        delegate?.selected(avatar: "avatar-\(selectedAvatarIndex)")
+        
+    }
+    @IBAction func nextAvatarTapped(_ sender: Any) {
+    
+        selectedAvatarIndex = selectedAvatarIndex + 1
+        if selectedAvatarIndex > 50 {
+            selectedAvatarIndex = 1
+        }
+        
+        avatarImageView.image = UIImage(named: "avatar-\(selectedAvatarIndex)")
+        
+        delegate?.selected(avatar: "avatar-\(selectedAvatarIndex)")
+    }
+    
+    @IBAction func textFieldDidEndEditing(_ sender: Any) {
+        delegate?.selected(name: usernameTextField.text ?? "NoName")
+    }
+    
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        delegate?.selected(name: usernameTextField.text ?? "Noname")
+        delegate?.selected(avatar: "avatar-\(selectedAvatarIndex)")
+        delegate?.didTapNext()
     }
 }

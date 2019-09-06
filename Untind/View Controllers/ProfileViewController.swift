@@ -17,8 +17,10 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logOutTapped(_ sender: Any) {
-        UserDefaults.standard.set(nil, forKey: "loggedUser")
-        self.parent?.dismiss(animated: true, completion: nil)
+        //Go to tab bar controller
+        let onboardingNav = UIStoryboard.main.instantiateViewController(withIdentifier: "OnobardingNavigationController")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = onboardingNav
     }
     
     

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 class Answer: NSObject {
-    var author : User
+    var author : Profile
     var postDate : Date
     var answerText : String
     var upvotes : Int
@@ -18,7 +18,7 @@ class Answer: NSObject {
     var question : Question?
     
     init(with json:JSONDictionary){
-        author = User(with: json["author"] as! JSONDictionary)
+        author = Profile(with: json["author"] as! JSONDictionary)
         postDate = (json["postDate"] as! Timestamp).dateValue()
         answerText = json["answerText"] as! String
         upvotes = json["upvotes"] as! Int
@@ -29,7 +29,7 @@ class Answer: NSObject {
         }
     }
     
-    init(with author: User, postDate: Date, answerText: String, upvotes: Int, rating: CGFloat, question: Question) {
+    init(with author: Profile, postDate: Date, answerText: String, upvotes: Int, rating: CGFloat, question: Question) {
         self.author = author
         self.postDate = postDate
         self.answerText = answerText

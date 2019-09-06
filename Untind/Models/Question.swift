@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 class Question: NSObject {
-    var author : User
+    var author : Profile
     var postDate : Date
     var questionText : String
     var answers : [Answer]
@@ -25,7 +25,7 @@ class Question: NSObject {
         
         let authorDict = dictionary["author"] as! JSONDictionary
             
-        author = User(with: authorDict)
+        author = Profile(with: authorDict)
         
         postDate = (dictionary["postDate"] as! Timestamp).dateValue()
         
@@ -58,7 +58,7 @@ class Question: NSObject {
             questionDocument.getDocument { (snapshot, error) in
                 let question = Question(with: snapshot!.data()!)
                 if question.answers.contains(where: { (answer) -> Bool in
-                    answer.author.username == User.loggedUser?.username
+                    answer.author.username == UTUser.loggedUser?.userProfile?.username
                 }) {
                     print("User has already answered this question")
                     completion(AddAnswerError("User has already answered"))
@@ -83,16 +83,4 @@ class Question: NSObject {
     }
 }
 
-struct AddAnswerError : LocalizedError {
-    var errorDescription: String? { return mMsg }
-    var failureReason: String? { return mMsg }
-    var recoverySuggestion: String? { return "" }
-    var helpAnchor: String? { return "" }
-    
-    private var mMsg : String
-    
-    init(_ description: String)
-    {
-        mMsg = description
-    }
-}
+

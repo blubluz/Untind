@@ -27,10 +27,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="BRr-49-cbz">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-card-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-9c-8hd">
-                                <rect key="frame" x="19.666666666666657" y="92.333333333333314" width="336" height="627.33333333333348"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding-card-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-9c-8hd">
+                                <rect key="frame" x="33.666666666666657" y="182" width="308" height="537.66666666666663"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-Mz-S6Q">
+                            <view tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-Mz-S6Q">
                                 <rect key="frame" x="47.666666666666657" y="182" width="280" height="448"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jaZ-kX-MSf">
@@ -240,12 +240,12 @@
                             <constraint firstItem="ohe-Mz-S6Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="500" constant="60" id="esj-Ld-5nz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ohe-Mz-S6Q" secondAttribute="trailing" priority="500" constant="60" id="gXc-cX-7f7"/>
                             <constraint firstAttribute="bottom" secondItem="BRr-49-cbz" secondAttribute="bottom" id="pVJ-Ub-XZp"/>
-                            <constraint firstItem="wdo-9c-8hd" firstAttribute="width" secondItem="ohe-Mz-S6Q" secondAttribute="width" multiplier="1.2" id="rEq-Uk-35X"/>
+                            <constraint firstItem="wdo-9c-8hd" firstAttribute="width" secondItem="ohe-Mz-S6Q" secondAttribute="width" multiplier="1.1" id="rEq-Uk-35X"/>
                             <constraint firstItem="ohe-Mz-S6Q" firstAttribute="height" secondItem="BRr-49-cbz" secondAttribute="height" multiplier="0.8" priority="900" id="t9q-vU-H6Z"/>
                             <constraint firstItem="BRr-49-cbz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vag-VN-i9b"/>
                             <constraint firstItem="BRr-49-cbz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xim-fc-u7a"/>
-                            <constraint firstItem="wdo-9c-8hd" firstAttribute="height" secondItem="ohe-Mz-S6Q" secondAttribute="height" multiplier="1.4" id="yqL-1f-2Ds"/>
-                            <constraint firstItem="wdo-9c-8hd" firstAttribute="centerY" secondItem="ohe-Mz-S6Q" secondAttribute="centerY" id="zOv-SV-yE8"/>
+                            <constraint firstItem="wdo-9c-8hd" firstAttribute="height" secondItem="ohe-Mz-S6Q" secondAttribute="height" multiplier="1.2" id="yqL-1f-2Ds"/>
+                            <constraint firstItem="wdo-9c-8hd" firstAttribute="top" secondItem="ohe-Mz-S6Q" secondAttribute="top" id="zD2-2u-QEy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -277,7 +277,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sign-in-background" translatesAutoresizingMaskIntoConstraints="NO" id="Po4-2E-u8N">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04c-NF-SJs">
+                            <view clipsSubviews="YES" tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04c-NF-SJs">
                                 <rect key="frame" x="20" y="182" width="335" height="448"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="vqa-Wa-0dR">
@@ -321,6 +321,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxw-Hh-Fhp">
                                         <rect key="frame" x="234" y="292" width="71" height="71"/>
                                         <state key="normal" image="confirm-button-teal"/>
+                                        <connections>
+                                            <action selector="confirmButtonTapped:" destination="UVk-iS-tcD" eventType="touchUpInside" id="yeW-Dp-VAe"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzf-RX-VrA">
                                         <rect key="frame" x="35" y="306" width="80" height="29"/>
@@ -375,9 +378,12 @@
                         <viewLayoutGuide key="safeArea" id="YXt-v8-C7j"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="d8y-SS-iVi" id="6KM-B0-5pF"/>
+                        <outlet property="confirmButton" destination="Jxw-Hh-Fhp" id="uYk-fl-Geb"/>
                         <outlet property="containerView" destination="04c-NF-SJs" id="Ka0-OI-8sh"/>
+                        <outlet property="emailIcon" destination="vqa-Wa-0dR" id="xRE-Ti-ChA"/>
                         <outlet property="emailTextView" destination="iqJ-Pl-xOU" id="Jem-he-wPv"/>
-                        <outlet property="forgotPasswordButton" destination="qzf-RX-VrA" id="eqi-go-5k8"/>
+                        <outlet property="forgotPasswordButton" destination="qzf-RX-VrA" id="2gZ-gh-cnf"/>
                         <outlet property="passwordTextView" destination="6Z7-7T-W15" id="b8d-xA-KrC"/>
                     </connections>
                 </viewController>
@@ -834,7 +840,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HSx-B9-ehF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4191.1999999999998" y="571.92118226600985"/>
+            <point key="canvasLocation" x="4212" y="96"/>
         </scene>
         <!--Write Question View Controller-->
         <scene sceneID="4VJ-y0-Zyy">
@@ -887,7 +893,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6I-1G-RPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4274.3999999999996" y="697.53694581280786"/>
+            <point key="canvasLocation" x="4212" y="855"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Y75-7u-5VY">
@@ -1052,7 +1058,7 @@
         <!--Navigation Controller-->
         <scene sceneID="CWd-3W-1Cf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="3sF-MZ-d95" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnobardingNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="3sF-MZ-d95" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5PZ-n3-oph">
@@ -1078,12 +1084,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sign-up-background" translatesAutoresizingMaskIntoConstraints="NO" id="RgN-xs-JoF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zoI-p6-cDX">
+                            <view clipsSubviews="YES" tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zoI-p6-cDX">
                                 <rect key="frame" x="20" y="182" width="335" height="448"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-Ae-SAG">
                                         <rect key="frame" x="215" y="0.0" width="120" height="118"/>
                                         <color key="tintColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                <color key="value" red="0.99215686270000003" green="0.55294117649999996" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aD9-vO-dKj">
                                         <rect key="frame" x="30" y="30" width="30" height="26"/>
@@ -1184,6 +1195,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qFi-vH-kbh"/>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="aD9-vO-dKj" id="RGp-X6-zW5"/>
+                        <outlet property="confirmButton" destination="ZxN-mw-vNY" id="cFC-yM-bnl"/>
+                        <outlet property="confirmPasswordTextView" destination="I0z-Vv-fKD" id="dT9-fe-xdK"/>
+                        <outlet property="containerView" destination="zoI-p6-cDX" id="hI0-dm-mci"/>
+                        <outlet property="emailIcon" destination="BI6-Ae-SAG" id="Apk-S0-Vmy"/>
+                        <outlet property="emailTextView" destination="0jt-2C-tC0" id="KtR-Gz-1yl"/>
+                        <outlet property="passwordTextView" destination="C8h-Df-ARg" id="yv6-YF-o5s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXd-bS-fX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

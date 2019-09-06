@@ -58,9 +58,18 @@
 		0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6522EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift */; };
 		0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */; };
 		0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */; };
+		0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2AF231EE7C40050E750 /* FirebaseAuthManager.swift */; };
+		0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */; };
+		0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B3231EF5FD0050E750 /* Errors.swift */; };
 		0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */; };
+		0ED706FA231C5EBA0039A8DE /* CreateProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */; };
+		0ED706FB231C5EBA0039A8DE /* CreateProfileSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */; };
+		0EDA134F231D85F700B759C5 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA134E231D85F700B759C5 /* CustomAnimator.swift */; };
+		0EDA1351231DA12E00B759C5 /* CustomInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA1350231DA12E00B759C5 /* CustomInteractor.swift */; };
+		0EDA1353231DA25400B759C5 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */; };
+		0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */; };
 		0EFA552C2303080A0000E6F6 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552B2303080A0000E6F6 /* Question.swift */; };
-		0EFA552E2303081A0000E6F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552D2303081A0000E6F6 /* User.swift */; };
+		0EFA552E2303081A0000E6F6 /* UTUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552D2303081A0000E6F6 /* UTUser.swift */; };
 		0EFA5530230308260000E6F6 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA552F230308260000E6F6 /* Answer.swift */; };
 		0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFA55312303121B0000E6F6 /* DateExtension.swift */; };
 		0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC0AED22F5CD1D00DC8BBD /* UTAnswerTextField.swift */; };
@@ -147,9 +156,18 @@
 		0E61DD6522EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDelegate.swift; sourceTree = "<group>"; };
 		0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDataSource.swift; sourceTree = "<group>"; };
 		0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeableCardViewCard.xib; sourceTree = "<group>"; };
+		0E7AC2AF231EE7C40050E750 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginManager.swift; sourceTree = "<group>"; };
+		0E7AC2B3231EF5FD0050E750 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
+		0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileSecondCell.swift; sourceTree = "<group>"; };
+		0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateProfileSecondCell.xib; sourceTree = "<group>"; };
+		0EDA134E231D85F700B759C5 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
+		0EDA1350231DA12E00B759C5 /* CustomInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractor.swift; sourceTree = "<group>"; };
+		0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		0EFA552B2303080A0000E6F6 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
-		0EFA552D2303081A0000E6F6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0EFA552D2303081A0000E6F6 /* UTUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTUser.swift; sourceTree = "<group>"; };
 		0EFA552F230308260000E6F6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		0EFA55312303121B0000E6F6 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		0EFC0AED22F5CD1D00DC8BBD /* UTAnswerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAnswerTextField.swift; sourceTree = "<group>"; };
@@ -221,10 +239,12 @@
 		0E17A38422EC8DF500390BA5 /* Untind */ = {
 			isa = PBXGroup;
 			children = (
+				0EDA134D231D85DF00B759C5 /* Helpers */,
 				0E17A3B522EC8E4700390BA5 /* Assets */,
 				0E47593022EDF32700B2DE82 /* Custom Views */,
 				0E17A3B422EC8E3A00390BA5 /* Storyboards */,
 				0E17A3B322EC8E3400390BA5 /* View Controllers */,
+				0E7AC2AE231EE7B60050E750 /* Managers */,
 				0EFA552A230307F60000E6F6 /* Models */,
 				0E17A3B622EC9A3100390BA5 /* Extensions */,
 				0E17A38522EC8DF500390BA5 /* AppDelegate.swift */,
@@ -301,6 +321,8 @@
 				0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */,
 				0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */,
 				0EFA55312303121B0000E6F6 /* DateExtension.swift */,
+				0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */,
+				0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +348,8 @@
 				0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */,
 				0E416C172319BBA500EA3CA7 /* CreateProfileFirstCell.swift */,
 				0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */,
+				0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */,
+				0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -372,11 +396,30 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0E7AC2AE231EE7B60050E750 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0E7AC2AF231EE7C40050E750 /* FirebaseAuthManager.swift */,
+				0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		0EDA134D231D85DF00B759C5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA134E231D85F700B759C5 /* CustomAnimator.swift */,
+				0EDA1350231DA12E00B759C5 /* CustomInteractor.swift */,
+				0E7AC2B3231EF5FD0050E750 /* Errors.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		0EFA552A230307F60000E6F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				0EFA552B2303080A0000E6F6 /* Question.swift */,
-				0EFA552D2303081A0000E6F6 /* User.swift */,
+				0EFA552D2303081A0000E6F6 /* UTUser.swift */,
 				0EFA552F230308260000E6F6 /* Answer.swift */,
 			);
 			path = Models;
@@ -518,6 +561,7 @@
 				0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */,
 				0E17A39022EC8DF600390BA5 /* LaunchScreen.storyboard in Resources */,
 				0E416C1A2319BBA500EA3CA7 /* CreateProfileFirstCell.xib in Resources */,
+				0ED706FB231C5EBA0039A8DE /* CreateProfileSecondCell.xib in Resources */,
 				0E17A38D22EC8DF600390BA5 /* Assets.xcassets in Resources */,
 				0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */,
 				0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */,
@@ -651,18 +695,22 @@
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
+				0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
+				0EDA1351231DA12E00B759C5 /* CustomInteractor.swift in Sources */,
 				0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */,
-				0EFA552E2303081A0000E6F6 /* User.swift in Sources */,
+				0EFA552E2303081A0000E6F6 /* UTUser.swift in Sources */,
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
 				0E416C142319AEF600EA3CA7 /* SignUpViewController.swift in Sources */,
 				0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */,
+				0ED706FA231C5EBA0039A8DE /* CreateProfileSecondCell.swift in Sources */,
 				0E416C192319BBA500EA3CA7 /* CreateProfileFirstCell.swift in Sources */,
 				0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */,
 				0E1C8B3E22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.swift in Sources */,
+				0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */,
 				0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */,
 				0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */,
 				0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */,
@@ -671,7 +719,9 @@
 				0E47592B22EDE47300B2DE82 /* LoginViewController.swift in Sources */,
 				0E47593622EE18E100B2DE82 /* TabBarCircleView.swift in Sources */,
 				0E47593A22EE1E4400B2DE82 /* FeedViewController.swift in Sources */,
+				0EDA1353231DA25400B759C5 /* UIViewControllerExtension.swift in Sources */,
 				0E61DD5C22EF791200C1C8C7 /* CGPoint+SwipeableAdditions.swift in Sources */,
+				0EDA134F231D85F700B759C5 /* CustomAnimator.swift in Sources */,
 				0E61DD5822EF78BF00C1C8C7 /* SwipeDirection.swift in Sources */,
 				0E47592F22EDF0F300B2DE82 /* TabBarViewController.swift in Sources */,
 				0E17A3B822EC9A3F00390BA5 /* UIColorExtension.swift in Sources */,
@@ -680,6 +730,8 @@
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,
 				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
+				0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */,
+				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E47593422EDFCD600B2DE82 /* UIImageExtension.swift in Sources */,
 				0E068A4B22FB558F00A9BDE9 /* MyAnswersContainerCell.swift in Sources */,
 			);
@@ -791,6 +843,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -845,6 +898,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

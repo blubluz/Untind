@@ -8,9 +8,13 @@ target 'Untind' do
   pod 'pop'
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
   pod 'SwiftyJSON'
   pod 'SVProgressHUD'
   pod 'IHKeyboardAvoiding'
+  pod 'FBSDKLoginKit'
+  
+
   # Pods for Untind
 
   target 'UntindTests' do

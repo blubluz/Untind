@@ -15,6 +15,10 @@ class UTLoginTextView: UIView {
     private var title : UILabel!
     private var underline : UIView!
     
+    var text : String? {
+        return textField.text
+    }
+    
     @IBInspectable var underlineColor: UIColor {
         get {
             return underline.backgroundColor!
