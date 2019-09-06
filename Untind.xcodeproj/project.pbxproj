@@ -80,6 +80,7 @@
 		9BEF1F06E29B66E1012EF409 /* Pods_Untind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */; };
 		9D7472092E23377E3094DD16 /* Pods_UntindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */; };
 		B0DDED9204B14A0D7F50C79B /* Pods_UntindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EE0AE1F6BF96288417DC38 /* Pods_UntindTests.framework */; };
+		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,7 @@
 		B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UntindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CAD022DE78A7E39AB5B51C /* Pods-Untind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Untind.debug.xcconfig"; path = "Target Support Files/Pods-Untind/Pods-Untind.debug.xcconfig"; sourceTree = "<group>"; };
 		F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Untind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				0EFA55312303121B0000E6F6 /* DateExtension.swift */,
 				0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */,
 				0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */,
+				F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */,
 				0E17A3BC22EC9E8700390BA5 /* GOTHICB.TTF in Sources */,
 				0E61DD6022EF7E3200C1C8C7 /* SwipeableCardView.swift in Sources */,
+				F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,

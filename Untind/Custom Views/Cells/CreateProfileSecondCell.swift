@@ -48,7 +48,7 @@ class CreateProfileSecondCell: UICollectionViewCell {
     }
     
     @IBAction func didTapNextButton(_ sender: Any) {
-        delegate?.selected(age: Int(ageTextField.text ?? "18")!)
+        delegate?.selected(age: Int(ageTextField.text ?? "18") ?? 18)
         delegate?.didTapNext()
     }
     

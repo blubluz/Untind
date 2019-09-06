@@ -10,6 +10,7 @@ import UIKit
 import IHKeyboardAvoiding
 import FirebaseAuth
 import FirebaseFirestore
+import SVProgressHUD
 
 class CreateProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CreateProfileDelegate {
 
@@ -151,8 +152,12 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func didTapNext() {
-        
         if pageControl.selectedPageIndex == 1 {
+            if validateFields() == false {
+                return
+            }
+            //We are at the last page
+            //Create account
             let age = currentUser.userProfile?.age ?? 18
             currentUser.userProfile?.settings.ageRange = (min(age - 4,18),age + 4)
             
@@ -165,11 +170,15 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
                 currentUser.userProfile?.uuid = "NoUUID_Simulator?"
             }
             
+            currentUser.userProfile?.uid = Auth.auth().currentUser!.uid
+            
             let db = Firestore.firestore()
             
             let documentPath = db.collection("UserProfiles").document(UTUser.loggedUser!.user.uid)
+            SVProgressHUD.show()
             documentPath.setData(currentUser.userProfile!.jsonValue()) { [weak self] (error) in
                 
+                SVProgressHUD.dismiss()
                 if error == nil {
                     UTUser.loggedUser?.userProfile = self?.currentUser.userProfile
                     self?.currentUser.saveUserProfile(locally: true)
@@ -183,8 +192,6 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
                     print("Error saving user profile on FireBase")
                 }
             }
-            //We are at the last page
-            //Create account
             
         } else {
             collectionView.scrollToItem(at: IndexPath(row: 0, section: pageControl.selectedPageIndex+1), at: .centeredHorizontally, animated: true)
@@ -199,5 +206,29 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
         } else {
             collectionView.scrollToItem(at: IndexPath(row: 0, section: pageControl.selectedPageIndex-1), at: .centeredHorizontally, animated: true)
         }
+    }
+    
+    func validateFields() -> Bool {
+        guard let userProfile = currentUser.userProfile else {
+            return false
+        }
+        
+        guard userProfile.username != Profile.defaultUsername else {
+            present(UIAlertController.errorAlert(text: "Please pick a username"), animated: true, completion: nil)
+            collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
+            return false
+        }
+        
+        guard userProfile.age != Profile.defaultAge else {
+            present(UIAlertController.errorAlert(text: "Please select your age"), animated: true, completion: nil)
+            return false
+        }
+        
+        guard userProfile.age >= 16 else {
+            present(UIAlertController.errorAlert(text: "You must be over 16 to user Untind"), animated: true, completion: nil)
+            return false
+        }
+        
+        return true
     }
 }

@@ -28,7 +28,7 @@ struct AddAnswerError : LocalizedError {
 
 enum GetUserProfileError : Error {
     case userNotLoggedIn
-    case userNotFound
+    case userProfileNotFound
     case dataNotFound
 }
 

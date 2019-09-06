@@ -48,41 +48,40 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
-        let db = Firestore.firestore()
+        guard passwordTextView.text != "" else {
+            present(UIAlertController.errorAlert(text: "Please enter a password"), animated: true, completion: nil)
+            return
+        }
         
-        if let uuid = UIDevice.current.identifierForVendor?.uuidString {
-            let userData =  [
-                "uuid" : uuid,
-                "avatar_type" : "avatar-1",
-                "username" : emailTextView.text ?? "test_user",
-                "settings" : [
-                    "ageRange" : [
-                        "minAge" : 20,
-                        "maxAge" : 30
-                    ],
-                    "prefferedGender" : "female",
-                ]
-                ] as [String : Any]
+        guard emailTextView.text != "" else {
+            present(UIAlertController.errorAlert(text: "Please enter an email address"), animated: true, completion: nil)
+            return
+        }
+        
+        SVProgressHUD.show()
+        Auth.auth().signIn(withEmail: emailTextView.text!, password: passwordTextView.text!) { [weak self] user, error in
             
-            
-            SVProgressHUD.show()
-            db.collection("users").document(uuid).setData(
-                userData, completion: {
-                    (error) in
+            if error == nil {
+                UTUser.loggedUser?.getUserProfile(completion: { (success, error) in
                     SVProgressHUD.dismiss()
-                    if error != nil {
-                        print(error?.localizedDescription)
-                    } else {
-                        print("Succesfully created/updated user")
-                        UserDefaults.standard.setValue(userData, forKey: "loggedUser")
-                        
+                    if success == true {
+                        UTUser.loggedUser?.saveUserProfile(locally: true)
+                        print("Go to feed")
+                        //Go to tab bar controller
                         let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         appDelegate.window?.rootViewController = tabBarController
+                        
+                    } else {
+                        if error == GetUserProfileError.userProfileNotFound{ self?.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
                         }
-            })
-        } else {
-            print( "No UUID available. Simulator?")
+                    }
+                })
+                
+            } else {
+                SVProgressHUD.dismiss()
+                self?.present(UIAlertController.errorAlert(text: error?.localizedDescription ?? "Unidentifier error"), animated: true, completion: nil)
+            }
         }
     }
     

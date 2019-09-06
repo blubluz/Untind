@@ -19,11 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
-        do {
-            try Auth.auth().signOut()
-        } catch let error as NSError {
-            print(error)
-        }
+       
         
         return true
     }

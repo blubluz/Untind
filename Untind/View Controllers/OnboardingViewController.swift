@@ -96,12 +96,20 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if UTUser.loggedUser != nil {
-            UTUser.loggedUser?.getUserProfile()
+            UTUser.loggedUser?.getUserProfile(completion: { (success, error) in
+                if error == GetUserProfileError.userProfileNotFound { self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
+                } else {
+                    if success == true {
+                        //Go to tab bar controller
+                        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = tabBarController
+                    } else {
+                        self.present(UIAlertController.errorAlert(text: error?.localizedDescription ?? "Error fetching user profile"), animated: true, completion: nil)
+                    }
+                }
+            })
             
-            //Go to tab bar controller
-            let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = tabBarController
         } else {
             //Do nothing
         }
@@ -150,8 +158,8 @@ class OnboardingViewController: UIViewController {
             } else {
                 SVProgressHUD.show()
                 let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                FirebaseAuthManager.login(credential: credential, completionBlock: { (success) in
-                    if success == true {
+                FirebaseAuthManager.login(credential: credential, completionBlock: { (error) in
+                    if error == nil {
                         print("Succesfuly logged in on facebook & Firebase")
                         UTUser.loggedUser?.getUserProfile(completion: { (success, error) in
                             SVProgressHUD.dismiss()
@@ -167,13 +175,14 @@ class OnboardingViewController: UIViewController {
                                 appDelegate.window?.rootViewController = tabBarController
                                 
                             } else {
-                                if error == GetUserProfileError.userNotFound{
+                                if error == GetUserProfileError.userProfileNotFound{
                                     self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
                                 }
                             }
                         })
                     } else {
                         SVProgressHUD.dismiss()
+                        self.present(UIAlertController.errorAlert(text: error?.localizedDescription ?? "Something went wrong"), animated: true, completion: nil)
                         print("Failed login with Facebook on Firebase")
                     }
                 })

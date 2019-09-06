@@ -316,6 +316,7 @@
                                                 <color key="value" red="0.12941176469999999" green="0.81568627449999997" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="password"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="secureTextEntry" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxw-Hh-Fhp">
@@ -630,7 +631,7 @@
                                     <constraint firstAttribute="width" constant="200" id="1Lk-D9-IqC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Sb1-lC-Pjk">
                                 <rect key="frame" x="157.66666666666666" y="59" width="60" height="60"/>
@@ -1115,6 +1116,7 @@
                                                 <color key="value" red="0.99215686270000003" green="0.55294117649999996" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="email"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="secureTextEntry" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8h-Df-ARg" customClass="UTLoginTextView" customModule="Untind" customModuleProvider="target">
@@ -1128,6 +1130,7 @@
                                                 <color key="value" red="0.99215686270000003" green="0.55294117649999996" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="password"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="secureTextEntry" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxN-mw-vNY">
@@ -1147,7 +1150,8 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="underlineColor">
                                                 <color key="value" red="0.99215686270000003" green="0.55294117649999996" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="password"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="confirm password"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="secureTextEntry" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>

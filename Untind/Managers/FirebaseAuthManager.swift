@@ -12,10 +12,10 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FirebaseAuthManager {
-    static func login(credential: AuthCredential, completionBlock: @escaping (_ success: Bool) -> Void) {
+    static func login(credential: AuthCredential, completionBlock: @escaping (_ error: Error?) -> Void) {
         Auth.auth().signIn(with: credential, completion: { (firebaseUser, error) in
             print(firebaseUser)
-            completionBlock(error == nil)
+            completionBlock(error)
         })
     }
 }

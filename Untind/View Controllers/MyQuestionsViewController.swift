@@ -43,29 +43,29 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         
         let db = Firestore.firestore()
         
-//        db.collectionGroup("questions").whereField(FieldPath(["author", "username"]), isEqualTo: UTUser.loggedUser?.userProfile.username ?? "").getDocuments { (snapshot : QuerySnapshot?, error) in
-//            if let err = error {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                self.myQuestions = []
-//                for document in snapshot!.documents {
-//                    self.myQuestions?.append(Question(with: document.data()))
-//                }
-//                self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
-//            }
-//        }
-//
-//        db.collectionGroup("answers").whereField(FieldPath(["author", "username"]), isEqualTo: UTUser.loggedUser?.userProfile. ?? "").getDocuments { (snapshot : QuerySnapshot?, error) in
-//            if let err = error {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                self.myAnswers = []
-//                for document in snapshot!.documents {
-//                    self.myAnswers?.append(Answer(with: document.data()))
-//                }
-//                self.collectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
-//            }
-//        }
+        db.collectionGroup("questions").whereField(FieldPath(["author", "uid"]), isEqualTo: UTUser.loggedUser?.user.uid ?? "").getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            } else {
+                self.myQuestions = []
+                for document in snapshot!.documents {
+                    self.myQuestions?.append(Question(with: document.data()))
+                }
+                self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+            }
+        }
+
+        db.collectionGroup("answers").whereField(FieldPath(["author", "uid"]), isEqualTo: UTUser.loggedUser?.user.uid ?? "").getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            } else {
+                self.myAnswers = []
+                for document in snapshot!.documents {
+                    self.myAnswers?.append(Answer(with: document.data()))
+                }
+                self.collectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

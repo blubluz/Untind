@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import SVProgressHUD
+import IHKeyboardAvoiding
 
 class SignUpViewController: UIViewController {
 
@@ -26,6 +29,11 @@ class SignUpViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         
+        
+        KeyboardAvoiding.avoidingView = containerView
+        KeyboardAvoiding.addTriggerView(emailTextView)
+        KeyboardAvoiding.addTriggerView(passwordTextView)
+        KeyboardAvoiding.addTriggerView(confirmPasswordTextView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +53,29 @@ class SignUpViewController: UIViewController {
  
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
-        navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
+        guard passwordTextView.text == confirmPasswordTextView.text else {
+            present(UIAlertController.errorAlert(text: "Passwords do not match"), animated: true, completion: nil)
+            return
+        }
+        
+        guard passwordTextView.text != "" else {
+            present(UIAlertController.errorAlert(text: "Please select a password"), animated: true, completion: nil)
+            return
+        }
+        
+        guard emailTextView.text != "" else {
+            present(UIAlertController.errorAlert(text: "Please enter an email address"), animated: true, completion: nil)
+            return
+        }
+        
+        SVProgressHUD.show()
+        Auth.auth().createUser(withEmail: emailTextView.text!, password: passwordTextView.text!) { authResult, error in
+            SVProgressHUD.dismiss()
+            if error == nil { self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
+            } else {
+                self.present(UIAlertController.errorAlert(text: error?.localizedDescription ?? "Unidentifier error"), animated: true, completion: nil)
+            }
+        }
     }
     
     private func doStartAnimations() {

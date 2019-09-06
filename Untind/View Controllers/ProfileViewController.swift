@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FBSDKLoginKit
 
 class ProfileViewController: UIViewController {
 
@@ -17,10 +19,20 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logOutTapped(_ sender: Any) {
-        //Go to tab bar controller
-        let onboardingNav = UIStoryboard.main.instantiateViewController(withIdentifier: "OnobardingNavigationController")
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = onboardingNav
+        
+        
+        LoginManager().logOut()
+        do {
+            try Auth.auth().signOut()
+            
+            //Go to tab bar controller
+            let onboardingNav = UIStoryboard.main.instantiateViewController(withIdentifier: "OnobardingNavigationController")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = onboardingNav
+        } catch let error as NSError {
+            print(error)
+        }
+        
     }
     
     

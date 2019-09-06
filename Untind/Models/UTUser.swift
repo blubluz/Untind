@@ -20,17 +20,24 @@ class UTUser: NSObject {
         self.userProfile = profile
     }
     
-    static var loggedUser : UTUser? = {
-        var profile : Profile?
+    private static var _loggedUser: UTUser?
+    
+    static var loggedUser : UTUser?  {
+        if _loggedUser != nil && Auth.auth().currentUser != nil {
+            return _loggedUser
+        } else {
+            var profile : Profile?
             if let userProfileDict = UserDefaults.standard.value(forKey: "loggedUserProfile") as? JSONDictionary {
                 profile = Profile(with: userProfileDict)
+            }
+            guard let currentUser = Auth.auth().currentUser else {
+                return nil
+            }
+            
+            _loggedUser = UTUser(user: currentUser, profile: profile)
+            return _loggedUser
         }
-        guard let currentUser = Auth.auth().currentUser else {
-            return nil
-        }
-        
-        return UTUser(user: currentUser, profile: profile)
-    }()
+    }
     
     func getUserProfile(completion: @escaping (Bool, GetUserProfileError?) -> Void  = { _, _ in }) {
         guard let user = Auth.auth().currentUser else {
@@ -51,7 +58,7 @@ class UTUser: NSObject {
                 }
                 
             } else {
-                completion(false, GetUserProfileError.userNotFound)
+                completion(false, GetUserProfileError.userProfileNotFound)
             }
         }
     }
@@ -85,11 +92,19 @@ struct UserSettings {
 }
 
 struct Profile {
-    var avatarType : String = "avatar-1"
-    var uuid : String = "NoUUID"
-    var username : String = "NoUsername"
-    var gender : Gender = .female
-    var age : Int = 18
+    static let defaultUsername = "NoUsername"
+    static let defaultAvatar = "avatar-1"
+    static let defaultUuid = "NoUUID"
+    static let defaultUid = "NoUID"
+    static let defaultGender = Gender.female
+    static let defaultAge = 17
+    
+    var avatarType : String = Profile.defaultAvatar
+    var uuid : String = Profile.defaultUuid
+    var uid : String = Profile.defaultUid
+    var username : String = Profile.defaultUsername
+    var gender : Gender = Profile.defaultGender
+    var age : Int = Profile.defaultAge
     var settings : UserSettings = UserSettings()
     
     init() {
@@ -104,7 +119,7 @@ struct Profile {
         gender = Gender(rawValue: jsonDictionary["gender"] as! String)!
         let settingsDict = jsonDictionary["settings"] as! JSONDictionary
         settings = UserSettings(with: JSON(settingsDict))
-        
+        uid = jsonDictionary["uid"] as! String
     }
     
     func jsonValue() -> JSONDictionary {
@@ -113,7 +128,8 @@ struct Profile {
                  "uuid" : uuid,
                  "age" : age,
                  "gender" : gender.rawValue,
-                 "settings" : settings.jsonValue()
+                 "settings" : settings.jsonValue(),
+                 "uid" : uid
         ]
     }
 }

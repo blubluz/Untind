@@ -19,7 +19,17 @@ class UTLoginTextView: UIView {
         return textField.text
     }
     
+    @IBInspectable var secureTextEntry: Bool {
+        get {
+            return textField.isSecureTextEntry
+        }
+        set {
+            self.textField.isSecureTextEntry = newValue
+        }
+    }
+    
     @IBInspectable var underlineColor: UIColor {
+        
         get {
             return underline.backgroundColor!
         }
