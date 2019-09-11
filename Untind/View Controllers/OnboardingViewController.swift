@@ -96,19 +96,30 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if UTUser.loggedUser != nil {
-            UTUser.loggedUser?.getUserProfile(completion: { (success, error) in
-                if error == GetUserProfileError.userProfileNotFound { self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
-                } else {
-                    if success == true {
-                        //Go to tab bar controller
-                        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.window?.rootViewController = tabBarController
+            if UTUser.loggedUser?.userProfile != nil {
+                UTUser.loggedUser?.getUserProfile()
+                //Go to tab bar controller
+                let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = tabBarController
+            } else {
+                SVProgressHUD.show()
+                UTUser.loggedUser?.getUserProfile(completion: { (success, error) in 
+                    SVProgressHUD.dismiss()
+                    if error == GetUserProfileError.userProfileNotFound { self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateProfileViewController"), animated: true)
                     } else {
-                        self.present(UIAlertController.errorAlert(text: error?.localizedDescription ?? "Error fetching user profile"), animated: true, completion: nil)
+                        if success == true {
+                            //Go to tab bar controller
+                            let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.window?.rootViewController = tabBarController
+                        } else {
+                            self.present(UIAlertController.errorAlert(text: error?.localizedDescription ?? "Error fetching user profile"), animated: true, completion: nil)
+                        }
                     }
-                }
-            })
+                })
+            }
+        
             
         } else {
             //Do nothing

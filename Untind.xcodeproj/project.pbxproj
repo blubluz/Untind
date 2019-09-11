@@ -62,6 +62,10 @@
 		0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */; };
 		0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B3231EF5FD0050E750 /* Errors.swift */; };
 		0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */; };
+		0ECB79412329818700F99498 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB79402329818700F99498 /* Registration.storyboard */; };
+		0ECB7943232981C800F99498 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB7942232981C800F99498 /* Feed.storyboard */; };
+		0ECB7945232981D000F99498 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB7944232981D000F99498 /* Chat.storyboard */; };
+		0ECB7947232981D500F99498 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB7946232981D500F99498 /* Profile.storyboard */; };
 		0ED706FA231C5EBA0039A8DE /* CreateProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */; };
 		0ED706FB231C5EBA0039A8DE /* CreateProfileSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */; };
 		0EDA134F231D85F700B759C5 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA134E231D85F700B759C5 /* CustomAnimator.swift */; };
@@ -161,6 +165,10 @@
 		0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginManager.swift; sourceTree = "<group>"; };
 		0E7AC2B3231EF5FD0050E750 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
+		0ECB79402329818700F99498 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
+		0ECB7942232981C800F99498 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		0ECB7944232981D000F99498 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		0ECB7946232981D500F99498 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileSecondCell.swift; sourceTree = "<group>"; };
 		0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateProfileSecondCell.xib; sourceTree = "<group>"; };
 		0EDA134E231D85F700B759C5 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
@@ -298,6 +306,10 @@
 			children = (
 				0E17A38922EC8DF500390BA5 /* Main.storyboard */,
 				0E17A38E22EC8DF600390BA5 /* LaunchScreen.storyboard */,
+				0ECB79402329818700F99498 /* Registration.storyboard */,
+				0ECB7942232981C800F99498 /* Feed.storyboard */,
+				0ECB7944232981D000F99498 /* Chat.storyboard */,
+				0ECB7946232981D500F99498 /* Profile.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -564,11 +576,15 @@
 				0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */,
 				0E17A39022EC8DF600390BA5 /* LaunchScreen.storyboard in Resources */,
 				0E416C1A2319BBA500EA3CA7 /* CreateProfileFirstCell.xib in Resources */,
+				0ECB7943232981C800F99498 /* Feed.storyboard in Resources */,
+				0ECB7945232981D000F99498 /* Chat.storyboard in Resources */,
 				0ED706FB231C5EBA0039A8DE /* CreateProfileSecondCell.xib in Resources */,
 				0E17A38D22EC8DF600390BA5 /* Assets.xcassets in Resources */,
 				0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */,
+				0ECB79412329818700F99498 /* Registration.storyboard in Resources */,
 				0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */,
 				0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */,
+				0ECB7947232981D500F99498 /* Profile.storyboard in Resources */,
 				0E17A3BB22EC9E7D00390BA5 /* GOTHICB.TTF in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,

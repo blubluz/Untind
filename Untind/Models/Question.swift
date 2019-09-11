@@ -58,7 +58,7 @@ class Question: NSObject {
             questionDocument.getDocument { (snapshot, error) in
                 let question = Question(with: snapshot!.data()!)
                 if question.answers.contains(where: { (answer) -> Bool in
-                    answer.author.username == UTUser.loggedUser?.userProfile?.username
+                    answer.author.uid == UTUser.loggedUser?.user.uid
                 }) {
                     print("User has already answered this question")
                     completion(AddAnswerError("User has already answered"))

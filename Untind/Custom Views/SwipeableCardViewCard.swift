@@ -9,6 +9,10 @@
 import UIKit
 import SVProgressHUD
 
+protocol QuestionCardDelegate: class {
+    func didAnswerQuestion(question: Question, answer : Answer)
+}
+
 class SwipeableCardViewCard: SwipeableCardView {
 
    
@@ -39,8 +43,13 @@ class SwipeableCardViewCard: SwipeableCardView {
     @IBOutlet weak var smallQuestionLabel: UILabel!
     @IBOutlet weak var answerTextField: UTAnswerTextField!
     
+    
+    weak var questionDelegate: QuestionCardDelegate?
+    
+    private var _question : Question?
     var question : Question? {
         didSet {
+            _question = question!
             questionLabel.text = question?.questionText
             smallQuestionLabel.text = question?.questionText
             authorNameLabel.text = question?.author.username
@@ -149,15 +158,18 @@ class SwipeableCardViewCard: SwipeableCardView {
             SVProgressHUD.show()
             let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: answerTextField.textField.text, upvotes: 0, rating: 0, question: question!)
             question?.addAnswer(answer: answer, completion: { (error) in
+                SVProgressHUD.dismiss()
                 if let err = error {
                     print("There was an error:\(err)")
                 } else {
+                    if let question = self._question {
+                        self.questionDelegate?.didAnswerQuestion(question: question, answer: answer)
+                    }
                     
+                    self.answerTextField.textField.text = ""
+                    self.isInAnswerMode = false
                 }
                 
-                self.answerTextField.textField.text = ""
-                SVProgressHUD.dismiss()
-                self.isInAnswerMode = false
             })
             
         }

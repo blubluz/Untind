@@ -37,6 +37,12 @@ class FeedViewController: UIViewController {
             } else {
                 for document in querySnapshot!.documents {
                     let question = Question(with: document)
+                    guard question.author.uid != UTUser.loggedUser!.user.uid && !question.answers.contains(where: { (answer) -> Bool in
+                        return answer.author.uid == UTUser.loggedUser!.user.uid
+                    }) else {
+                        continue
+                    }
+                    
                     self.questions.append(question)
                     self.swipeableCardViewContainer.dataSource = self
                 }
@@ -87,10 +93,19 @@ extension FeedViewController: SwipeableCardViewDataSource {
     func card(forItemAtIndex index: Int) -> SwipeableCardViewCard {
         let cardView = SwipeableCardViewCard()
         cardView.question = questions[index]
+        cardView.questionDelegate = self
         return cardView
     }
     
     func viewForEmptyCards() -> UIView? {
         return nil
+    }
+}
+
+
+//MARK: - QuestionCardDelegate
+extension FeedViewController: QuestionCardDelegate {
+    func didAnswerQuestion(question: Question, answer: Answer) {
+        swipeableCardViewContainer.swipeAwayTopCard(animated: true)
     }
 }

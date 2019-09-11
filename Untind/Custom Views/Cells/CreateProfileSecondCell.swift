@@ -11,10 +11,10 @@ import UIKit
 protocol CreateProfileDelegate: class {
     func didTapNext()
     func didTapBack()
-    func selected(name: String)
-    func selected(avatar: String)
-    func selected(gender: Gender)
-    func selected(age: Int)
+    func selected(name: String?)
+    func selected(avatar: String?)
+    func selected(gender: Gender?)
+    func selected(age: Int?)
 }
 
 class CreateProfileSecondCell: UICollectionViewCell {
@@ -48,7 +48,10 @@ class CreateProfileSecondCell: UICollectionViewCell {
     }
     
     @IBAction func didTapNextButton(_ sender: Any) {
-        delegate?.selected(age: Int(ageTextField.text ?? "18") ?? 18)
+        if let ageString = ageTextField.text, ageString != "" {
+            delegate?.selected(age: Int(ageString))
+        }
+        
         delegate?.didTapNext()
     }
     

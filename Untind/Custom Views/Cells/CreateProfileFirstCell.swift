@@ -50,7 +50,10 @@ class CreateProfileFirstCell: UICollectionViewCell {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        delegate?.selected(name: usernameTextField.text ?? "Noname")
+        if usernameTextField.text != "" {
+            delegate?.selected(name: usernameTextField.text)
+        }
+        
         delegate?.selected(avatar: "avatar-\(selectedAvatarIndex)")
         delegate?.didTapNext()
     }

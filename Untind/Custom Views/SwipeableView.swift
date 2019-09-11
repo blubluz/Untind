@@ -11,7 +11,7 @@ import pop
 
 class SwipeableView: UIView {
 
-    var delegate: SwipeableViewDelegate?
+    var cardDelegate: SwipeableViewDelegate?
 
     // MARK: Gesture Recognizer
 
@@ -91,7 +91,7 @@ class SwipeableView: UIView {
             removeAnimations()
             layer.rasterizationScale = UIScreen.main.scale
             layer.shouldRasterize = true
-            delegate?.didBeginSwipe(onView: self)
+            cardDelegate?.didBeginSwipe(onView: self)
         case .changed:
             let rotationStrength = min(panGestureTranslation.x / frame.width, SwipeableView.maximumRotation)
             let rotationAngle = SwipeableView.animationDirectionY * SwipeableView.rotationAngle * rotationStrength
@@ -100,7 +100,7 @@ class SwipeableView: UIView {
             transform = CATransform3DRotate(transform, rotationAngle, 0, 0, 1)
             transform = CATransform3DTranslate(transform, panGestureTranslation.x, panGestureTranslation.y, 0)
             layer.transform = transform
-            delegate?.didSwipe(onView: self, percent: dragPercentage)
+            cardDelegate?.didSwipe(onView: self, percent: dragPercentage)
         case .ended:
             endedPanAnimation()
             layer.shouldRasterize = false
@@ -149,7 +149,7 @@ class SwipeableView: UIView {
             translationAnimation?.fromValue = NSValue(cgPoint: POPLayerGetTranslationXY(layer))
             translationAnimation?.toValue = NSValue(cgPoint: animationPointForDirection(dragDirection))
             layer.pop_add(translationAnimation, forKey: "swipeTranslationAnimation")
-            self.delegate?.didEndSwipe(onView: self)
+            self.cardDelegate?.didEndSwipe(onView: self)
         } else {
             resetCardViewPosition()
         }
@@ -192,7 +192,7 @@ class SwipeableView: UIView {
     // MARK: - Tap Gesture Recognizer
 
     @objc private func tapRecognized(_ recognizer: UITapGestureRecognizer) {
-        delegate?.didTap(view: self)
+        cardDelegate?.didTap(view: self)
     }
 
 }

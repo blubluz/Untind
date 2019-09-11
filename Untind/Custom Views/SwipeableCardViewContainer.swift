@@ -65,7 +65,7 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
     }
 
     private func addCardView(cardView: SwipeableCardViewCard, atIndex index: Int) {
-        cardView.delegate = self
+        cardView.cardDelegate = self
         setFrame(forCardView: cardView, atIndex: index)
         cardViews.append(cardView)
         insertSubview(cardView, at: 0)
@@ -85,6 +85,17 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
         cardViews = []
     }
 
+    func swipeAwayTopCard(animated: Bool) {
+        if let topCardView = cardViews.first {
+            print(topCardView.questionLabel.text ?? "No question")
+            UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, options: .curveLinear, animations: {
+                topCardView.transform = CGAffineTransform(translationX: -500, y: -500).rotated(by: 5)
+            }) { (success) in
+                self.didEndSwipe(onView: topCardView)
+            }
+        }
+    }
+    
     /// Sets the frame of a card view provided for a given index. Applies a specific
     /// horizontal and vertical offset relative to the index in order to create an
     /// overlay stack effect on a series of cards.
@@ -146,6 +157,7 @@ extension SwipeableCardViewContainer {
                 self.layoutIfNeeded()
             }) { (success : Bool) in
                 // Remove swiped card
+                self.cardViews.removeFirst()
                 view.removeFromSuperview()
             }
         }

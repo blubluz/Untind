@@ -31,6 +31,7 @@ class UTUser: NSObject {
                 profile = Profile(with: userProfileDict)
             }
             guard let currentUser = Auth.auth().currentUser else {
+                _loggedUser = nil
                 return nil
             }
             

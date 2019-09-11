@@ -17,7 +17,12 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UTPageControl!
     
-    var currentUser = UTUser(user: Auth.auth().currentUser!, profile: Profile())
+    var currentUser : UTUser?
+    
+    private var selectedAvatar : String?
+    private var selectedAge : Int?
+    private var selectedGender : Gender?
+    private var selectedUsername : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +45,10 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
         view.addSubview(transitionRefferenceView)
         transitionRefferenceView.isUserInteractionEnabled = false
         view.bringSubviewToFront(collectionView)
-        
+     
+        if let auth = Auth.auth().currentUser {
+            currentUser = UTUser(user: auth, profile: Profile())
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,53 +143,59 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     
     
     //MARK: - Create Profile Delegate
-    func selected(age: Int) {
-        currentUser.userProfile?.age = age
+    func selected(age: Int?) {
+        selectedAge = age
     }
     
-    func selected(avatar: String) {
-        currentUser.userProfile?.avatarType = avatar
+    func selected(avatar: String?) {
+        selectedAvatar = avatar
     }
     
-    func selected(name: String) {
-        currentUser.userProfile?.username = name
+    func selected(name: String?) {
+        selectedUsername = name
     }
     
-    func selected(gender: Gender) {
-        currentUser.userProfile?.gender = gender
+    func selected(gender: Gender?) {
+        selectedGender = gender
     }
     
     func didTapNext() {
         if pageControl.selectedPageIndex == 1 {
             if validateFields() == false {
                 return
+            } else {
+                currentUser?.userProfile?.age = selectedAge!
+                currentUser?.userProfile?.avatarType = selectedAvatar!
+                currentUser?.userProfile?.username = selectedUsername!
+                currentUser?.userProfile?.gender = selectedGender!
             }
+            
             //We are at the last page
             //Create account
-            let age = currentUser.userProfile?.age ?? 18
-            currentUser.userProfile?.settings.ageRange = (min(age - 4,18),age + 4)
+            let age = currentUser?.userProfile?.age ?? 18
+            currentUser?.userProfile?.settings.ageRange = (min(age - 4,18),age + 4)
             
-            let gender = currentUser.userProfile?.gender
-            currentUser.userProfile?.settings.prefferedGender = gender == .female ? .male : .female
+            let gender = currentUser?.userProfile?.gender
+            currentUser?.userProfile?.settings.prefferedGender = gender == .female ? .male : .female
             
             if let uuid = UIDevice.current.identifierForVendor?.uuidString {
-                currentUser.userProfile?.uuid = uuid
+                currentUser?.userProfile?.uuid = uuid
             } else {
-                currentUser.userProfile?.uuid = "NoUUID_Simulator?"
+                currentUser?.userProfile?.uuid = "NoUUID_Simulator?"
             }
             
-            currentUser.userProfile?.uid = Auth.auth().currentUser!.uid
+            currentUser?.userProfile?.uid = Auth.auth().currentUser!.uid
             
             let db = Firestore.firestore()
             
             let documentPath = db.collection("UserProfiles").document(UTUser.loggedUser!.user.uid)
             SVProgressHUD.show()
-            documentPath.setData(currentUser.userProfile!.jsonValue()) { [weak self] (error) in
+            documentPath.setData(currentUser!.userProfile!.jsonValue()) { [weak self] (error) in
                 
                 SVProgressHUD.dismiss()
                 if error == nil {
-                    UTUser.loggedUser?.userProfile = self?.currentUser.userProfile
-                    self?.currentUser.saveUserProfile(locally: true)
+                    UTUser.loggedUser?.userProfile = self?.currentUser?.userProfile
+                    self?.currentUser?.saveUserProfile(locally: true)
                     
                     //Go to tab bar controller
                     let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController")
@@ -209,23 +223,34 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func validateFields() -> Bool {
-        guard let userProfile = currentUser.userProfile else {
+        guard  currentUser?.userProfile != nil else {
             return false
         }
         
-        guard userProfile.username != Profile.defaultUsername else {
+        guard selectedUsername != nil && selectedUsername != "" else {
             present(UIAlertController.errorAlert(text: "Please pick a username"), animated: true, completion: nil)
             collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
             return false
         }
         
-        guard userProfile.age != Profile.defaultAge else {
+        guard selectedAge != nil else {
             present(UIAlertController.errorAlert(text: "Please select your age"), animated: true, completion: nil)
             return false
         }
         
-        guard userProfile.age >= 16 else {
+        guard selectedAge! >= 16 else {
             present(UIAlertController.errorAlert(text: "You must be over 16 to user Untind"), animated: true, completion: nil)
+            return false
+        }
+        
+        guard selectedGender != nil else {
+            present(UIAlertController.errorAlert(text: "You must select your gender"), animated: true, completion: nil)
+            return false
+        }
+        
+        guard selectedAvatar != nil else {
+            present(UIAlertController.errorAlert(text: "You must select your avatar"), animated: true, completion: nil)
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
             return false
         }
         
