@@ -27,8 +27,11 @@ class TabBarViewController: UIViewController, PresentationViewController {
     @IBOutlet weak var addQuestionIndicatorArrow: UIImageView!
     @IBOutlet weak var closeModalButton: UIButton!
     @IBOutlet weak var presentationViewContainer: UIView!
+    
+    //Constraints
     @IBOutlet weak var presentationContainerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBarProportionalHeightConstraint: NSLayoutConstraint!
     
     weak var presentedContainerViewController : UIViewController?
     weak var currentDisplayedViewController : UIViewController?
@@ -54,8 +57,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TEST: Add initial controller here for testing purpose
-        
+        //TEST: Add initial controller here
         let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedViewController") as! FeedViewController
         currentDisplayedViewController = feedVC
         self.addChild(feedVC)
@@ -96,10 +98,12 @@ class TabBarViewController: UIViewController, PresentationViewController {
         profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
         
         profileButton.setImage(UIImage(named: UTUser.loggedUser?.userProfile?.avatarType ?? "anonymous-avatar"), for: .normal)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidAppear(animated) 
     }
     
   
@@ -188,9 +192,11 @@ class TabBarViewController: UIViewController, PresentationViewController {
     @IBAction func chatButtonTapped(_ sender: UITabBarButton) {
         moveCircle(toButton: sender)
     }
+    
     @IBAction func notificationsButtonTapped(_ sender: UITabBarButton) {
         moveCircle(toButton: sender)
     }
+    
     @IBAction func profileButtonTapped(_ sender: UITabBarButton) {
         moveCircle(toButton: sender)
         
@@ -238,6 +244,20 @@ class TabBarViewController: UIViewController, PresentationViewController {
     
     
     //MARK: - Helper functions
+    func hideTopBar(animated: Bool) {
+        UIView.animate(withDuration: animated == true ? 0.3 : 0, animations: {
+            self.topBarProportionalHeightConstraint.constant = -self.topBarView.frame.size.height
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func showTopBar(animated: Bool) {
+        UIView.animate(withDuration: animated == true ?  0.3 : 0, animations: {
+            self.topBarProportionalHeightConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil, inContainer: Bool) {
         
         self.currentDisplayedViewController?.viewWillDisappear(flag)

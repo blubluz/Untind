@@ -19,7 +19,11 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
     
     private var lineSpacing : CGFloat = 37
     @IBInspectable var maxCharacters : Int = 10
-    
+    @IBInspectable var themeColor : UIColor = UIColor(red: 33, green: 208, blue: 185, alpha: 1) {
+        didSet {
+            quoteMark.tintColor = themeColor
+        }
+    }
     
     private var numberOfLines : Int = 0 {
         didSet {
@@ -62,6 +66,8 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
         textField.typingAttributes = [NSAttributedString.Key.foregroundColor : UIColor(red: 55, green: 73, blue: 85, alpha: 1), NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 16)!, NSAttributedString.Key.paragraphStyle : paraStyle]
         
         quoteMark = UIImageView(image: UIImage(named: "quote-icon"))
+        quoteMark.tintColor = themeColor
+        
         addSubview(quoteMark)
         self.activateConstraints(constraints: [
             quoteMark.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
@@ -101,7 +107,7 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
             var currentLineY = lineSpacing
             while currentLineY <= frame.size.height {
                 let lineView = UIView(frame: CGRect(x: lines.count == 0 ? 26 : 0, y: currentLineY, width: lines.count == 0 ? frame.size.width-26 : frame.size.width - 4, height: 0.5))
-                lineView.backgroundColor = UIColor(red: 33, green: 208, blue: 185, alpha: 1)
+                lineView.backgroundColor = themeColor
                 lineView.alpha = CGFloat(1.0 - (0.2 * Double(lines.count)))
                 addSubview(lineView)
                 lines.append(lineView)

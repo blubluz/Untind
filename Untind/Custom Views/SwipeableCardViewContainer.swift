@@ -11,6 +11,8 @@ import UIKit
 class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
    
     
+   
+    
 
     static let horizontalInset: CGFloat = 12.0
 
@@ -117,8 +119,6 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
 // MARK: - SwipeableViewDelegate
 
 extension SwipeableCardViewContainer {
-
-    
     func didSwipe(onView view: SwipeableView, percent: CGFloat) {
       
     }

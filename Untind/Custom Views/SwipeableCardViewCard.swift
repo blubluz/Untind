@@ -13,7 +13,7 @@ protocol QuestionCardDelegate: class {
     func didAnswerQuestion(question: Question, answer : Answer)
 }
 
-class SwipeableCardViewCard: SwipeableCardView {
+class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate {
 
    
     
@@ -26,6 +26,7 @@ class SwipeableCardViewCard: SwipeableCardView {
     @IBOutlet weak var topViewQuestions: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewBar: UIView!
+    @IBOutlet weak var turnButton: UIButton!
     @IBOutlet weak var answerButton: UIButton!
     @IBOutlet weak var bottomBarImageView: UIImageView!
     @IBOutlet weak var topBarImageView: UIImageView!
@@ -84,13 +85,13 @@ class SwipeableCardViewCard: SwipeableCardView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-      
-        
+        self.tapGestureDelegate = self
     }
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.tapGestureDelegate = self
     }
     
  
@@ -118,6 +119,22 @@ class SwipeableCardViewCard: SwipeableCardView {
     
     
     
+    // MARK: - Tap Gesture Delegate
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let touchView = touch.view else {
+            return true
+        }
+        
+        let shouldAllow = !(touchView.isDescendant(of: answerButton) || touchView.isDescendant(of: turnButton))
+        
+        if shouldAllow {
+            return false
+        } else {
+            return true
+        }
+        
+    }
     // MARK: - Button Actions
     
     @IBAction func turnButtonTapped(_ sender: Any) {

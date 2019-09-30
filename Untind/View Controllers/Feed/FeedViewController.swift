@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        
+        tap.cancelsTouchesInView = false
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -45,6 +45,7 @@ class FeedViewController: UIViewController {
                     
                     self.questions.append(question)
                     self.swipeableCardViewContainer.dataSource = self
+                    self.swipeableCardViewContainer.delegate = self
                 }
             }
         }
@@ -85,7 +86,7 @@ class FeedViewController: UIViewController {
 
 
 //MARK: - SwipeableCardViewDataSource
-extension FeedViewController: SwipeableCardViewDataSource {
+extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDelegate {
     func numberOfCards() -> Int {
         return questions.count
     }
@@ -99,6 +100,16 @@ extension FeedViewController: SwipeableCardViewDataSource {
     
     func viewForEmptyCards() -> UIView? {
         return nil
+    }
+    
+    func didSelect(card: SwipeableCardViewCard, atIndex index: Int) {
+        
+        let questionVc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
+        questionVc.question = card.question
+        
+        self.modalPresentationStyle = .overCurrentContext
+        questionVc.modalPresentationStyle = .overCurrentContext
+        self.present(questionVc, animated: false, completion: nil)
     }
 }
 

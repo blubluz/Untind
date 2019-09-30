@@ -12,13 +12,19 @@ protocol DraggingDelegate : class{
     func didCloseByDragging()
 }
 
+protocol QuestionsDelegate: class {
+    func didTap(question: Question)
+}
+
 class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     @IBOutlet weak var questionsCollectionView: UICollectionView!
     weak var draggingDelegate : DraggingDelegate?
+    weak var questionsDelegate : QuestionsDelegate?
     var questions : [Question]?
     private var shouldClose = true
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,6 +60,12 @@ class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, 
         let heightWidthRatio = 273.0/158.0
         let width = max(130, UIScreen.main.bounds.size.width/2 - 30)
         return CGSize(width: width, height: width * CGFloat(heightWidthRatio))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("test")
+
+        questionsDelegate?.didTap(question: questions![indexPath.row])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

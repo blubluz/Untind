@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol AnswersDelegate: class {
+    func didTap(answer: Answer)
+}
 class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
 
     @IBOutlet weak var answersTableView: UITableView!
     private var indexPath: IndexPath?
     weak var draggingDelegate : DraggingDelegate?
+    weak var answerDelegate: AnswersDelegate?
     private var shouldClose = true
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var answers : [Answer]?
@@ -49,7 +53,11 @@ class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("test")
+        self.answerDelegate?.didTap(answer: answers![indexPath.row])
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y == 0 {
             shouldClose = true

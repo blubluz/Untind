@@ -12,6 +12,11 @@ import pop
 class SwipeableView: UIView {
 
     var cardDelegate: SwipeableViewDelegate?
+    var tapGestureDelegate: UIGestureRecognizerDelegate? {
+        didSet {
+            tapGestureRecognizer?.delegate = tapGestureDelegate
+        }
+    }
 
     // MARK: Gesture Recognizer
 
@@ -42,6 +47,8 @@ class SwipeableView: UIView {
     static var cardViewResetAnimationSpringSpeed: CGFloat = 20.0
 
     static var cardViewResetAnimationDuration: TimeInterval = 0.2
+    
+    
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -65,15 +72,19 @@ class SwipeableView: UIView {
     private func setupGestureRecognizers() {
         // Pan Gesture Recognizer
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(SwipeableView.panGestureRecognized(_:)))
+        panGestureRecognizer.cancelsTouchesInView = false
         self.panGestureRecognizer = panGestureRecognizer
         addGestureRecognizer(panGestureRecognizer)
 
         // Tap Gesture Recognizer
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognized(_:)))
+        tapGestureRecognizer.delegate = tapGestureDelegate
+        tapGestureRecognizer.cancelsTouchesInView = false
         self.tapGestureRecognizer = tapGestureRecognizer
         addGestureRecognizer(tapGestureRecognizer)
     }
-
+    
+    
     // MARK: - Pan Gesture Recognizer
 
     @objc private func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -194,5 +205,4 @@ class SwipeableView: UIView {
     @objc private func tapRecognized(_ recognizer: UITapGestureRecognizer) {
         cardDelegate?.didTap(view: self)
     }
-
 }

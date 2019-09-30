@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, DraggingDelegate {
+class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, DraggingDelegate, AnswersDelegate, QuestionsDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -35,7 +35,6 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,12 +89,14 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyQuestionsContainerCell", for: indexPath) as! MyQuestionsContainerCell
             cell.set(questions: self.myQuestions)
             cell.draggingDelegate = self
+            cell.questionsDelegate = self
             return cell
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAnswersContainerCell", for: indexPath) as! MyAnswersContainerCell
             cell.set(answers: self.myAnswers)
             cell.draggingDelegate = self
+            cell.answerDelegate = self
             return cell
         }
     }
@@ -121,6 +122,32 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : indexPath.row == 0 ? ThemeMode.answer : ThemeMode.question])
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("test")
+    }
+    
+    //MARK: - AnswersDelegate
+    func didTap(answer: Answer) {
+        let questionVc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
+        questionVc.question = answer.question
+        
+        self.modalPresentationStyle = .overCurrentContext
+        questionVc.modalPresentationStyle = .overCurrentContext
+        self.present(questionVc, animated: false, completion: nil)
+    }
+    
+    //MARK: - QuestionsDelegate
+    func didTap(question: Question) {
+        let questionVc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
+        questionVc.question = question
+        
+        self.modalPresentationStyle = .overCurrentContext
+        questionVc.modalPresentationStyle = .overCurrentContext
+        self.present(questionVc, animated: false, completion: nil)
+        
+    }
+    
     //MARK: - DraggingDelegate
     func didCloseByDragging() {
         if let parentVc = self.parent as? PresentationViewController {

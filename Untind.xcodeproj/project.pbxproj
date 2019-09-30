@@ -62,6 +62,9 @@
 		0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */; };
 		0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B3231EF5FD0050E750 /* Errors.swift */; };
 		0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */; };
+		0E946F9323353FB7004D6310 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E946F9223353FB7004D6310 /* QuestionViewController.swift */; };
+		0EB020CE2335407000462805 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB020CC2335407000462805 /* AnswerTableViewCell.swift */; };
+		0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB020CD2335407000462805 /* AnswerTableViewCell.xib */; };
 		0ECB79412329818700F99498 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB79402329818700F99498 /* Registration.storyboard */; };
 		0ECB7943232981C800F99498 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB7942232981C800F99498 /* Feed.storyboard */; };
 		0ECB7945232981D000F99498 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB7944232981D000F99498 /* Chat.storyboard */; };
@@ -165,6 +168,9 @@
 		0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginManager.swift; sourceTree = "<group>"; };
 		0E7AC2B3231EF5FD0050E750 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
+		0E946F9223353FB7004D6310 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		0EB020CC2335407000462805 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
+		0EB020CD2335407000462805 /* AnswerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerTableViewCell.xib; sourceTree = "<group>"; };
 		0ECB79402329818700F99498 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		0ECB7942232981C800F99498 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		0ECB7944232981D000F99498 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -286,10 +292,10 @@
 		0E17A3B322EC8E3400390BA5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0E946F9123353FA1004D6310 /* Feed */,
 				0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */,
 				0E47592A22EDE47300B2DE82 /* LoginViewController.swift */,
 				0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */,
-				0E47593922EE1E4400B2DE82 /* FeedViewController.swift */,
 				0E1C8B3922F9EDBD0011A5D7 /* MyQuestionsViewController.swift */,
 				0EFF24F6230DE2F6006F4A8E /* ProfileViewController.swift */,
 				0E09534C2310636600326172 /* WriteQuestionViewController.swift */,
@@ -365,6 +371,8 @@
 				0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */,
 				0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */,
 				0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */,
+				0EB020CC2335407000462805 /* AnswerTableViewCell.swift */,
+				0EB020CD2335407000462805 /* AnswerTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -418,6 +426,15 @@
 				0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		0E946F9123353FA1004D6310 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				0E47593922EE1E4400B2DE82 /* FeedViewController.swift */,
+				0E946F9223353FB7004D6310 /* QuestionViewController.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		0EDA134D231D85DF00B759C5 /* Helpers */ = {
@@ -586,6 +603,7 @@
 				0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */,
 				0ECB7947232981D500F99498 /* Profile.storyboard in Resources */,
 				0E17A3BB22EC9E7D00390BA5 /* GOTHICB.TTF in Resources */,
+				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,
 			);
@@ -736,6 +754,7 @@
 				0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */,
 				0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */,
 				0E5EC81C22F38A9A003C8C73 /* ShadowUIView.swift in Sources */,
+				0E946F9323353FB7004D6310 /* QuestionViewController.swift in Sources */,
 				0E47592B22EDE47300B2DE82 /* LoginViewController.swift in Sources */,
 				0E47593622EE18E100B2DE82 /* TabBarCircleView.swift in Sources */,
 				0E47593A22EE1E4400B2DE82 /* FeedViewController.swift in Sources */,
@@ -744,6 +763,7 @@
 				0EDA134F231D85F700B759C5 /* CustomAnimator.swift in Sources */,
 				0E61DD5822EF78BF00C1C8C7 /* SwipeDirection.swift in Sources */,
 				0E47592F22EDF0F300B2DE82 /* TabBarViewController.swift in Sources */,
+				0EB020CE2335407000462805 /* AnswerTableViewCell.swift in Sources */,
 				0E17A3B822EC9A3F00390BA5 /* UIColorExtension.swift in Sources */,
 				0E61DD6422EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift in Sources */,
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
@@ -940,7 +960,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind.MVP;
+				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind.MVP2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -962,7 +982,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind.MVP;
+				PRODUCT_BUNDLE_IDENTIFIER = FincPicsels.Untind.MVP2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
