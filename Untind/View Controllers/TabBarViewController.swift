@@ -17,21 +17,21 @@ class TabBarViewController: UIViewController, PresentationViewController {
     @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var circleView: TabBarCircleView!
     @IBOutlet var tabBarButtons: [UITabBarButton]!
-    @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var profileNotificationsView: UIView!
-    @IBOutlet weak var topBarView: UIView!
+//    @IBOutlet weak var profileButton: UIButton!
+//    @IBOutlet weak var profileNotificationsView: UIView!
+//    @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var filterButtonBackground: UIView!
-    @IBOutlet weak var addQuestionIndicatorArrow: UIImageView!
-    @IBOutlet weak var closeModalButton: UIButton!
+//    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var filterButton: UIButton!
+//    @IBOutlet weak var filterButtonBackground: UIView!
+//    @IBOutlet weak var addQuestionIndicatorArrow: UIImageView!
+//    @IBOutlet weak var closeModalButton: UIButton!
     @IBOutlet weak var presentationViewContainer: UIView!
     
     //Constraints
     @IBOutlet weak var presentationContainerBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topBarTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topBarProportionalHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var topBarTopConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var topBarProportionalHeightConstraint: NSLayoutConstraint!
     
     weak var presentedContainerViewController : UIViewController?
     weak var currentDisplayedViewController : UIViewController?
@@ -50,7 +50,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
                 button.isSelected == true
             })?.center ?? tabBarButtons[0].center
         
-        filterButtonBackground.layer.cornerRadius = filterButtonBackground.frame.size.width/2
+//        filterButtonBackground.layer.cornerRadius = filterButtonBackground.frame.size.width/2
         
     }
     
@@ -58,7 +58,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         super.viewDidLoad()
         
         //TEST: Add initial controller here
-        let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedViewController") as! FeedViewController
+        let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedNavigationController") as! UINavigationController
         currentDisplayedViewController = feedVC
         self.addChild(feedVC)
         
@@ -80,7 +80,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
         
-        closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
+//        closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
         presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
     }
     
@@ -92,21 +92,21 @@ class TabBarViewController: UIViewController, PresentationViewController {
         circleView.layer.cornerRadius = 22
         circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         
-        profileNotificationsView.layer.cornerRadius = profileNotificationsView.frame.size.height/2
-        profileNotificationsView.layer.shadowOpacity = 0.3
-        profileNotificationsView.layer.shadowRadius = 4
-        profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
+//        profileNotificationsView.layer.cornerRadius = profileNotificationsView.frame.size.height/2
+//        profileNotificationsView.layer.shadowOpacity = 0.3
+//        profileNotificationsView.layer.shadowRadius = 4
+//        profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
         
-        profileButton.setImage(UIImage(named: UTUser.loggedUser?.userProfile?.avatarType ?? "anonymous-avatar"), for: .normal)
+//        profileButton.setImage(UIImage(named: UTUser.loggedUser?.userProfile?.avatarType ?? "anonymous-avatar"), for: .normal)
         
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated) 
+        super.viewDidAppear(animated)
+        controllerContainerView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
     }
     
-  
 
     
     @objc func didSwitchTheme(_ notification: Notification) {
@@ -227,33 +227,33 @@ class TabBarViewController: UIViewController, PresentationViewController {
     }
     
     @IBAction func filterButtonTapped(_ sender: Any) {
-        if filterButton.currentImage == UIImage(named: "add-button-icon") {
-            guard !(self.presentedContainerViewController is AddQuestionController) else {
-                return
-            }
-            
-            let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
-            self.present(writeQVC, animated: true, completion: nil)
-            
-            addQuestionIndicatorArrow.isHidden = false
-            
-        } else {
-            
-        }
+//        if filterButton.currentImage == UIImage(named: "add-button-icon") {
+//            guard !(self.presentedContainerViewController is AddQuestionController) else {
+//                return
+//            }
+//
+//            let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
+//            self.present(writeQVC, animated: true, completion: nil)
+//
+////            addQuestionIndicatorArrow.isHidden = false
+//
+//        } else {
+//
+//        }
     }
     
     
     //MARK: - Helper functions
     func hideTopBar(animated: Bool) {
         UIView.animate(withDuration: animated == true ? 0.3 : 0, animations: {
-            self.topBarProportionalHeightConstraint.constant = -self.topBarView.frame.size.height
+//            self.topBarProportionalHeightConstraint.constant = -self.topBarView.frame.size.height
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
     func showTopBar(animated: Bool) {
         UIView.animate(withDuration: animated == true ?  0.3 : 0, animations: {
-            self.topBarProportionalHeightConstraint.constant = 0
+//            self.topBarProportionalHeightConstraint.constant = 0
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -273,11 +273,11 @@ class TabBarViewController: UIViewController, PresentationViewController {
             self.presentedContainerViewController?.modalPresentationStyle = .overCurrentContext
             
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 4, options: .curveLinear, animations: {
-                self.closeModalButton.transform = CGAffineTransform.identity
-                self.profileButton.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileButton.center.x, y: 0)
-                self.filterButton.transform = CGAffineTransform(translationX: 150, y: 0)
-                self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -200)
-                self.profileNotificationsView.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileNotificationsView.center.x + 22, y: 0)
+//                self.closeModalButton.transform = CGAffineTransform.identity
+//                self.profileButton.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileButton.center.x, y: 0)
+//                self.filterButton.transform = CGAffineTransform(translationX: 150, y: 0)
+//                self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -200)
+//                self.profileNotificationsView.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileNotificationsView.center.x + 22, y: 0)
             }, completion: nil)
             
             if let feedVcView = self.presentedContainerViewController!.view {
@@ -315,13 +315,13 @@ class TabBarViewController: UIViewController, PresentationViewController {
         self.currentDisplayedViewController?.viewDidAppear(animated)
         if isModalInContainer {
             UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 4, options: .curveLinear, animations: {
-                self.closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
-                self.profileButton.transform = CGAffineTransform.identity
-                self.titleLabel.transform = CGAffineTransform.identity
-                self.filterButton.transform = CGAffineTransform.identity
-                self.addQuestionIndicatorArrow.layer.removeAllAnimations()
-                self.profileNotificationsView.transform = CGAffineTransform.identity
-                self.addQuestionIndicatorArrow.isHidden = true
+//                self.closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
+//                self.profileButton.transform = CGAffineTransform.identity
+//                self.titleLabel.transform = CGAffineTransform.identity
+//                self.filterButton.transform = CGAffineTransform.identity
+//                self.addQuestionIndicatorArrow.layer.removeAllAnimations()
+//                self.profileNotificationsView.transform = CGAffineTransform.identity
+//                self.addQuestionIndicatorArrow.isHidden = true
             }, completion: completion)
             
             UIView.animate(withDuration: animated ? 0.3 : 0, delay: 0, options: .curveEaseOut, animations: {
@@ -341,7 +341,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         self.presentedContainerViewController?.willMove(toParent: nil)
         self.presentedContainerViewController?.view.removeFromSuperview()
         self.presentedContainerViewController?.removeFromParent()
-        self.addQuestionIndicatorArrow.isHidden = true
+//        self.addQuestionIndicatorArrow.isHidden = true
     }
     
     func moveCircle(toButton button: UIButton) {

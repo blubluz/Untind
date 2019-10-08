@@ -109,7 +109,7 @@ extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDele
         
         self.modalPresentationStyle = .overCurrentContext
         questionVc.modalPresentationStyle = .overCurrentContext
-        self.present(questionVc, animated: false, completion: nil)
+        self.navigationController?.pushViewController(questionVc, animated: false)
     }
 }
 

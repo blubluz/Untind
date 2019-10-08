@@ -46,9 +46,7 @@ class QuestionViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
-        doDisappearAnimations {
-            self.dismiss(animated: false, completion: nil)
-        }
+        self.navigationController?.popViewController(animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
