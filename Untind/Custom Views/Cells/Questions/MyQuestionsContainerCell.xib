@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MyQuestionsContainerCell" customModule="Untind" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="357" height="573"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="357" height="573"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4T-pV-vDA">
+                        <rect key="frame" x="0.0" y="0.0" width="357" height="573"/>
+                        <subviews>
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fnH-eA-1SW">
+                                <rect key="frame" x="20" y="0.0" width="317" height="573"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="19" minimumInteritemSpacing="19" id="leQ-Z4-Cbu">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NWh-bl-wsE">
+                                <rect key="frame" x="168.5" y="276.5" width="20" height="20"/>
+                                <color key="color" red="1" green="0.56470588235294117" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Td5-Vq-3Zm">
+                                <rect key="frame" x="0.0" y="0.0" width="357" height="573"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ask-question-card-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="YmD-MS-jCc">
+                                        <rect key="frame" x="20.5" y="-68" width="316" height="409"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-Ri-nTz">
+                                        <rect key="frame" x="99.5" y="0.0" width="158" height="273"/>
+                                        <state key="normal" image="ask-question-card"/>
+                                        <connections>
+                                            <action selector="didTapAddQuestion:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fGS-OQ-l1O"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no questions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdp-AG-SuP">
+                                        <rect key="frame" x="25" y="313" width="307" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask a new question, something which is most relevant to you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eN-Yz-xQK">
+                                        <rect key="frame" x="20" y="366" width="317" height="37.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="8eN-Yz-xQK" secondAttribute="trailing" constant="20" id="FLk-dX-HH9"/>
+                                    <constraint firstItem="Zdp-AG-SuP" firstAttribute="leading" secondItem="Td5-Vq-3Zm" secondAttribute="leading" constant="25" id="LXf-tf-QYs"/>
+                                    <constraint firstItem="gvw-Ri-nTz" firstAttribute="top" secondItem="Td5-Vq-3Zm" secondAttribute="top" id="MCH-MW-Lye"/>
+                                    <constraint firstItem="8eN-Yz-xQK" firstAttribute="top" secondItem="Zdp-AG-SuP" secondAttribute="bottom" constant="25" id="NcC-uG-1vv"/>
+                                    <constraint firstItem="8eN-Yz-xQK" firstAttribute="leading" secondItem="Td5-Vq-3Zm" secondAttribute="leading" constant="20" id="dHW-u2-E8X"/>
+                                    <constraint firstItem="gvw-Ri-nTz" firstAttribute="centerX" secondItem="Td5-Vq-3Zm" secondAttribute="centerX" id="dNy-lp-NUB"/>
+                                    <constraint firstItem="Zdp-AG-SuP" firstAttribute="top" secondItem="gvw-Ri-nTz" secondAttribute="bottom" constant="40" id="eNp-go-rNg"/>
+                                    <constraint firstItem="YmD-MS-jCc" firstAttribute="centerY" secondItem="gvw-Ri-nTz" secondAttribute="centerY" id="fqU-Og-ejG"/>
+                                    <constraint firstItem="YmD-MS-jCc" firstAttribute="centerX" secondItem="gvw-Ri-nTz" secondAttribute="centerX" id="ktL-3M-TVf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zdp-AG-SuP" secondAttribute="trailing" constant="25" id="wGJ-LL-fDw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Td5-Vq-3Zm" firstAttribute="top" secondItem="b4T-pV-vDA" secondAttribute="top" id="6w1-Yp-4us"/>
+                            <constraint firstItem="Td5-Vq-3Zm" firstAttribute="leading" secondItem="b4T-pV-vDA" secondAttribute="leading" id="Cz9-mP-Ytg"/>
+                            <constraint firstAttribute="bottom" secondItem="fnH-eA-1SW" secondAttribute="bottom" id="Qr4-gB-lLl"/>
+                            <constraint firstItem="NWh-bl-wsE" firstAttribute="centerX" secondItem="b4T-pV-vDA" secondAttribute="centerX" id="RvR-Ru-vjY"/>
+                            <constraint firstItem="fnH-eA-1SW" firstAttribute="leading" secondItem="b4T-pV-vDA" secondAttribute="leading" constant="20" id="eZh-0Q-wOI"/>
+                            <constraint firstItem="NWh-bl-wsE" firstAttribute="centerY" secondItem="b4T-pV-vDA" secondAttribute="centerY" id="eqb-Rs-AY8"/>
+                            <constraint firstAttribute="trailing" secondItem="fnH-eA-1SW" secondAttribute="trailing" constant="20" id="gBv-7h-cyX"/>
+                            <constraint firstAttribute="bottom" secondItem="Td5-Vq-3Zm" secondAttribute="bottom" id="m5N-Ti-z0D"/>
+                            <constraint firstItem="fnH-eA-1SW" firstAttribute="top" secondItem="b4T-pV-vDA" secondAttribute="top" id="qBj-qU-zEb"/>
+                            <constraint firstAttribute="trailing" secondItem="Td5-Vq-3Zm" secondAttribute="trailing" id="uEa-1c-keb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="b4T-pV-vDA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8h9-uK-WFw"/>
+                <constraint firstItem="b4T-pV-vDA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FEe-Oi-YJE"/>
+                <constraint firstAttribute="bottom" secondItem="b4T-pV-vDA" secondAttribute="bottom" id="dxu-K3-7Bw"/>
+                <constraint firstAttribute="trailing" secondItem="b4T-pV-vDA" secondAttribute="trailing" id="jun-5L-B5h"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="357" height="573"/>
+            <connections>
+                <outlet property="activityIndicator" destination="NWh-bl-wsE" id="AdP-55-Flw"/>
+                <outlet property="emptyStateView" destination="Td5-Vq-3Zm" id="eQP-eq-sbX"/>
+                <outlet property="questionsCollectionView" destination="fnH-eA-1SW" id="q4b-p9-hpI"/>
+            </connections>
+            <point key="canvasLocation" x="-2.1739130434782612" y="198.54910714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ask-question-card" width="158" height="273"/>
+        <image name="ask-question-card-shadow" width="316" height="409"/>
+    </resources>
+</document>

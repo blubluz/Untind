@@ -29,21 +29,7 @@ class WriteQuestionViewController: UIViewController {
     }
     
     @IBAction func postButtonTapped(_ sender: Any) {
-        let db = Firestore.firestore()
-        
-        
-        db.collection("questions").addDocument(data: [
-            "answers" : [],
-            "author" : UTUser.loggedUser!.userProfile?.jsonValue(),
-            "postDate" : Date(),
-            "questionText" : textView.text ?? "No qusetion text"], completion: { error in
-                if error != nil {
-                    self.textView.text = "There was an error \(error!.localizedDescription)"
-                } else {
-                    self.textView.text = "Question succesfuly posted!"
-                }
-        })
-        
+    
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {

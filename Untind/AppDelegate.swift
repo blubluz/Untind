@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
-       
+        SVProgressHUD.setForegroundColor(UIColor.flatOrange)
+        SVProgressHUD.setBackgroundColor(UIColor(red: 255, green: 255, blue: 255, alpha: 0.4))
         
         return true
     }

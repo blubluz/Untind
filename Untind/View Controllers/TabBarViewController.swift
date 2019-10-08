@@ -233,7 +233,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
             }
             
             let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
-            self.present(writeQVC, animated: true, inContainer: true)
+            self.present(writeQVC, animated: true, completion: nil)
             
             addQuestionIndicatorArrow.isHidden = false
             
@@ -275,9 +275,8 @@ class TabBarViewController: UIViewController, PresentationViewController {
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 4, options: .curveLinear, animations: {
                 self.closeModalButton.transform = CGAffineTransform.identity
                 self.profileButton.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileButton.center.x, y: 0)
+                self.filterButton.transform = CGAffineTransform(translationX: 150, y: 0)
                 self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -200)
-                self.filterButton.setImage(UIImage(named: "add-button-icon"), for: .normal)
-                self.filterButtonBackground.isHidden = false
                 self.profileNotificationsView.transform = CGAffineTransform(translationX: self.titleLabel.center.x - self.profileNotificationsView.center.x + 22, y: 0)
             }, completion: nil)
             
@@ -319,8 +318,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
                 self.closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
                 self.profileButton.transform = CGAffineTransform.identity
                 self.titleLabel.transform = CGAffineTransform.identity
-                self.filterButton.setImage(UIImage(named: "filter-icon"), for: .normal)
-                self.filterButtonBackground.isHidden = true
+                self.filterButton.transform = CGAffineTransform.identity
                 self.addQuestionIndicatorArrow.layer.removeAllAnimations()
                 self.profileNotificationsView.transform = CGAffineTransform.identity
                 self.addQuestionIndicatorArrow.isHidden = true

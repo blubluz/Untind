@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AddQuestionCollectionViewCell" customModule="Untind" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="214" height="305"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="214" height="305"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLd-2T-4D0">
+                        <rect key="frame" x="0.0" y="0.0" width="214" height="305"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-question-circle" translatesAutoresizingMaskIntoConstraints="NO" id="CkW-eK-39J">
+                                <rect key="frame" x="73" y="118.5" width="68" height="68"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CkW-eK-39J" firstAttribute="centerY" secondItem="HLd-2T-4D0" secondAttribute="centerY" id="KYe-Bo-5BK"/>
+                            <constraint firstItem="CkW-eK-39J" firstAttribute="centerX" secondItem="HLd-2T-4D0" secondAttribute="centerX" id="Pd5-hO-jlk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="HLd-2T-4D0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7mF-RN-urx"/>
+                <constraint firstAttribute="bottom" secondItem="HLd-2T-4D0" secondAttribute="bottom" id="PhU-Af-5F3"/>
+                <constraint firstItem="HLd-2T-4D0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Qrw-Xq-EZd"/>
+                <constraint firstAttribute="trailing" secondItem="HLd-2T-4D0" secondAttribute="trailing" id="k0O-Li-tP6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="214" height="305"/>
+            <connections>
+                <outlet property="containerView" destination="HLd-2T-4D0" id="NzQ-vm-Q4A"/>
+            </connections>
+            <point key="canvasLocation" x="250.72463768115944" y="238.72767857142856"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="add-question-circle" width="68" height="68"/>
+    </resources>
+</document>
