@@ -64,6 +64,8 @@
 		0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B3231EF5FD0050E750 /* Errors.swift */; };
 		0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */; };
 		0E946F9323353FB7004D6310 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E946F9223353FB7004D6310 /* QuestionViewController.swift */; };
+		0E9CD4222351020F008D6E0F /* UTSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CD4212351020F008D6E0F /* UTSegmentedControl.swift */; };
+		0E9CD42623511277008D6E0F /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CD42523511277008D6E0F /* UserProfileViewController.swift */; };
 		0EB020CE2335407000462805 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB020CC2335407000462805 /* AnswerTableViewCell.swift */; };
 		0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB020CD2335407000462805 /* AnswerTableViewCell.xib */; };
 		0ECB79412329818700F99498 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB79402329818700F99498 /* Registration.storyboard */; };
@@ -172,6 +174,8 @@
 		0E7AC2B3231EF5FD0050E750 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
 		0E946F9223353FB7004D6310 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		0E9CD4212351020F008D6E0F /* UTSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTSegmentedControl.swift; sourceTree = "<group>"; };
+		0E9CD42523511277008D6E0F /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		0EB020CC2335407000462805 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
 		0EB020CD2335407000462805 /* AnswerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerTableViewCell.xib; sourceTree = "<group>"; };
 		0ECB79402329818700F99498 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 		0E17A3B322EC8E3400390BA5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0E9CD42423511264008D6E0F /* Profile */,
 				0E946F9123353FA1004D6310 /* Feed */,
 				0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */,
 				0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */,
@@ -372,6 +377,7 @@
 		0E47593022EDF32700B2DE82 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E9CD420235101E2008D6E0F /* Segmented Controls */,
 				0ED28FFA234675FB00267882 /* Labels */,
 				0ED28FF9234675BB00267882 /* Cards */,
 				0ED28FF8234675AA00267882 /* TextFields */,
@@ -457,6 +463,22 @@
 				0E946F9223353FB7004D6310 /* QuestionViewController.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		0E9CD420235101E2008D6E0F /* Segmented Controls */ = {
+			isa = PBXGroup;
+			children = (
+				0E9CD4212351020F008D6E0F /* UTSegmentedControl.swift */,
+			);
+			path = "Segmented Controls";
+			sourceTree = "<group>";
+		};
+		0E9CD42423511264008D6E0F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0E9CD42523511277008D6E0F /* UserProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		0ED28FF7234675A600267882 /* Buttons */ = {
@@ -790,8 +812,10 @@
 				0EFA552C2303080A0000E6F6 /* Question.swift in Sources */,
 				0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */,
 				0E17A3BC22EC9E8700390BA5 /* GOTHICB.TTF in Sources */,
+				0E9CD42623511277008D6E0F /* UserProfileViewController.swift in Sources */,
 				0E61DD6022EF7E3200C1C8C7 /* SwipeableCardView.swift in Sources */,
 				F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */,
+				0E9CD4222351020F008D6E0F /* UTSegmentedControl.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,

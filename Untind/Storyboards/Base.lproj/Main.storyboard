@@ -53,17 +53,17 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3Ku-sm-w7d">
-                                                <rect key="frame" x="104.5" y="109" width="71" height="289"/>
+                                                <rect key="frame" x="69" y="109" width="142" height="289"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ms-wx-dcX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="71" height="144.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="142" height="144.5"/>
                                                         <state key="normal" image="login-facebook"/>
                                                         <connections>
                                                             <action selector="facebookTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uBx-gw-7nZ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYf-mq-bXi">
-                                                        <rect key="frame" x="0.0" y="144.5" width="71" height="144.5"/>
+                                                        <rect key="frame" x="0.0" y="144.5" width="142" height="144.5"/>
                                                         <state key="normal" image="login-email"/>
                                                         <connections>
                                                             <action selector="emailTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S0v-gb-RL6"/>
@@ -88,25 +88,25 @@
                                         <rect key="frame" x="0.0" y="85" width="280" height="363"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="t9Z-9u-0Tp">
-                                                <rect key="frame" x="40" y="40" width="200" height="123"/>
+                                                <rect key="frame" x="40" y="40" width="200" height="117"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j09-Ep-2dl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="59"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="56"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="U" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsV-i6-1Qa">
-                                                                <rect key="frame" x="0.0" y="0.0" width="31" height="59"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="56"/>
                                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="48"/>
                                                                 <color key="textColor" red="1" green="0.56470588235294117" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0w-HU-V40">
-                                                                <rect key="frame" x="80.5" y="0.0" width="36" height="59"/>
+                                                                <rect key="frame" x="83" y="0.0" width="35" height="56"/>
                                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="48"/>
                                                                 <color key="textColor" red="1" green="0.56470588235294117" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRi-Df-PYH">
-                                                                <rect key="frame" x="166" y="0.0" width="34" height="59"/>
+                                                                <rect key="frame" x="166" y="0.0" width="34" height="56"/>
                                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="48"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -114,22 +114,22 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pdG-o2-ZrD">
-                                                        <rect key="frame" x="0.0" y="64" width="200" height="59"/>
+                                                        <rect key="frame" x="0.0" y="61" width="200" height="56"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzW-gf-PeU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="31" height="59"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="56"/>
                                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="48"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hze-35-bIX">
-                                                                <rect key="frame" x="80.5" y="0.0" width="36" height="59"/>
+                                                                <rect key="frame" x="83" y="0.0" width="35" height="56"/>
                                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="48"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgC-l9-gYH">
-                                                                <rect key="frame" x="166" y="0.0" width="34" height="59"/>
+                                                                <rect key="frame" x="166" y="0.0" width="34" height="56"/>
                                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="48"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -145,7 +145,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVm-g4-qAL">
-                                                <rect key="frame" x="38" y="201" width="204" height="43"/>
+                                                <rect key="frame" x="38" y="195" width="204" height="43"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="43" id="Vwb-U9-Vd8"/>
                                                 </constraints>
@@ -158,10 +158,10 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="A3o-wo-yuO">
-                                                <rect key="frame" x="15" y="282" width="250" height="71"/>
+                                                <rect key="frame" x="15" y="276" width="250" height="142"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fnV-Bf-31k">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="71"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="142"/>
                                                         <state key="normal" image="signUpButton"/>
                                                         <state key="selected" image="signUpButtonPressed"/>
                                                         <state key="highlighted" image="signUpButtonPressed"/>
@@ -170,7 +170,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f89-bE-nJI">
-                                                        <rect key="frame" x="125" y="0.0" width="125" height="71"/>
+                                                        <rect key="frame" x="125" y="0.0" width="125" height="142"/>
                                                         <state key="normal" image="tur button"/>
                                                         <state key="selected" image="tur button copy"/>
                                                         <state key="highlighted" image="tur button copy"/>
@@ -181,7 +181,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZWV-Db-7zz">
-                                                <rect key="frame" x="15" y="361" width="250" height="14.5"/>
+                                                <rect key="frame" x="15" y="426" width="250" height="14.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcK-j2-Ksc">
                                                         <rect key="frame" x="0.0" y="0.0" width="125" height="14.5"/>
@@ -283,7 +283,7 @@
                                 <rect key="frame" x="20" y="224" width="374" height="448"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="vqa-Wa-0dR">
-                                        <rect key="frame" x="254" y="0.0" width="120" height="118"/>
+                                        <rect key="frame" x="134" y="0.0" width="240" height="236"/>
                                         <color key="tintColor" red="0.56470588235294117" green="0.76470588235294112" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8y-SS-iVi">
@@ -326,7 +326,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxw-Hh-Fhp">
-                                        <rect key="frame" x="273" y="292" width="71" height="71"/>
+                                        <rect key="frame" x="202" y="292" width="142" height="142"/>
                                         <state key="normal" image="confirm-button-teal"/>
                                         <connections>
                                             <action selector="confirmButtonTapped:" destination="UVk-iS-tcD" eventType="touchUpInside" id="yeW-Dp-VAe"/>
@@ -570,18 +570,18 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qq2-wM-phz">
-                                                <rect key="frame" x="294" y="65.5" width="54" height="54"/>
+                                                <rect key="frame" x="240" y="38.5" width="108" height="108"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zei-Bd-w8I">
-                                                <rect key="frame" x="291" y="62.5" width="54" height="54"/>
+                                                <rect key="frame" x="237" y="35.5" width="108" height="108"/>
                                                 <state key="normal" image="filter-icon"/>
                                                 <connections>
-                                                    <action selector="filterButtonTapped:" destination="31b-Vw-T1r" eventType="touchUpInside" id="0Ay-Yf-CpZ"/>
+                                                    <action selector="filterButtonTapped:" destination="t9P-4u-8VJ" eventType="touchUpInside" id="jU8-Qs-kqV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kB-UV-GNT">
-                                                <rect key="frame" x="41" y="77.5" width="24" height="24"/>
+                                                <rect key="frame" x="41" y="65.5" width="48" height="48"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="close-button"/>
                                                 <connections>
@@ -589,7 +589,7 @@
                                                 </connections>
                                             </button>
                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow-small" translatesAutoresizingMaskIntoConstraints="NO" id="KXN-OU-bb1">
-                                                <rect key="frame" x="313.5" y="124.5" width="9" height="6"/>
+                                                <rect key="frame" x="282" y="151.5" width="18" height="12"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -644,7 +644,16 @@
                     <navigationItem key="navigationItem" id="Esx-Ew-d0y"/>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="addQuestionIndicatorArrow" destination="KXN-OU-bb1" id="IPT-vJ-oLB"/>
+                        <outlet property="closeModalButton" destination="9kB-UV-GNT" id="u1X-oN-hSJ"/>
+                        <outlet property="filterButton" destination="Zei-Bd-w8I" id="p0N-7a-2la"/>
+                        <outlet property="filterButtonBackground" destination="qq2-wM-phz" id="C9x-XW-ONZ"/>
+                        <outlet property="profileButton" destination="G0u-B5-JC3" id="jfD-yW-bII"/>
+                        <outlet property="profileNotificationsView" destination="kCe-nw-anE" id="Iul-lf-uTz"/>
                         <outlet property="swipeableCardViewContainer" destination="9hu-GF-jju" id="PWe-M5-V2K"/>
+                        <outlet property="titleLabel" destination="glK-PU-Ts7" id="rzF-IG-V56"/>
+                        <outlet property="topBarTopConstraint" destination="oAP-j7-2kD" id="cqr-ma-POc"/>
+                        <outlet property="topBarView" destination="HiY-QL-p2M" id="yvg-Ks-Mbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v76-KX-6e0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -694,7 +703,7 @@
                                         <rect key="frame" x="0.0" y="767" width="414" height="95"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGe-wT-gLG">
-                                                <rect key="frame" x="152" y="20" width="242" height="55"/>
+                                                <rect key="frame" x="-90" y="-35" width="484" height="110"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                 <state key="normal" title="POST QUESTION" backgroundImage="post-question-button"/>
                                                 <connections>
@@ -702,7 +711,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ld-f9-ry1" customClass="BiggerTapSizeButton" customModule="Untind" customModuleProvider="target">
-                                                <rect key="frame" x="78" y="35.5" width="24" height="24"/>
+                                                <rect key="frame" x="-188" y="-4" width="48" height="48"/>
                                                 <color key="tintColor" red="1" green="0.63929647207260132" blue="0.53166574239730835" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="close-button"/>
                                                 <connections>
@@ -1001,7 +1010,7 @@
                                 <rect key="frame" x="20" y="224" width="374" height="448"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-Ae-SAG">
-                                        <rect key="frame" x="254" y="0.0" width="120" height="118"/>
+                                        <rect key="frame" x="134" y="0.0" width="240" height="236"/>
                                         <color key="tintColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1050,7 +1059,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxN-mw-vNY">
-                                        <rect key="frame" x="253" y="343" width="71" height="71"/>
+                                        <rect key="frame" x="182" y="343" width="142" height="142"/>
                                         <state key="normal" image="confirm-button-orange"/>
                                         <connections>
                                             <action selector="confirmButtonTapped:" destination="0e8-eH-k0W" eventType="touchUpInside" id="PpF-dG-ZA2"/>

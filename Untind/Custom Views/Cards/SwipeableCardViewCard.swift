@@ -11,6 +11,7 @@ import SVProgressHUD
 
 protocol QuestionCardDelegate: class {
     func didAnswerQuestion(question: Question, answer : Answer)
+    func didTapProfile(profile: Profile)
 }
 
 class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UITextViewDelegate {
@@ -145,6 +146,10 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     }
 
     // MARK: - Button Actions
+    
+    @IBAction func didTapUserProfile(_ sender: Any) {
+        questionDelegate?.didTapProfile(profile: question!.author)
+    }
     
     @IBAction func turnButtonTapped(_ sender: Any) {
         if isFlipped {

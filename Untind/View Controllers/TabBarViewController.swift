@@ -17,21 +17,11 @@ class TabBarViewController: UIViewController, PresentationViewController {
     @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var circleView: TabBarCircleView!
     @IBOutlet var tabBarButtons: [UITabBarButton]!
-//    @IBOutlet weak var profileButton: UIButton!
-//    @IBOutlet weak var profileNotificationsView: UIView!
-//    @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
-//    @IBOutlet weak var titleLabel: UILabel!
-//    @IBOutlet weak var filterButton: UIButton!
-//    @IBOutlet weak var filterButtonBackground: UIView!
-//    @IBOutlet weak var addQuestionIndicatorArrow: UIImageView!
-//    @IBOutlet weak var closeModalButton: UIButton!
     @IBOutlet weak var presentationViewContainer: UIView!
     
     //Constraints
     @IBOutlet weak var presentationContainerBottomConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var topBarTopConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var topBarProportionalHeightConstraint: NSLayoutConstraint!
     
     weak var presentedContainerViewController : UIViewController?
     weak var currentDisplayedViewController : UIViewController?
@@ -50,7 +40,6 @@ class TabBarViewController: UIViewController, PresentationViewController {
                 button.isSelected == true
             })?.center ?? tabBarButtons[0].center
         
-//        filterButtonBackground.layer.cornerRadius = filterButtonBackground.frame.size.width/2
         
     }
     
@@ -80,7 +69,6 @@ class TabBarViewController: UIViewController, PresentationViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
         
-//        closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
         presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
     }
     
@@ -92,19 +80,13 @@ class TabBarViewController: UIViewController, PresentationViewController {
         circleView.layer.cornerRadius = 22
         circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         
-//        profileNotificationsView.layer.cornerRadius = profileNotificationsView.frame.size.height/2
-//        profileNotificationsView.layer.shadowOpacity = 0.3
-//        profileNotificationsView.layer.shadowRadius = 4
-//        profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        
-//        profileButton.setImage(UIImage(named: UTUser.loggedUser?.userProfile?.avatarType ?? "anonymous-avatar"), for: .normal)
         
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        controllerContainerView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
+        controllerContainerView.roundCorners(cornerRadius: 35, corners: [.bottomLeft,.bottomRight])
     }
     
 
@@ -170,11 +152,11 @@ class TabBarViewController: UIViewController, PresentationViewController {
         self.currentDisplayedViewController?.removeFromParent()
         
         
-        let profileVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedViewController") as! FeedViewController
-        self.currentDisplayedViewController = profileVc
-        self.addChild(profileVc)
+        let feedVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedNavigationController") as! UINavigationController
+        self.currentDisplayedViewController = feedVc
+        self.addChild(feedVc)
         
-        if let profileVcView = profileVc.view {
+        if let profileVcView = feedVc.view {
             self.controllerContainerView.addSubview(profileVcView)
             
             profileVcView.translatesAutoresizingMaskIntoConstraints = false
@@ -235,7 +217,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
 //            let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
 //            self.present(writeQVC, animated: true, completion: nil)
 //
-////            addQuestionIndicatorArrow.isHidden = false
+//           addQuestionIndicatorArrow.isHidden = false
 //
 //        } else {
 //

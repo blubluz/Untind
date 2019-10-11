@@ -185,6 +185,12 @@ Give reasons.</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b28-xk-Ys8">
                                                     <rect key="frame" x="5" y="8" width="166.5" height="49"/>
                                                     <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnt-5y-A6Y">
+                                                            <rect key="frame" x="0.0" y="0.0" width="166.5" height="49"/>
+                                                            <connections>
+                                                                <action selector="didTapUserProfile:" destination="-1" eventType="touchUpInside" id="j7D-ht-Yav"/>
+                                                            </connections>
+                                                        </button>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-2" translatesAutoresizingMaskIntoConstraints="NO" id="1if-tz-YGQ">
                                                             <rect key="frame" x="5" y="-3" width="55" height="55"/>
                                                             <constraints>
@@ -212,8 +218,12 @@ Give reasons.</string>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="xnt-5y-A6Y" firstAttribute="top" secondItem="b28-xk-Ys8" secondAttribute="top" id="0RI-gK-EKJ"/>
                                                         <constraint firstItem="kkX-q1-UkG" firstAttribute="centerY" secondItem="b28-xk-Ys8" secondAttribute="centerY" id="1yb-AZ-r3v"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xnt-5y-A6Y" secondAttribute="trailing" id="U2j-x1-NY9"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xnt-5y-A6Y" secondAttribute="bottom" id="Xta-FO-ecc"/>
                                                         <constraint firstAttribute="trailing" secondItem="kkX-q1-UkG" secondAttribute="trailing" id="aik-Ix-LOa"/>
+                                                        <constraint firstItem="xnt-5y-A6Y" firstAttribute="leading" secondItem="b28-xk-Ys8" secondAttribute="leading" id="cXl-qo-RZY"/>
                                                         <constraint firstItem="1if-tz-YGQ" firstAttribute="leading" secondItem="b28-xk-Ys8" secondAttribute="leading" constant="5" id="feX-OK-dfN"/>
                                                         <constraint firstItem="kkX-q1-UkG" firstAttribute="leading" secondItem="1if-tz-YGQ" secondAttribute="trailing" constant="10" id="kKn-lS-eCr"/>
                                                         <constraint firstItem="1if-tz-YGQ" firstAttribute="centerY" secondItem="b28-xk-Ys8" secondAttribute="centerY" id="von-fs-Zco"/>
@@ -453,6 +463,11 @@ Give reasons.</string>
                                 <constraint firstAttribute="bottom" secondItem="coX-r3-URW" secondAttribute="bottom" id="zly-5g-Fcx"/>
                                 <constraint firstItem="coX-r3-URW" firstAttribute="top" secondItem="98z-Ls-6Os" secondAttribute="top" id="znD-X2-mmm"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="coX-r3-URW"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

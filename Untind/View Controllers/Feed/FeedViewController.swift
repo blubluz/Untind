@@ -12,12 +12,23 @@ import SwiftyJSON
 import IHKeyboardAvoiding
 
 class FeedViewController: UIViewController {
-    
+
+        @IBOutlet weak var topBarTopConstraint: NSLayoutConstraint!
+        @IBOutlet weak var topBarProportionalHeightConstraint: NSLayoutConstraint!
+        @IBOutlet weak var profileButton: UIButton!
+        @IBOutlet weak var profileNotificationsView: UIView!
+        @IBOutlet weak var topBarView: UIView!
+        @IBOutlet weak var titleLabel: UILabel!
+        @IBOutlet weak var filterButton: UIButton!
+        @IBOutlet weak var filterButtonBackground: UIView!
+        @IBOutlet weak var addQuestionIndicatorArrow: UIImageView!
+        @IBOutlet weak var closeModalButton: UIButton!
     @IBOutlet weak var swipeableCardViewContainer: SwipeableCardViewContainer!
     var questions : [Question] = []
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+                filterButtonBackground.layer.cornerRadius = filterButtonBackground.frame.size.width/2
     }
     
     override func viewDidLoad() {
@@ -28,7 +39,8 @@ class FeedViewController: UIViewController {
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        
+                closeModalButton.transform = CGAffineTransform(translationX: -150, y: 0).rotated(by: 360)
+
         let db = Firestore.firestore()
         
         db.collection("questions").getDocuments { (querySnapshot : QuerySnapshot?, error) in
@@ -51,6 +63,16 @@ class FeedViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+                profileNotificationsView.layer.cornerRadius = profileNotificationsView.frame.size.height/2
+                profileNotificationsView.layer.shadowOpacity = 0.3
+                profileNotificationsView.layer.shadowRadius = 4
+                profileNotificationsView.layer.shadowOffset = CGSize(width: 0, height: 5)
+                
+                profileButton.setImage(UIImage(named: UTUser.loggedUser?.userProfile?.avatarType ?? "anonymous-avatar"), for: .normal)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -78,6 +100,22 @@ class FeedViewController: UIViewController {
     @objc func keyboardWillDisappear() {
         self.swipeableCardViewContainer.transform = CGAffineTransform.identity
     }
+    
+      @IBAction func filterButtonTapped(_ sender: Any) {
+            if filterButton.currentImage == UIImage(named: "add-button-icon") {
+//                guard !(self.presentedContainerViewController is AddQuestionController) else {
+//                    return
+//                }
+    
+                let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
+                self.present(writeQVC, animated: true, completion: nil)
+    
+    //            addQuestionIndicatorArrow.isHidden = false
+    
+            } else {
+    
+            }
+        }
     
     deinit {
         print("FeedViewController did deinit")
@@ -113,10 +151,13 @@ extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDele
     }
 }
 
-
 //MARK: - QuestionCardDelegate
 extension FeedViewController: QuestionCardDelegate {
     func didAnswerQuestion(question: Question, answer: Answer) {
         swipeableCardViewContainer.swipeAwayTopCard(animated: true)
+    }
+    
+    func didTapProfile(profile: Profile) {
+        self.navigationController?.pushViewController(UserProfileViewController.instantiate(), animated: true)
     }
 }
