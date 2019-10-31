@@ -32,6 +32,6 @@ class MyQuestionsCollectionViewCell: UICollectionViewCell {
     
     func configureWith(question: Question) {
         questionLabel.text = question.questionText
-        answersNumberLabel.text = "\(question.answers.count)"
+        answersNumberLabel.text = "\(question.answers?.count ?? 0)"
     }
 }

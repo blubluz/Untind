@@ -8,6 +8,17 @@
 
 import UIKit
 
+enum Vote {
+    case upvote
+    case downvote
+    case none
+}
+
+protocol AnswerCellDelegate: class {
+    func didTapProfile(profile: Profile)
+    func didVote(value: Vote, answer: Answer)
+}
+
 class AnswerTableViewCell: UITableViewCell {
 
     @IBOutlet weak var containerView: UIView!
@@ -16,6 +27,9 @@ class AnswerTableViewCell: UITableViewCell {
     @IBOutlet weak var answerAuthorLabel: UILabel!
     @IBOutlet weak var answerPostDateLabel: UILabel!
     @IBOutlet weak var answerUpvotesLabel: UILabel!
+    weak var delegate : AnswerCellDelegate?
+    weak var answer : Answer?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +43,8 @@ class AnswerTableViewCell: UITableViewCell {
 
     }
     
-    func configureWith(answer:Answer) {
+    func configureWith(answer: Answer) {
+        self.answer = answer
         answerLabel.text = answer.answerText
         answerAuthorLabel.text = answer.author.username
         answerPostDateLabel.text = answer.postDate.toFormattedString()
@@ -38,7 +53,23 @@ class AnswerTableViewCell: UITableViewCell {
         } else {
             answerUpvotesLabel.text = "\(answer.upvotes)"
         }
-        
     }
     
+    @IBAction func didTapAuthorProfile(_ sender: Any) {
+        if let author = answer?.author {
+            delegate?.didTapProfile(profile: author)
+        }
+    }
+    
+    @IBAction func upvoteTapped(_ sender: Any) {
+        if let answer = answer {
+            delegate?.didVote(value: .upvote, answer: answer)
+        }
+    }
+    
+    @IBAction func downvoteTapped(_ sender: Any) {
+        if let answer = answer {
+            delegate?.didVote(value: .downvote, answer: answer)
+        }
+    }
 }

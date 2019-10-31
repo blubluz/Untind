@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E060C37235667FE00E00251 /* ReportUserPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E060C36235667FE00E00251 /* ReportUserPopup.swift */; };
+		0E060C3B2356688D00E00251 /* ReportReasonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E060C392356688D00E00251 /* ReportReasonCell.swift */; };
 		0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */; };
 		0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */; };
-		0E068A4B22FB558F00A9BDE9 /* MyAnswersContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4922FB558F00A9BDE9 /* MyAnswersContainerCell.swift */; };
+		0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */; };
 		0E068A4C22FB558F00A9BDE9 /* MyAnswersContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */; };
 		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
 		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
@@ -36,6 +38,9 @@
 		0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C152319BAD000EA3CA7 /* CreateProfileViewController.swift */; };
 		0E416C192319BBA500EA3CA7 /* CreateProfileFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C172319BBA500EA3CA7 /* CreateProfileFirstCell.swift */; };
 		0E416C1A2319BBA500EA3CA7 /* CreateProfileFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */; };
+		0E468F772356540800C671AE /* ProfileAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E468F752356540800C671AE /* ProfileAnswerCell.swift */; };
+		0E468F782356540800C671AE /* ProfileAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E468F762356540800C671AE /* ProfileAnswerCell.xib */; };
+		0E468F7A235661EC00C671AE /* Popups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E468F79235661EC00C671AE /* Popups.storyboard */; };
 		0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */; };
 		0E47592F22EDF0F300B2DE82 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */; };
 		0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E47593122EDF37600B2DE82 /* UITabBarButton.swift */; };
@@ -59,13 +64,16 @@
 		0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6522EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift */; };
 		0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */; };
 		0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */; };
+		0E722A8E23579F0500EE206D /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E722A8D23579F0500EE206D /* ContentSizedTableView.swift */; };
+		0E722A902357ABE800EE206D /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E722A8F2357ABE800EE206D /* Globals.swift */; };
 		0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2AF231EE7C40050E750 /* FirebaseAuthManager.swift */; };
 		0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */; };
 		0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7AC2B3231EF5FD0050E750 /* Errors.swift */; };
 		0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */; };
 		0E946F9323353FB7004D6310 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E946F9223353FB7004D6310 /* QuestionViewController.swift */; };
-		0E9CD4222351020F008D6E0F /* UTSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CD4212351020F008D6E0F /* UTSegmentedControl.swift */; };
 		0E9CD42623511277008D6E0F /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CD42523511277008D6E0F /* UserProfileViewController.swift */; };
+		0EAC900C2354FB6700887CE3 /* ProfileQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC900A2354FB6700887CE3 /* ProfileQuestionCell.swift */; };
+		0EAC900D2354FB6700887CE3 /* ProfileQuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC900B2354FB6700887CE3 /* ProfileQuestionCell.xib */; };
 		0EB020CE2335407000462805 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB020CC2335407000462805 /* AnswerTableViewCell.swift */; };
 		0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB020CD2335407000462805 /* AnswerTableViewCell.xib */; };
 		0ECB79412329818700F99498 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB79402329818700F99498 /* Registration.storyboard */; };
@@ -112,9 +120,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E060C36235667FE00E00251 /* ReportUserPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserPopup.swift; sourceTree = "<group>"; };
+		0E060C392356688D00E00251 /* ReportReasonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCell.swift; sourceTree = "<group>"; };
 		0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersTableViewCell.swift; sourceTree = "<group>"; };
 		0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersTableViewCell.xib; sourceTree = "<group>"; };
-		0E068A4922FB558F00A9BDE9 /* MyAnswersContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersContainerCell.swift; sourceTree = "<group>"; };
+		0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersContainerCell.swift; sourceTree = "<group>"; };
 		0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersContainerCell.xib; sourceTree = "<group>"; };
 		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
@@ -146,6 +156,9 @@
 		0E416C152319BAD000EA3CA7 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		0E416C172319BBA500EA3CA7 /* CreateProfileFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileFirstCell.swift; sourceTree = "<group>"; };
 		0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateProfileFirstCell.xib; sourceTree = "<group>"; };
+		0E468F752356540800C671AE /* ProfileAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnswerCell.swift; sourceTree = "<group>"; };
+		0E468F762356540800C671AE /* ProfileAnswerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileAnswerCell.xib; sourceTree = "<group>"; };
+		0E468F79235661EC00C671AE /* Popups.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Popups.storyboard; sourceTree = "<group>"; };
 		0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E47592E22EDF0F300B2DE82 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0E47593122EDF37600B2DE82 /* UITabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarButton.swift; sourceTree = "<group>"; };
@@ -169,13 +182,16 @@
 		0E61DD6522EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDelegate.swift; sourceTree = "<group>"; };
 		0E61DD6622EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewDataSource.swift; sourceTree = "<group>"; };
 		0E61DD6B22EF8DE200C1C8C7 /* SwipeableCardViewCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeableCardViewCard.xib; sourceTree = "<group>"; };
+		0E722A8D23579F0500EE206D /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
+		0E722A8F2357ABE800EE206D /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0E7AC2AF231EE7C40050E750 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		0E7AC2B1231EF4280050E750 /* FacebookLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginManager.swift; sourceTree = "<group>"; };
 		0E7AC2B3231EF5FD0050E750 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0E89923F2316F3CA00644E1D /* SwipeableCardViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCardViewCard.swift; sourceTree = "<group>"; };
 		0E946F9223353FB7004D6310 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		0E9CD4212351020F008D6E0F /* UTSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTSegmentedControl.swift; sourceTree = "<group>"; };
 		0E9CD42523511277008D6E0F /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		0EAC900A2354FB6700887CE3 /* ProfileQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQuestionCell.swift; sourceTree = "<group>"; };
+		0EAC900B2354FB6700887CE3 /* ProfileQuestionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileQuestionCell.xib; sourceTree = "<group>"; };
 		0EB020CC2335407000462805 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
 		0EB020CD2335407000462805 /* AnswerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerTableViewCell.xib; sourceTree = "<group>"; };
 		0ECB79402329818700F99498 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
@@ -238,6 +254,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E060C35235667EC00E00251 /* Pop-ups */ = {
+			isa = PBXGroup;
+			children = (
+				0E060C36235667FE00E00251 /* ReportUserPopup.swift */,
+			);
+			path = "Pop-ups";
+			sourceTree = "<group>";
+		};
+		0E060C382356687A00E00251 /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				0E060C392356688D00E00251 /* ReportReasonCell.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
 		0E17A37922EC8DF500390BA5 = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +307,7 @@
 				0E17A39122EC8DF600390BA5 /* Info.plist */,
 				0E47592C22EDE7E900B2DE82 /* GoogleService-Info.plist */,
 				0EFF6DA622F7523900A6A76B /* Constants.swift */,
+				0E722A8F2357ABE800EE206D /* Globals.swift */,
 			);
 			path = Untind;
 			sourceTree = "<group>";
@@ -300,6 +333,7 @@
 		0E17A3B322EC8E3400390BA5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0E060C35235667EC00E00251 /* Pop-ups */,
 				0E9CD42423511264008D6E0F /* Profile */,
 				0E946F9123353FA1004D6310 /* Feed */,
 				0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */,
@@ -324,6 +358,7 @@
 				0ECB7942232981C800F99498 /* Feed.storyboard */,
 				0ECB7944232981D000F99498 /* Chat.storyboard */,
 				0ECB7946232981D500F99498 /* Profile.storyboard */,
+				0E468F79235661EC00C671AE /* Popups.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -367,6 +402,7 @@
 		0E1C8B3B22F9FD1F0011A5D7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0E060C382356687A00E00251 /* Popups */,
 				0E5132B02347BBCF0035C959 /* Profile */,
 				0E5132AF2347BBC70035C959 /* Answers */,
 				0E5132AE2347BBBC0035C959 /* Questions */,
@@ -412,7 +448,7 @@
 				0EB020CD2335407000462805 /* AnswerTableViewCell.xib */,
 				0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */,
 				0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */,
-				0E068A4922FB558F00A9BDE9 /* MyAnswersContainerCell.swift */,
+				0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */,
 				0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */,
 			);
 			path = Answers;
@@ -425,6 +461,10 @@
 				0E416C182319BBA500EA3CA7 /* CreateProfileFirstCell.xib */,
 				0ED706F8231C5EBA0039A8DE /* CreateProfileSecondCell.swift */,
 				0ED706F9231C5EBA0039A8DE /* CreateProfileSecondCell.xib */,
+				0EAC900A2354FB6700887CE3 /* ProfileQuestionCell.swift */,
+				0EAC900B2354FB6700887CE3 /* ProfileQuestionCell.xib */,
+				0E468F752356540800C671AE /* ProfileAnswerCell.swift */,
+				0E468F762356540800C671AE /* ProfileAnswerCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -443,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				0E61DD5722EF78BF00C1C8C7 /* SwipeDirection.swift */,
+				0E722A8D23579F0500EE206D /* ContentSizedTableView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -468,7 +509,6 @@
 		0E9CD420235101E2008D6E0F /* Segmented Controls */ = {
 			isa = PBXGroup;
 			children = (
-				0E9CD4212351020F008D6E0F /* UTSegmentedControl.swift */,
 			);
 			path = "Segmented Controls";
 			sourceTree = "<group>";
@@ -677,10 +717,13 @@
 				0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */,
 				0E17A39022EC8DF600390BA5 /* LaunchScreen.storyboard in Resources */,
 				0E416C1A2319BBA500EA3CA7 /* CreateProfileFirstCell.xib in Resources */,
+				0E468F782356540800C671AE /* ProfileAnswerCell.xib in Resources */,
 				0ECB7943232981C800F99498 /* Feed.storyboard in Resources */,
 				0E5132B42347BC160035C959 /* AddQuestionCollectionViewCell.xib in Resources */,
 				0ECB7945232981D000F99498 /* Chat.storyboard in Resources */,
+				0E468F7A235661EC00C671AE /* Popups.storyboard in Resources */,
 				0ED706FB231C5EBA0039A8DE /* CreateProfileSecondCell.xib in Resources */,
+				0EAC900D2354FB6700887CE3 /* ProfileQuestionCell.xib in Resources */,
 				0E17A38D22EC8DF600390BA5 /* Assets.xcassets in Resources */,
 				0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */,
 				0ECB79412329818700F99498 /* Registration.storyboard in Resources */,
@@ -813,18 +856,21 @@
 				0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */,
 				0E17A3BC22EC9E8700390BA5 /* GOTHICB.TTF in Sources */,
 				0E9CD42623511277008D6E0F /* UserProfileViewController.swift in Sources */,
+				0E060C37235667FE00E00251 /* ReportUserPopup.swift in Sources */,
 				0E61DD6022EF7E3200C1C8C7 /* SwipeableCardView.swift in Sources */,
 				F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */,
-				0E9CD4222351020F008D6E0F /* UTSegmentedControl.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
+				0E060C3B2356688D00E00251 /* ReportReasonCell.swift in Sources */,
 				0EDA1351231DA12E00B759C5 /* CustomInteractor.swift in Sources */,
+				0E722A8E23579F0500EE206D /* ContentSizedTableView.swift in Sources */,
 				0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */,
 				0EFA552E2303081A0000E6F6 /* UTUser.swift in Sources */,
+				0EAC900C2354FB6700887CE3 /* ProfileQuestionCell.swift in Sources */,
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
@@ -836,6 +882,7 @@
 				0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */,
 				0E1C8B3E22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.swift in Sources */,
 				0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */,
+				0E722A902357ABE800EE206D /* Globals.swift in Sources */,
 				0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */,
 				0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */,
 				0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */,
@@ -848,6 +895,7 @@
 				0E61DD5C22EF791200C1C8C7 /* CGPoint+SwipeableAdditions.swift in Sources */,
 				0EDA134F231D85F700B759C5 /* CustomAnimator.swift in Sources */,
 				0E61DD5822EF78BF00C1C8C7 /* SwipeDirection.swift in Sources */,
+				0E468F772356540800C671AE /* ProfileAnswerCell.swift in Sources */,
 				0E47592F22EDF0F300B2DE82 /* TabBarViewController.swift in Sources */,
 				0ED28FFC2346796800267882 /* BiggerTapSizeButton.swift in Sources */,
 				0EB020CE2335407000462805 /* AnswerTableViewCell.swift in Sources */,
@@ -861,7 +909,7 @@
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,
 				0E47593422EDFCD600B2DE82 /* UIImageExtension.swift in Sources */,
-				0E068A4B22FB558F00A9BDE9 /* MyAnswersContainerCell.swift in Sources */,
+				0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

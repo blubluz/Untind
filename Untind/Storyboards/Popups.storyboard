@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Report User Popup-->
+        <scene sceneID="Z4x-4R-rUh">
+            <objects>
+                <viewController storyboardIdentifier="ReportUserPopup" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aEb-k4-dl8" customClass="ReportUserPopup" customModule="Untind" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YZR-52-BHd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlR-E3-OWg">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <connections>
+                                    <action selector="didTapBackground:" destination="aEb-k4-dl8" eventType="touchUpInside" id="jhp-X2-dzy"/>
+                                </connections>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-6x-Zz5">
+                                <rect key="frame" x="20" y="149.5" width="374" height="597"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpv-ys-xGj">
+                                        <rect key="frame" x="0.0" y="529" width="374" height="68"/>
+                                        <color key="backgroundColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="68" id="UmI-RB-GUY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                        <state key="normal" title="SUBMIT REPORT">
+                                            <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report a User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIm-ce-K8f">
+                                        <rect key="frame" x="5" y="30" width="364" height="29"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" red="0.23529411764705882" green="0.30980392156862746" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDc-HJ-mmC">
+                                        <rect key="frame" x="30" y="79" width="314" height="105"/>
+                                        <string key="text">Your are about to report a user. Please be sure of this intent because if reported falsely, your own account could be compromised.
+
+Pick one of the reasons why you are reporting this person?</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="0.23529411759999999" green="0.30980392159999998" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="338" placeholderIntrinsicHeight="275" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Qk-Hw-UfY">
+                                        <rect key="frame" x="18" y="214" width="338" height="275"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="275" id="JbX-de-adQ"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReportReasonCell" rowHeight="58" id="6RU-dw-VIr" customClass="ReportReasonCell" customModule="Untind" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="338" height="58"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RU-dw-VIr" id="viq-t9-zEy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="58"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Czp-uh-MGv">
+                                                            <rect key="frame" x="5" y="23" width="12" height="12"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="12" id="E2Q-5h-etk"/>
+                                                                <constraint firstAttribute="height" constant="12" id="O2G-5v-8IY"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="report-checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="3yI-4n-kee">
+                                                            <rect key="frame" x="3" y="21" width="16" height="16"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inappropriate behaviour" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIf-fu-aYh">
+                                                            <rect key="frame" x="34" y="19" width="177" height="20"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                                            <color key="textColor" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="yIf-fu-aYh" firstAttribute="centerY" secondItem="viq-t9-zEy" secondAttribute="centerY" id="Aqk-Pp-U8f"/>
+                                                        <constraint firstItem="yIf-fu-aYh" firstAttribute="leading" secondItem="3yI-4n-kee" secondAttribute="trailing" constant="15" id="Ber-uQ-bW0"/>
+                                                        <constraint firstItem="3yI-4n-kee" firstAttribute="centerY" secondItem="viq-t9-zEy" secondAttribute="centerY" id="JPy-ZV-HLP"/>
+                                                        <constraint firstItem="Czp-uh-MGv" firstAttribute="centerY" secondItem="3yI-4n-kee" secondAttribute="centerY" id="hsE-2Y-isU"/>
+                                                        <constraint firstItem="3yI-4n-kee" firstAttribute="leading" secondItem="viq-t9-zEy" secondAttribute="leading" constant="3" id="qgP-fb-QW5"/>
+                                                        <constraint firstItem="Czp-uh-MGv" firstAttribute="centerX" secondItem="3yI-4n-kee" secondAttribute="centerX" id="quA-TT-WKz"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="checkMark" destination="3yI-4n-kee" id="1Qs-YR-OTj"/>
+                                                    <outlet property="circleView" destination="Czp-uh-MGv" id="wWw-f8-bli"/>
+                                                    <outlet property="reasonLabel" destination="yIf-fu-aYh" id="4fN-Lh-wDO"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Xpv-ys-xGj" secondAttribute="bottom" id="6G0-oC-cfx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xpv-ys-xGj" secondAttribute="trailing" id="6aM-zz-3my"/>
+                                    <constraint firstItem="oDc-HJ-mmC" firstAttribute="leading" secondItem="TlB-6x-Zz5" secondAttribute="leading" constant="30" id="DRk-Jr-mGF"/>
+                                    <constraint firstItem="BIm-ce-K8f" firstAttribute="leading" secondItem="TlB-6x-Zz5" secondAttribute="leading" constant="5" id="GA8-tK-UEP"/>
+                                    <constraint firstAttribute="trailing" secondItem="BIm-ce-K8f" secondAttribute="trailing" constant="5" id="Htt-Ks-iug"/>
+                                    <constraint firstItem="Xpv-ys-xGj" firstAttribute="leading" secondItem="TlB-6x-Zz5" secondAttribute="leading" id="KWc-Gf-lDw"/>
+                                    <constraint firstItem="BIm-ce-K8f" firstAttribute="centerX" secondItem="TlB-6x-Zz5" secondAttribute="centerX" id="PcF-FM-Bvv"/>
+                                    <constraint firstItem="Xpv-ys-xGj" firstAttribute="top" secondItem="2Qk-Hw-UfY" secondAttribute="bottom" constant="40" id="R6K-Sj-UZ8"/>
+                                    <constraint firstItem="2Qk-Hw-UfY" firstAttribute="top" secondItem="oDc-HJ-mmC" secondAttribute="bottom" constant="30" id="SqF-BW-Thl"/>
+                                    <constraint firstItem="oDc-HJ-mmC" firstAttribute="top" secondItem="BIm-ce-K8f" secondAttribute="bottom" constant="20" id="UT3-En-QMN"/>
+                                    <constraint firstItem="2Qk-Hw-UfY" firstAttribute="leading" secondItem="TlB-6x-Zz5" secondAttribute="leading" constant="18" id="bcJ-35-vDL"/>
+                                    <constraint firstItem="BIm-ce-K8f" firstAttribute="top" secondItem="TlB-6x-Zz5" secondAttribute="top" constant="30" id="eL5-VG-4lW"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Qk-Hw-UfY" secondAttribute="trailing" constant="18" id="pno-us-emq"/>
+                                    <constraint firstAttribute="trailing" secondItem="oDc-HJ-mmC" secondAttribute="trailing" constant="30" id="xwT-g1-NQD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.2627450980392157" blue="0.30588235294117649" alpha="0.96999999999999997" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="1VI-PT-Xnx" firstAttribute="trailing" secondItem="TlB-6x-Zz5" secondAttribute="trailing" constant="20" id="BPb-8l-YX2"/>
+                            <constraint firstItem="1VI-PT-Xnx" firstAttribute="bottom" secondItem="UlR-E3-OWg" secondAttribute="bottom" id="HlO-qQ-hT5"/>
+                            <constraint firstItem="TlB-6x-Zz5" firstAttribute="leading" secondItem="1VI-PT-Xnx" secondAttribute="leading" constant="20" id="Ocs-Rm-ns2"/>
+                            <constraint firstItem="UlR-E3-OWg" firstAttribute="top" secondItem="1VI-PT-Xnx" secondAttribute="top" id="TO7-1x-m5z"/>
+                            <constraint firstItem="1VI-PT-Xnx" firstAttribute="trailing" secondItem="UlR-E3-OWg" secondAttribute="trailing" id="bvo-au-urp"/>
+                            <constraint firstItem="UlR-E3-OWg" firstAttribute="leading" secondItem="1VI-PT-Xnx" secondAttribute="leading" id="hg3-qm-Tgc"/>
+                            <constraint firstItem="TlB-6x-Zz5" firstAttribute="centerY" secondItem="YZR-52-BHd" secondAttribute="centerY" id="myP-Gr-G6N"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1VI-PT-Xnx"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="TlB-6x-Zz5" id="eUQ-zY-WVB"/>
+                        <outlet property="heightConstraint" destination="JbX-de-adQ" id="6FZ-n4-74R"/>
+                        <outlet property="reasonsTableView" destination="2Qk-Hw-UfY" id="mwc-UO-W0q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h66-x8-zIW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-55.072463768115945" y="125.89285714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="report-checkmark" width="16" height="16"/>
+    </resources>
+</document>

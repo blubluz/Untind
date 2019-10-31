@@ -12,6 +12,7 @@ import SVProgressHUD
 protocol QuestionCardDelegate: class {
     func didAnswerQuestion(question: Question, answer : Answer)
     func didTapProfile(profile: Profile)
+    func didTapReport(profile: Profile)
 }
 
 class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UITextViewDelegate {
@@ -29,6 +30,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     @IBOutlet weak var bottomViewBar: UIView!
     @IBOutlet weak var turnButton: UIButton!
     @IBOutlet weak var mainTurnButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var answerButton: UIButton!
     @IBOutlet weak var bottomBarImageView: UIImageView!
     @IBOutlet weak var topBarImageView: UIImageView!
@@ -130,7 +132,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             return true
         }
         
-        let shouldAllow = !(touchView == answerButton || touchView == turnButton || touchView == mainTurnButton || isFlipped || isInAnswerMode)
+        let shouldAllow = !(touchView == answerButton || touchView == turnButton || touchView == mainTurnButton || isFlipped || touchView == profileButton || isInAnswerMode)
         
         if shouldAllow {
             return true
@@ -174,10 +176,17 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         }
     }
     @IBAction func seeMoreQuestionsTapped(_ sender: Any) {
+        self.didTapUserProfile(self)
     }
+    
     @IBAction func seePublicAnswersTapped(_ sender: Any) {
+        self.cardDelegate?.didTap(view: self)
     }
+    
     @IBAction func reportButtonTapped(_ sender: Any) {
+        if let author = question?.author {
+            questionDelegate?.didTapReport(profile: author)
+        }
     }
     @IBAction func copySetQuestionsTapped(_ sender: Any) {
     }
@@ -186,13 +195,16 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         if !isInAnswerMode {
             isInAnswerMode = true
         } else {
-            SVProgressHUD.show()
             let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: answerTextField.textField.text, upvotes: 0, rating: 0, question: question!)
-            question?.addAnswer(answer: answer, completion: { (error) in
+            
+            SVProgressHUD.show()
+            answer.post { (error) in
                 SVProgressHUD.dismiss()
                 if let err = error {
-                    print("There was an error:\(err)")
+                    print("Error posting answer: \(err.localizedDescription)")
                 } else {
+                    print("Answer posted succesfuly")
+                    self.question?.answers?.append(answer)
                     if let question = self._question {
                         self.questionDelegate?.didAnswerQuestion(question: question, answer: answer)
                     }
@@ -200,9 +212,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
                     self.answerTextField.textField.text = ""
                     self.isInAnswerMode = false
                 }
-                
-            })
-            
+            }
         }
     }
     

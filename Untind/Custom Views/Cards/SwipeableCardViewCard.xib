@@ -22,6 +22,7 @@
                 <outlet property="bottomViewTrailingConstraint" destination="dgf-5F-9oC" id="W3t-NT-g8c"/>
                 <outlet property="mainTurnButton" destination="2JP-XB-krE" id="A5N-VX-fqE"/>
                 <outlet property="postDateLabel" destination="6Hj-LZ-uti" id="OyV-h7-WAm"/>
+                <outlet property="profileButton" destination="xnt-5y-A6Y" id="J1O-vd-tD2"/>
                 <outlet property="questionCardLine" destination="uJw-20-ldm" id="9m7-kN-pB1"/>
                 <outlet property="questionLabel" destination="ziZ-PX-ZUg" id="Vfb-YE-gDC"/>
                 <outlet property="smallQuestionLabel" destination="htz-zV-UM6" id="K9i-wu-yhS"/>
@@ -107,6 +108,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="tAL-jy-gIz" secondAttribute="height" multiplier="121:30" id="uGo-Nw-TWS"/>
                             </constraints>
+                            <color key="tintColor" red="0.12941176470588234" green="0.81568627450980391" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" image="answer-button">
                                 <color key="titleColor" red="0.12941176469999999" green="0.81568627449999997" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -185,12 +187,6 @@ Give reasons.</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b28-xk-Ys8">
                                                     <rect key="frame" x="5" y="8" width="166.5" height="49"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnt-5y-A6Y">
-                                                            <rect key="frame" x="0.0" y="0.0" width="166.5" height="49"/>
-                                                            <connections>
-                                                                <action selector="didTapUserProfile:" destination="-1" eventType="touchUpInside" id="j7D-ht-Yav"/>
-                                                            </connections>
-                                                        </button>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-2" translatesAutoresizingMaskIntoConstraints="NO" id="1if-tz-YGQ">
                                                             <rect key="frame" x="5" y="-3" width="55" height="55"/>
                                                             <constraints>
@@ -215,6 +211,12 @@ Give reasons.</string>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnt-5y-A6Y">
+                                                            <rect key="frame" x="0.0" y="0.0" width="166.5" height="49"/>
+                                                            <connections>
+                                                                <action selector="didTapUserProfile:" destination="-1" eventType="touchUpInside" id="j7D-ht-Yav"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -463,11 +465,6 @@ Give reasons.</string>
                                 <constraint firstAttribute="bottom" secondItem="coX-r3-URW" secondAttribute="bottom" id="zly-5g-Fcx"/>
                                 <constraint firstItem="coX-r3-URW" firstAttribute="top" secondItem="98z-Ls-6Os" secondAttribute="top" id="znD-X2-mmm"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="coX-r3-URW"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

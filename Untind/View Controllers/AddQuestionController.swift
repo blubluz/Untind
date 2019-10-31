@@ -44,27 +44,23 @@ class AddQuestionController: UIViewController {
             return
         }
         
-        let db = Firestore.firestore()
-            
+        let question = Question(author: UTUser.loggedUser!.userProfile!, postDate: Date(), questionText: answerTextField.textField.text!)
+        
         SVProgressHUD.show()
-            db.collection("questions").addDocument(data: [
-                "answers" : [],
-                "author" : UTUser.loggedUser!.userProfile?.jsonValue(),
-                "postDate" : Date(),
-                "questionText" : answerTextField.textField.text! ], completion: { error in
-                SVProgressHUD.dismiss()
-                    if error != nil {
-                        self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
-                    } else {
-                        let alertController = UIAlertController(title: "Posted!", message: "Your question has been posted. You can find it in the questions screen.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                            self.dismiss(animated: true, completion: nil)
-                        }))
-                        
-                        self.present(alertController, animated: true, completion: nil)
-                    }
-            })
-            
+        
+        question.post { (error) in
+            SVProgressHUD.dismiss()
+            if error != nil {
+                self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(title: "Posted!", message: "Your question has been posted. You can find it in the questions screen.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

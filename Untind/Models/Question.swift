@@ -10,15 +10,15 @@ import UIKit
 import FirebaseFirestore
 
 class Question: NSObject {
+    var id : String?
     var author : Profile
     var postDate : Date
     var questionText : String
-    var answers : [Answer]
-    var documentID : String?
+    var answers : [Answer]?
     
     convenience init(with document: DocumentSnapshot) {
         self.init(with: document.data()!)
-        documentID = document.documentID
+        id = document.documentID
     }
     
     init(with dictionary: JSONDictionary) {
@@ -31,55 +31,134 @@ class Question: NSObject {
         
         questionText = dictionary["questionText"] as! String
         
-        let answersArray = dictionary["answers"] as! [JSONDictionary]
-        answers = []
-        for item in answersArray {
-            answers.append(Answer(with: item))
-        }
+        id = dictionary["id"] as? String
+        
+    }
+    
+    init(author: Profile, postDate: Date, questionText: String) {
+        self.author = author
+        self.postDate = postDate
+        self.questionText = questionText
     }
     
     func jsonValue() -> [String : Any] {
-        return [ "author" : author.jsonValue(),
+        var json = [ "author" : author.jsonValue(),
                  "postDate" : postDate,
-                 "questionText" : questionText,
-                 "answers" : answers.map({ (answer) -> JSONDictionary in
-                    return answer.questionAnswerjsonValue()
-                 })
-        ]
+                 "questionText" : questionText
+            ] as [String : Any]
+        
+        if let id = self.id {
+            json["id"] = id
+        }
+        
+        return json
+     
     }
     
-    func addAnswer(answer: Answer, completion: @escaping (Error?) -> Void) {
-        self.answers.append(answer)
+    func fetchAnswers(completion: @escaping (Error?) -> Void) {
         let db = Firestore.firestore()
-        
-        if let documentId = documentID {
-            let questionDocument = db.collection("questions").document(documentId)
-
-            questionDocument.getDocument { (snapshot, error) in
-                let question = Question(with: snapshot!.data()!)
-                if question.answers.contains(where: { (answer) -> Bool in
-                    answer.author.uid == UTUser.loggedUser?.user.uid
-                }) {
-                    print("User has already answered this question")
-                    completion(AddAnswerError("User has already answered"))
+        if self.answers == nil {
+            self.answers = [Answer]()
+        }
+        if let id = id {
+            db.collection("answers").whereField(FieldPath(["question","id"]), isEqualTo: id).getDocuments { (snapshot: QuerySnapshot?, error) in
+                if let err = error {
+                    print("Error getting answers: \(err)")
+                    completion(error)
                 } else {
+                    snapshot!.documents.forEach {
+                        let answer = Answer(with: $0)
+                        if !(self.answers?.contains(where: { (localAnswer) -> Bool in
+                            localAnswer.id == answer.id
+                        }) ?? false) {
+                            self.answers?.append(Answer(with: $0))
+                        }
+                    }
+                    completion(nil)
+                }
+            }
+        } else {
+            completion(nil) //Should be error
+            print("Oops. We have no documentId")
+        }
+    }
+    
+    func post(completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("questions").addDocument(data: jsonValue()) { (error) in
+            completion(error)
+        }
+    }
+    
+    static func fetch(id: String, withAnswers: Bool = true, completion: @escaping (Error?, Question?) -> Void) {
+        let db = Firestore.firestore()
+        var question: Question?
+        var localError: Error?
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(localError,question)
+        }
+        
+        dispatchGroup.enter()
+        db.collection("questions").document(id).getDocument { (snapshot, error) in
+            if let err = error {
+                localError = err
+                print("Oops. Error fetching question.")
+                dispatchGroup.leave()
+            } else {
+                question = Question(with: snapshot!)
+                if withAnswers {
+                    dispatchGroup.enter()
+                    question?.fetchAnswers(completion: { (error) in
+                        if error != nil {
+                            localError = error
+                        }
+                        dispatchGroup.leave()
+                    })
+                }
+                dispatchGroup.leave()
+            }
+        }
+    }
+    
+    static func fetchAll(forUserId userId: String, withAnswers: Bool = true, completion: @escaping (Error?, [Question]) -> Void) {
+        let db = Firestore.firestore()
+        var questions = [Question]()
+        var localError : Error?
+        let dispatchGroup = DispatchGroup()
+        
+        
+        
+        dispatchGroup.enter()
+        dispatchGroup.notify(queue: .main) {
+            completion(localError, questions)
+        }
+        
+        db.collectionGroup("questions").whereField(FieldPath(["author", "uid"]), isEqualTo: userId).getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                localError = err
+                print("Error getting documents: \(err)")
+            } else {
+                for document in snapshot!.documents {
                     
-                    db.collection("answers").addDocument(data: answer.jsonValue())
-                    questionDocument.updateData(["answers" : FieldValue.arrayUnion([answer.questionAnswerjsonValue()])]) {
-                        error in
-                        if let error = error {
-                            print("There was an error adding this answer!")
-                            completion(error)
-                        } else {
-                            print("Succesfuly added answer")
-                            completion(nil)
+                    let question = Question(with: document)
+                    questions.append(question)
+                    if withAnswers {
+                        dispatchGroup.enter()
+                        question.fetchAnswers { (error) in
+                            if error != nil {
+                                localError = error
+                            }
+                            dispatchGroup.leave()
                         }
                     }
                 }
             }
-        } else {
-            print("This questions does not have a Document ID")
+            dispatchGroup.leave()
         }
+        
+        
     }
 }
 

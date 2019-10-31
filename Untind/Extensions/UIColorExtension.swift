@@ -16,6 +16,7 @@ extension UIColor {
     static let lightTeal = UIColor(red: 206, green: 242, blue: 237, alpha: 1)
     static let answerTeal = UIColor(red: 33, green: 208, blue: 185, alpha: 1)
     static let teal = UIColor(red: 48, green: 209, blue: 185, alpha: 1)
+    static let teal2 = UIColor(red: 33, green: 208, blue: 185, alpha: 1)
     static let gray81 = UIColor(red: 81, green: 81, blue: 81, alpha: 1)
     static let defaultColorPageControlUnselected = UIColor(red: 128, green: 75, blue: 66, alpha: 1)
     

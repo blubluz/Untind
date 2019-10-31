@@ -100,7 +100,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
             return cell
         }
         else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAnswersContainerCell", for: indexPath) as! MyAnswersContainerCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAnswersContainerCell", for: indexPath) as! AnswersContainerCell
             cell.set(answers: self.myAnswers, isLoading: isLoadingAnswers)
             cell.draggingDelegate = self
             cell.answerDelegate = self
@@ -130,9 +130,6 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : indexPath.row == 0 ? ThemeMode.answer : ThemeMode.question])
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("test")
-    }
     
     //MARK: - AnswersDelegate
     func didTap(answer: Answer) {
@@ -143,6 +140,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         questionVc.modalPresentationStyle = .overCurrentContext
         self.present(questionVc, animated: false, completion: nil)
     }
+    
     func didTapAnswersButton() {
         if let parentVc = self.parent as? PresentationViewController {
             parentVc.dismissContainerViewController(animated: true, completion: nil)
@@ -188,7 +186,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
         if collectionView.contentOffset.x == 0 {
             collectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true)
         } else {
-            if let cell = collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as? MyAnswersContainerCell {
+            if let cell = collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as? AnswersContainerCell {
                 cell.answersTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
         }

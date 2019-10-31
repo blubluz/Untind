@@ -12,7 +12,7 @@ protocol AnswersDelegate: class {
     func didTap(answer: Answer)
     func didTapAnswersButton()
 }
-class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
+class AnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
 
     @IBOutlet weak var answersTableView: UITableView!
     private var indexPath: IndexPath?
@@ -26,6 +26,7 @@ class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITable
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.startAnimating()
+        
     }
     
     func set(answers: [Answer]?, isLoading: Bool = false) {
@@ -58,7 +59,6 @@ class MyAnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyAnswersTableViewCell") as! MyAnswersTableViewCell
         cell.configureWith(answer: answers![indexPath.row])
-        
         return cell
     }
     

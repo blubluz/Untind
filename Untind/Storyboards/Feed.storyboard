@@ -56,17 +56,17 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrd-tK-TBS">
-                                                <rect key="frame" x="5" y="8" width="314" height="17"/>
+                                                <rect key="frame" x="5" y="-5" width="314" height="40"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-2" translatesAutoresizingMaskIntoConstraints="NO" id="qpp-B5-kC7">
-                                                        <rect key="frame" x="5" y="-11.5" width="40" height="40"/>
+                                                        <rect key="frame" x="5" y="0.0" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="HYS-mi-Udp"/>
                                                             <constraint firstAttribute="height" constant="40" id="pcU-fk-mYK"/>
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NOX-1K-bzy">
-                                                        <rect key="frame" x="55" y="-10.5" width="259" height="38.5"/>
+                                                        <rect key="frame" x="55" y="1" width="259" height="38.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SpicyCurryWings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="tVB-hT-Okg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="259" height="19.5"/>
@@ -82,20 +82,32 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5s-7o-Nut">
+                                                        <rect key="frame" x="0.0" y="0.0" width="314" height="40"/>
+                                                        <connections>
+                                                            <action selector="didTapAuthorProfile:" destination="o0s-D9-ipz" eventType="touchUpInside" id="v20-Dt-axC"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="NOX-1K-bzy" firstAttribute="leading" secondItem="qpp-B5-kC7" secondAttribute="trailing" constant="10" id="DJD-t7-6Hp"/>
                                                     <constraint firstAttribute="trailing" secondItem="NOX-1K-bzy" secondAttribute="trailing" id="Dlx-qv-HY0"/>
+                                                    <constraint firstItem="qpp-B5-kC7" firstAttribute="top" secondItem="hrd-tK-TBS" secondAttribute="top" id="HWY-8z-6P9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="J5s-7o-Nut" secondAttribute="trailing" id="Wfy-ER-Kwg"/>
                                                     <constraint firstItem="qpp-B5-kC7" firstAttribute="leading" secondItem="hrd-tK-TBS" secondAttribute="leading" constant="5" id="dWr-Mq-Exb"/>
                                                     <constraint firstItem="qpp-B5-kC7" firstAttribute="centerY" secondItem="hrd-tK-TBS" secondAttribute="centerY" id="eOD-Hj-7t2"/>
+                                                    <constraint firstAttribute="bottom" secondItem="J5s-7o-Nut" secondAttribute="bottom" id="g1z-92-HIt"/>
                                                     <constraint firstItem="NOX-1K-bzy" firstAttribute="centerY" secondItem="hrd-tK-TBS" secondAttribute="centerY" id="pdX-2f-WBe"/>
+                                                    <constraint firstItem="J5s-7o-Nut" firstAttribute="leading" secondItem="hrd-tK-TBS" secondAttribute="leading" id="plQ-oK-55o"/>
+                                                    <constraint firstAttribute="bottom" secondItem="qpp-B5-kC7" secondAttribute="bottom" id="siJ-r3-au8"/>
+                                                    <constraint firstItem="J5s-7o-Nut" firstAttribute="top" secondItem="hrd-tK-TBS" secondAttribute="top" id="xiZ-XE-SVV"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="hrd-tK-TBS" firstAttribute="top" secondItem="dt5-fb-CjF" secondAttribute="top" constant="8" id="1UD-Kb-0Xp"/>
+                                            <constraint firstItem="hrd-tK-TBS" firstAttribute="top" secondItem="dt5-fb-CjF" secondAttribute="top" constant="-5" id="1UD-Kb-0Xp"/>
                                             <constraint firstAttribute="bottom" secondItem="pzc-OY-75C" secondAttribute="bottom" constant="15" id="3sm-Le-05q"/>
                                             <constraint firstAttribute="trailing" secondItem="pzc-OY-75C" secondAttribute="trailing" constant="5" id="740-Iv-STo"/>
                                             <constraint firstAttribute="bottom" secondItem="hrd-tK-TBS" secondAttribute="bottom" priority="500" constant="15" id="AeV-TV-5nh"/>
@@ -139,17 +151,43 @@
                                     <constraint firstItem="bkw-CL-5PY" firstAttribute="width" secondItem="ci4-Nt-Owt" secondAttribute="width" id="urG-ML-XhX"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom-blue-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="REg-d9-6CV">
+                                <rect key="frame" x="0.0" y="733" width="414" height="163"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSH-2M-9Qf">
+                                <rect key="frame" x="110" y="781.5" width="194" height="51"/>
+                                <color key="backgroundColor" red="0.12941176470588234" green="0.81568627450980391" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAm-N6-5nN">
+                                <rect key="frame" x="146.5" y="792" width="121" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="answer-button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="REg-d9-6CV" secondAttribute="bottom" id="0sk-hx-pdA"/>
                             <constraint firstItem="4EL-7D-sFc" firstAttribute="leading" secondItem="Yr2-6g-Whf" secondAttribute="leading" id="2Hb-Tg-AEI"/>
                             <constraint firstItem="4EL-7D-sFc" firstAttribute="trailing" secondItem="Yr2-6g-Whf" secondAttribute="trailing" id="4O2-5X-IvF"/>
+                            <constraint firstItem="oAm-N6-5nN" firstAttribute="bottom" secondItem="Yr2-6g-Whf" secondAttribute="bottom" constant="-40" id="5EQ-mi-NRa"/>
+                            <constraint firstItem="RSH-2M-9Qf" firstAttribute="height" secondItem="oAm-N6-5nN" secondAttribute="height" multiplier="1.7" id="8Dz-my-rc7"/>
                             <constraint firstItem="rHw-uc-oif" firstAttribute="top" secondItem="3Eh-5u-AYV" secondAttribute="top" id="A2y-NU-wj7"/>
                             <constraint firstAttribute="bottom" secondItem="4EL-7D-sFc" secondAttribute="bottom" id="C3K-UV-9dH"/>
+                            <constraint firstItem="RSH-2M-9Qf" firstAttribute="centerY" secondItem="oAm-N6-5nN" secondAttribute="centerY" id="Fid-4m-zmC"/>
                             <constraint firstItem="rHw-uc-oif" firstAttribute="leading" secondItem="Yr2-6g-Whf" secondAttribute="leading" id="NyO-3U-JcU"/>
+                            <constraint firstItem="RSH-2M-9Qf" firstAttribute="centerX" secondItem="oAm-N6-5nN" secondAttribute="centerX" id="P52-S6-ntA"/>
+                            <constraint firstItem="Yr2-6g-Whf" firstAttribute="trailing" secondItem="REg-d9-6CV" secondAttribute="trailing" id="bVK-NY-NmK"/>
                             <constraint firstItem="Yr2-6g-Whf" firstAttribute="trailing" secondItem="rHw-uc-oif" secondAttribute="trailing" id="cMx-sy-cVs"/>
                             <constraint firstItem="4EL-7D-sFc" firstAttribute="top" secondItem="rHw-uc-oif" secondAttribute="bottom" constant="-40" id="hQ0-5j-N2s"/>
+                            <constraint firstItem="oAm-N6-5nN" firstAttribute="centerX" secondItem="3Eh-5u-AYV" secondAttribute="centerX" id="kBY-lu-Dx2"/>
+                            <constraint firstItem="RSH-2M-9Qf" firstAttribute="width" secondItem="oAm-N6-5nN" secondAttribute="width" multiplier="1.6" id="mEr-tZ-eBt"/>
                             <constraint firstItem="4EL-7D-sFc" firstAttribute="leading" secondItem="rHw-uc-oif" secondAttribute="leading" id="xwO-5A-GF8"/>
+                            <constraint firstItem="REg-d9-6CV" firstAttribute="leading" secondItem="Yr2-6g-Whf" secondAttribute="leading" id="yNP-wK-Hyo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yr2-6g-Whf"/>
                         <variation key="default">
@@ -178,8 +216,10 @@
     </scenes>
     <resources>
         <image name="answer-bottom-line" width="316" height="7"/>
+        <image name="answer-button" width="121" height="30"/>
         <image name="avatar-2" width="142" height="150"/>
         <image name="back-button" width="30" height="26"/>
+        <image name="bottom-blue-gradient" width="367" height="163"/>
         <image name="onboarding-card-shadow" width="375" height="586"/>
     </resources>
 </document>

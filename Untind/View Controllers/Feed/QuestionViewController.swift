@@ -24,6 +24,7 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var questionAuthorView: UIView!
     
     public weak var question : Question?
+    private var didAppearOnce = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,17 @@ class QuestionViewController: UIViewController {
             questionAuthorName.text = question.author.username
             questionAuthorAvatar.image = UIImage(named: question.author.avatarType)
             questionPostDate.text = question.postDate.toFormattedString()
+            self.answersTableView.reloadData()
+            
+            question.fetchAnswers { (error) in
+                self.answersTableView.reloadData()
+            }
         }
+        
+        
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,7 +62,10 @@ class QuestionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        doAppearAnimations()
+        if !didAppearOnce {
+            didAppearOnce = true
+            doAppearAnimations()
+        }
     }
     
     
@@ -85,11 +99,18 @@ class QuestionViewController: UIViewController {
             
         }
     }
+    
+    //MARK: - Button Actions
+    @IBAction func didTapAuthorProfile(_ sender: Any) {
+        self.navigationController?.pushViewController(UserProfileViewController.instantiate(profile: question?.author), animated: true)
+    }
+    
 }
 
+//MARK: - Table View Delegate & DataSource
 extension QuestionViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return question?.answers.count ?? 0
+        return question?.answers?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,8 +134,8 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AnswerTableViewCell") as! AnswerTableViewCell
-        cell.configureWith(answer: question!.answers[indexPath.section])
-        
+        cell.configureWith(answer: question!.answers![indexPath.section])
+        cell.delegate = self
         return cell
     }
     
@@ -122,4 +143,15 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource, UI
         
     }
     
+}
+
+//MARK: - Answer Cell Delegate
+extension QuestionViewController: AnswerCellDelegate {
+    func didTapProfile(profile: Profile) {
+        self.navigationController?.pushViewController(UserProfileViewController.instantiate(profile: profile), animated: true)
+    }
+    
+    func didVote(value: Vote, answer: Answer) {
+        
+    }
 }

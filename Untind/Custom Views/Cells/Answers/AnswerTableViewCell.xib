@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,11 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="249"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="390" height="248.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="390" height="249"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HuO-xu-GRU">
-                        <rect key="frame" x="30" y="0.0" width="330" height="248.5"/>
+                        <rect key="frame" x="30" y="0.0" width="330" height="249"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="300" verticalHuggingPriority="251" image="quote-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ELv-Iw-Yqd">
                                 <rect key="frame" x="20" y="30" width="16" height="12"/>
@@ -32,7 +30,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XST-ci-zH4">
-                                <rect key="frame" x="46" y="30" width="204" height="141.5"/>
+                                <rect key="frame" x="46" y="30" width="204" height="142"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">I dont think its fair for a man because we live in a society where both genders enjoy rights and privileges. By doing that, it hampers the balance and overall spirit of equality”.</string>
@@ -46,20 +44,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzn-ah-LaJ">
-                                <rect key="frame" x="20" y="188.5" width="230" height="40"/>
+                                <rect key="frame" x="20" y="189" width="230" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhR-hM-eXf">
-                                        <rect key="frame" x="5" y="8" width="175" height="17"/>
+                                        <rect key="frame" x="5" y="-5" width="175" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-2" translatesAutoresizingMaskIntoConstraints="NO" id="wSC-bK-MJ8">
-                                                <rect key="frame" x="5" y="-14" width="45" height="45"/>
+                                                <rect key="frame" x="5" y="0.0" width="45" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="Jue-VP-NUj"/>
                                                     <constraint firstAttribute="width" constant="45" id="Te2-GH-J1E"/>
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UKA-pm-ude">
-                                                <rect key="frame" x="60" y="-9.5" width="115" height="36"/>
+                                                <rect key="frame" x="60" y="4.5" width="115" height="36"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SpicyCurryWings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3F1-XH-LnQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="17"/>
@@ -75,14 +73,26 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="390-9n-FVI">
+                                                <rect key="frame" x="0.0" y="0.0" width="175" height="45"/>
+                                                <connections>
+                                                    <action selector="didTapAuthorProfile:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MT3-Wk-JY6"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="wSC-bK-MJ8" secondAttribute="bottom" id="6Fh-nv-j8m"/>
                                             <constraint firstItem="UKA-pm-ude" firstAttribute="centerY" secondItem="RhR-hM-eXf" secondAttribute="centerY" id="BWZ-Xr-neP"/>
+                                            <constraint firstAttribute="trailing" secondItem="390-9n-FVI" secondAttribute="trailing" id="Iuc-vR-Gkw"/>
+                                            <constraint firstItem="390-9n-FVI" firstAttribute="top" secondItem="RhR-hM-eXf" secondAttribute="top" id="KC2-tW-qEi"/>
                                             <constraint firstItem="wSC-bK-MJ8" firstAttribute="centerY" secondItem="RhR-hM-eXf" secondAttribute="centerY" id="MMW-2q-EqC"/>
                                             <constraint firstItem="wSC-bK-MJ8" firstAttribute="leading" secondItem="RhR-hM-eXf" secondAttribute="leading" constant="5" id="O8c-9v-Z81"/>
+                                            <constraint firstItem="wSC-bK-MJ8" firstAttribute="top" secondItem="RhR-hM-eXf" secondAttribute="top" id="bZI-Uo-hHp"/>
                                             <constraint firstAttribute="trailing" secondItem="UKA-pm-ude" secondAttribute="trailing" id="fPf-ig-gZv"/>
+                                            <constraint firstItem="390-9n-FVI" firstAttribute="leading" secondItem="RhR-hM-eXf" secondAttribute="leading" id="j3N-lL-C4o"/>
                                             <constraint firstItem="UKA-pm-ude" firstAttribute="leading" secondItem="wSC-bK-MJ8" secondAttribute="trailing" constant="10" id="p8b-KR-3xM"/>
+                                            <constraint firstAttribute="bottom" secondItem="390-9n-FVI" secondAttribute="bottom" id="yi7-fG-MBw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -92,7 +102,7 @@
                                     <constraint firstItem="RhR-hM-eXf" firstAttribute="leading" secondItem="Kzn-ah-LaJ" secondAttribute="leading" priority="500" constant="5" id="Tpt-Nu-mln"/>
                                     <constraint firstItem="RhR-hM-eXf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kzn-ah-LaJ" secondAttribute="leading" priority="750" constant="5" id="aXd-u1-uXT"/>
                                     <constraint firstAttribute="bottom" secondItem="RhR-hM-eXf" secondAttribute="bottom" priority="500" constant="15" id="h1U-U7-wgm"/>
-                                    <constraint firstItem="RhR-hM-eXf" firstAttribute="top" secondItem="Kzn-ah-LaJ" secondAttribute="top" constant="8" id="kLx-6A-Tb8"/>
+                                    <constraint firstItem="RhR-hM-eXf" firstAttribute="top" secondItem="Kzn-ah-LaJ" secondAttribute="top" constant="-5" id="kLx-6A-Tb8"/>
                                     <constraint firstAttribute="height" constant="40" id="uUa-xQ-5HP"/>
                                 </constraints>
                             </view>
@@ -114,6 +124,9 @@
                                 <color key="tintColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="downvote-1"/>
                                 <state key="highlighted" image="downvote-pressed"/>
+                                <connections>
+                                    <action selector="downvoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ISC-Zt-S72"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ek-bs-R4X">
                                 <rect key="frame" x="260" y="30" width="50" height="50"/>
@@ -124,6 +137,9 @@
                                 <color key="tintColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="upvote-1"/>
                                 <state key="highlighted" image="upvote-pressed"/>
+                                <connections>
+                                    <action selector="upvoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="18W-fe-6Xi"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dS-YK-Cui">
                                 <rect key="frame" x="262.5" y="98" width="45" height="1"/>
@@ -184,7 +200,7 @@
     </objects>
     <resources>
         <image name="answer-corner-view" width="39" height="20"/>
-        <image name="avatar-2" width="47" height="54"/>
+        <image name="avatar-2" width="142" height="150"/>
         <image name="downvote-1" width="43" height="43"/>
         <image name="downvote-pressed" width="43" height="43"/>
         <image name="quote-icon" width="16" height="12"/>

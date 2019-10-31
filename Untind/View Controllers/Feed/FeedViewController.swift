@@ -49,9 +49,7 @@ class FeedViewController: UIViewController {
             } else {
                 for document in querySnapshot!.documents {
                     let question = Question(with: document)
-                    guard question.author.uid != UTUser.loggedUser!.user.uid && !question.answers.contains(where: { (answer) -> Bool in
-                        return answer.author.uid == UTUser.loggedUser!.user.uid
-                    }) else {
+                    guard question.author.uid != UTUser.loggedUser!.user.uid else {
                         continue
                     }
                     
@@ -102,19 +100,8 @@ class FeedViewController: UIViewController {
     }
     
       @IBAction func filterButtonTapped(_ sender: Any) {
-            if filterButton.currentImage == UIImage(named: "add-button-icon") {
-//                guard !(self.presentedContainerViewController is AddQuestionController) else {
-//                    return
-//                }
-    
                 let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
                 self.present(writeQVC, animated: true, completion: nil)
-    
-    //            addQuestionIndicatorArrow.isHidden = false
-    
-            } else {
-    
-            }
         }
     
     deinit {
@@ -153,11 +140,17 @@ extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDele
 
 //MARK: - QuestionCardDelegate
 extension FeedViewController: QuestionCardDelegate {
+    func didTapReport(profile: Profile) {
+        let vc = ReportUserPopup.instantiate()
+        vc.modalPresentationStyle = .overCurrentContext
+        Globals.tabBarController?.present(vc, animated: false, completion: nil)
+    }
+    
     func didAnswerQuestion(question: Question, answer: Answer) {
         swipeableCardViewContainer.swipeAwayTopCard(animated: true)
     }
     
     func didTapProfile(profile: Profile) {
-        self.navigationController?.pushViewController(UserProfileViewController.instantiate(), animated: true)
+        self.navigationController?.pushViewController(UserProfileViewController.instantiate(profile: profile), animated: true)
     }
 }

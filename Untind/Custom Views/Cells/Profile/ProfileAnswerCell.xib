@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="231" id="KGk-i7-Jjw" customClass="ProfileAnswerCell" customModule="Untind" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="231"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="411" height="231"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7PR-cg-nbF">
+                        <rect key="frame" x="2" y="22" width="407" height="187"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1b-Rb-UK0">
+                                <rect key="frame" x="0.0" y="0.0" width="407" height="187"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSO-01-8Jn">
+                                        <rect key="frame" x="22" y="22" width="363" height="43.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Is it fair for a man, to pay for the woman at a restaurant, on their first date? Give reasons.">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ1-xH-yjG">
+                                        <rect key="frame" x="48" y="81.5" width="337" height="85.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">I dont think its fair for a man because we live in a society where both genders enjoy rights and privileges. By doing that, it hampers the balance and overall spirit of equality.</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.21568627450980393" green="0.28627450980392155" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Italic"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quote-icon" translatesAutoresizingMaskIntoConstraints="NO" id="rqf-kJ-bB9">
+                                        <rect key="frame" x="24" y="81.5" width="16" height="12"/>
+                                        <color key="tintColor" red="0.12941176469999999" green="0.81568627449999997" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="rqf-kJ-bB9" firstAttribute="top" secondItem="UZ1-xH-yjG" secondAttribute="top" id="3bn-rQ-Ap1"/>
+                                    <constraint firstItem="iSO-01-8Jn" firstAttribute="leading" secondItem="J1b-Rb-UK0" secondAttribute="leading" constant="22" id="5B5-a0-IuD"/>
+                                    <constraint firstAttribute="trailing" secondItem="iSO-01-8Jn" secondAttribute="trailing" constant="22" id="CzT-lT-ngk"/>
+                                    <constraint firstItem="iSO-01-8Jn" firstAttribute="top" secondItem="J1b-Rb-UK0" secondAttribute="top" constant="22" id="Hl1-Cr-XQd"/>
+                                    <constraint firstItem="UZ1-xH-yjG" firstAttribute="leading" secondItem="rqf-kJ-bB9" secondAttribute="trailing" constant="8" id="IsY-DG-tNq"/>
+                                    <constraint firstItem="UZ1-xH-yjG" firstAttribute="trailing" secondItem="iSO-01-8Jn" secondAttribute="trailing" id="Jnv-sA-nNl"/>
+                                    <constraint firstItem="UZ1-xH-yjG" firstAttribute="leading" secondItem="iSO-01-8Jn" secondAttribute="leading" constant="26" id="eNa-HF-iWK"/>
+                                    <constraint firstItem="UZ1-xH-yjG" firstAttribute="top" secondItem="iSO-01-8Jn" secondAttribute="bottom" constant="16" id="kbJ-fD-6OW"/>
+                                    <constraint firstAttribute="bottom" secondItem="UZ1-xH-yjG" secondAttribute="bottom" constant="20" id="wVq-u4-9JW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="J1b-Rb-UK0" firstAttribute="top" secondItem="7PR-cg-nbF" secondAttribute="top" id="JJy-JQ-lx6"/>
+                            <constraint firstAttribute="trailing" secondItem="J1b-Rb-UK0" secondAttribute="trailing" id="j4S-2A-p8G"/>
+                            <constraint firstAttribute="bottom" secondItem="J1b-Rb-UK0" secondAttribute="bottom" id="oXR-di-tXy"/>
+                            <constraint firstItem="J1b-Rb-UK0" firstAttribute="leading" secondItem="7PR-cg-nbF" secondAttribute="leading" id="wlW-oS-70g"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="7PR-cg-nbF" secondAttribute="bottom" constant="22" id="N4Q-uz-2iB"/>
+                    <constraint firstItem="7PR-cg-nbF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="Z9f-qh-kUd"/>
+                    <constraint firstItem="7PR-cg-nbF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="iGR-G0-kQH"/>
+                    <constraint firstAttribute="trailing" secondItem="7PR-cg-nbF" secondAttribute="trailing" constant="2" id="wFs-C9-IRf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="answerLabel" destination="UZ1-xH-yjG" id="ew3-Io-yo7"/>
+                <outlet property="cellContainerView" destination="7PR-cg-nbF" id="QN9-8j-wop"/>
+                <outlet property="questionLabel" destination="iSO-01-8Jn" id="4is-hh-6Cf"/>
+                <outlet property="quoteIcon" destination="rqf-kJ-bB9" id="YKG-Bm-Sbm"/>
+            </connections>
+            <point key="canvasLocation" x="197.82608695652175" y="191.18303571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="quote-icon" width="16" height="12"/>
+    </resources>
+</document>
