@@ -81,7 +81,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         
         
-        Answer.fetchAll(forUserId: profile?.uid ?? "") { (error, answers) in
+        Answer.fetchAll(forQuestionId: nil, userId: profile?.uid) { (error, answers) in
             if let err = error {
                 //Handle error
             } else {

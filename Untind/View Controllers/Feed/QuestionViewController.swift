@@ -31,7 +31,8 @@ class QuestionViewController: UIViewController {
         answersTableView.register(UINib(nibName: "AnswerTableViewCell", bundle: nil), forCellReuseIdentifier: "AnswerTableViewCell")
         answersTableView.delegate = self
         answersTableView.dataSource = self
-        answersTableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 50, right: 0)
+        self.automaticallyAdjustsScrollViewInsets = false
+        answersTableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 130, right: 0)
         
         if let question = question {
             questionLabel.text = question.questionText
@@ -152,6 +153,8 @@ extension QuestionViewController: AnswerCellDelegate {
     }
     
     func didVote(value: Vote, answer: Answer) {
-        
+        answer.vote(newVote: value) {
+            
+        }
     }
 }

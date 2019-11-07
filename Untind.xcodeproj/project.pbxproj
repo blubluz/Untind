@@ -52,6 +52,7 @@
 		0E5132B42347BC160035C959 /* AddQuestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5132B22347BC160035C959 /* AddQuestionCollectionViewCell.xib */; };
 		0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5EC81922F37669003C8C73 /* CALayerExtension.swift */; };
 		0E5EC81C22F38A9A003C8C73 /* ShadowUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */; };
+		0E60045423720F0400BCB4F4 /* VoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E60045323720F0400BCB4F4 /* VoteButton.swift */; };
 		0E61DD5222EF77F900C1C8C7 /* SwipeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD5122EF77F900C1C8C7 /* SwipeableView.swift */; };
 		0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD5422EF78B700C1C8C7 /* SwipeableViewDelegate.swift */; };
 		0E61DD5822EF78BF00C1C8C7 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61DD5722EF78BF00C1C8C7 /* SwipeDirection.swift */; };
@@ -170,6 +171,7 @@
 		0E5132B22347BC160035C959 /* AddQuestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddQuestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		0E5EC81922F37669003C8C73 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowUIView.swift; sourceTree = "<group>"; };
+		0E60045323720F0400BCB4F4 /* VoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteButton.swift; sourceTree = "<group>"; };
 		0E61DD5122EF77F900C1C8C7 /* SwipeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableView.swift; sourceTree = "<group>"; };
 		0E61DD5422EF78B700C1C8C7 /* SwipeableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableViewDelegate.swift; sourceTree = "<group>"; };
 		0E61DD5722EF78BF00C1C8C7 /* SwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 			children = (
 				0E47593122EDF37600B2DE82 /* UITabBarButton.swift */,
 				0ED28FFB2346796800267882 /* BiggerTapSizeButton.swift */,
+				0E60045323720F0400BCB4F4 /* VoteButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
+				0E60045423720F0400BCB4F4 /* VoteButton.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */,

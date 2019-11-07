@@ -17,7 +17,7 @@ class Answer: NSObject {
     var upvotes : Int
     var rating : CGFloat
     var question : Question?
-    var myVote : Vote = .none
+    private(set) var myVote : Vote = .novote
     
     
     convenience init(with document: DocumentSnapshot) {
@@ -64,14 +64,69 @@ class Answer: NSObject {
         return json
     }
     
-    func getVote() {
+    func getVote(completion: @escaping() -> Void) {
         guard let userId = UTUser.loggedUser?.userProfile?.uid else {
+            completion()
+            return
+        }
+        let db = Firestore.firestore()
+        db.collection("votes").document("\(userId)_\(self.id)").getDocument { (snapshot, error) in
+            if snapshot?.data() == nil {
+                self.myVote = .novote
+            } else {
+                self.myVote = Vote.from(json: snapshot?.data())
+            }
+            completion()
+        }
+    }
+    
+    func vote(newVote: Vote, completion: @escaping() -> Void) {
+        var votesDifference : Int = 1
+        
+        if myVote == newVote {
+            myVote = .novote
+            if newVote == .upvote {
+                votesDifference = -1
+            }
+        } else {
+            if myVote == newVote.opposite {
+                if myVote == .upvote {
+                    votesDifference = -2
+                } else {
+                    votesDifference = 2
+                }
+            } else {
+                if newVote == .downvote {
+                    votesDifference = -1
+                }
+            }
+            myVote = newVote
+        }
+        
+        let upvoteFieldValue = FieldValue.increment(Int64(votesDifference))
+        
+        upvotes = upvotes + votesDifference
+        
+        let db = Firestore.firestore()
+        guard let userId = UTUser.loggedUser?.userProfile?.uid else {
+            completion()
             return
         }
         
-        let db = Firestore.firestore()
-        db.collection("votes").document("\(userId)_\(self.id)").getDocument { (snapshot, error) in
-            
+        db.collection("votes").document("\(userId)_\(self.id)").setData([
+            "userId" : userId,
+            "answerId" : self.id,
+            "value" : myVote.rawValue,
+            "questionId" : self.question?.id ?? ""]) { (error) in
+                if let error = error {
+                    print("Error trying to vote: \(error.localizedDescription)")
+                }
+                
+                
+                let answerRef = db.collection("answers").document(self.id)
+                answerRef.updateData(["upvotes" : upvoteFieldValue])
+                
+                completion()
         }
     }
     
@@ -82,19 +137,45 @@ class Answer: NSObject {
           }
       }
     
-    static func fetchAll(forUserId userId: String, completion: @escaping (Error?, [Answer]?) -> Void) {
+    static func fetchAll(forQuestionId questionId: String?, userId: String?, completion: @escaping(Error?, [Answer]?) -> Void) {
         let db = Firestore.firestore()
         var answers = [Answer]()
+        let dispatchGroup = DispatchGroup()
+        var localError: Error?
         
-        db.collectionGroup("answers").whereField(FieldPath(["author","uid"]), isEqualTo: userId).getDocuments { (snapshot, error) in
+        
+        dispatchGroup.enter()
+        dispatchGroup.notify(queue: .main) {
+            completion(localError,answers)
+        }
+        
+        
+        var query = db.collectionGroup("answers")
+        if let questionId = questionId {
+            query = query.whereField(FieldPath(["question","id"]), isEqualTo: questionId)
+        } else
+        if let userId = userId {
+            query = query.whereField(FieldPath(["author","uid"]), isEqualTo: userId)
+        } else {
+            dispatchGroup.leave()
+            return
+        }
+        
+        query.getDocuments { (snapshot, error) in
             if let err = error {
                 print("Error getting answers: \(err)")
-                completion(error,nil)
+                localError = err
+                dispatchGroup.leave()
             } else {
                 snapshot?.documents.forEach {
-                    answers.append(Answer(with: $0))
+                    let answer = Answer(with: $0)
+                    dispatchGroup.enter()
+                    answer.getVote {
+                        dispatchGroup.leave()   
+                    }
+                    answers.append(answer)
                 }
-                completion(nil,answers)
+                dispatchGroup.leave()
             }
         }
     }

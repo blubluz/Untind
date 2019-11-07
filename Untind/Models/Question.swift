@@ -61,19 +61,12 @@ class Question: NSObject {
             self.answers = [Answer]()
         }
         if let id = id {
-            db.collection("answers").whereField(FieldPath(["question","id"]), isEqualTo: id).getDocuments { (snapshot: QuerySnapshot?, error) in
-                if let err = error {
-                    print("Error getting answers: \(err)")
+            Answer.fetchAll(forQuestionId: id, userId: nil) { (error, answers) in
+                if let error = error {
+                    print("Error getting answers: \(error)")
                     completion(error)
-                } else {
-                    snapshot!.documents.forEach {
-                        let answer = Answer(with: $0)
-                        if !(self.answers?.contains(where: { (localAnswer) -> Bool in
-                            localAnswer.id == answer.id
-                        }) ?? false) {
-                            self.answers?.append(Answer(with: $0))
-                        }
-                    }
+                } else if let localAnswers = answers {
+                    self.answers = localAnswers
                     completion(nil)
                 }
             }
@@ -96,11 +89,11 @@ class Question: NSObject {
         var localError: Error?
         let dispatchGroup = DispatchGroup()
         
+        dispatchGroup.enter()
         dispatchGroup.notify(queue: .main) {
             completion(localError,question)
         }
         
-        dispatchGroup.enter()
         db.collection("questions").document(id).getDocument { (snapshot, error) in
             if let err = error {
                 localError = err
