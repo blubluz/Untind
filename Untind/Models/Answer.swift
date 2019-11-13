@@ -113,20 +113,31 @@ class Answer: NSObject {
             return
         }
         
-        db.collection("votes").document("\(userId)_\(self.id)").setData([
-            "userId" : userId,
-            "answerId" : self.id,
-            "value" : myVote.rawValue,
-            "questionId" : self.question?.id ?? ""]) { (error) in
-                if let error = error {
-                    print("Error trying to vote: \(error.localizedDescription)")
-                }
-                
+        if myVote == .novote {
+            db.collection("votes").document("\(userId)_\(self.id)").delete { (error) in
                 
                 let answerRef = db.collection("answers").document(self.id)
                 answerRef.updateData(["upvotes" : upvoteFieldValue])
                 
                 completion()
+            }
+            return
+        } else {
+            db.collection("votes").document("\(userId)_\(self.id)").setData([
+                "userId" : userId,
+                "answerId" : self.id,
+                "value" : myVote.rawValue,
+                "questionId" : self.question?.id ?? ""]) { (error) in
+                    if let error = error {
+                        print("Error trying to vote: \(error.localizedDescription)")
+                    }
+                    
+                    
+                    let answerRef = db.collection("answers").document(self.id)
+                    answerRef.updateData(["upvotes" : upvoteFieldValue])
+                    
+                    completion()
+            }
         }
     }
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -102,6 +102,16 @@
                                             <constraint firstAttribute="height" constant="48" id="gnA-VD-eyv"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVS-VT-Bio">
+                                        <rect key="frame" x="306" y="67" width="85" height="27"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                                        <state key="normal" title="Send message">
+                                            <color key="titleColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendMessageTapped:" destination="kwP-xZ-I8K" eventType="touchUpInside" id="pUh-Zg-yjG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -111,6 +121,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Ooa-ZZ-343" secondAttribute="bottom" constant="15" id="FAR-bQ-waX"/>
                                     <constraint firstAttribute="trailing" secondItem="Ooa-ZZ-343" secondAttribute="trailing" constant="20" id="FYE-tI-kiZ"/>
                                     <constraint firstItem="gv0-tl-ChD" firstAttribute="top" secondItem="KIa-fp-gYj" secondAttribute="top" constant="27" id="J3p-XZ-h0L"/>
+                                    <constraint firstItem="CVS-VT-Bio" firstAttribute="top" secondItem="gv0-tl-ChD" secondAttribute="bottom" constant="8" id="JdW-em-W2Z"/>
                                     <constraint firstItem="mwR-vQ-mtU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KIa-fp-gYj" secondAttribute="top" constant="20" id="N2U-rL-Pgu"/>
                                     <constraint firstItem="Ooa-ZZ-343" firstAttribute="top" secondItem="ISJ-t4-HoL" secondAttribute="bottom" priority="800" constant="20" id="PZq-Rv-FpJ"/>
                                     <constraint firstAttribute="trailing" secondItem="ISJ-t4-HoL" secondAttribute="trailing" constant="15" id="Qir-Vo-sMb"/>
@@ -118,6 +129,7 @@
                                     <constraint firstItem="ISJ-t4-HoL" firstAttribute="top" secondItem="mwR-vQ-mtU" secondAttribute="bottom" constant="10" id="cMy-Ot-aCk"/>
                                     <constraint firstItem="Ooa-ZZ-343" firstAttribute="leading" secondItem="KIa-fp-gYj" secondAttribute="leading" constant="20" id="cvB-k6-MtE"/>
                                     <constraint firstItem="Qvk-Gs-rNN" firstAttribute="top" secondItem="KIa-fp-gYj" secondAttribute="top" constant="29" id="dAh-bl-QYN"/>
+                                    <constraint firstAttribute="trailing" secondItem="CVS-VT-Bio" secondAttribute="trailing" constant="23" id="iuf-IN-1Hg"/>
                                     <constraint firstAttribute="height" constant="314" id="kDm-bb-IYF"/>
                                     <constraint firstItem="mwR-vQ-mtU" firstAttribute="centerY" secondItem="KIa-fp-gYj" secondAttribute="centerY" priority="700" constant="-40" id="och-H5-Kt3"/>
                                     <constraint firstItem="mwR-vQ-mtU" firstAttribute="centerX" secondItem="KIa-fp-gYj" secondAttribute="centerX" id="r5x-8g-XLG"/>

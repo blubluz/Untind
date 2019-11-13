@@ -212,6 +212,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     //MARK: - Button actions
+    @IBAction func sendMessageTapped(_ sender: Any) {
+        self.navigationController?.pushViewController(ChatViewController.instantiate(), animated: true)
+    }
+    
     @IBAction func myQuestionsTapped(_ sender: Any) {
         if collectionView.contentOffset.x != 0 {
             collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)

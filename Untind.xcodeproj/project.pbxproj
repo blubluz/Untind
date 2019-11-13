@@ -16,6 +16,7 @@
 		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
 		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
 		0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0E045C2319C47200979E03 /* UTPageControl.swift */; };
+		0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E14BF3E237C922400E25880 /* ChatViewController.swift */; };
 		0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38522EC8DF500390BA5 /* AppDelegate.swift */; };
 		0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */; };
 		0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E17A38922EC8DF500390BA5 /* Main.storyboard */; };
@@ -130,6 +131,7 @@
 		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
 		0E0E045C2319C47200979E03 /* UTPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTPageControl.swift; sourceTree = "<group>"; };
+		0E14BF3E237C922400E25880 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0E17A38222EC8DF500390BA5 /* Untind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E17A38522EC8DF500390BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +274,14 @@
 			path = Popups;
 			sourceTree = "<group>";
 		};
+		0E14BF3D237C920E00E25880 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				0E14BF3E237C922400E25880 /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		0E17A37922EC8DF500390BA5 = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +345,7 @@
 		0E17A3B322EC8E3400390BA5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0E14BF3D237C920E00E25880 /* Chat */,
 				0E060C35235667EC00E00251 /* Pop-ups */,
 				0E9CD42423511264008D6E0F /* Profile */,
 				0E946F9123353FA1004D6310 /* Feed */,
@@ -909,6 +920,7 @@
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,
 				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
+				0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */,
 				0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */,
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,
