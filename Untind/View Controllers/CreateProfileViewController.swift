@@ -198,8 +198,8 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
                     self?.currentUser?.saveUserProfile(locally: true)
                     
                     //Go to tab bar controller
-                    let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-                    Globals.tabBarController = tabBarController
+                    let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarNavigationController") as! UINavigationController
+                    Globals.mainNavigationController = tabBarController
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.window?.rootViewController = tabBarController
                     

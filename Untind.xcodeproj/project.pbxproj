@@ -32,6 +32,8 @@
 		0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */; };
 		0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */; };
 		0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */; };
+		0E22593F238332EC009E6C24 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22593E238332EC009E6C24 /* Message.swift */; };
+		0E22594223833710009E6C24 /* VerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */; };
 		0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */; };
 		0E416C10231993B700EA3CA7 /* UTLoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */; };
 		0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */; };
@@ -152,6 +154,8 @@
 		0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuestionsContainerCell.swift; sourceTree = "<group>"; };
 		0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsContainerCell.xib; sourceTree = "<group>"; };
+		0E22593E238332EC009E6C24 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextView.swift; sourceTree = "<group>"; };
 		0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTLoginTextView.swift; sourceTree = "<group>"; };
 		0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -423,9 +427,18 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		0E22594023833703009E6C24 /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */,
+			);
+			path = TextViews;
+			sourceTree = "<group>";
+		};
 		0E47593022EDF32700B2DE82 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E22594023833703009E6C24 /* TextViews */,
 				0E9CD420235101E2008D6E0F /* Segmented Controls */,
 				0ED28FFA234675FB00267882 /* Labels */,
 				0ED28FF9234675BB00267882 /* Cards */,
@@ -591,6 +604,7 @@
 				0EFA552B2303080A0000E6F6 /* Question.swift */,
 				0EFA552D2303081A0000E6F6 /* UTUser.swift */,
 				0EFA552F230308260000E6F6 /* Answer.swift */,
+				0E22593E238332EC009E6C24 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -860,6 +874,7 @@
 			files = (
 				0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */,
 				0E47593822EE1AE500B2DE82 /* UIViewExtension.swift in Sources */,
+				0E22594223833710009E6C24 /* VerticallyCenteredTextView.swift in Sources */,
 				0E416C10231993B700EA3CA7 /* UTLoginTextView.swift in Sources */,
 				0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */,
 				0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */,
@@ -921,6 +936,7 @@
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,
 				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
 				0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */,
+				0E22593F238332EC009E6C24 /* Message.swift in Sources */,
 				0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */,
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,

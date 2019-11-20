@@ -99,8 +99,8 @@ class OnboardingViewController: UIViewController {
             if UTUser.loggedUser?.userProfile != nil {
                 UTUser.loggedUser?.getUserProfile()
                 //Go to tab bar controller
-                let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-                Globals.tabBarController = tabBarController
+                let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarNavigationController") as! UINavigationController
+                Globals.mainNavigationController = tabBarController
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.window?.rootViewController = tabBarController
             } else {
@@ -111,8 +111,8 @@ class OnboardingViewController: UIViewController {
                     } else {
                         if success == true {
                             //Go to tab bar controller
-                            let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-                            Globals.tabBarController = tabBarController
+                            let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarNavigationController") as! UINavigationController
+                            Globals.mainNavigationController = tabBarController
                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             appDelegate.window?.rootViewController = tabBarController
                         } else {
@@ -183,8 +183,8 @@ class OnboardingViewController: UIViewController {
                                 print("Go to feed")
                                 
                                 //Go to tab bar controller
-                                let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-                                Globals.tabBarController = tabBarController
+                                let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarNavigationController") as! UINavigationController
+                                Globals.mainNavigationController = tabBarController
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 appDelegate.window?.rootViewController = tabBarController
                                 

@@ -68,8 +68,8 @@ class SignInViewController: UIViewController {
                         UTUser.loggedUser?.saveUserProfile(locally: true)
                         print("Go to feed")
                         //Go to tab bar controller
-                        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-                        Globals.tabBarController = tabBarController
+                        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarNavigationController") as! UINavigationController
+                        Globals.mainNavigationController = tabBarController
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         appDelegate.window?.rootViewController = tabBarController
                         

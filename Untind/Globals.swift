@@ -10,5 +10,9 @@ import Foundation
 import UIKit
 
 struct Globals {
-    static var tabBarController : TabBarViewController?
+    static var tabBarController : TabBarViewController? {
+        return mainNavigationController?.viewControllers.first as? TabBarViewController
+    }
+    
+    static var mainNavigationController : UINavigationController?
 }

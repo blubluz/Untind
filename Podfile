@@ -13,7 +13,6 @@ target 'Untind' do
   pod 'SVProgressHUD'
   pod 'IHKeyboardAvoiding'
   pod 'FBSDKLoginKit'
-  
 
   # Pods for Untind
 
