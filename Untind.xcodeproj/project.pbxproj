@@ -16,6 +16,8 @@
 		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
 		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
 		0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0E045C2319C47200979E03 /* UTPageControl.swift */; };
+		0E10DACF23873050001F89CD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10DACD23873050001F89CD /* MessageCell.swift */; };
+		0E10DAD023873050001F89CD /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E10DACE23873050001F89CD /* MessageCell.xib */; };
 		0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E14BF3E237C922400E25880 /* ChatViewController.swift */; };
 		0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38522EC8DF500390BA5 /* AppDelegate.swift */; };
 		0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */; };
@@ -133,6 +135,8 @@
 		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
 		0E0E045C2319C47200979E03 /* UTPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTPageControl.swift; sourceTree = "<group>"; };
+		0E10DACD23873050001F89CD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		0E10DACE23873050001F89CD /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		0E14BF3E237C922400E25880 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0E17A38222EC8DF500390BA5 /* Untind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E17A38522EC8DF500390BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 		0E1C8B3B22F9FD1F0011A5D7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0E33C8092385BF93006F9AC4 /* Messages */,
 				0E060C382356687A00E00251 /* Popups */,
 				0E5132B02347BBCF0035C959 /* Profile */,
 				0E5132AF2347BBC70035C959 /* Answers */,
@@ -433,6 +438,15 @@
 				0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */,
 			);
 			path = TextViews;
+			sourceTree = "<group>";
+		};
+		0E33C8092385BF93006F9AC4 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				0E10DACD23873050001F89CD /* MessageCell.swift */,
+				0E10DACE23873050001F89CD /* MessageCell.xib */,
+			);
+			path = Messages;
 			sourceTree = "<group>";
 		};
 		0E47593022EDF32700B2DE82 /* Custom Views */ = {
@@ -762,6 +776,7 @@
 				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,
+				0E10DAD023873050001F89CD /* MessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,6 +891,7 @@
 				0E47593822EE1AE500B2DE82 /* UIViewExtension.swift in Sources */,
 				0E22594223833710009E6C24 /* VerticallyCenteredTextView.swift in Sources */,
 				0E416C10231993B700EA3CA7 /* UTLoginTextView.swift in Sources */,
+				0E10DACF23873050001F89CD /* MessageCell.swift in Sources */,
 				0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */,
 				0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */,
 				0E61DD5222EF77F900C1C8C7 /* SwipeableView.swift in Sources */,

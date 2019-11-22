@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController, UITextViewDelegate {
-    
+class ChatViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var bottomChatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var messageTextViewBackground: UIView!
@@ -17,9 +16,10 @@ class ChatViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var bottomInputView: UIView!
     @IBOutlet weak var placeHolderLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var messagesCollectionView: UICollectionView!
     
     
-    var messageList: [Message] = []
+    var messageList: [String] = []
     
     static func instantiate() -> ChatViewController {
         let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
@@ -38,11 +38,25 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         messageTextViewBackground.layer.borderColor = UIColor.flatOrange.cgColor
         messageTextViewBackground.backgroundColor = UIColor(white: 1, alpha: 0.5)
         
+        messagesCollectionView.register(UINib(nibName: "MessageCell", bundle: nil), forCellWithReuseIdentifier: "MessageCell")
+        if let flowLayout = messagesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: self.view.bounds.size.width, height: 50)
+        }
+        
+        messagesCollectionView.delegate = self
+        messagesCollectionView.dataSource = self
         
         messageTextView.delegate = self
 
     }
     
+    
+    @IBAction func sendButtonTapped(_ sender: Any) {
+        self.messageTextView.resignFirstResponder()
+        messageList.append(self.messageTextView.text)
+        self.messagesCollectionView.insertItems(at: [IndexPath(item: messageList.count-1, section: 0)])
+        self.messageTextView.text = ""
+    }
     
     @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -80,5 +94,29 @@ class ChatViewController: UIViewController, UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return true
     }
-
+    
+    // MARK: - CollectionViewDelegate
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messageList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
+        cell.configureWithMessage(message: messageList[indexPath.row])
+        
+        if indexPath.row % 2 == 0 {
+            cell.sender = .other
+        } else {
+            cell.sender = .me
+        }
+        
+        return cell
+        
+    }
+    
 }

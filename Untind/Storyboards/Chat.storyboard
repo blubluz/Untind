@@ -62,6 +62,17 @@
                                     <constraint firstAttribute="height" constant="40" id="oi5-7R-gJb"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7kF-KH-tx1">
+                                <rect key="frame" x="0.0" y="134" width="414" height="681"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NDa-QD-caI">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXk-o3-M2W">
                                 <rect key="frame" x="0.0" y="815" width="414" height="47"/>
                                 <subviews>
@@ -90,6 +101,9 @@
                                                 <state key="normal" title="Send">
                                                     <color key="titleColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="sendButtonTapped:" destination="oe2-8f-9dX" eventType="touchUpInside" id="uve-wJ-6BB"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -118,10 +132,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="SdE-Um-ryA" firstAttribute="top" secondItem="2Sw-nP-RNl" secondAttribute="top" id="3rw-P8-vfg"/>
+                            <constraint firstItem="7kF-KH-tx1" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="7I1-s0-dj7"/>
                             <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="SdE-Um-ryA" secondAttribute="trailing" id="9lS-YK-dHU"/>
                             <constraint firstItem="UXk-o3-M2W" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="DjR-DR-MXs"/>
+                            <constraint firstItem="7kF-KH-tx1" firstAttribute="top" secondItem="qvd-R4-JKX" secondAttribute="bottom" id="GYH-Hu-9Po"/>
                             <constraint firstItem="qvd-R4-JKX" firstAttribute="top" secondItem="2Sw-nP-RNl" secondAttribute="top" id="JhH-D5-mlU"/>
+                            <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="7kF-KH-tx1" secondAttribute="trailing" id="MaN-Kg-4ha"/>
                             <constraint firstAttribute="bottom" secondItem="eAG-q0-haj" secondAttribute="bottom" id="Osd-FS-nBb"/>
+                            <constraint firstItem="UXk-o3-M2W" firstAttribute="top" secondItem="7kF-KH-tx1" secondAttribute="bottom" id="YQP-to-Gth"/>
                             <constraint firstItem="SdE-Um-ryA" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="bRv-nH-Z9V"/>
                             <constraint firstItem="eAG-q0-haj" firstAttribute="leading" secondItem="2Sw-nP-RNl" secondAttribute="leading" id="en4-mf-Orm"/>
                             <constraint firstAttribute="bottom" secondItem="SdE-Um-ryA" secondAttribute="bottom" id="f6l-bF-aZC"/>
@@ -138,6 +156,7 @@
                         <outlet property="bottomInputViewHeight" destination="wbS-0f-XNU" id="h95-Ec-MTH"/>
                         <outlet property="messageTextView" destination="wiE-2Z-Z2V" id="Z4X-KD-d10"/>
                         <outlet property="messageTextViewBackground" destination="coP-bU-sFr" id="BSa-hM-pZb"/>
+                        <outlet property="messagesCollectionView" destination="7kF-KH-tx1" id="OjU-Gp-pLC"/>
                         <outlet property="placeHolderLabel" destination="rld-Yk-2yY" id="bJ0-5U-g0t"/>
                         <outlet property="sendButton" destination="Cn4-zf-3bp" id="ozQ-Bq-l61"/>
                     </connections>

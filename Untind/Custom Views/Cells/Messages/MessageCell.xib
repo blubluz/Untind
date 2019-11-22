@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MessageCell" customModule="Untind" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLU-rw-cR5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V06-6A-F3q" userLabel="messageView">
+                                <rect key="frame" x="20" y="8" width="374" height="57"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnv-8P-4C7">
+                                        <rect key="frame" x="18" y="8" width="338" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.81568627449999997" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="gnv-8P-4C7" secondAttribute="bottom" constant="8" id="EyE-G0-V2K"/>
+                                    <constraint firstItem="gnv-8P-4C7" firstAttribute="top" secondItem="V06-6A-F3q" secondAttribute="top" constant="8" id="TxI-xA-gWs"/>
+                                    <constraint firstItem="gnv-8P-4C7" firstAttribute="leading" secondItem="V06-6A-F3q" secondAttribute="leading" constant="18" id="rwP-kD-lKu"/>
+                                    <constraint firstAttribute="trailing" secondItem="gnv-8P-4C7" secondAttribute="trailing" constant="18" id="vcC-Cn-hcn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="V06-6A-F3q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MLU-rw-cR5" secondAttribute="leading" constant="20" id="6OX-Ec-XbF"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="V06-6A-F3q" secondAttribute="trailing" constant="20" id="JUh-X9-l5R"/>
+                            <constraint firstAttribute="trailing" secondItem="V06-6A-F3q" secondAttribute="trailing" constant="20" id="Nln-Bx-kfb"/>
+                            <constraint firstAttribute="bottom" secondItem="V06-6A-F3q" secondAttribute="bottom" constant="8" id="SRP-Dp-XKt"/>
+                            <constraint firstItem="V06-6A-F3q" firstAttribute="leading" secondItem="MLU-rw-cR5" secondAttribute="leading" constant="20" id="cGR-Im-MpI"/>
+                            <constraint firstItem="V06-6A-F3q" firstAttribute="top" secondItem="MLU-rw-cR5" secondAttribute="top" constant="8" id="x0d-tv-o2W"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="MLU-rw-cR5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="STD-bn-yyc"/>
+                <constraint firstAttribute="trailing" secondItem="MLU-rw-cR5" secondAttribute="trailing" id="iWg-fa-zbm"/>
+                <constraint firstAttribute="bottom" secondItem="MLU-rw-cR5" secondAttribute="bottom" id="mbh-lH-YTq"/>
+                <constraint firstItem="MLU-rw-cR5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mhz-Il-Tm5"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="414" height="73"/>
+            <connections>
+                <outlet property="cellLabel" destination="gnv-8P-4C7" id="dka-7Z-cay"/>
+                <outlet property="messageView" destination="V06-6A-F3q" id="Tqp-wv-8AI"/>
+                <outlet property="messageViewLeadingConstraint" destination="cGR-Im-MpI" id="Rja-qI-cdb"/>
+                <outlet property="messageViewTrailingConstraint" destination="Nln-Bx-kfb" id="dVA-Q9-7zs"/>
+                <outlet property="msgViewLeadingOptionalConstraint" destination="6OX-Ec-XbF" id="P7A-Kn-Zcq"/>
+                <outlet property="msgViewTrailingOptionalConstraint" destination="JUh-X9-l5R" id="KmQ-2q-LmA"/>
+            </connections>
+            <point key="canvasLocation" x="384" y="146"/>
+        </collectionViewCell>
+    </objects>
+</document>
