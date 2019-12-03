@@ -45,6 +45,7 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         messagesCollectionView.dataSource = self
         
         messageTextView.delegate = self
+        messagesCollectionView.contentOffset = CGPoint(x: 0, y: -55)
         
 
         //Looks for single or multiple taps.
@@ -79,7 +80,7 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         self.messagesCollectionView.insertItems(at: [IndexPath(item: messageList.count-1, section: 0)])
         self.messageTextView.text = ""
         self.messagesCollectionView.scrollToItem(at: IndexPath(item: messageList.count-1, section: 0), at: .top, animated: true)
-        messageTextView.resignFirstResponder()
+        bottomInputViewHeight.constant = min(max(30,messageTextView.contentSize.height),120)
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -93,18 +94,19 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            messageInputViewBottomConstraint.constant = keyboardHeight + 20
             
+            messageInputViewBottomConstraint.constant = keyboardHeight - 10
             UIView.animate(withDuration: 0, animations: {
                 self.view.layoutIfNeeded()
+                self.messagesCollectionView.contentOffset = CGPoint(x: 0, y: keyboardHeight )
             }) { (completed) in
-                self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.messageList.count-1, section: 0), at: .bottom, animated: true)
             }
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         messageInputViewBottomConstraint.constant = 0
+        messagesCollectionView.contentOffset = CGPoint(x: 0, y: -55)
         
         UIView.animate(withDuration: 0, animations: {
             self.view.layoutIfNeeded()
@@ -115,6 +117,9 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     
     func textViewDidChange(_ textView: UITextView) {
         resetMessageTextView()
+        bottomInputViewHeight.constant = min(max(30,textView.contentSize.height),120)
+        
+      
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

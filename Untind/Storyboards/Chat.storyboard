@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,7 +63,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7kF-KH-tx1">
-                                <rect key="frame" x="0.0" y="134" width="414" height="681"/>
+                                <rect key="frame" x="0.0" y="134" width="414" height="728"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="NDa-QD-caI">
                                     <size key="itemSize" width="50" height="50"/>
@@ -133,13 +133,13 @@
                         <constraints>
                             <constraint firstItem="SdE-Um-ryA" firstAttribute="top" secondItem="2Sw-nP-RNl" secondAttribute="top" id="3rw-P8-vfg"/>
                             <constraint firstItem="7kF-KH-tx1" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="7I1-s0-dj7"/>
+                            <constraint firstItem="6Nk-fx-HnF" firstAttribute="bottom" secondItem="7kF-KH-tx1" secondAttribute="bottom" id="8JR-Uq-9oD"/>
                             <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="SdE-Um-ryA" secondAttribute="trailing" id="9lS-YK-dHU"/>
                             <constraint firstItem="UXk-o3-M2W" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="DjR-DR-MXs"/>
                             <constraint firstItem="7kF-KH-tx1" firstAttribute="top" secondItem="qvd-R4-JKX" secondAttribute="bottom" id="GYH-Hu-9Po"/>
                             <constraint firstItem="qvd-R4-JKX" firstAttribute="top" secondItem="2Sw-nP-RNl" secondAttribute="top" id="JhH-D5-mlU"/>
                             <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="7kF-KH-tx1" secondAttribute="trailing" id="MaN-Kg-4ha"/>
                             <constraint firstAttribute="bottom" secondItem="eAG-q0-haj" secondAttribute="bottom" id="Osd-FS-nBb"/>
-                            <constraint firstItem="UXk-o3-M2W" firstAttribute="top" secondItem="7kF-KH-tx1" secondAttribute="bottom" id="YQP-to-Gth"/>
                             <constraint firstItem="SdE-Um-ryA" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="bRv-nH-Z9V"/>
                             <constraint firstItem="eAG-q0-haj" firstAttribute="leading" secondItem="2Sw-nP-RNl" secondAttribute="leading" id="en4-mf-Orm"/>
                             <constraint firstAttribute="bottom" secondItem="SdE-Um-ryA" secondAttribute="bottom" id="f6l-bF-aZC"/>
