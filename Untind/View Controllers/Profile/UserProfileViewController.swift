@@ -21,6 +21,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var myQuestionsButton: UIButton!
     @IBOutlet weak var myAnswersButton: UIButton!
+    @IBOutlet weak var interactionButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -89,6 +90,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 self.collectionView.reloadData()
             }
         }
+        
+//        profile
     }
     
     //MARK: - TableView Delegate & DataSource

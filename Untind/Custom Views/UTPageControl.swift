@@ -105,7 +105,7 @@ class UTPageControl: UIView {
         self.backgroundColor = UIColor.clear
         if pageControlWidthConstraint == nil {
             pageControlWidthConstraint = widthAnchor.constraint(equalToConstant: 2 * self.unselectedDotWidth * CGFloat(max(0,numberOfPages-1)) + selectedDotWidth)
-            self.activateConstraints(constraints: [self.heightAnchor.constraint(equalToConstant: 6),
+            self.activateConstraints([self.heightAnchor.constraint(equalToConstant: 6),
                                                    pageControlWidthConstraint!])
         }
         
@@ -121,7 +121,7 @@ class UTPageControl: UIView {
             dots.append(dot)
             
             if i == 0{
-                self.activateConstraints(constraints: [
+                self.activateConstraints( [
                     dot.centerXAnchor.constraint(equalTo: centerXAnchor, constant: numberOfPages % 2 == 0 ? 3 : 0),
                     dot.centerYAnchor.constraint(equalTo: centerYAnchor),
                     widthConstraint,
@@ -138,7 +138,7 @@ class UTPageControl: UIView {
                         constraint = dot.trailingAnchor.constraint(equalTo: dots[i-2].leadingAnchor, constant: -dotSpacing)
                     }
                 }
-                self.activateConstraints(constraints: [constraint!,
+                self.activateConstraints( [constraint!,
                     dot.centerYAnchor.constraint(equalTo: centerYAnchor),
                     widthConstraint,
                     dot.heightAnchor.constraint(equalToConstant: 6)])

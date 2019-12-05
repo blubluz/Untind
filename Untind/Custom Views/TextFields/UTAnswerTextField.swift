@@ -88,7 +88,7 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
         addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         
-        self.activateConstraints(constraints: [
+        self.activateConstraints( [
             textField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             textField.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
@@ -111,7 +111,7 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
         quoteMark.tintColor = themeColor
         quoteMark.translatesAutoresizingMaskIntoConstraints = false
         addSubview(quoteMark)
-        self.activateConstraints(constraints: [
+        self.activateConstraints([
             quoteMark.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
             quoteMark.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)])
         
@@ -119,7 +119,7 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
         questionMark.tintColor = themeColor
         questionMark.translatesAutoresizingMaskIntoConstraints = false
         addSubview(questionMark)
-        self.activateConstraints(constraints: [
+        self.activateConstraints( [
             questionMark.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             questionMark.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15)])
         

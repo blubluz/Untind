@@ -86,12 +86,8 @@ extension UIView {
             ])
     }
     
-    internal func activateConstraints(constraints: [NSLayoutConstraint]) {
+    func activateConstraints(_ constraints: [NSLayoutConstraint]) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints(constraints)
-        for constraint in self.constraints {
-            constraint.isActive = true
-        }
+        NSLayoutConstraint.activate(constraints)
     }
-
 }

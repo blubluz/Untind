@@ -70,7 +70,7 @@ class UTLoginTextView: UIView {
         title.textColor = UIColor(red: 60, green: 79, blue: 92, alpha: 1)
         title.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(title)
-        self.activateConstraints(constraints: [
+        self.activateConstraints( [
             title.topAnchor.constraint(equalTo: self.topAnchor, constant: 3),
             title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3),
             title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 3),
@@ -81,7 +81,7 @@ class UTLoginTextView: UIView {
         textField = UITextField(frame: CGRect.zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(textField)
-        self.activateConstraints(constraints: [
+        self.activateConstraints( [
             textField.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 3),
             textField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 3)])
@@ -93,7 +93,7 @@ class UTLoginTextView: UIView {
         underline = UIView(frame: .zero)
         underline.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(underline)
-        self.activateConstraints(constraints: [
+        self.activateConstraints( [
             underline.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 1),
             underline.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 3),
             underline.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 3),

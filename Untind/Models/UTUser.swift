@@ -93,6 +93,16 @@ struct UserSettings {
 }
 
 struct Profile {
+    enum RelationshipStatus {
+        case canAskQuestion
+        case waitingQuestionAnswer
+        case canInviteOnADate
+        case waitingDateAnswer
+        case dateFailed
+        case chatStarted
+        case waitingDateResult
+    }
+    
     static let defaultUsername = "NoUsername"
     static let defaultAvatar = "avatar-1"
     static let defaultUuid = "NoUUID"
@@ -133,6 +143,11 @@ struct Profile {
                  "uid" : uid
         ]
     }
+    
+//    func getRelationshipStatus(completion: @escaping (Error?) -> Void) -> RelationshipStatus {
+//        let db = Firestore.firestore()
+//        
+//    }
 }
 
 enum Gender : String, Codable{

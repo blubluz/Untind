@@ -283,7 +283,7 @@
                                 <rect key="frame" x="20" y="224" width="374" height="448"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="vqa-Wa-0dR">
-                                        <rect key="frame" x="134" y="0.0" width="240" height="236"/>
+                                        <rect key="frame" x="254" y="0.0" width="120" height="118"/>
                                         <color key="tintColor" red="0.56470588235294117" green="0.76470588235294112" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8y-SS-iVi">
@@ -326,7 +326,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jxw-Hh-Fhp">
-                                        <rect key="frame" x="202" y="292" width="142" height="142"/>
+                                        <rect key="frame" x="273" y="292" width="71" height="71"/>
                                         <state key="normal" image="confirm-button-teal"/>
                                         <connections>
                                             <action selector="confirmButtonTapped:" destination="UVk-iS-tcD" eventType="touchUpInside" id="yeW-Dp-VAe"/>
@@ -576,18 +576,18 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qq2-wM-phz">
-                                                <rect key="frame" x="276" y="7" width="72" height="72"/>
+                                                <rect key="frame" x="312" y="25" width="36" height="36"/>
                                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zei-Bd-w8I">
-                                                <rect key="frame" x="273" y="4" width="72" height="72"/>
+                                                <rect key="frame" x="309" y="22" width="36" height="36"/>
                                                 <state key="normal" image="add-button-icon"/>
                                                 <connections>
                                                     <action selector="filterButtonTapped:" destination="t9P-4u-8VJ" eventType="touchUpInside" id="jU8-Qs-kqV"/>
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kB-UV-GNT">
-                                                <rect key="frame" x="41" y="16" width="48" height="48"/>
+                                                <rect key="frame" x="41" y="28" width="24" height="24"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="close-button"/>
                                                 <connections>
@@ -595,7 +595,7 @@
                                                 </connections>
                                             </button>
                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow-small" translatesAutoresizingMaskIntoConstraints="NO" id="KXN-OU-bb1">
-                                                <rect key="frame" x="300" y="84" width="18" height="12"/>
+                                                <rect key="frame" x="322.5" y="66" width="9" height="6"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1010,7 +1010,7 @@
                                 <rect key="frame" x="20" y="224" width="374" height="448"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-icon" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-Ae-SAG">
-                                        <rect key="frame" x="134" y="0.0" width="240" height="236"/>
+                                        <rect key="frame" x="254" y="0.0" width="120" height="118"/>
                                         <color key="tintColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -1059,7 +1059,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxN-mw-vNY">
-                                        <rect key="frame" x="182" y="343" width="142" height="142"/>
+                                        <rect key="frame" x="253" y="343" width="71" height="71"/>
                                         <state key="normal" image="confirm-button-orange"/>
                                         <connections>
                                             <action selector="confirmButtonTapped:" destination="0e8-eH-k0W" eventType="touchUpInside" id="PpF-dG-ZA2"/>

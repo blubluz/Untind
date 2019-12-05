@@ -146,6 +146,8 @@ class Answer: NSObject {
           db.collection("answers").addDocument(data: jsonValue()) { (error) in
               completion(error)
           }
+        
+        db.collection("dates").document("\(author.uuid)_\(UTUser.loggedUser!.userProfile?.uid)")
       }
     
     static func fetchAll(forQuestionId questionId: String?, userId: String?, completion: @escaping(Error?, [Answer]?) -> Void) {

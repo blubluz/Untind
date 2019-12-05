@@ -13,11 +13,15 @@
 		0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */; };
 		0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */; };
 		0E068A4C22FB558F00A9BDE9 /* MyAnswersContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */; };
+		0E079B552396E4E4004B1D7B /* ChatInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E079B542396E4E4004B1D7B /* ChatInputAccesoryView.swift */; };
 		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
 		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
 		0E0E045D2319C47200979E03 /* UTPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0E045C2319C47200979E03 /* UTPageControl.swift */; };
 		0E10DACF23873050001F89CD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10DACD23873050001F89CD /* MessageCell.swift */; };
+		0E1291982399AF86001D1470 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1291972399AF86001D1470 /* StringExtension.swift */; };
+		0E12919A2399B4E2001D1470 /* CharacterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1291992399B4E2001D1470 /* CharacterExtension.swift */; };
 		0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E14BF3E237C922400E25880 /* ChatViewController.swift */; };
+		0E15661F23982C26004A1FD5 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15661E23982C26004A1FD5 /* UIFontExtension.swift */; };
 		0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38522EC8DF500390BA5 /* AppDelegate.swift */; };
 		0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */; };
 		0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E17A38922EC8DF500390BA5 /* Main.storyboard */; };
@@ -131,11 +135,15 @@
 		0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersTableViewCell.xib; sourceTree = "<group>"; };
 		0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersContainerCell.swift; sourceTree = "<group>"; };
 		0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersContainerCell.xib; sourceTree = "<group>"; };
+		0E079B542396E4E4004B1D7B /* ChatInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatInputAccesoryView.swift; path = Untind/Extensions/ChatInputAccesoryView.swift; sourceTree = SOURCE_ROOT; };
 		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
 		0E0E045C2319C47200979E03 /* UTPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTPageControl.swift; sourceTree = "<group>"; };
 		0E10DACD23873050001F89CD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		0E1291972399AF86001D1470 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		0E1291992399B4E2001D1470 /* CharacterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtension.swift; sourceTree = "<group>"; };
 		0E14BF3E237C922400E25880 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		0E15661E23982C26004A1FD5 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		0E17A38222EC8DF500390BA5 /* Untind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E17A38522EC8DF500390BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E17A38722EC8DF500390BA5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -406,6 +414,9 @@
 				0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */,
 				0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */,
 				F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */,
+				0E15661E23982C26004A1FD5 /* UIFontExtension.swift */,
+				0E1291972399AF86001D1470 /* StringExtension.swift */,
+				0E1291992399B4E2001D1470 /* CharacterExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -461,6 +472,7 @@
 				0E47593522EE18E100B2DE82 /* TabBarCircleView.swift */,
 				0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */,
 				0E0E045C2319C47200979E03 /* UTPageControl.swift */,
+				0E079B542396E4E4004B1D7B /* ChatInputAccesoryView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -893,10 +905,12 @@
 				0E61DD5222EF77F900C1C8C7 /* SwipeableView.swift in Sources */,
 				0EFA5530230308260000E6F6 /* Answer.swift in Sources */,
 				0E8992402316F3CA00644E1D /* SwipeableCardViewCard.swift in Sources */,
+				0E079B552396E4E4004B1D7B /* ChatInputAccesoryView.swift in Sources */,
 				0EFA552C2303080A0000E6F6 /* Question.swift in Sources */,
 				0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */,
 				0E17A3BC22EC9E8700390BA5 /* GOTHICB.TTF in Sources */,
 				0E9CD42623511277008D6E0F /* UserProfileViewController.swift in Sources */,
+				0E12919A2399B4E2001D1470 /* CharacterExtension.swift in Sources */,
 				0E060C37235667FE00E00251 /* ReportUserPopup.swift in Sources */,
 				0E61DD6022EF7E3200C1C8C7 /* SwipeableCardView.swift in Sources */,
 				F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */,
@@ -917,10 +931,12 @@
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
+				0E15661F23982C26004A1FD5 /* UIFontExtension.swift in Sources */,
 				0E416C142319AEF600EA3CA7 /* SignUpViewController.swift in Sources */,
 				0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */,
 				0ED706FA231C5EBA0039A8DE /* CreateProfileSecondCell.swift in Sources */,
 				0E416C192319BBA500EA3CA7 /* CreateProfileFirstCell.swift in Sources */,
+				0E1291982399AF86001D1470 /* StringExtension.swift in Sources */,
 				0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */,
 				0E1C8B3E22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.swift in Sources */,
 				0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */,

@@ -8,25 +8,23 @@
 
 import UIKit
 
-class ChatViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
-    @IBOutlet weak var bottomChatViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var messageTextView: UITextView!
-    @IBOutlet weak var messageTextViewBackground: UIView!
-    @IBOutlet weak var bottomInputViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var messageInputViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomInputView: UIView!
-    @IBOutlet weak var placeHolderLabel: UILabel!
-    @IBOutlet weak var sendButton: UIButton!
+class ChatViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ChatInputAccesoryDelegate {
+    
     @IBOutlet weak var messagesCollectionView: UICollectionView!
     
+    private lazy var chatInputAccesory : ChatInputAccesoryView = {
+        let cv = ChatInputAccesoryView()
+        cv.chatDelegate = self
+        return cv
+    }()
     
     var messageList: [String] = []
+    var shouldScrollToBottom = true
     
     static func instantiate() -> ChatViewController {
         let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
         return vc
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,17 +33,11 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         messageList = ["Hello. I have sent you a message to let you know about our meeting next week. We should find some time to meet before friday, if possible", "Hey, sure let me check up my schedule", "Okay", "What about monday? I have a few meetings in the morning, but i think i can squeeze this one in." , "Sounds nice. Dinner?", "Yup"]
         
-        messageTextViewBackground.layer.borderWidth = 1
-        messageTextViewBackground.layer.cornerRadius = 18
-        messageTextViewBackground.layer.borderColor = UIColor.flatOrange.cgColor
-        messageTextViewBackground.backgroundColor = UIColor(white: 1, alpha: 0.5)
         
         messagesCollectionView.register(MessageCell.self, forCellWithReuseIdentifier: "MessageCell")
         messagesCollectionView.delegate = self
         messagesCollectionView.dataSource = self
-        
-        messageTextView.delegate = self
-        messagesCollectionView.contentOffset = CGPoint(x: 0, y: -55)
+        messagesCollectionView.keyboardDismissMode = .interactive
         
 
         //Looks for single or multiple taps.
@@ -55,7 +47,47 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         //tap.cancelsTouchesInView = false
 
         messagesCollectionView.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _ = chatInputAccesory
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
+        if shouldScrollToBottom {
+            shouldScrollToBottom = false
+            scrollToBottom(animated: false)
+        }
+    }
+    
+    func scrollToBottom(animated: Bool) {
+        view.layoutIfNeeded()
+        messagesCollectionView.setContentOffset(bottomOffset(), animated: animated)
+    }
+    
+    func bottomOffset() -> CGPoint {
+        return CGPoint(x: 0, y: max(-messagesCollectionView.contentInset.top, messagesCollectionView.contentSize.height - (messagesCollectionView.bounds.size.height - messagesCollectionView.contentInset.bottom)))
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override var canResignFirstResponder: Bool {
+        return true
+    }
+    
+    override var inputAccessoryView: UIView? {
+        get {
+           return chatInputAccesory
+        }
     }
     
     //Calls this function when the tap is recognized.
@@ -64,23 +96,18 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         view.endEditing(true)
     }
     
-    func resetMessageTextView() {
-        if messageTextView.text != "" {
-            placeHolderLabel.isHidden = true
-            sendButton.isHidden = false
-        } else {
-            placeHolderLabel.isHidden = false
-            sendButton.isHidden = true
+ 
+    
+    func didTapSend() {
+        if self.chatInputAccesory.text == "" {
+            return
         }
-    }
-    
-    
-    @IBAction func sendButtonTapped(_ sender: Any) {
-        messageList.append(self.messageTextView.text)
+        
+        messageList.append(self.chatInputAccesory.text)
         self.messagesCollectionView.insertItems(at: [IndexPath(item: messageList.count-1, section: 0)])
-        self.messageTextView.text = ""
+        self.chatInputAccesory.text = ""
+        self.chatInputAccesory.resetMessageTextView()
         self.messagesCollectionView.scrollToItem(at: IndexPath(item: messageList.count-1, section: 0), at: .top, animated: true)
-        bottomInputViewHeight.constant = min(max(30,messageTextView.contentSize.height),120)
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -89,45 +116,60 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     
     //MARK: - Keyboard Handling
     @objc func keyboardWillShow(_ notification: Notification) {
+     
         
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            
-            
-            messageInputViewBottomConstraint.constant = keyboardHeight - 10
-            UIView.animate(withDuration: 0, animations: {
-                self.view.layoutIfNeeded()
-                self.messagesCollectionView.contentOffset = CGPoint(x: 0, y: keyboardHeight )
-            }) { (completed) in
-            }
-        }
+        adjustContentForKeyboard(shown: true, notification: notification)
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        messageInputViewBottomConstraint.constant = 0
-        messagesCollectionView.contentOffset = CGPoint(x: 0, y: -55)
+        adjustContentForKeyboard(shown: false, notification: notification)
+    }
+    
+    func adjustContentForKeyboard(shown: Bool, notification: Notification) {
+        guard let keyboardEndFrameValue: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let keyboardBeginFrameValue : NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
+            return
+        }
         
-        UIView.animate(withDuration: 0, animations: {
-            self.view.layoutIfNeeded()
-        })
+        let keyboardEndFrame = keyboardEndFrameValue.cgRectValue
+        let keyboardBeginFrame = keyboardBeginFrameValue.cgRectValue
+        
+        let keyboardHeight = keyboardEndFrame.height
+        if shown == true {
+            if keyboardEndFrame.size.height <= keyboardBeginFrame.size.height {
+                        return
+            }
+            
+//            keyboardHeight = min(keyboardEndFrame.height, keyboardBeginFrame.height)
+        }
+        
+        if messagesCollectionView.contentInset.bottom == keyboardHeight {
+            return
+        }
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        
+        let distanceFromBottom = bottomOffset().y - messagesCollectionView.contentOffset.y
+     
+        var insets = messagesCollectionView.contentInset
+        
+        insets.bottom = keyboardHeight
+
+        UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+            self.messagesCollectionView.contentInset = insets
+            self.messagesCollectionView.scrollIndicatorInsets = insets
+     
+            if distanceFromBottom < 10 {
+                self.messagesCollectionView.contentOffset = self.bottomOffset()
+            }
+        }, completion: nil)
     }
     
     //MARK: - UITextView Delegate
     
-    func textViewDidChange(_ textView: UITextView) {
-        resetMessageTextView()
-        bottomInputViewHeight.constant = min(max(30,textView.contentSize.height),120)
-        
-      
-    }
+  
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return true
-    }
-    // MARK: - ScrollViewDelegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
     }
     
     // MARK: - CollectionViewDelegate
@@ -156,6 +198,11 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         
         return cell
         
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("ChatViewController did deinit")
     }
     
 }

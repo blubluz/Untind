@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
@@ -156,13 +156,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drV-zY-nJH">
+                                <rect key="frame" x="59.666666666666657" y="782" width="295" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="U7a-M2-hYc"/>
+                                    <constraint firstAttribute="width" constant="295" id="jbV-Xu-ru3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="zDx-PB-ImH" secondAttribute="bottom" id="2uE-vt-ASM"/>
+                            <constraint firstItem="wwC-N7-sK5" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="drV-zY-nJH" secondAttribute="trailing" priority="750" constant="40" id="4Ii-kz-MX7"/>
                             <constraint firstItem="KIa-fp-gYj" firstAttribute="top" secondItem="wwC-N7-sK5" secondAttribute="top" id="4WL-x9-wbc"/>
                             <constraint firstItem="zDx-PB-ImH" firstAttribute="leading" secondItem="wwC-N7-sK5" secondAttribute="leading" constant="20" id="Jyh-PG-dB1"/>
+                            <constraint firstItem="wwC-N7-sK5" firstAttribute="bottom" secondItem="drV-zY-nJH" secondAttribute="bottom" constant="30" id="Sff-Wa-K0c"/>
                             <constraint firstItem="wwC-N7-sK5" firstAttribute="trailing" secondItem="KIa-fp-gYj" secondAttribute="trailing" id="aYX-Ta-oLt"/>
+                            <constraint firstItem="drV-zY-nJH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="wwC-N7-sK5" secondAttribute="leading" priority="750" constant="40" id="fyA-3s-tx8"/>
+                            <constraint firstItem="drV-zY-nJH" firstAttribute="centerX" secondItem="moB-nA-CeW" secondAttribute="centerX" id="gx4-e0-jDJ"/>
                             <constraint firstItem="KIa-fp-gYj" firstAttribute="leading" secondItem="wwC-N7-sK5" secondAttribute="leading" id="ho2-gd-R9x"/>
                             <constraint firstItem="wwC-N7-sK5" firstAttribute="trailing" secondItem="zDx-PB-ImH" secondAttribute="trailing" constant="20" id="j6P-Gx-myb"/>
                             <constraint firstItem="zDx-PB-ImH" firstAttribute="top" secondItem="KIa-fp-gYj" secondAttribute="bottom" id="jwM-Ai-ddG"/>
@@ -173,6 +188,7 @@
                         <outlet property="avatarImageView" destination="mwR-vQ-mtU" id="JOc-YY-89a"/>
                         <outlet property="collectionView" destination="zDx-PB-ImH" id="EY1-ij-ItK"/>
                         <outlet property="headerViewHeightConstraint" destination="kDm-bb-IYF" id="IaD-S0-CKT"/>
+                        <outlet property="interactionButton" destination="drV-zY-nJH" id="dks-Ft-Ulu"/>
                         <outlet property="myAnswersButton" destination="4Au-IU-bAX" id="HTi-40-Gza"/>
                         <outlet property="myQuestionsButton" destination="d3p-MH-EKf" id="vOi-9F-wi5"/>
                         <outlet property="selectorPointerLeadingConstraint" destination="G2f-7y-bHr" id="c1A-k0-uv0"/>
