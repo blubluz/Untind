@@ -143,12 +143,58 @@ class Answer: NSObject {
     
     func post(completion: @escaping (Error?) -> Void) {
           let db = Firestore.firestore()
+          let dispatchGroup = DispatchGroup()
+        var localError : Error?
+        
+        dispatchGroup.enter()
+        dispatchGroup.enter()
+        dispatchGroup.notify(queue: .main) {
+            completion(localError)
+        }
+        
           db.collection("answers").addDocument(data: jsonValue()) { (error) in
-              completion(error)
+            localError = error
+            dispatchGroup.leave()
           }
         
-        db.collection("dates").document("\(author.uuid)_\(UTUser.loggedUser!.userProfile?.uid)")
-      }
+        guard let questionAuthorId = question?.author.uid else {
+            dispatchGroup.leave()
+            return
+        }
+        
+        let dateDocument = db.collection("dates").document(questionAuthorId.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
+            
+            dateDocument.getDocument { (snapshot, error) in
+                if error != nil {
+                    localError = error
+                    dispatchGroup.leave()
+                } else {
+                    if let data = snapshot?.data() {
+                        let date = UntindDate(with: data)
+                        if date.invitee == nil {
+                            date.invitee = UTUser.loggedUser?.userProfile
+                        } else if date.invited == nil {
+                            date.invited = UTUser.loggedUser?.userProfile
+                        }
+                        
+                        dateDocument.setData(date.jsonValue()) {
+                             (error) in
+                            localError = error
+                            dispatchGroup.leave()
+                        }
+                    } else {
+                        let date = UntindDate()
+                        date.invited = UTUser.loggedUser!.userProfile!
+                        
+                        dateDocument.setData(date.jsonValue()) {
+                            (error) in
+                            localError = error
+                            dispatchGroup.leave()
+                        }
+                    }
+                }
+        }
+    }
     
     static func fetchAll(forQuestionId questionId: String?, userId: String?, completion: @escaping(Error?, [Answer]?) -> Void) {
         let db = Firestore.firestore()

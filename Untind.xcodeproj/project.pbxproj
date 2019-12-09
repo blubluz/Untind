@@ -108,6 +108,7 @@
 		9BEF1F06E29B66E1012EF409 /* Pods_Untind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */; };
 		9D7472092E23377E3094DD16 /* Pods_UntindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */; };
 		B0DDED9204B14A0D7F50C79B /* Pods_UntindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EE0AE1F6BF96288417DC38 /* Pods_UntindTests.framework */; };
+		F777227A239AA352000E7CA8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* Date.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -241,6 +242,7 @@
 		B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UntindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CAD022DE78A7E39AB5B51C /* Pods-Untind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Untind.debug.xcconfig"; path = "Target Support Files/Pods-Untind/Pods-Untind.debug.xcconfig"; sourceTree = "<group>"; };
 		F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Untind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7772279239AA352000E7CA8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -628,6 +630,7 @@
 				0EFA552D2303081A0000E6F6 /* UTUser.swift */,
 				0EFA552F230308260000E6F6 /* Answer.swift */,
 				0E22593E238332EC009E6C24 /* Message.swift */,
+				F7772279239AA352000E7CA8 /* Date.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
+				F777227A239AA352000E7CA8 /* Date.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
 				0E15661F23982C26004A1FD5 /* UIFontExtension.swift in Sources */,
 				0E416C142319AEF600EA3CA7 /* SignUpViewController.swift in Sources */,

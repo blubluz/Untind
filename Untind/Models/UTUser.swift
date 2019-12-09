@@ -93,15 +93,6 @@ struct UserSettings {
 }
 
 struct Profile {
-    enum RelationshipStatus {
-        case canAskQuestion
-        case waitingQuestionAnswer
-        case canInviteOnADate
-        case waitingDateAnswer
-        case dateFailed
-        case chatStarted
-        case waitingDateResult
-    }
     
     static let defaultUsername = "NoUsername"
     static let defaultAvatar = "avatar-1"
@@ -144,10 +135,21 @@ struct Profile {
         ]
     }
     
-//    func getRelationshipStatus(completion: @escaping (Error?) -> Void) -> RelationshipStatus {
-//        let db = Firestore.firestore()
-//        
-//    }
+    func getDateStatus(completion: @escaping (Error?, UntindDate?) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("dates").document(uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)).getDocument { (snapshot, error) in
+            if let error = error {
+                completion(error)
+            } else {
+                if let data = snapshot?.data() {
+                    
+                } else {
+                    return .
+                }
+            }
+        }
+    }
 }
 
 enum Gender : String, Codable{

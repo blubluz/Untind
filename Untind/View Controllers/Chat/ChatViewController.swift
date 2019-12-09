@@ -58,9 +58,9 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         if shouldScrollToBottom {
             shouldScrollToBottom = false
             scrollToBottom(animated: false)
@@ -116,8 +116,6 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     
     //MARK: - Keyboard Handling
     @objc func keyboardWillShow(_ notification: Notification) {
-     
-        
         adjustContentForKeyboard(shown: true, notification: notification)
     }
     
