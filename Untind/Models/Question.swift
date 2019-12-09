@@ -15,6 +15,7 @@ class Question: NSObject {
     var postDate : Date
     var questionText : String
     var answers : [Answer]?
+    var respondent : Profile?
     
     convenience init(with document: DocumentSnapshot) {
         self.init(with: document.data()!)
@@ -33,6 +34,9 @@ class Question: NSObject {
         
         id = dictionary["id"] as? String
         
+        if let respondentDict = dictionary["respondent"] as? JSONDictionary {
+            respondent = Profile(with: respondentDict)
+        }
     }
     
     init(author: Profile, postDate: Date, questionText: String) {
@@ -44,8 +48,12 @@ class Question: NSObject {
     func jsonValue() -> [String : Any] {
         var json = [ "author" : author.jsonValue(),
                  "postDate" : postDate,
-                 "questionText" : questionText
+                 "questionText" : questionText,
             ] as [String : Any]
+        
+        if let respondent = self.respondent {
+            json["respondent"] = respondent.jsonValue()
+        }
         
         if let id = self.id {
             json["id"] = id
@@ -56,7 +64,6 @@ class Question: NSObject {
     }
     
     func fetchAnswers(completion: @escaping (Error?) -> Void) {
-        let db = Firestore.firestore()
         if self.answers == nil {
             self.answers = [Answer]()
         }
@@ -76,7 +83,8 @@ class Question: NSObject {
         }
     }
     
-    func post(completion: @escaping (Error?) -> Void) {
+    func post(toProfile: Profile? = nil, completion: @escaping (Error?) -> Void) {
+        self.respondent = toProfile
         let db = Firestore.firestore()
         db.collection("questions").addDocument(data: jsonValue()) { (error) in
             completion(error)

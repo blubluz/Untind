@@ -18,12 +18,60 @@ class UntindDate: NSObject {
     enum RelationshipStatus {
         case canAskQuestion
         case waitingQuestionAnswer
-        case canInviteOnADate
+        case canRequestDate
+        case shouldAnswerDateRequest
         case waitingDateAnswer
+        case dateScheduled
         case dateFailed
+        case dateStarted
         case chatStarted
+        case shouldGiveDateResult
         case waitingDateResult
+        case youRejected
+        case heRejected
         case unknown
+        
+        enum InteractionState {
+            case interactive
+            case nonInteractive
+        }
+        
+        var interactionState : InteractionState  {
+            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult]
+            
+            if interactiveStatuses.contains(self) {
+                return .interactive
+            } else {
+                return .nonInteractive
+            }
+        }
+        
+        var buttonText : String? {
+            switch self {
+            case .canAskQuestion:
+                return "Ask a question"
+            case .canRequestDate:
+                return "Send a date request"
+            case .dateStarted:
+                fallthrough
+            case .chatStarted:
+                return "See chat"
+            case .heRejected, .youRejected, .dateFailed:
+                return "Date Failed"
+            case .dateScheduled:
+                return "Date scheduled"
+            case .waitingQuestionAnswer:
+                return "Waiting for answer"
+            case .waitingDateResult:
+                return "Waiting for date result"
+            case .waitingDateAnswer:
+                return "Waiting for date answer"
+            default:
+                return nil
+            }
+        }
+        
+        
     }
 
     var invited : Profile?
@@ -32,13 +80,81 @@ class UntindDate: NSObject {
     var isAccepted : Bool = false
     var invitedResult : DateResult = .noAnswer
     var inviteeResult : DateResult = .noAnswer
+    var latestMessages : [UTMessage] = []
     
     var myRelationshipStatus : RelationshipStatus {
         guard let myId = UTUser.loggedUser?.userProfile?.uid else {
             return .unknown
         }
         
-        if let invited = invited 
+        if invited?.uid != myId && invitee?.uid != myId {
+            return .canAskQuestion
+        } else {
+            var me : Profile?
+            var him : Profile?
+            if invited?.uid == myId {
+                me = invited
+                him = invitee
+            } else {
+                me = invitee
+                him = invited
+            }
+            if him == nil {
+                return .canRequestDate
+            } else {
+                if let dateScheduledTime = dateTime {
+                    if isAccepted == false {
+                        if me?.uid == invited?.uid {
+                            return .shouldAnswerDateRequest
+                        } else {
+                            return .waitingDateAnswer
+                        }
+                    } else {
+                        if Date().timeIntervalSince(dateScheduledTime) > 0 && Date().timeIntervalSince(dateScheduledTime) < 900 {
+                            return .chatStarted
+                        } else if Date().timeIntervalSince(dateScheduledTime) >= 900 {
+                            if me?.uid == invited?.uid {
+                                if invitedResult == .noAnswer {
+                                    return .shouldGiveDateResult
+                                } else {
+                                    if invitedResult == .rejected {
+                                        return .youRejected
+                                    } else if inviteeResult != .noAnswer {
+                                        if inviteeResult == .rejected {
+                                            return .heRejected
+                                        } else {
+                                            return .chatStarted
+                                        }
+                                    } else {
+                                        return .waitingDateResult
+                                    }
+                                }
+                            } else {
+                                if inviteeResult == .noAnswer {
+                                    return .shouldGiveDateResult
+                                } else {
+                                    if inviteeResult == .rejected {
+                                        return .youRejected
+                                    } else if invitedResult != .noAnswer {
+                                        if invitedResult == .rejected {
+                                            return .heRejected
+                                        } else {
+                                            return .chatStarted
+                                        }
+                                    } else {
+                                        return .waitingDateResult
+                                    }
+                                }
+                            }
+                        } else {
+                            return .dateScheduled
+                        }
+                    }
+                } else {
+                    return .canRequestDate
+                }
+            }
+        }
     }
     
     override init() {

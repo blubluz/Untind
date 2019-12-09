@@ -49,7 +49,7 @@ class FeedViewController: UIViewController {
             } else {
                 for document in querySnapshot!.documents {
                     let question = Question(with: document)
-                    guard question.author.uid != UTUser.loggedUser!.user.uid else {
+                    guard question.author.uid != UTUser.loggedUser!.user.uid, question.respondent == nil else {
                         continue
                     }
                     

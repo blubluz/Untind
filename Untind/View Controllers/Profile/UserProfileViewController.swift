@@ -30,6 +30,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var userNameLabel: UILabel!
     
     var profile: Profile?
+    var date: UntindDate?
     var questions : [Question]?
     var answers : [Answer]?
     
@@ -53,6 +54,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             userNameLabel.text = profile.username
         }
         
+        prepareForAnimations()
         loadData()
     }
     
@@ -62,12 +64,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         selectorPointerView.layer.cornerRadius = 22
     }
     
+    
+    //MARK: - Helper methods
     static func instantiate(profile: Profile? = nil) -> UserProfileViewController {
         let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
         vc.profile = profile
         return vc
     }
     
+    func prepareForAnimations() {
+        interactionButton.layer.cornerRadius = 24.5
+        
+        self.interactionButton.transform = CGAffineTransform(translationX: 0, y: 150)
+    }
     
     func loadData() {
         let db = Firestore.firestore()
@@ -85,13 +94,38 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         Answer.fetchAll(forQuestionId: nil, userId: profile?.uid) { (error, answers) in
             if let err = error {
                 //Handle error
+                print("Error fetching answers: \(err.localizedDescription)")
             } else {
                 self.answers = answers
                 self.collectionView.reloadData()
             }
         }
         
-//        profile
+        profile?.getDate(completion: { (error, date) in
+            if let error = error {
+                print("Error loading date: \(error.localizedDescription)")
+            } else if let date = date {
+                self.date = date
+                self.setupButtonFor(status: date.myRelationshipStatus)
+            }
+        })
+    }
+    
+    func setupButtonFor(status: UntindDate.RelationshipStatus) {
+        if let buttonText = status.buttonText {
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.6, options: .curveEaseIn, animations: {
+                self.interactionButton.transform = CGAffineTransform.identity
+            }, completion: nil)
+            
+            interactionButton.setTitle(buttonText.uppercased(), for: .normal)
+            if status.interactionState == .interactive {
+                interactionButton.backgroundColor = UIColor.flatOrange
+            } else {
+                interactionButton.isEnabled = false
+                interactionButton.backgroundColor = UIColor.gray81
+                interactionButton.alpha = 0.8
+            }
+        }
     }
     
     //MARK: - TableView Delegate & DataSource
@@ -215,6 +249,27 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     //MARK: - Button actions
+    @IBAction func interactionButtonTapped(_ sender: Any) {
+        guard let date = self.date else {
+            return
+        }
+        
+        if date.myRelationshipStatus.interactionState == .interactive {
+            switch date.myRelationshipStatus {
+            case .canAskQuestion:
+                let writeQVC = UIStoryboard.main.instantiateViewController(withIdentifier: "AddQuestionController") as! AddQuestionController
+                writeQVC.profile = profile
+                self.present(writeQVC, animated: true, completion: nil)
+            case .canRequestDate:
+                break
+            case .shouldGiveDateResult:
+                break
+            default:
+                return
+            }
+        }
+    }
+    
     @IBAction func sendMessageTapped(_ sender: Any) {
         Globals.mainNavigationController?.pushViewController(ChatViewController.instantiate(), animated: true)
     }

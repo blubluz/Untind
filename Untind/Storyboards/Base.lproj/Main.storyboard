@@ -975,7 +975,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2p-vr-n6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4223.188405797102" y="571.875"/>
+            <point key="canvasLocation" x="4758" y="306"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CWd-3W-1Cf">
@@ -1161,7 +1161,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="6" translatesAutoresizingMaskIntoConstraints="NO" id="rZz-Co-y98" customClass="UTPageControl" customModule="Untind" customModuleProvider="target">
-                                <rect key="frame" x="132" y="841" width="150" height="6"/>
+                                <rect key="frame" x="168" y="841" width="78" height="6"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="numberOfPages">

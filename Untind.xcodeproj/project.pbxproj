@@ -37,6 +37,7 @@
 		0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */; };
 		0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */; };
 		0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */; };
+		0E1EA6D7239ED98100147B88 /* UTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1EA6D6239ED98100147B88 /* UTMessage.swift */; };
 		0E22593F238332EC009E6C24 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22593E238332EC009E6C24 /* Message.swift */; };
 		0E22594223833710009E6C24 /* VerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */; };
 		0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */; };
@@ -165,6 +166,7 @@
 		0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuestionsContainerCell.swift; sourceTree = "<group>"; };
 		0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsContainerCell.xib; sourceTree = "<group>"; };
+		0E1EA6D6239ED98100147B88 /* UTMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMessage.swift; sourceTree = "<group>"; };
 		0E22593E238332EC009E6C24 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextView.swift; sourceTree = "<group>"; };
 		0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 				0EFA552F230308260000E6F6 /* Answer.swift */,
 				0E22593E238332EC009E6C24 /* Message.swift */,
 				F7772279239AA352000E7CA8 /* Date.swift */,
+				0E1EA6D6239ED98100147B88 /* UTMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,
 				0E47593422EDFCD600B2DE82 /* UIImageExtension.swift in Sources */,
+				0E1EA6D7239ED98100147B88 /* UTMessage.swift in Sources */,
 				0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

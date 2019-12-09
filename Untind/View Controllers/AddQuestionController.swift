@@ -16,6 +16,8 @@ class AddQuestionController: UIViewController {
     @IBOutlet weak var answerTextField: UTAnswerTextField!
     @IBOutlet weak var bottomView: UIView!
     
+    var profile : Profile?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -48,7 +50,7 @@ class AddQuestionController: UIViewController {
         
         SVProgressHUD.show()
         
-        question.post { (error) in
+        question.post(toProfile: self.profile) { (error) in
             SVProgressHUD.dismiss()
             if error != nil {
                 self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)

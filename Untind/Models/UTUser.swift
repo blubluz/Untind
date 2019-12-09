@@ -135,17 +135,17 @@ struct Profile {
         ]
     }
     
-    func getDateStatus(completion: @escaping (Error?, UntindDate?) -> Void) {
+    func getDate(completion: @escaping (Error?, UntindDate?) -> Void) {
         let db = Firestore.firestore()
         
         db.collection("dates").document(uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)).getDocument { (snapshot, error) in
             if let error = error {
-                completion(error)
+                completion(error, nil)
             } else {
                 if let data = snapshot?.data() {
-                    
+                    completion(error,UntindDate(with: data))
                 } else {
-                    return .
+                    completion(error,UntindDate())
                 }
             }
         }
