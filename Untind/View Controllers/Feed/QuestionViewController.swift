@@ -18,10 +18,9 @@ class QuestionViewController: UIViewController {
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionAuthorAvatar: UIImageView!
-    @IBOutlet weak var questionAuthorName: UILabel!
-    @IBOutlet weak var questionPostDate: UILabel!
     @IBOutlet weak var questionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var questionAuthorView: UIView!
+    @IBOutlet weak var addAnswerBackgroundView: UIView!
     
     public weak var question : Question?
     private var didAppearOnce = false
@@ -36,9 +35,7 @@ class QuestionViewController: UIViewController {
         
         if let question = question {
             questionLabel.text = question.questionText
-            questionAuthorName.text = question.author.username
             questionAuthorAvatar.image = UIImage(named: question.author.avatarType)
-            questionPostDate.text = question.postDate.toFormattedString()
             self.answersTableView.reloadData()
             
             question.fetchAnswers { (error) in
@@ -46,7 +43,7 @@ class QuestionViewController: UIViewController {
             }
         }
         
-        
+        addAnswerBackgroundView.layer.cornerRadius = addAnswerBackgroundView.frame.size.width/2
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil

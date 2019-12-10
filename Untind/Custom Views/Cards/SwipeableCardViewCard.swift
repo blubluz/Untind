@@ -22,23 +22,17 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     /// Outlets
     @IBOutlet weak var topViewShadowContainer: UIView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var topViewBar: UIView!
     @IBOutlet weak var topViewBottomView: UIView!
     @IBOutlet weak var topViewOptions: UIView!
     @IBOutlet weak var topViewQuestions: UIView!
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var bottomViewBar: UIView!
     @IBOutlet weak var turnButton: UIButton!
     @IBOutlet weak var mainTurnButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var answerButton: UIButton!
-    @IBOutlet weak var bottomBarImageView: UIImageView!
-    @IBOutlet weak var topBarImageView: UIImageView!
     
-    @IBOutlet weak var questionCardLine: UIImageView!
     @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var answerButtonBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
@@ -109,7 +103,6 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         
         bottomView.layer.cornerRadius = 20
         topView.layer.cornerRadius = 20
-        answerButtonBottomConstraint.constant =  answerButton.frame.size.height/2 - bottomView.frame.origin.y/2 - 10
         
         // set the shadow properties
         bottomView.layer.shadowColor = UIColor.black.cgColor
@@ -169,7 +162,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             UIView.transition(with: topView, duration: 0.35, options: [.transitionFlipFromRight,.curveEaseInOut], animations: {
                 self.topViewOptions.alpha = 1
                 self.topViewQuestions.alpha = 0
-                self.bottomViewTrailingConstraint.constant = 5
+                self.bottomViewTrailingConstraint.constant = 15
                 self.bottomViewBottomConstraint.constant = self.bottomView.frame.origin.y - 10
                 self.layoutIfNeeded()
             }, completion: nil)
@@ -248,8 +241,6 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     private func animateAnswerOptions(onScreen: Bool) {
         if onScreen == false {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
-                self.topBarImageView.tintColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
-                self.bottomBarImageView.tintColor = #colorLiteral(red: 0.1294117647, green: 0.8156862745, blue: 0.7254901961, alpha: 1)
                 self.bottomView.backgroundColor = #colorLiteral(red: 0.2352941176, green: 0.3098039216, blue: 0.3607843137, alpha: 1)
                 self.layoutIfNeeded()
             }, completion: nil)
@@ -272,14 +263,11 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             }, completion: nil)
             
             UIView.animate(withDuration: 0.4, delay: 0.35, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
-                self.questionCardLine.transform = CGAffineTransform.identity
                 
             }, completion: nil)
             
         } else {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
-                self.topBarImageView.tintColor = #colorLiteral(red: 0.2, green: 0.262745098, blue: 0.3058823529, alpha: 1)
-                self.bottomBarImageView.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
                 self.bottomView.backgroundColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
                 self.layoutIfNeeded()
             }, completion: nil)
@@ -295,18 +283,12 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 10, options: .curveEaseOut, animations: {
                 self.questionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
-                
             }, completion: nil)
             
             UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 8, options: .curveEaseOut, animations: {
                 self.topViewBottomView.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
-                
             }, completion: nil)
             
-            UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 8, options: .curveLinear, animations: {
-                self.questionCardLine.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
-                
-            }, completion: nil)
         }
     }
     

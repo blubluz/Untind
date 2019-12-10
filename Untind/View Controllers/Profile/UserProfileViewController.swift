@@ -13,11 +13,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     
-    @IBOutlet weak var selectorPointerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var selecterPointerYConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var selectorPointerView: UIView!
     @IBOutlet weak var selectorView: UIView!
+    @IBOutlet weak var profileContainerView: UIView!
     
     @IBOutlet weak var myQuestionsButton: UIButton!
     @IBOutlet weak var myAnswersButton: UIButton!
@@ -36,6 +37,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     
     var isLoadingQuestions : Bool = false
     var isLoadingAnswers : Bool = false
+    var didSetupSelector : Bool = false
     let headerViewMaxHeight: CGFloat = 314
     let headerViewMinHeight: CGFloat = 195
         
@@ -58,10 +60,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if !didSetupSelector {
+            didSetupSelector = true
+            selecterPointerYConstraint.constant = (selectorView.frame.size.width/4) * -1
+        }
         selectorView.layer.cornerRadius = 24
-        selectorPointerView.layer.cornerRadius = 22
+        selectorPointerView.roundCorners(cornerRadius: 4, corners: [.topLeft,.topRight])
+        profileContainerView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
     }
     
     
@@ -221,13 +232,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
             let completionPercentage = min((scrollView.contentOffset.x * 100) / scrollView.frame.size.width, 100)
-            selectorPointerLeadingConstraint.constant = max((selectorView.frame.size.width/2 - 2) * completionPercentage/100,2)
-            selectorView.backgroundColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.answerTeal, withPercentage: completionPercentage/100)
+            selecterPointerYConstraint.constant = (selectorView.frame.size.width/4) * ((2 * completionPercentage/100) - 1)
+            selectorPointerView.backgroundColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
             
-            let questionsButtonColor = UIColor.fadeFromColor(fromColor: UIColor.gray81, toColor: UIColor.white, withPercentage: completionPercentage/100)
+            let questionsButtonColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.darkBlue, withPercentage: completionPercentage/100)
             myQuestionsButton.setTitleColor(questionsButtonColor, for: .normal)
             
-            let answersButtonColor = UIColor.fadeFromColor(fromColor: UIColor.white, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
+            let answersButtonColor = UIColor.fadeFromColor(fromColor: UIColor.darkBlue, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
             myAnswersButton.setTitleColor(answersButtonColor, for: .normal)
             
             if completionPercentage == 100 {

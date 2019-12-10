@@ -79,7 +79,7 @@ class AnswerTableViewCell: UITableViewCell {
         self.answer = answer
         answerLabel.text = answer.answerText
         answerAuthorLabel.text = answer.author.username
-        answerPostDateLabel.text = answer.postDate.toFormattedString()
+        answerPostDateLabel.text = "M, 31"
         if answer.upvotes > 0 {
             answerUpvotesLabel.text = "+\(answer.upvotes)"
         } else {
