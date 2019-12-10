@@ -137,16 +137,28 @@ struct Profile {
     
     func getDate(completion: @escaping (Error?, UntindDate?) -> Void) {
         let db = Firestore.firestore()
-        
         db.collection("dates").document(uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)).getDocument { (snapshot, error) in
             if let error = error {
                 completion(error, nil)
             } else {
+                var date : UntindDate = UntindDate()
                 if let data = snapshot?.data() {
-                    completion(error,UntindDate(with: data))
-                } else {
-                    completion(error,UntindDate())
+                    date = UntindDate(with: data)
                 }
+
+                if date.myRelationshipStatus == .canAskQuestion {
+                    Question.fetch(fromUserId: UTUser.loggedUser?.userProfile?.uid ?? "", toUserId: self.uid) { (error, question) in
+                        if question != nil {
+                            date.privateQuestion = question
+                            completion(error, date)
+                        } else {
+                            completion(error,UntindDate())
+                        }
+                    }
+                } else {
+                    completion(error,date)
+                }
+                
             }
         }
     }

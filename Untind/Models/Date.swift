@@ -18,6 +18,7 @@ class UntindDate: NSObject {
     enum RelationshipStatus {
         case canAskQuestion
         case waitingQuestionAnswer
+        case shouldAnswerQuestion
         case canRequestDate
         case shouldAnswerDateRequest
         case waitingDateAnswer
@@ -37,7 +38,7 @@ class UntindDate: NSObject {
         }
         
         var interactionState : InteractionState  {
-            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult]
+            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult, .waitingQuestionAnswer]
             
             if interactiveStatuses.contains(self) {
                 return .interactive
@@ -52,6 +53,8 @@ class UntindDate: NSObject {
                 return "Ask a question"
             case .canRequestDate:
                 return "Send a date request"
+            case .shouldAnswerQuestion:
+                return "Answer private question"
             case .dateStarted:
                 fallthrough
             case .chatStarted:
@@ -81,6 +84,7 @@ class UntindDate: NSObject {
     var invitedResult : DateResult = .noAnswer
     var inviteeResult : DateResult = .noAnswer
     var latestMessages : [UTMessage] = []
+    var privateQuestion : Question?
     
     var myRelationshipStatus : RelationshipStatus {
         guard let myId = UTUser.loggedUser?.userProfile?.uid else {
@@ -88,7 +92,15 @@ class UntindDate: NSObject {
         }
         
         if invited?.uid != myId && invitee?.uid != myId {
-            return .canAskQuestion
+            if privateQuestion != nil {
+                if privateQuestion?.author.uid == UTUser.loggedUser?.userProfile?.uid {
+                    return .waitingQuestionAnswer
+                } else {
+                    return .shouldAnswerQuestion
+                }
+            } else {
+                return .canAskQuestion
+            }
         } else {
             var me : Profile?
             var him : Profile?

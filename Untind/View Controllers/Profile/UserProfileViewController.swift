@@ -106,12 +106,16 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 print("Error loading date: \(error.localizedDescription)")
             } else if let date = date {
                 self.date = date
-                self.setupButtonFor(status: date.myRelationshipStatus)
+                if date.myRelationshipStatus == .canAskQuestion {
+                  
+                } else {
+                    self.setupButtonFor(status: date.myRelationshipStatus)
+                }
             }
         })
     }
     
-    func setupButtonFor(status: UntindDate.RelationshipStatus) {
+    func setupButtonFor(status: UntindDate.RelationshipStatus, didSendQuestion : Bool = false) {
         if let buttonText = status.buttonText {
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.6, options: .curveEaseIn, animations: {
                 self.interactionButton.transform = CGAffineTransform.identity
@@ -121,8 +125,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             if status.interactionState == .interactive {
                 interactionButton.backgroundColor = UIColor.flatOrange
             } else {
-                interactionButton.isEnabled = false
-                interactionButton.backgroundColor = UIColor.gray81
+                if status != .waitingQuestionAnswer {
+                    interactionButton.isEnabled = false
+                }
+                interactionButton.backgroundColor = UIColor.gray81.withAlphaComponent(0.4)
                 interactionButton.alpha = 0.8
             }
         }
@@ -263,6 +269,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             case .canRequestDate:
                 break
             case .shouldGiveDateResult:
+                break
+            case .waitingQuestionAnswer:
+                if let question = date.privateQuestion {
+                    let questionVc = QuestionViewController.instantiate()
+                    questionVc.question = question
+                    self.navigationController?.pushViewController(questionVc, animated: false)
+                }
                 break
             default:
                 return

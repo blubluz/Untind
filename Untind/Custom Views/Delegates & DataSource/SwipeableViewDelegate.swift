@@ -15,6 +15,8 @@ protocol SwipeableViewDelegate: class {
 
     func didBeginSwipe(onView view: SwipeableView)
 
+    func didSwipeAway(onView view: SwipeableView)
+    
     func didEndSwipe(onView view: SwipeableView)
     
     func didSwipe(onView view: SwipeableView, percent: CGFloat)

@@ -156,4 +156,10 @@ class AnswerTableViewCell: UITableViewCell {
             
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+            downvoteButton.isSelected = false
+            upvoteButton.isSelected = false
+    }
 }

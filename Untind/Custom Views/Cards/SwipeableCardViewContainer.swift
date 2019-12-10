@@ -93,7 +93,7 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
             UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, options: .curveLinear, animations: {
                 topCardView.transform = CGAffineTransform(translationX: -500, y: -500).rotated(by: 5)
             }) { (success) in
-                self.didEndSwipe(onView: topCardView)
+                self.didSwipeAway(onView: topCardView)
             }
         }
     }
@@ -135,7 +135,12 @@ extension SwipeableCardViewContainer {
         // React to Swipe Began?
     }
 
+    
     func didEndSwipe(onView view: SwipeableView) {
+        
+    }
+    
+    func didSwipeAway(onView view: SwipeableView) {
         guard let dataSource = dataSource else {
             return
         }

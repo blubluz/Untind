@@ -72,7 +72,7 @@ class SwipeableView: UIView {
     private func setupGestureRecognizers() {
         // Pan Gesture Recognizer
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(SwipeableView.panGestureRecognized(_:)))
-        panGestureRecognizer.cancelsTouchesInView = false
+        panGestureRecognizer.cancelsTouchesInView = true
         self.panGestureRecognizer = panGestureRecognizer
         addGestureRecognizer(panGestureRecognizer)
 
@@ -86,7 +86,7 @@ class SwipeableView: UIView {
     
     
     // MARK: - Pan Gesture Recognizer
-
+    
     @objc private func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
         panGestureTranslation = gestureRecognizer.translation(in: self)
 
@@ -160,7 +160,7 @@ class SwipeableView: UIView {
             translationAnimation?.fromValue = NSValue(cgPoint: POPLayerGetTranslationXY(layer))
             translationAnimation?.toValue = NSValue(cgPoint: animationPointForDirection(dragDirection))
             layer.pop_add(translationAnimation, forKey: "swipeTranslationAnimation")
-            self.cardDelegate?.didEndSwipe(onView: self)
+            self.cardDelegate?.didSwipeAway(onView: self)
         } else {
             resetCardViewPosition()
         }

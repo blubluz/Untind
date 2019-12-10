@@ -90,6 +90,56 @@ class Question: NSObject {
             completion(error)
         }
     }
+    static func fetch(fromUserId fromId: String, toUserId toId: String, completion: @escaping (Error?, Question?) -> Void) {
+           let db = Firestore.firestore()
+             var question: Question?
+             var localError: Error?
+             let dispatchGroup = DispatchGroup()
+             
+             dispatchGroup.enter()
+             dispatchGroup.enter()
+             dispatchGroup.notify(queue: .main) {
+                 completion(localError,question)
+             }
+        
+        db.collectionGroup("questions").whereField(FieldPath(["author", "uid"]), isEqualTo: toId).whereField(FieldPath(["respondent", "uid"]), isEqualTo: fromId).getDocuments { (snapshot : QuerySnapshot?, error) in
+              if let err = error {
+                  localError = err
+                  print("Error getting documents: \(err)")
+              } else {
+                  if let document = snapshot?.documents.last {
+                      question = Question(with: document)
+                      dispatchGroup.enter()
+                      question?.fetchAnswers { (error) in
+                          if error != nil {
+                              localError = error
+                          }
+                          dispatchGroup.leave()
+                      }
+                  }
+              }
+              dispatchGroup.leave()
+          }
+        
+        db.collectionGroup("questions").whereField(FieldPath(["respondent", "uid"]), isEqualTo: toId).whereField(FieldPath(["author", "uid"]), isEqualTo: fromId).getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                localError = err
+                print("Error getting documents: \(err)")
+            } else {
+                if let document = snapshot?.documents.last {
+                    question = Question(with: document)
+                    dispatchGroup.enter()
+                    question?.fetchAnswers { (error) in
+                        if error != nil {
+                            localError = error
+                        }
+                        dispatchGroup.leave()
+                    }
+                }
+            }
+            dispatchGroup.leave()
+        }
+    }
     
     static func fetch(id: String, withAnswers: Bool = true, completion: @escaping (Error?, Question?) -> Void) {
         let db = Firestore.firestore()
@@ -158,8 +208,6 @@ class Question: NSObject {
             }
             dispatchGroup.leave()
         }
-        
-        
     }
 }
 

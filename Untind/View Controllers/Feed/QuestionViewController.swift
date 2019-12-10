@@ -70,6 +70,11 @@ class QuestionViewController: UIViewController {
     }
     
     
+    //MARK: - Helper methods
+       static func instantiate() -> QuestionViewController {
+           let vc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
+           return vc
+       }
     
     func doDisappearAnimations(completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveLinear, animations: {
