@@ -17,3 +17,9 @@ enum ThemeMode : String {
     case answer = "answer"
     case question = "question"
 }
+
+enum UIViewTags : Int {
+    case feedTopBar = 225200
+    case alertBackground = 000001
+    case alertView = 000002
+}

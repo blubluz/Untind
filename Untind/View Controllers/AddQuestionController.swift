@@ -12,9 +12,13 @@ import SVProgressHUD
 
 class AddQuestionController: UIViewController {
 
+    @IBOutlet weak var answerSheetView: UIView!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var answerTextField: UTAnswerTextField!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var postButton: UIButton!
     
     var profile : Profile?
     
@@ -37,10 +41,14 @@ class AddQuestionController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        backgroundView.roundCorners(cornerRadius: 30, corners: [.topLeft,.topRight])
+        answerSheetView.roundCorners(cornerRadius: 30, corners: [.topLeft,.topRight])
     }
     
     @IBAction func postQuestionsTapped(_ sender: Any) {
+        let alertController = UTAlertController(title: "Success!!", message: "Your Question was sent successfully to _username_. We will notify you when they answer you")
+        self.present(alertController, animated: true, completion: nil)
+        return
+        
         guard answerTextField.textField.text.count > 10 else {
             present(UIAlertController.errorAlert(text: "Please write a longer question"), animated: true, completion: nil)
             return

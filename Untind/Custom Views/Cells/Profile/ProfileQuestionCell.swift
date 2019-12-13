@@ -27,6 +27,6 @@ class ProfileQuestionCell: UITableViewCell {
     
     func configureWith(question: Question) {
         questionLabel.text = question.questionText
-        commentsLabel.text = "\(question.answers?.count ?? 0)"
+        commentsLabel.text = "\(question.answers?.count ?? 0) COMMENTS"
     }
 }

@@ -333,3 +333,9 @@ class TabBarViewController: UIViewController, PresentationViewController {
         circleView.move(toButton: button)
     }
 }
+
+//MARK: - UIViewControllerTransitioningDelegate
+
+extension TabBarViewController : UIViewControllerTransitioningDelegate {
+    
+}

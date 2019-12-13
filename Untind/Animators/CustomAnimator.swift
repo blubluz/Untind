@@ -45,17 +45,6 @@ class CustomAnimator : NSObject, UIViewControllerAnimatedTransitioning {
         toView.alpha = isPresenting ? 0 : 1
         toView.layoutIfNeeded()
         
-//        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
-//
-//
-//            transitionView.frame = self.isPresenting ? destinationView.frame : self.originFrame
-//            detailView.frame = self.isPresenting ? fromView.frame : CGRect(x: 0, y: 0, width: toView.frame.width, height: toView.frame.height)
-//            detailView.alpha = self.isPresenting ? 1 : 0
-//        }) { (finished) in
-//            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-//            transitionView.removeFromSuperview()
-//            destinationView.alpha = 1
-//        }
         
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
 

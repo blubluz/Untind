@@ -87,9 +87,9 @@ class AnswerTableViewCell: UITableViewCell {
         }
         switch answer.myVote {
         case .downvote:
-            downvoteButton.isSelected = true
+            downvoteButton.select(animated: true)
         case .upvote:
-            upvoteButton.isSelected = true
+            upvoteButton.select(animated: true)
         case .novote:
             break;
         }
@@ -106,7 +106,7 @@ class AnswerTableViewCell: UITableViewCell {
         upvoteButton.isSelected = !upvoteButton.isSelected
     
         if downvoteButton.isSelected == true {
-            downvoteButton.isSelected = false
+            downvoteButton.deselect(animated: true)
         }
         
         if let answer = answer {
@@ -131,9 +131,14 @@ class AnswerTableViewCell: UITableViewCell {
     
     @IBAction func downvoteTapped(_ sender: Any) {
         //Animate
-        downvoteButton.isSelected = !downvoteButton.isSelected
+        if downvoteButton.isSelected  {
+            downvoteButton.deselect(animated: true)
+        } else {
+            downvoteButton.select(animated: true)
+        }
+        
         if upvoteButton.isSelected {
-            upvoteButton.isSelected = false
+            upvoteButton.deselect(animated: true)
         }
         
         if let answer = answer {

@@ -30,11 +30,13 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     @IBOutlet weak var mainTurnButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var answerButton: UIButton!
+    @IBOutlet weak var commentsButton: UIButton!
     
     @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var expireLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var authorAvatarImageView: UIImageView!
@@ -60,14 +62,29 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     private var isInAnswerMode : Bool = false {
         didSet {
             let themeMode = isInAnswerMode ? ThemeMode.answer : ThemeMode.question
-            NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : themeMode])
+            //            NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : themeMode])
             if isInAnswerMode == true {
                 answerTextField.textField.becomeFirstResponder()
-                answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
+                Async.main {
+                    self.answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
+                    
+                }
+                
+                self.commentsButton.setImage(#imageLiteral(resourceName: "rotate"), for: .normal)
+                self.commentsButton.setTitle(nil, for: .normal)
+                self.commentsButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
                 animateAnswerOptions(onScreen: true)
+                
             } else {
-                answerButton.setImage(UIImage(named: "answer-button"), for: .normal)
+                answerTextField.textField.resignFirstResponder()
+                Async.main {
+                    self.answerButton.setImage(UIImage(named: "answer-icon"), for: .normal)
+                }
+                self.commentsButton.setImage(nil, for: .normal)
+                self.commentsButton.setTitle("12 COMMENTS", for: .normal)
+                self.commentsButton.transform = CGAffineTransform.identity
                 animateAnswerOptions(onScreen: false)
+
             }
         }
     }
@@ -134,11 +151,6 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         }
         
     }
-    // MARK: - UITextViewDelegate
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-//        isInAnswerMode = false
-    }
 
     // MARK: - Button Actions
     
@@ -182,6 +194,14 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         }
     }
     @IBAction func copySetQuestionsTapped(_ sender: Any) {
+    }
+    
+    @IBAction func comentsButtonTapped(_ sender: Any) {
+        if isInAnswerMode {
+            isInAnswerMode = false
+        } else {
+            return
+        }
     }
     
     @IBAction func answerButtonTapped(_ sender: Any) {
@@ -254,7 +274,8 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             
             UIView.animate(withDuration: 0.4, delay: 0.25, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.questionLabel.transform = CGAffineTransform.identity
-                
+                self.expireLabel.transform = CGAffineTransform.identity
+
             }, completion: nil)
             
             UIView.animate(withDuration: 0.4, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
@@ -283,6 +304,8 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 10, options: .curveEaseOut, animations: {
                 self.questionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
+                self.expireLabel.transform = CGAffineTransform(translationX: 250, y:0)
+
             }, completion: nil)
             
             UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 8, options: .curveEaseOut, animations: {

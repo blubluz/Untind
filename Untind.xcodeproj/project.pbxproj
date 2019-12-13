@@ -109,6 +109,12 @@
 		9BEF1F06E29B66E1012EF409 /* Pods_Untind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */; };
 		9D7472092E23377E3094DD16 /* Pods_UntindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */; };
 		B0DDED9204B14A0D7F50C79B /* Pods_UntindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EE0AE1F6BF96288417DC38 /* Pods_UntindTests.framework */; };
+		F706BF8D23A3C73E0032864A /* UTAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F706BF8C23A3C73E0032864A /* UTAlertAction.swift */; };
+		F706BF8F23A3CA490032864A /* UTAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F706BF8E23A3CA490032864A /* UTAlertButton.swift */; };
+		F706BF9123A3DE670032864A /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F706BF9023A3DE670032864A /* NSAttributedString.swift */; };
+		F7557D8C23A290BA00186E34 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8B23A290BA00186E34 /* Async.swift */; };
+		F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8D23A2950000186E34 /* UTAlertController.swift */; };
+		F7557D9023A2950000186E34 /* UTAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7557D8E23A2950000186E34 /* UTAlertController.xib */; };
 		F777227A239AA352000E7CA8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* Date.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
 /* End PBXBuildFile section */
@@ -244,6 +250,12 @@
 		B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UntindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CAD022DE78A7E39AB5B51C /* Pods-Untind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Untind.debug.xcconfig"; path = "Target Support Files/Pods-Untind/Pods-Untind.debug.xcconfig"; sourceTree = "<group>"; };
 		F4B0F3E6FBF9FC7F0EAF9164 /* Pods_Untind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Untind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F706BF8C23A3C73E0032864A /* UTAlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertAction.swift; sourceTree = "<group>"; };
+		F706BF8E23A3CA490032864A /* UTAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertButton.swift; sourceTree = "<group>"; };
+		F706BF9023A3DE670032864A /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		F7557D8B23A290BA00186E34 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		F7557D8D23A2950000186E34 /* UTAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertController.swift; sourceTree = "<group>"; };
+		F7557D8E23A2950000186E34 /* UTAlertController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UTAlertController.xib; sourceTree = "<group>"; };
 		F7772279239AA352000E7CA8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -332,6 +344,7 @@
 				0E17A3B322EC8E3400390BA5 /* View Controllers */,
 				0E7AC2AE231EE7B60050E750 /* Managers */,
 				0EFA552A230307F60000E6F6 /* Models */,
+				F7557D8823A229ED00186E34 /* Animators */,
 				0E17A3B622EC9A3100390BA5 /* Extensions */,
 				0E17A38522EC8DF500390BA5 /* AppDelegate.swift */,
 				0E17A39122EC8DF600390BA5 /* Info.plist */,
@@ -421,6 +434,7 @@
 				0E15661E23982C26004A1FD5 /* UIFontExtension.swift */,
 				0E1291972399AF86001D1470 /* StringExtension.swift */,
 				0E1291992399B4E2001D1470 /* CharacterExtension.swift */,
+				F706BF9023A3DE670032864A /* NSAttributedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -464,6 +478,7 @@
 		0E47593022EDF32700B2DE82 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				F706BF8A23A3B97C0032864A /* Alerts */,
 				0E22594023833703009E6C24 /* TextViews */,
 				0E9CD420235101E2008D6E0F /* Segmented Controls */,
 				0ED28FFA234675FB00267882 /* Labels */,
@@ -580,6 +595,7 @@
 				0E47593122EDF37600B2DE82 /* UITabBarButton.swift */,
 				0ED28FFB2346796800267882 /* BiggerTapSizeButton.swift */,
 				0E60045323720F0400BCB4F4 /* VoteButton.swift */,
+				F706BF8E23A3CA490032864A /* UTAlertButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -618,7 +634,7 @@
 		0EDA134D231D85DF00B759C5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0EDA134E231D85F700B759C5 /* CustomAnimator.swift */,
+				F7557D8B23A290BA00186E34 /* Async.swift */,
 				0EDA1350231DA12E00B759C5 /* CustomInteractor.swift */,
 				0E7AC2B3231EF5FD0050E750 /* Errors.swift */,
 			);
@@ -659,6 +675,32 @@
 				B9EC78CED775F210243AE468 /* Pods_UntindUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F706BF8A23A3B97C0032864A /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				F706BF8B23A3B9B80032864A /* Action */,
+				F7557D8D23A2950000186E34 /* UTAlertController.swift */,
+				F7557D8E23A2950000186E34 /* UTAlertController.xib */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		F706BF8B23A3B9B80032864A /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				F706BF8C23A3C73E0032864A /* UTAlertAction.swift */,
+			);
+			path = Action;
+			sourceTree = "<group>";
+		};
+		F7557D8823A229ED00186E34 /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA134E231D85F700B759C5 /* CustomAnimator.swift */,
+			);
+			path = Animators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -791,6 +833,7 @@
 				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,
+				F7557D9023A2950000186E34 /* UTAlertController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,6 +963,7 @@
 				0E060C37235667FE00E00251 /* ReportUserPopup.swift in Sources */,
 				0E61DD6022EF7E3200C1C8C7 /* SwipeableCardView.swift in Sources */,
 				F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */,
+				F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				0E60045423720F0400BCB4F4 /* VoteButton.swift in Sources */,
@@ -935,6 +979,7 @@
 				0EAC900C2354FB6700887CE3 /* ProfileQuestionCell.swift in Sources */,
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
+				F706BF8F23A3CA490032864A /* UTAlertButton.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
 				F777227A239AA352000E7CA8 /* Date.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
@@ -944,6 +989,7 @@
 				0ED706FA231C5EBA0039A8DE /* CreateProfileSecondCell.swift in Sources */,
 				0E416C192319BBA500EA3CA7 /* CreateProfileFirstCell.swift in Sources */,
 				0E1291982399AF86001D1470 /* StringExtension.swift in Sources */,
+				F706BF9123A3DE670032864A /* NSAttributedString.swift in Sources */,
 				0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */,
 				0E1C8B3E22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.swift in Sources */,
 				0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */,
@@ -965,6 +1011,7 @@
 				0ED28FFC2346796800267882 /* BiggerTapSizeButton.swift in Sources */,
 				0EB020CE2335407000462805 /* AnswerTableViewCell.swift in Sources */,
 				0E17A3B822EC9A3F00390BA5 /* UIColorExtension.swift in Sources */,
+				F7557D8C23A290BA00186E34 /* Async.swift in Sources */,
 				0E61DD6422EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift in Sources */,
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
@@ -976,6 +1023,7 @@
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,
 				0E47593422EDFCD600B2DE82 /* UIImageExtension.swift in Sources */,
+				F706BF8D23A3C73E0032864A /* UTAlertAction.swift in Sources */,
 				0E1EA6D7239ED98100147B88 /* UTMessage.swift in Sources */,
 				0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */,
 			);

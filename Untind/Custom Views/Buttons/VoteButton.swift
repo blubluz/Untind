@@ -43,25 +43,6 @@ class VoteButton: UIButton {
         return view
     }()
     
-    override var isSelected: Bool {
-        didSet {
-            if isSelected == true {
-                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-                    self.circleView.transform = CGAffineTransform.identity
-                }, completion: nil)
-                UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveLinear, animations: {
-                    self.outerCircleView.alpha = 0
-                }, completion: nil)
-            } else {
-                UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-                    self.circleView.transform = CGAffineTransform(scaleX: 0, y: 0)
-                }, completion: nil)
-                UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveLinear, animations: {
-                    self.outerCircleView.alpha = 1
-                }, completion: nil)
-            }
-        }
-    }
     
     var voteType : VoteType = .upvote {
         didSet {
@@ -92,6 +73,35 @@ class VoteButton: UIButton {
         setupView()
     }
     
+    
+    func select (animated: Bool) {
+        isSelected = true
+        performSelection(animated: animated)
+    }
+    
+    func deselect (animated: Bool) {
+        
+        isSelected = false
+        performSelection(animated: animated)
+    }
+    
+    private func performSelection(animated : Bool) {
+        if isSelected == true {
+            UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
+                self.circleView.transform = CGAffineTransform.identity
+            }, completion: nil)
+            UIView.animate(withDuration: animated ? 0.2: 0, delay: 0.1, options: .curveLinear, animations: {
+                self.outerCircleView.alpha = 0
+            }, completion: nil)
+        } else {
+            UIView.animate(withDuration: animated ? 0.4 : 0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
+                self.circleView.transform = CGAffineTransform(scaleX: 0, y: 0)
+            }, completion: nil)
+            UIView.animate(withDuration: animated ? 0.2 : 0, delay: 0.1, options: .curveLinear, animations: {
+                self.outerCircleView.alpha = 1
+            }, completion: nil)
+        }
+    }
     
     func setupView() {
         self.titleLabel?.text = ""

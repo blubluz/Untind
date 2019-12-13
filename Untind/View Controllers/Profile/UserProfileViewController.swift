@@ -15,6 +15,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var selecterPointerYConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var usernameLabelYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var selectorPointerView: UIView!
     @IBOutlet weak var selectorView: UIView!
@@ -29,6 +30,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var sexAgeLabel: UILabel!
     
     var profile: Profile?
     var date: UntindDate?
@@ -38,8 +40,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     var isLoadingQuestions : Bool = false
     var isLoadingAnswers : Bool = false
     var didSetupSelector : Bool = false
-    let headerViewMaxHeight: CGFloat = 314
-    let headerViewMinHeight: CGFloat = 195
+    let headerViewMaxHeight: CGFloat = 256
+    let headerViewMinHeight: CGFloat = 141
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +73,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             selecterPointerYConstraint.constant = (selectorView.frame.size.width/4) * -1
         }
         selectorView.layer.cornerRadius = 24
-        selectorPointerView.roundCorners(cornerRadius: 4, corners: [.topLeft,.topRight])
         profileContainerView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
     }
     
@@ -247,21 +248,25 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         } else {
             let y: CGFloat = scrollView.contentOffset.y
             let newHeaderViewHeight: CGFloat = headerViewHeightConstraint.constant - y
-            
             if newHeaderViewHeight > headerViewMaxHeight {
                 headerViewHeightConstraint.constant = headerViewMaxHeight
-                self.userNameLabel.transform = CGAffineTransform.identity
 
             } else if newHeaderViewHeight < headerViewMinHeight {
                 headerViewHeightConstraint.constant = headerViewMinHeight
-                self.userNameLabel.transform = CGAffineTransform(scaleX: headerViewMinHeight/headerViewMaxHeight, y: headerViewMinHeight/headerViewMaxHeight)
 
             } else {
-                self.userNameLabel.transform = CGAffineTransform(scaleX: newHeaderViewHeight/headerViewMaxHeight, y: newHeaderViewHeight/headerViewMaxHeight)
                 self.collectionView.collectionViewLayout.invalidateLayout()
                 headerViewHeightConstraint.constant = newHeaderViewHeight
+                
                 scrollView.contentOffset.y = 0 // block scroll view
             }
+            
+            //1 if transition is complete
+            //0 if transition is at start
+            let completionPercent = (headerViewHeightConstraint.constant - headerViewMinHeight) / (headerViewMaxHeight - headerViewMinHeight)
+            avatarImageView.alpha = completionPercent * completionPercent
+            sexAgeLabel.alpha = completionPercent * completionPercent
+            usernameLabelYConstraint.constant = (1-completionPercent) * (-40) + 15
         }
     }
     

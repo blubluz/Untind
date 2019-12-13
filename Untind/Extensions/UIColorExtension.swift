@@ -25,6 +25,9 @@ extension UIColor {
         self.init(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: alpha)
     }
     
+    static func gray(value: Int, alpha: Double? = 1) -> UIColor { 
+        return UIColor(red: value, green: value, blue: value, alpha: 1)
+    }
     
     static func fadeFromColor(fromColor: UIColor, toColor: UIColor, withPercentage: CGFloat) -> UIColor {
         var fromRed: CGFloat = 0.0

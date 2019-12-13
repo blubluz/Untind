@@ -26,11 +26,13 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
+        tap.cancelsTouchesInView = true
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-
+        topBarView.tag = UIViewTags.feedTopBar.rawValue
+        
+        
         let db = Firestore.firestore()
         
         db.collection("questions").getDocuments { (querySnapshot : QuerySnapshot?, error) in
@@ -54,10 +56,9 @@ class FeedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         KeyboardAvoiding.avoidingView = self.swipeableCardViewContainer
      
@@ -75,10 +76,12 @@ class FeedViewController: UIViewController {
     }
     
     @objc func keyboardWillAppear() {
+        topBarView.alpha = 0
         self.swipeableCardViewContainer.transform = CGAffineTransform(translationX: 0, y: -120)
     }
     
     @objc func keyboardWillDisappear() {
+        topBarView.alpha = 1
         self.swipeableCardViewContainer.transform = CGAffineTransform.identity
     }
     
