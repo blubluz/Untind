@@ -14,6 +14,7 @@ class Question: NSObject {
     var author : Profile
     var postDate : Date
     var questionText : String
+    var answersCount : Int = 0
     var answers : [Answer]?
     var respondent : Profile?
     
@@ -25,17 +26,16 @@ class Question: NSObject {
     init(with dictionary: JSONDictionary) {
         
         let authorDict = dictionary["author"] as! JSONDictionary
-            
         author = Profile(with: authorDict)
-        
         postDate = (dictionary["postDate"] as! Timestamp).dateValue()
-        
         questionText = dictionary["questionText"] as! String
-        
         id = dictionary["id"] as? String
         
         if let respondentDict = dictionary["respondent"] as? JSONDictionary {
             respondent = Profile(with: respondentDict)
+        }
+        if let answersCount = dictionary["answersCount"] as? Int {
+               self.answersCount = answersCount
         }
     }
     
@@ -49,7 +49,8 @@ class Question: NSObject {
         var json = [ "author" : author.jsonValue(),
                  "postDate" : postDate,
                  "questionText" : questionText,
-            ] as [String : Any]
+                 "answersCount" : answersCount
+             ] as [String : Any]
         
         if let respondent = self.respondent {
             json["respondent"] = respondent.jsonValue()

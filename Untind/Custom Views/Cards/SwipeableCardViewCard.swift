@@ -55,6 +55,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             smallQuestionLabel.text = question?.questionText
             authorNameLabel.text = question?.author.username
             postDateLabel.text = question?.postDate.toFormattedString()
+            commentsButton.setTitle("\(question?.answersCount ?? 0) COMMENTS", for: .normal)
             authorAvatarImageView.image = UIImage(named: question?.author.avatarType ?? "placeholder")
         }
     }

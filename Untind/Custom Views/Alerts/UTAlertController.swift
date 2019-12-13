@@ -18,6 +18,9 @@ class UTAlertController: UIViewController {
     lazy private(set) var backgroundTransparentView : UIView = {
         let v = UIView()
         v.tag = UIViewTags.alertBackground.rawValue
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissController))
+        tapGesture.numberOfTapsRequired = 1
+        v.addGestureRecognizer(tapGesture)
         self.view.addSubview(v)
         self.view.edgeConstrain(subView: v)
         v.backgroundColor = UIColor(white: 0, alpha: 0.17)
@@ -115,6 +118,12 @@ class UTAlertController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func dismissController() {
+        if actions.count == 0 && self.isDismissable == true {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func addNewAction(action: UTAlertAction) {
         actions.append(action)
         addActionButton(withAction: action)
@@ -161,11 +170,11 @@ class UTAlertController: UIViewController {
 
 extension UTAlertController : UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return UTAlertControllerAnimator(duration: 0.8, isPresenting: true)
+        return UTAlertControllerAnimator(duration: 0.5, isPresenting: true)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return UTAlertControllerAnimator(duration: 0.8, isPresenting: false)
+        return UTAlertControllerAnimator(duration: 0.5, isPresenting: false)
     }
 }
 
@@ -186,24 +195,40 @@ class UTAlertControllerAnimator :NSObject, UIViewControllerAnimatedTransitioning
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let container = transitionContext.containerView
-        guard let toView = transitionContext.view(forKey: .to) else {
+        var alertControllerView : UIView?
+        if isPresenting {
+            alertControllerView = transitionContext.view(forKey: .to)
+        } else {
+            alertControllerView = transitionContext.view(forKey: .from)
+        }
+        
+        guard let temporaryView = alertControllerView else {
             return
         }
-        container.addSubview(toView)
         
-        let background = toView.viewWithTag(UIViewTags.alertBackground.rawValue)
-        let alert = toView.viewWithTag(UIViewTags.alertView.rawValue)
-        background?.alpha = 0
         
-        alert?.transform = CGAffineTransform(scaleX: 0, y: 0)
+        temporaryView.frame = CGRect(origin: .zero, size: CGSize.screenSize)
         
-        UIView.animate(withDuration: duration) {
-            background?.alpha = 1
+        container.addSubview(temporaryView)
+        
+        let background = temporaryView.viewWithTag(UIViewTags.alertBackground.rawValue)
+        let alert = temporaryView.viewWithTag(UIViewTags.alertView.rawValue)
+        
+        if isPresenting {
+            background?.alpha = 0
+            alert?.transform = CGAffineTransform(scaleX: 0, y: 0)
         }
         
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
-            alert?.transform = CGAffineTransform.identity
+        UIView.animate(withDuration: 0.2) {
+            background?.alpha = self.isPresenting ? 1 : 0
+        }
+        
+        UIView.animate(withDuration: isPresenting ? duration : 0.2, delay: 0, usingSpringWithDamping: isPresenting ? 0.7 : 1, initialSpringVelocity: isPresenting ? 0.4 : 0, options: .curveEaseIn, animations: {
+            alert?.transform = self.isPresenting ? CGAffineTransform.identity : CGAffineTransform(scaleX: 1, y: 0.01)
             }) { (finished) in
+                if !self.isPresenting{
+                    temporaryView.removeFromSuperview()
+                }
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 
         }

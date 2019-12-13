@@ -56,7 +56,6 @@ class CustomAnimator : NSObject, UIViewControllerAnimatedTransitioning {
             transitionView.removeFromSuperview()
             destinationView.alpha = 1
         }
-        
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

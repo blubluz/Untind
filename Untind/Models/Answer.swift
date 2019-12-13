@@ -142,8 +142,8 @@ class Answer: NSObject {
     }
     
     func post(completion: @escaping (Error?) -> Void) {
-          let db = Firestore.firestore()
-          let dispatchGroup = DispatchGroup()
+        let db = Firestore.firestore()
+        let dispatchGroup = DispatchGroup()
         var localError : Error?
         
         dispatchGroup.enter()
@@ -152,10 +152,13 @@ class Answer: NSObject {
             completion(localError)
         }
         
-          db.collection("answers").addDocument(data: jsonValue()) { (error) in
+        db.collection("answers").addDocument(data: jsonValue()) { (error) in
             localError = error
             dispatchGroup.leave()
-          }
+            if let questionId = self.question?.id {
+                db.collection("questions").document("\(questionId)").updateData(["answersCount" : FieldValue.increment(Int64(1))])
+            }
+        }
         
         guard let questionAuthorId = question?.author.uid else {
             dispatchGroup.leave()
@@ -163,36 +166,36 @@ class Answer: NSObject {
         }
         
         let dateDocument = db.collection("dates").document(questionAuthorId.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
-            
-            dateDocument.getDocument { (snapshot, error) in
-                if error != nil {
-                    localError = error
-                    dispatchGroup.leave()
+        
+        dateDocument.getDocument { (snapshot, error) in
+            if error != nil {
+                localError = error
+                dispatchGroup.leave()
+            } else {
+                if let data = snapshot?.data() {
+                    let date = UntindDate(with: data)
+                    if date.invitee == nil {
+                        date.invitee = UTUser.loggedUser?.userProfile
+                    } else if date.invited == nil {
+                        date.invited = UTUser.loggedUser?.userProfile
+                    }
+                    
+                    dateDocument.setData(date.jsonValue()) {
+                        (error) in
+                        localError = error
+                        dispatchGroup.leave()
+                    }
                 } else {
-                    if let data = snapshot?.data() {
-                        let date = UntindDate(with: data)
-                        if date.invitee == nil {
-                            date.invitee = UTUser.loggedUser?.userProfile
-                        } else if date.invited == nil {
-                            date.invited = UTUser.loggedUser?.userProfile
-                        }
-                        
-                        dateDocument.setData(date.jsonValue()) {
-                             (error) in
-                            localError = error
-                            dispatchGroup.leave()
-                        }
-                    } else {
-                        let date = UntindDate()
-                        date.invited = UTUser.loggedUser!.userProfile!
-                        
-                        dateDocument.setData(date.jsonValue()) {
-                            (error) in
-                            localError = error
-                            dispatchGroup.leave()
-                        }
+                    let date = UntindDate()
+                    date.invited = UTUser.loggedUser!.userProfile!
+                    
+                    dateDocument.setData(date.jsonValue()) {
+                        (error) in
+                        localError = error
+                        dispatchGroup.leave()
                     }
                 }
+            }
         }
     }
     
@@ -213,11 +216,11 @@ class Answer: NSObject {
         if let questionId = questionId {
             query = query.whereField(FieldPath(["question","id"]), isEqualTo: questionId)
         } else
-        if let userId = userId {
-            query = query.whereField(FieldPath(["author","uid"]), isEqualTo: userId)
-        } else {
-            dispatchGroup.leave()
-            return
+            if let userId = userId {
+                query = query.whereField(FieldPath(["author","uid"]), isEqualTo: userId)
+            } else {
+                dispatchGroup.leave()
+                return
         }
         
         query.getDocuments { (snapshot, error) in

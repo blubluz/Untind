@@ -40,6 +40,7 @@
 		0E1EA6D7239ED98100147B88 /* UTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1EA6D6239ED98100147B88 /* UTMessage.swift */; };
 		0E22593F238332EC009E6C24 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22593E238332EC009E6C24 /* Message.swift */; };
 		0E22594223833710009E6C24 /* VerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */; };
+		0E22C22323A40D900010D975 /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22C22223A40D900010D975 /* CGRectExtension.swift */; };
 		0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */; };
 		0E416C10231993B700EA3CA7 /* UTLoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */; };
 		0E416C1223199B7C00EA3CA7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */; };
@@ -114,7 +115,6 @@
 		F706BF9123A3DE670032864A /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F706BF9023A3DE670032864A /* NSAttributedString.swift */; };
 		F7557D8C23A290BA00186E34 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8B23A290BA00186E34 /* Async.swift */; };
 		F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8D23A2950000186E34 /* UTAlertController.swift */; };
-		F7557D9023A2950000186E34 /* UTAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7557D8E23A2950000186E34 /* UTAlertController.xib */; };
 		F777227A239AA352000E7CA8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* Date.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
 /* End PBXBuildFile section */
@@ -175,6 +175,7 @@
 		0E1EA6D6239ED98100147B88 /* UTMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMessage.swift; sourceTree = "<group>"; };
 		0E22593E238332EC009E6C24 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextView.swift; sourceTree = "<group>"; };
+		0E22C22223A40D900010D975 /* CGRectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
 		0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
 		0E416C0F231993B700EA3CA7 /* UTLoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTLoginTextView.swift; sourceTree = "<group>"; };
 		0E416C1123199B7C00EA3CA7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +256,6 @@
 		F706BF9023A3DE670032864A /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		F7557D8B23A290BA00186E34 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		F7557D8D23A2950000186E34 /* UTAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertController.swift; sourceTree = "<group>"; };
-		F7557D8E23A2950000186E34 /* UTAlertController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UTAlertController.xib; sourceTree = "<group>"; };
 		F7772279239AA352000E7CA8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -435,6 +435,7 @@
 				0E1291972399AF86001D1470 /* StringExtension.swift */,
 				0E1291992399B4E2001D1470 /* CharacterExtension.swift */,
 				F706BF9023A3DE670032864A /* NSAttributedString.swift */,
+				0E22C22223A40D900010D975 /* CGRectExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -682,7 +683,6 @@
 			children = (
 				F706BF8B23A3B9B80032864A /* Action */,
 				F7557D8D23A2950000186E34 /* UTAlertController.swift */,
-				F7557D8E23A2950000186E34 /* UTAlertController.xib */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -833,7 +833,6 @@
 				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,
-				F7557D9023A2950000186E34 /* UTAlertController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,6 +1018,7 @@
 				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
 				0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */,
 				0E22593F238332EC009E6C24 /* Message.swift in Sources */,
+				0E22C22323A40D900010D975 /* CGRectExtension.swift in Sources */,
 				0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */,
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,
@@ -1216,7 +1216,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1238,7 +1238,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
