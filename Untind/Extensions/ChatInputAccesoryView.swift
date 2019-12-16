@@ -58,7 +58,7 @@ class ChatInputAccesoryView : UIView {
         tv.delegate = self
         tv.backgroundColor = UIColor.clear
         tv.textColor = UIColor.gray81
-        tv.font = UIFont.helveticaNeue(weight: .normal, size: 17)
+        tv.font = UIFont.helveticaNeue(weight: .regular, size: 17)
         
         return tv
     }()
@@ -86,7 +86,7 @@ class ChatInputAccesoryView : UIView {
         lb.activateConstraints( [
             lb.leadingAnchor.constraint(equalTo: messageTextViewBackground.leadingAnchor, constant: 15),
             lb.centerYAnchor.constraint(equalTo: messageTextViewBackground.centerYAnchor)])
-        lb.font = UIFont.helveticaNeue(weight: .normal, size: 15)
+        lb.font = UIFont.helveticaNeue(weight: .regular, size: 15)
         lb.textColor = UIColor.init(white: 0, alpha: 0.35)
         lb.text = "Message..."
         return lb

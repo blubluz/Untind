@@ -117,6 +117,12 @@
 		F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8D23A2950000186E34 /* UTAlertController.swift */; };
 		F777227A239AA352000E7CA8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* Date.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
+		F7F92B7923A68FF4007DC648 /* DateTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */; };
+		F7F92B7C23A796A7007DC648 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */; };
+		F7F92B7D23A796A7007DC648 /* DateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */; };
+		F7F92B8023A7E3C5007DC648 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7E23A7E3C5007DC648 /* ContainerCollectionViewCell.swift */; };
+		F7F92B8123A7E3C5007DC648 /* ContainerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F92B7F23A7E3C5007DC648 /* ContainerCollectionViewCell.xib */; };
+		F7F92B8323A7E670007DC648 /* DatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B8223A7E670007DC648 /* DatesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,6 +264,12 @@
 		F7557D8D23A2950000186E34 /* UTAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertController.swift; sourceTree = "<group>"; };
 		F7772279239AA352000E7CA8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableHeader.swift; sourceTree = "<group>"; };
+		F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCollectionViewCell.xib; sourceTree = "<group>"; };
+		F7F92B7E23A7E3C5007DC648 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
+		F7F92B7F23A7E3C5007DC648 /* ContainerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContainerCollectionViewCell.xib; sourceTree = "<group>"; };
+		F7F92B8223A7E670007DC648 /* DatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				0E14BF3E237C922400E25880 /* ChatViewController.swift */,
+				F7F92B8223A7E670007DC648 /* DatesViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -451,7 +464,8 @@
 		0E1C8B3B22F9FD1F0011A5D7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0E33C8092385BF93006F9AC4 /* Messages */,
+				F7F92B7723A68FD4007DC648 /* Dates */,
+				0E33C8092385BF93006F9AC4 /* Chat */,
 				0E060C382356687A00E00251 /* Popups */,
 				0E5132B02347BBCF0035C959 /* Profile */,
 				0E5132AF2347BBC70035C959 /* Answers */,
@@ -468,12 +482,12 @@
 			path = TextViews;
 			sourceTree = "<group>";
 		};
-		0E33C8092385BF93006F9AC4 /* Messages */ = {
+		0E33C8092385BF93006F9AC4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
 				0E10DACD23873050001F89CD /* MessageCell.swift */,
 			);
-			path = Messages;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		0E47593022EDF32700B2DE82 /* Custom Views */ = {
@@ -703,6 +717,18 @@
 			path = Animators;
 			sourceTree = "<group>";
 		};
+		F7F92B7723A68FD4007DC648 /* Dates */ = {
+			isa = PBXGroup;
+			children = (
+				F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */,
+				F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */,
+				F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */,
+				F7F92B7E23A7E3C5007DC648 /* ContainerCollectionViewCell.swift */,
+				F7F92B7F23A7E3C5007DC648 /* ContainerCollectionViewCell.xib */,
+			);
+			path = Dates;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -829,8 +855,10 @@
 				0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */,
 				0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */,
 				0ECB7947232981D500F99498 /* Profile.storyboard in Resources */,
+				F7F92B8123A7E3C5007DC648 /* ContainerCollectionViewCell.xib in Resources */,
 				0E17A3BB22EC9E7D00390BA5 /* GOTHICB.TTF in Resources */,
 				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
+				F7F92B7D23A796A7007DC648 /* DateCollectionViewCell.xib in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,
 			);
@@ -975,11 +1003,13 @@
 				0E722A8E23579F0500EE206D /* ContentSizedTableView.swift in Sources */,
 				0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */,
 				0EFA552E2303081A0000E6F6 /* UTUser.swift in Sources */,
+				F7F92B8023A7E3C5007DC648 /* ContainerCollectionViewCell.swift in Sources */,
 				0EAC900C2354FB6700887CE3 /* ProfileQuestionCell.swift in Sources */,
 				0E47593222EDF37600B2DE82 /* UITabBarButton.swift in Sources */,
 				0E61DD6722EF7F5D00C1C8C7 /* SwipeableCardViewDelegate.swift in Sources */,
 				F706BF8F23A3CA490032864A /* UTAlertButton.swift in Sources */,
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
+				F7F92B7923A68FF4007DC648 /* DateTableHeader.swift in Sources */,
 				F777227A239AA352000E7CA8 /* Date.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
 				0E15661F23982C26004A1FD5 /* UIFontExtension.swift in Sources */,
@@ -994,6 +1024,7 @@
 				0E7AC2B2231EF4280050E750 /* FacebookLoginManager.swift in Sources */,
 				0E722A902357ABE800EE206D /* Globals.swift in Sources */,
 				0EFF6DA322F73CE000A6A76B /* UILabelExtension.swift in Sources */,
+				F7F92B8323A7E670007DC648 /* DatesViewController.swift in Sources */,
 				0EFF6DA522F750F900A6A76B /* NSNotificationExtension.swift in Sources */,
 				0E416C162319BAD000EA3CA7 /* CreateProfileViewController.swift in Sources */,
 				0E17A38622EC8DF500390BA5 /* AppDelegate.swift in Sources */,
@@ -1012,6 +1043,7 @@
 				0E17A3B822EC9A3F00390BA5 /* UIColorExtension.swift in Sources */,
 				F7557D8C23A290BA00186E34 /* Async.swift in Sources */,
 				0E61DD6422EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift in Sources */,
+				F7F92B7C23A796A7007DC648 /* DateCollectionViewCell.swift in Sources */,
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,

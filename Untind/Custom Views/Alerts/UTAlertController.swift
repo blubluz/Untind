@@ -64,7 +64,7 @@ class UTAlertController: UIViewController {
             l.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -17)])
         
         l.numberOfLines = 9
-        l.font = UIFont.helveticaNeue(weight: .normal, size: 14)
+        l.font = UIFont.helveticaNeue(weight: .regular, size: 14)
         l.textColor = UIColor.gray(value: 151)
         l.textAlignment = .center
         return l

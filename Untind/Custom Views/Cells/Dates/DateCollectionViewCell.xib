@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="A3o-13-fGO" customClass="DateCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AYC-Cn-Pes">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="68"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELp-2j-p7x">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="68"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-1" translatesAutoresizingMaskIntoConstraints="NO" id="oEX-Bi-wdF">
+                                <rect key="frame" x="10" y="10" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oEX-Bi-wdF" secondAttribute="height" multiplier="1:1" id="Qr5-PJ-wVt"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mhf-gl-ge2">
+                                <rect key="frame" x="68" y="10" width="279.5" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="randomusername, F 24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BmM-nF-kgZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="214" height="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" red="0.23529411764705882" green="0.30980392156862746" blue="0.36078431372549019" alpha="0.99309529049295775" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Today 14:25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AQ-EL-dle">
+                                        <rect key="frame" x="214" y="0.0" width="65.5" height="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aUN-aJ-igI">
+                                <rect key="frame" x="68" y="44" width="279.5" height="14"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sent you a date request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahs-i3-VaD">
+                                        <rect key="frame" x="0.0" y="0.0" width="279.5" height="14"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="0.98999999999999999" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cfZ-Gv-uE8">
+                                <rect key="frame" x="357.5" y="0.0" width="32.5" height="68"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8r-7v-WNR">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="F8r-7v-WNR" secondAttribute="height" multiplier="1:1" id="Miu-FV-3NL"/>
+                                            <constraint firstAttribute="width" constant="48" id="wgu-2n-i80"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.94901960784313721" green="0.4823529411764706" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="reject-date-icon"/>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6St-oC-Yqk">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="7q1-hf-faR"/>
+                                            <constraint firstAttribute="width" secondItem="6St-oC-Yqk" secondAttribute="height" multiplier="1:1" id="NOt-YZ-2ps"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.43529411764705883" green="0.80784313725490198" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="accept-date-icon-1"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="niY-S2-SeQ">
+                                <rect key="frame" x="357.5" y="0.0" width="42.5" height="68"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uE-7Q-HKL">
+                                        <rect key="frame" x="0.0" y="0.0" width="42.5" height="68"/>
+                                        <color key="tintColor" red="0.43529411759999997" green="0.80784313730000001" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="15" maxX="5" maxY="0.0"/>
+                                        <state key="normal" image="rotate"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="niY-S2-SeQ" secondAttribute="height" multiplier="1:1.6" id="ukt-gJ-Vdk"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aUN-aJ-igI" firstAttribute="leading" secondItem="oEX-Bi-wdF" secondAttribute="trailing" constant="10" id="6mV-Ko-CQQ"/>
+                            <constraint firstItem="cfZ-Gv-uE8" firstAttribute="leading" secondItem="Mhf-gl-ge2" secondAttribute="trailing" constant="10" id="9Tv-YC-ckP"/>
+                            <constraint firstItem="Mhf-gl-ge2" firstAttribute="top" secondItem="oEX-Bi-wdF" secondAttribute="top" id="Crj-I2-g2d"/>
+                            <constraint firstItem="9uE-7Q-HKL" firstAttribute="leading" secondItem="Mhf-gl-ge2" secondAttribute="trailing" priority="900" constant="10" id="DRg-wS-3qn"/>
+                            <constraint firstAttribute="trailing" secondItem="cfZ-Gv-uE8" secondAttribute="trailing" constant="10" id="HPF-4t-1nI"/>
+                            <constraint firstAttribute="bottom" secondItem="cfZ-Gv-uE8" secondAttribute="bottom" id="LDl-P5-idw"/>
+                            <constraint firstItem="cfZ-Gv-uE8" firstAttribute="top" secondItem="ELp-2j-p7x" secondAttribute="top" id="NjY-Ju-Afc"/>
+                            <constraint firstItem="oEX-Bi-wdF" firstAttribute="leading" secondItem="ELp-2j-p7x" secondAttribute="leading" constant="10" id="bzB-NX-g6S"/>
+                            <constraint firstAttribute="trailing" secondItem="niY-S2-SeQ" secondAttribute="trailing" id="duC-l9-d7c"/>
+                            <constraint firstAttribute="trailing" secondItem="Mhf-gl-ge2" secondAttribute="trailing" priority="800" constant="20" id="ft1-vG-Ibt"/>
+                            <constraint firstItem="niY-S2-SeQ" firstAttribute="top" secondItem="ELp-2j-p7x" secondAttribute="top" id="hlJ-cS-uzW"/>
+                            <constraint firstItem="Mhf-gl-ge2" firstAttribute="leading" secondItem="oEX-Bi-wdF" secondAttribute="trailing" constant="10" id="jsR-cZ-qs3"/>
+                            <constraint firstItem="oEX-Bi-wdF" firstAttribute="top" secondItem="ELp-2j-p7x" secondAttribute="top" constant="10" id="l6z-Mw-rCm"/>
+                            <constraint firstAttribute="bottom" secondItem="oEX-Bi-wdF" secondAttribute="bottom" constant="10" id="rra-As-QB3"/>
+                            <constraint firstItem="aUN-aJ-igI" firstAttribute="bottom" secondItem="oEX-Bi-wdF" secondAttribute="bottom" id="uo6-Ty-4qd"/>
+                            <constraint firstItem="cfZ-Gv-uE8" firstAttribute="leading" secondItem="aUN-aJ-igI" secondAttribute="trailing" priority="900" constant="10" id="uot-cN-fOT"/>
+                            <constraint firstAttribute="bottom" secondItem="niY-S2-SeQ" secondAttribute="bottom" id="yBB-QK-az8"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ELp-2j-p7x" firstAttribute="leading" secondItem="AYC-Cn-Pes" secondAttribute="leading" id="3bx-50-a56"/>
+                    <constraint firstAttribute="bottom" secondItem="ELp-2j-p7x" secondAttribute="bottom" id="COD-ot-bP0"/>
+                    <constraint firstItem="ELp-2j-p7x" firstAttribute="top" secondItem="AYC-Cn-Pes" secondAttribute="top" id="kHy-n4-QSA"/>
+                    <constraint firstAttribute="trailing" secondItem="ELp-2j-p7x" secondAttribute="trailing" id="lzo-MY-yLv"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="400" height="68"/>
+            <connections>
+                <outlet property="acceptDateButton" destination="6St-oC-Yqk" id="YzD-85-a4M"/>
+                <outlet property="avatarImageView" destination="oEX-Bi-wdF" id="xzN-A9-Vc1"/>
+                <outlet property="cancelDateButton" destination="F8r-7v-WNR" id="Uxw-6T-aqO"/>
+                <outlet property="containerView" destination="ELp-2j-p7x" id="qv2-qu-bWF"/>
+                <outlet property="dateButtonsStackView" destination="cfZ-Gv-uE8" id="BH4-lv-Gko"/>
+                <outlet property="dateSentLabel" destination="8AQ-EL-dle" id="mJr-Cp-cut"/>
+                <outlet property="descriptionLabel" destination="ahs-i3-VaD" id="dcp-iZ-W59"/>
+                <outlet property="titleLabel" destination="BmM-nF-kgZ" id="Jor-0P-6Sv"/>
+                <outlet property="turnCellButton" destination="9uE-7Q-HKL" id="Mld-S2-TpR"/>
+            </connections>
+            <point key="canvasLocation" x="488.40579710144931" y="209.59821428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="accept-date-icon-1" width="48" height="48"/>
+        <image name="avatar-1" width="142" height="150"/>
+        <image name="reject-date-icon" width="48" height="48"/>
+        <image name="rotate" width="30" height="30"/>
+    </resources>
+</document>
