@@ -17,6 +17,20 @@ enum DateCellTestType {
     case pendingResponse
 }
 
+protocol DateDelegate : NSObject {
+    func didTapRejectDate(date: UntindDate)
+    func didTapAcceptDate(date: UntindDate)
+    func didTapCancelDate(date: UntindDate)
+    func didTapRescheduleDate(date: UntindDate)
+    func didTapDate(date: UntindDate)
+}
+
+extension DateDelegate {
+    func didTapDate(date: UntindDate) {
+        
+    }
+}
+
 class DateCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -28,7 +42,7 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var acceptDateButton: UIButton!
     @IBOutlet weak var dateButtonsStackView: UIStackView!
     @IBOutlet weak var containerView: UIView!
-
+    weak var delegate : DateDelegate?
     
     
     override func awakeFromNib() {
@@ -97,4 +111,11 @@ class DateCollectionViewCell: UICollectionViewCell {
         turnCellButton.tintColor = UIColor(red: 111, green: 206, blue: 27, alpha: 1)
         containerView.backgroundColor = UIColor.white
     }
+    
+    //MARK: - Button actions
+    
+    @IBAction func didTapAcceptDate(_ sender: Any) {
+        delegate?.didTapAcceptDate(date: UntindDate())
+    }
+    
 }

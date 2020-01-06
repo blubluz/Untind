@@ -20,7 +20,7 @@ extension NibView {
     /// Initializes the view from a xib
     /// file and configure initial constrains.
     func xibSetup() {
-        backgroundColor = .clear
+//        backgroundColor = .clear
         let view = loadViewFromNib()
         addEdgeConstrainedSubView(view: view)
     }

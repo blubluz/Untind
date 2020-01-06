@@ -12,6 +12,7 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
 
     @IBOutlet weak var collectionView: UICollectionView!
     var cellType : DateCellTestType = .upcomingDate
+    weak var delegate : DateDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +36,7 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(DateCollectionViewCell.self, for: indexPath).update(with: cellType)
+        cell.delegate = self.delegate
         return cell
     }
     

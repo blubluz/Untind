@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E02A91F23C3BECA00847FFF /* AcceptDatePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E02A91D23C3BECA00847FFF /* AcceptDatePopup.swift */; };
+		0E02A92023C3BECA00847FFF /* AcceptDatePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E02A91E23C3BECA00847FFF /* AcceptDatePopup.xib */; };
 		0E060C37235667FE00E00251 /* ReportUserPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E060C36235667FE00E00251 /* ReportUserPopup.swift */; };
 		0E060C3B2356688D00E00251 /* ReportReasonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E060C392356688D00E00251 /* ReportReasonCell.swift */; };
 		0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */; };
@@ -146,6 +148,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E02A91D23C3BECA00847FFF /* AcceptDatePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptDatePopup.swift; sourceTree = "<group>"; };
+		0E02A91E23C3BECA00847FFF /* AcceptDatePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AcceptDatePopup.xib; sourceTree = "<group>"; };
 		0E060C36235667FE00E00251 /* ReportUserPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserPopup.swift; sourceTree = "<group>"; };
 		0E060C392356688D00E00251 /* ReportReasonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonCell.swift; sourceTree = "<group>"; };
 		0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersTableViewCell.swift; sourceTree = "<group>"; };
@@ -306,9 +310,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E02A91C23C3BEA500847FFF /* Date Popups */ = {
+			isa = PBXGroup;
+			children = (
+				0E02A91D23C3BECA00847FFF /* AcceptDatePopup.swift */,
+				0E02A91E23C3BECA00847FFF /* AcceptDatePopup.xib */,
+			);
+			path = "Date Popups";
+			sourceTree = "<group>";
+		};
 		0E060C35235667EC00E00251 /* Pop-ups */ = {
 			isa = PBXGroup;
 			children = (
+				0E02A91C23C3BEA500847FFF /* Date Popups */,
 				0E060C36235667FE00E00251 /* ReportUserPopup.swift */,
 			);
 			path = "Pop-ups";
@@ -873,6 +887,7 @@
 				0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */,
 				0ECB7947232981D500F99498 /* Profile.storyboard in Resources */,
 				F7F92B8123A7E3C5007DC648 /* ContainerCollectionViewCell.xib in Resources */,
+				0E02A92023C3BECA00847FFF /* AcceptDatePopup.xib in Resources */,
 				0E17A3BB22EC9E7D00390BA5 /* GOTHICB.TTF in Resources */,
 				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
 				F7F92B7D23A796A7007DC648 /* DateCollectionViewCell.xib in Resources */,
@@ -1018,6 +1033,7 @@
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
 				F7EED81723A909C500420514 /* UITableViewExtension.swift in Sources */,
 				0E060C3B2356688D00E00251 /* ReportReasonCell.swift in Sources */,
+				0E02A91F23C3BECA00847FFF /* AcceptDatePopup.swift in Sources */,
 				0EDA1351231DA12E00B759C5 /* CustomInteractor.swift in Sources */,
 				0E722A8E23579F0500EE206D /* ContentSizedTableView.swift in Sources */,
 				0EFC0AEE22F5CD1D00DC8BBD /* UTAnswerTextField.swift in Sources */,

@@ -26,6 +26,10 @@ class DatesViewController: UIViewController {
         collectionView.register(DateTableHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
         collectionView.register(UINib(nibName: "ContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContainerCollectionViewCell")
         collectionView.register(UINib(nibName: "DateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DateCollectionViewCell")
+        // Makes header stay visible while scrolling
+//        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            layout.sectionHeadersPinToVisibleBounds = true
+//        }
     }
 }
 
@@ -75,6 +79,7 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         case 0:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContainerCollectionViewCell", for: indexPath) as! ContainerCollectionViewCell
         cell.configureWithType(type: .newDateRequest)
+        cell.delegate = self
         return cell
         case 1:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContainerCollectionViewCell", for: indexPath) as! ContainerCollectionViewCell
@@ -109,4 +114,26 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         
         return CGSize(width: min((UIScreen.main.bounds.size.width - 50), 420), height: 82)
       }
+}
+
+extension DatesViewController : DateDelegate {
+    func didTapRejectDate(date: UntindDate) {
+        
+    }
+    
+    func didTapAcceptDate(date: UntindDate) {
+        let vc = AcceptDatePopup.instantiate()
+        vc.modalPresentationStyle = .overCurrentContext
+        Globals.tabBarController?.present(vc, animated: false, completion: nil)
+    }
+    
+    func didTapCancelDate(date: UntindDate) {
+        
+    }
+    
+    func didTapRescheduleDate(date: UntindDate) {
+        
+    }
+    
+    
 }
