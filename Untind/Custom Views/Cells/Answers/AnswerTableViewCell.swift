@@ -103,7 +103,11 @@ class AnswerTableViewCell: UITableViewCell {
     
     @IBAction func upvoteTapped(_ sender: Any) {
         //Animate
-        upvoteButton.isSelected = !upvoteButton.isSelected
+        if upvoteButton.isSelected {
+            upvoteButton.deselect(animated: true)
+        } else {
+            upvoteButton.select(animated: true)
+        }
     
         if downvoteButton.isSelected == true {
             downvoteButton.deselect(animated: true)
@@ -164,7 +168,7 @@ class AnswerTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-            downvoteButton.isSelected = false
-            upvoteButton.isSelected = false
+        self.downvoteButton.deselect(animated: false)
+        self.upvoteButton.deselect(animated: false)
     }
 }

@@ -117,6 +117,9 @@
 		F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8D23A2950000186E34 /* UTAlertController.swift */; };
 		F777227A239AA352000E7CA8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* Date.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
+		F7EED81723A909C500420514 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81623A909C500420514 /* UITableViewExtension.swift */; };
+		F7EED81923A909E800420514 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81823A909E800420514 /* UICollectionViewExtension.swift */; };
+		F7EED81C23A9265500420514 /* DateCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */; };
 		F7F92B7923A68FF4007DC648 /* DateTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */; };
 		F7F92B7C23A796A7007DC648 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */; };
 		F7F92B7D23A796A7007DC648 /* DateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */; };
@@ -264,6 +267,9 @@
 		F7557D8D23A2950000186E34 /* UTAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertController.swift; sourceTree = "<group>"; };
 		F7772279239AA352000E7CA8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		F7EED81623A909C500420514 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		F7EED81823A909E800420514 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableHeader.swift; sourceTree = "<group>"; };
 		F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -432,23 +438,25 @@
 		0E17A3B622EC9A3100390BA5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F7EED81823A909E800420514 /* UICollectionViewExtension.swift */,
+				0E5EC81922F37669003C8C73 /* CALayerExtension.swift */,
 				0E61DD5A22EF791200C1C8C7 /* CGPoint+SwipeableAdditions.swift */,
 				0E61DD5922EF791200C1C8C7 /* CGRect+SwipeAdditions.swift */,
-				0E17A3B722EC9A3F00390BA5 /* UIColorExtension.swift */,
-				0E47593322EDFCD600B2DE82 /* UIImageExtension.swift */,
-				0E47593722EE1AE500B2DE82 /* UIViewExtension.swift */,
-				0E5EC81922F37669003C8C73 /* CALayerExtension.swift */,
-				0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */,
-				0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */,
-				0EFA55312303121B0000E6F6 /* DateExtension.swift */,
-				0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */,
-				0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */,
-				F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */,
-				0E15661E23982C26004A1FD5 /* UIFontExtension.swift */,
-				0E1291972399AF86001D1470 /* StringExtension.swift */,
-				0E1291992399B4E2001D1470 /* CharacterExtension.swift */,
-				F706BF9023A3DE670032864A /* NSAttributedString.swift */,
 				0E22C22223A40D900010D975 /* CGRectExtension.swift */,
+				0E1291992399B4E2001D1470 /* CharacterExtension.swift */,
+				0EFA55312303121B0000E6F6 /* DateExtension.swift */,
+				F706BF9023A3DE670032864A /* NSAttributedString.swift */,
+				0EFF6DA422F750F900A6A76B /* NSNotificationExtension.swift */,
+				0E1291972399AF86001D1470 /* StringExtension.swift */,
+				F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */,
+				0E17A3B722EC9A3F00390BA5 /* UIColorExtension.swift */,
+				0E15661E23982C26004A1FD5 /* UIFontExtension.swift */,
+				0E47593322EDFCD600B2DE82 /* UIImageExtension.swift */,
+				0EFF6DA222F73CE000A6A76B /* UILabelExtension.swift */,
+				0EDA1354231DAE7900B759C5 /* UIStoryboardExtension.swift */,
+				F7EED81623A909C500420514 /* UITableViewExtension.swift */,
+				0EDA1352231DA25400B759C5 /* UIViewControllerExtension.swift */,
+				0E47593722EE1AE500B2DE82 /* UIViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -493,6 +501,7 @@
 		0E47593022EDF32700B2DE82 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E1C8B3B22F9FD1F0011A5D7 /* Cells */,
 				F706BF8A23A3B97C0032864A /* Alerts */,
 				0E22594023833703009E6C24 /* TextViews */,
 				0E9CD420235101E2008D6E0F /* Segmented Controls */,
@@ -500,9 +509,7 @@
 				0ED28FF9234675BB00267882 /* Cards */,
 				0ED28FF8234675AA00267882 /* TextFields */,
 				0ED28FF7234675A600267882 /* Buttons */,
-				0E1C8B3B22F9FD1F0011A5D7 /* Cells */,
 				0E61DD5622EF78B900C1C8C7 /* Helpers */,
-				0E61DD5322EF78AD00C1C8C7 /* Delegates & DataSource */,
 				0E47593522EE18E100B2DE82 /* TabBarCircleView.swift */,
 				0E5EC81B22F38A9A003C8C73 /* ShadowUIView.swift */,
 				0E0E045C2319C47200979E03 /* UTPageControl.swift */,
@@ -649,6 +656,8 @@
 		0EDA134D231D85DF00B759C5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F7EED81A23A9264100420514 /* Layouts */,
+				0E61DD5322EF78AD00C1C8C7 /* Delegates & DataSource */,
 				F7557D8B23A290BA00186E34 /* Async.swift */,
 				0EDA1350231DA12E00B759C5 /* CustomInteractor.swift */,
 				0E7AC2B3231EF5FD0050E750 /* Errors.swift */,
@@ -715,6 +724,14 @@
 				0EDA134E231D85F700B759C5 /* CustomAnimator.swift */,
 			);
 			path = Animators;
+			sourceTree = "<group>";
+		};
+		F7EED81A23A9264100420514 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */,
+			);
+			path = Layouts;
 			sourceTree = "<group>";
 		};
 		F7F92B7723A68FD4007DC648 /* Dates */ = {
@@ -993,11 +1010,13 @@
 				F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */,
 				0E1C8B3A22F9EDBD0011A5D7 /* MyQuestionsViewController.swift in Sources */,
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
+				F7EED81C23A9265500420514 /* DateCollectionViewLayout.swift in Sources */,
 				0E60045423720F0400BCB4F4 /* VoteButton.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */,
 				0E61DD6822EF7F5D00C1C8C7 /* SwipeableCardViewDataSource.swift in Sources */,
+				F7EED81723A909C500420514 /* UITableViewExtension.swift in Sources */,
 				0E060C3B2356688D00E00251 /* ReportReasonCell.swift in Sources */,
 				0EDA1351231DA12E00B759C5 /* CustomInteractor.swift in Sources */,
 				0E722A8E23579F0500EE206D /* ContentSizedTableView.swift in Sources */,
@@ -1046,6 +1065,7 @@
 				F7F92B7C23A796A7007DC648 /* DateCollectionViewCell.swift in Sources */,
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
+				F7EED81923A909E800420514 /* UICollectionViewExtension.swift in Sources */,
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,
 				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
 				0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */,

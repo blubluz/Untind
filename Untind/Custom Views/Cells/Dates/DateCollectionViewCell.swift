@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum DateCellTestType {
+    case newDateRequest
+    case upcomingDate
+    case activeDate1
+    case activeDate2
+    case pendingInvite
+    case pendingResponse
+}
+
 class DateCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,15 +28,7 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var acceptDateButton: UIButton!
     @IBOutlet weak var dateButtonsStackView: UIStackView!
     @IBOutlet weak var containerView: UIView!
-    
-    enum DateCellTestType {
-        case newDateRequest
-        case upcomingDate
-        case activeDate1
-        case activeDate2
-        case pendingInvite
-        case pendingResponse
-    }
+
     
     
     override func awakeFromNib() {
@@ -39,34 +40,47 @@ class DateCollectionViewCell: UICollectionViewCell {
     func update(with type: DateCellTestType) -> DateCollectionViewCell {
         switch type {
         case .newDateRequest:
-            cancelDateButton.isHidden = false
-            acceptDateButton.isHidden = false
-            turnCellButton.isHidden = false
+            turnCellButton.isHidden = true
+            dateSentLabel.isHidden = true
+
+            
             titleLabel.attributedText = NSAttributedString(string: "randomusername, F 24", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14)]).boldAppearenceOf(string: "randomusername", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
             descriptionLabel.text = "sent you a date request"
         case .upcomingDate:
-            turnCellButton.isHidden = false
+            cancelDateButton.isHidden = true
+            acceptDateButton.isHidden = true
+            dateSentLabel.isHidden = true
             titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 25, invited you", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-            descriptionLabel.attributedText = NSAttributedString(string: "Date starting in 00:15 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:15 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
+            descriptionLabel.attributedText = NSAttributedString(string: "Date starting in 00:15 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 12), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:15 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
         case .activeDate1:
-            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue, NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-            descriptionLabel.attributedText = NSAttributedString(string: "Date ends in 00:04 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:04 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
+            cancelDateButton.isHidden = true
+            acceptDateButton.isHidden = true
+            dateSentLabel.isHidden = true
+            turnCellButton.isHidden = true
+            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue, ]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+            descriptionLabel.attributedText = NSAttributedString(string: "Date ends in 00:04 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 12), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:04 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
         case .activeDate2:
-            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+            cancelDateButton.isHidden = true
+            acceptDateButton.isHidden = true
+            turnCellButton.isHidden = true
+            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
             descriptionLabel.text = "an example of last line of messsage that can contain a lot of text"
-            dateSentLabel.isHidden = false
             containerView.backgroundColor = UIColor(red: 246, green: 253, blue: 238, alpha: 1)
         case .pendingInvite:
+            cancelDateButton.isHidden = true
+            acceptDateButton.isHidden = true
+            dateSentLabel.isHidden = true
             titleLabel.attributedText = NSAttributedString(string: "you invited anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
             descriptionLabel.text = "awaiting a response"
             descriptionLabel.textColor = UIColor.white
-            turnCellButton.isHidden = false
-            containerView.backgroundColor = UIColor(red: 246, green: 253, blue: 238, alpha: 1)
+            containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
         case .pendingResponse:
+            cancelDateButton.isHidden = true
+            acceptDateButton.isHidden = true
+            dateSentLabel.isHidden = true
             titleLabel.attributedText = NSAttributedString(string: "you dated anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
             descriptionLabel.text = "awaiting their response"
             descriptionLabel.textColor = UIColor.white
-            turnCellButton.isHidden = false
             turnCellButton.tintColor = UIColor.white
             containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
         }
@@ -76,10 +90,10 @@ class DateCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        cancelDateButton.isHidden = true
-        acceptDateButton.isHidden = true
-        turnCellButton.isHidden = true
-        dateSentLabel.isHidden = true
+        cancelDateButton.isHidden = false
+        acceptDateButton.isHidden = false
+        turnCellButton.isHidden = false
+        dateSentLabel.isHidden = false
         turnCellButton.tintColor = UIColor(red: 111, green: 206, blue: 27, alpha: 1)
         containerView.backgroundColor = UIColor.white
     }

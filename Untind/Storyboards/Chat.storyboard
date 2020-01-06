@@ -5,14 +5,13 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Dates View Controller-->
         <scene sceneID="OW5-Jb-Oe5">
             <objects>
-                <viewController id="AZW-p8-eZi" customClass="DatesViewController" customModule="Untind" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DatesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AZW-p8-eZi" customClass="DatesViewController" customModule="Untind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fZo-Vo-FZY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,25 +25,16 @@
                                 <color key="textColor" red="0.23529411764705882" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ycd-RE-kuy">
-                                <rect key="frame" x="0.0" y="86.5" width="375" height="580.5"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ycd-RE-kuy">
+                                <rect key="frame" x="0.0" y="71.5" width="375" height="595.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2gG-Lk-8ez">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RuM-Gs-j9n">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="4nA-08-apl">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FyI-tE-o0h">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -56,20 +46,21 @@
                             <constraint firstItem="ycd-RE-kuy" firstAttribute="leading" secondItem="Bj0-dr-Ncw" secondAttribute="leading" id="ZcK-Sd-Y4F"/>
                             <constraint firstItem="a2Y-YN-gdI" firstAttribute="top" secondItem="fZo-Vo-FZY" secondAttribute="top" id="dON-oE-dWD"/>
                             <constraint firstItem="a2Y-YN-gdI" firstAttribute="leading" secondItem="Bj0-dr-Ncw" secondAttribute="leading" id="gjM-DW-MAl"/>
-                            <constraint firstItem="ycd-RE-kuy" firstAttribute="top" secondItem="4hs-W3-NBt" secondAttribute="bottom" constant="20" id="nku-BB-Kwx"/>
+                            <constraint firstItem="ycd-RE-kuy" firstAttribute="top" secondItem="4hs-W3-NBt" secondAttribute="bottom" constant="5" id="nku-BB-Kwx"/>
                             <constraint firstItem="Bj0-dr-Ncw" firstAttribute="trailing" secondItem="ycd-RE-kuy" secondAttribute="trailing" id="q4u-2s-N4S"/>
                             <constraint firstItem="Bj0-dr-Ncw" firstAttribute="bottom" secondItem="ycd-RE-kuy" secondAttribute="bottom" id="sCB-XB-CSg"/>
                             <constraint firstAttribute="bottom" secondItem="a2Y-YN-gdI" secondAttribute="bottom" id="u1O-5C-8oY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bj0-dr-Ncw"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bHq-ka-SHl"/>
                     <connections>
                         <outlet property="collectionView" destination="ycd-RE-kuy" id="WCn-fH-cPl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="77I-6U-hVz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="-1"/>
+            <point key="canvasLocation" x="580" y="-376.46176911544228"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="Zmf-VG-DPa">
@@ -162,7 +153,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ps0-Jk-s8C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="359" y="-200"/>
+            <point key="canvasLocation" x="1296.8" y="-200.14992503748127"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RUF-OY-eYF">
+            <objects>
+                <navigationController storyboardIdentifier="DatesNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="1W1-oN-UIe" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NtM-Sg-QPx">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AZW-p8-eZi" kind="relationship" relationship="rootViewController" id="ulq-3h-xjC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lYX-zH-awZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-359.19999999999999" y="-376.46176911544228"/>
         </scene>
     </scenes>
     <resources>

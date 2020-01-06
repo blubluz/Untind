@@ -10,33 +10,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="A3o-13-fGO" customClass="DateCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="68"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="A3o-13-fGO" customClass="DateCollectionViewCell" customModule="Untind" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="78"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AYC-Cn-Pes">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="68"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="78"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELp-2j-p7x">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="68"/>
+                        <rect key="frame" x="0.0" y="7" width="400" height="64"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-1" translatesAutoresizingMaskIntoConstraints="NO" id="oEX-Bi-wdF">
-                                <rect key="frame" x="10" y="10" width="48" height="48"/>
+                                <rect key="frame" x="10" y="10" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oEX-Bi-wdF" secondAttribute="height" multiplier="1:1" id="Qr5-PJ-wVt"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mhf-gl-ge2">
-                                <rect key="frame" x="68" y="10" width="279.5" height="17"/>
+                                <rect key="frame" x="64" y="10" width="210" height="33.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="randomusername, F 24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BmM-nF-kgZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="214" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="randomusername, F 24" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="BmM-nF-kgZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="33.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" red="0.23529411764705882" green="0.30980392156862746" blue="0.36078431372549019" alpha="0.99309529049295775" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Today 14:25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AQ-EL-dle">
-                                        <rect key="frame" x="214" y="0.0" width="65.5" height="17"/>
+                                        <rect key="frame" x="105" y="0.0" width="105" height="33.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -44,10 +44,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aUN-aJ-igI">
-                                <rect key="frame" x="68" y="44" width="279.5" height="14"/>
+                                <rect key="frame" x="64" y="40" width="210" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sent you a date request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahs-i3-VaD">
-                                        <rect key="frame" x="0.0" y="0.0" width="279.5" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="210" height="14"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="0.98999999999999999" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -55,10 +55,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cfZ-Gv-uE8">
-                                <rect key="frame" x="357.5" y="0.0" width="32.5" height="68"/>
+                                <rect key="frame" x="284" y="0.0" width="106" height="64"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8r-7v-WNR">
-                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8r-7v-WNR">
+                                        <rect key="frame" x="0.0" y="8" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="F8r-7v-WNR" secondAttribute="height" multiplier="1:1" id="Miu-FV-3NL"/>
                                             <constraint firstAttribute="width" constant="48" id="wgu-2n-i80"/>
@@ -67,8 +67,8 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="reject-date-icon"/>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6St-oC-Yqk">
-                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6St-oC-Yqk">
+                                        <rect key="frame" x="58" y="8" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="7q1-hf-faR"/>
                                             <constraint firstAttribute="width" secondItem="6St-oC-Yqk" secondAttribute="height" multiplier="1:1" id="NOt-YZ-2ps"/>
@@ -80,17 +80,17 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="niY-S2-SeQ">
-                                <rect key="frame" x="357.5" y="0.0" width="42.5" height="68"/>
+                                <rect key="frame" x="364.5" y="0.0" width="35.5" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uE-7Q-HKL">
-                                        <rect key="frame" x="0.0" y="0.0" width="42.5" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="35.5" height="64"/>
                                         <color key="tintColor" red="0.43529411759999997" green="0.80784313730000001" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="15" maxX="5" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="30" maxX="7" maxY="15"/>
                                         <state key="normal" image="rotate"/>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="niY-S2-SeQ" secondAttribute="height" multiplier="1:1.6" id="ukt-gJ-Vdk"/>
+                                    <constraint firstAttribute="width" secondItem="niY-S2-SeQ" secondAttribute="height" multiplier="1:1.8" id="ukt-gJ-Vdk"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -118,14 +118,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ELp-2j-p7x" firstAttribute="leading" secondItem="AYC-Cn-Pes" secondAttribute="leading" id="3bx-50-a56"/>
-                    <constraint firstAttribute="bottom" secondItem="ELp-2j-p7x" secondAttribute="bottom" id="COD-ot-bP0"/>
-                    <constraint firstItem="ELp-2j-p7x" firstAttribute="top" secondItem="AYC-Cn-Pes" secondAttribute="top" id="kHy-n4-QSA"/>
+                    <constraint firstAttribute="bottom" secondItem="ELp-2j-p7x" secondAttribute="bottom" constant="7" id="COD-ot-bP0"/>
+                    <constraint firstItem="ELp-2j-p7x" firstAttribute="top" secondItem="AYC-Cn-Pes" secondAttribute="top" constant="7" id="kHy-n4-QSA"/>
                     <constraint firstAttribute="trailing" secondItem="ELp-2j-p7x" secondAttribute="trailing" id="lzo-MY-yLv"/>
                 </constraints>
             </collectionViewCellContentView>
-            <size key="customSize" width="400" height="68"/>
+            <size key="customSize" width="400" height="78"/>
             <connections>
-                <outlet property="acceptDateButton" destination="6St-oC-Yqk" id="YzD-85-a4M"/>
+                <outlet property="acceptDateButton" destination="6St-oC-Yqk" id="8QX-Kq-3bs"/>
                 <outlet property="avatarImageView" destination="oEX-Bi-wdF" id="xzN-A9-Vc1"/>
                 <outlet property="cancelDateButton" destination="F8r-7v-WNR" id="Uxw-6T-aqO"/>
                 <outlet property="containerView" destination="ELp-2j-p7x" id="qv2-qu-bWF"/>
@@ -135,7 +135,7 @@
                 <outlet property="titleLabel" destination="BmM-nF-kgZ" id="Jor-0P-6Sv"/>
                 <outlet property="turnCellButton" destination="9uE-7Q-HKL" id="Mld-S2-TpR"/>
             </connections>
-            <point key="canvasLocation" x="488.40579710144931" y="209.59821428571428"/>
+            <point key="canvasLocation" x="488.40579710144931" y="212.94642857142856"/>
         </collectionViewCell>
     </objects>
     <resources>

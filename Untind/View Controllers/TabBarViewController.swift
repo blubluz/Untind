@@ -145,6 +145,9 @@ class TabBarViewController: UIViewController, PresentationViewController {
     @IBAction func feedButtonTapped(_ sender: UITabBarButton) {
         moveCircle(toButton: sender)
         
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+            self.circleView.backgroundColor = UIColor(red: 249, green: 219, blue: 202, alpha: 1)
+        }, completion: nil)
         
         //Remove old
         currentDisplayedViewController?.willMove(toParent: nil)
@@ -172,7 +175,36 @@ class TabBarViewController: UIViewController, PresentationViewController {
         }
     }
     @IBAction func chatButtonTapped(_ sender: UITabBarButton) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+            self.circleView.backgroundColor = UIColor(red: 209, green: 229, blue: 188, alpha: 1)
+        }, completion: nil)
         moveCircle(toButton: sender)
+        
+        //Remove old
+           currentDisplayedViewController?.willMove(toParent: nil)
+           currentDisplayedViewController?.view.removeFromSuperview()
+           self.currentDisplayedViewController?.removeFromParent()
+           
+           
+           let feedVc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "DatesNavigationController") as! UINavigationController
+           self.currentDisplayedViewController = feedVc
+           self.addChild(feedVc)
+           
+           if let profileVcView = feedVc.view {
+               self.controllerContainerView.addSubview(profileVcView)
+               
+               profileVcView.translatesAutoresizingMaskIntoConstraints = false
+               controllerContainerView.addConstraints([
+                   profileVcView.leadingAnchor.constraint(equalTo: controllerContainerView.leadingAnchor),
+                   profileVcView.topAnchor.constraint(equalTo: controllerContainerView.topAnchor),
+                   profileVcView.trailingAnchor.constraint(equalTo: controllerContainerView.trailingAnchor),
+                   profileVcView.bottomAnchor.constraint(equalTo: controllerContainerView.bottomAnchor)])
+               
+               for constraint in profileVcView.constraints {
+                   constraint.isActive = true
+               }
+           }
     }
     
     @IBAction func notificationsButtonTapped(_ sender: UITabBarButton) {

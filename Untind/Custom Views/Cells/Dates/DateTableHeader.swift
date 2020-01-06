@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-class DateTableHeader : UIView {
-    private lazy var titleLabel : UILabel = {
+class DateTableHeader : UICollectionReusableView {
+    lazy var titleLabel : UILabel = {
        let l = UILabel()
         self.addSubview(l)
         l.activateConstraints([
@@ -19,6 +19,7 @@ class DateTableHeader : UIView {
             l.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 7.5),
             l.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)])
         l.font = UIFont.helveticaNeue(weight: .regular, size: 12)
+        l.textColor = UIColor(red: 60, green: 79, blue: 92, alpha: 1)
         
         return l
     }()
