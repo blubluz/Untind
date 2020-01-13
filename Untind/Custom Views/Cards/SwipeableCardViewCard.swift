@@ -117,7 +117,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        topViewOptions.alpha = 0 //start with questions first
+        topViewOptions.alpha = 0 // start with questions first
         
         bottomView.layer.cornerRadius = 20
         topView.layer.cornerRadius = 20

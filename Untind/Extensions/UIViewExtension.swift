@@ -86,8 +86,32 @@ extension UIView {
             ])
     }
     
+    
+    /// Activates all the constrains in the array.
+    ///
+    /// - Parameter constraints: the constraints to activate
     func activateConstraints(_ constraints: [NSLayoutConstraint]) {
         self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(constraints)
     }
+    
+    /// Sets the anchor point of the layer relative to view bounds
+    /// Useful for scale transform animations
+    /// - Parameter anchorPoint Anchor point
+    func set(anchorPoint: CGPoint) {
+
+           let originalPosition = CGPoint(x: frame.midX, y: frame.midY)
+
+           let width = bounds.width
+           let height = bounds.height
+
+           let newXPosition = originalPosition.x +  (anchorPoint.x - 0.5) * width
+           let newYPosition = originalPosition.y + (anchorPoint.y - 0.5) * height
+
+           layer.anchorPoint = anchorPoint
+
+           layer.position = CGPoint(x: newXPosition,
+                                    y: newYPosition)
+       }
+    
 }

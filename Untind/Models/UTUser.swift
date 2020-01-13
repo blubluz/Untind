@@ -135,6 +135,11 @@ struct Profile {
         ]
     }
     
+    
+    func inviteOnDate(completion: @escaping (Error?, Bool) -> Void) {
+        
+    }
+    
     func getDate(completion: @escaping (Error?, UntindDate?) -> Void) {
         let db = Firestore.firestore()
         db.collection("dates").document(uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)).getDocument { (snapshot, error) in

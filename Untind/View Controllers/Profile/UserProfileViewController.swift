@@ -283,6 +283,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 writeQVC.profile = profile
                 self.present(writeQVC, animated: true, completion: nil)
             case .canRequestDate:
+                let vc = SendDatePopup.instantiate()
+                vc.modalPresentationStyle = .overCurrentContext
+                Globals.tabBarController?.present(vc, animated: false, completion: nil)
                 break
             case .shouldGiveDateResult:
                 break

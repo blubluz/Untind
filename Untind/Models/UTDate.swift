@@ -76,7 +76,8 @@ class UntindDate: NSObject {
         
         
     }
-
+    
+    var id : String?
     var invited : Profile?
     var invitee : Profile?
     var dateTime : Date?
@@ -169,9 +170,57 @@ class UntindDate: NSObject {
         }
     }
     
+    static func fetch(forUserId userId: String, completion: @escaping (Error?, [UntindDate]) -> Void) {
+        let db = Firestore.firestore()
+        var dates : [UntindDate] = []
+        var localError : Error?
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        dispatchGroup.enter()
+        dispatchGroup.notify(queue: .main) {
+            completion(localError, dates)
+        }
+        
+        db.collectionGroup("dates").whereField(FieldPath(["invited","uid"]), isEqualTo: userId).getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                localError = err
+                print("Error getting dates: \(err)")
+            } else {
+                if let documents = snapshot?.documents {
+                    for document in documents {
+                        let date = UntindDate(with: document)
+                        dates.append(date)
+                    }
+                }
+            }
+            dispatchGroup.leave()
+        }
+        
+        db.collectionGroup("dates").whereField(FieldPath(["invitee","uid"]), isEqualTo: userId).getDocuments { (snapshot : QuerySnapshot?, error) in
+            if let err = error {
+                localError = err
+                print("Error getting dates: \(err)")
+            } else {
+                if let documents = snapshot?.documents {
+                    for document in documents {
+                        let date = UntindDate(with: document)
+                        dates.append(date)
+                    }
+                }
+            }
+            dispatchGroup.leave()
+        }
+    }
+    
     override init() {
         super.init()
     }
+    
+    convenience init(with document: DocumentSnapshot) {
+          self.init(with: document.data()!)
+          id = document.documentID
+      }
     
     init(with jsonDictionary: JSONDictionary) {
         if let invitedDict = jsonDictionary["invited"] as? JSONDictionary {

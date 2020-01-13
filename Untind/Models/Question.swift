@@ -91,6 +91,7 @@ class Question: NSObject {
             completion(error)
         }
     }
+    
     static func fetch(fromUserId fromId: String, toUserId toId: String, completion: @escaping (Error?, Question?) -> Void) {
            let db = Firestore.firestore()
              var question: Question?
@@ -106,7 +107,7 @@ class Question: NSObject {
         db.collectionGroup("questions").whereField(FieldPath(["author", "uid"]), isEqualTo: toId).whereField(FieldPath(["respondent", "uid"]), isEqualTo: fromId).getDocuments { (snapshot : QuerySnapshot?, error) in
               if let err = error {
                   localError = err
-                  print("Error getting documents: \(err)")
+                  print("Error getting question: \(err)")
               } else {
                   if let document = snapshot?.documents.last {
                       question = Question(with: document)
@@ -125,7 +126,7 @@ class Question: NSObject {
         db.collectionGroup("questions").whereField(FieldPath(["respondent", "uid"]), isEqualTo: toId).whereField(FieldPath(["author", "uid"]), isEqualTo: fromId).getDocuments { (snapshot : QuerySnapshot?, error) in
             if let err = error {
                 localError = err
-                print("Error getting documents: \(err)")
+                print("Error getting questions: \(err)")
             } else {
                 if let document = snapshot?.documents.last {
                     question = Question(with: document)
