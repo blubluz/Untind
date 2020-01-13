@@ -118,11 +118,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 print("Error loading date: \(error.localizedDescription)")
             } else if let date = date {
                 self.date = date
-                if date.myRelationshipStatus == .canAskQuestion {
-                  
-                } else {
-                    self.setupButtonFor(status: date.myRelationshipStatus)
-                }
+                self.setupButtonFor(status: date.myRelationshipStatus)
             }
         })
     }

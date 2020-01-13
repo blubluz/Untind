@@ -255,6 +255,10 @@ class UntindDate: NSObject {
             json["dateTime"] = dateTime
         }
         
+        if let question = self.privateQuestion {
+            json["privateQuestion"] = question.jsonValue()
+        }
+        
         json["isAccepted"] = isAccepted
         json["invitedResult"] = invitedResult.rawValue
         json["inviteeResult"] = inviteeResult.rawValue

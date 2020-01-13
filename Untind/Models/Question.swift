@@ -88,6 +88,36 @@ class Question: NSObject {
         self.respondent = toProfile
         let db = Firestore.firestore()
         db.collection("questions").addDocument(data: jsonValue()) { (error) in
+//            if error == nil && self.respondent != nil {
+//                let dateDocument = db.collection("dates").document(self.author.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
+//                      
+//                      dateDocument.getDocument { (snapshot, error) in
+//                          if error != nil {
+//                          } else {
+//                              if let data = snapshot?.data() {
+//                                  let date = UntindDate(with: data)
+//                                  date.privateQuestion = self
+//                                  if date.invitee == nil {
+//                                      date.invitee = UTUser.loggedUser?.userProfile
+//                                  } else if date.invited == nil {
+//                                      date.invited = UTUser.loggedUser?.userProfile
+//                                  }
+//                                  
+//                                  dateDocument.setData(date.jsonValue()) {
+//                                      (error) in
+//                                  }
+//                              } else {
+//                                  let date = UntindDate()
+//                                  date.privateQuestion = self
+//                                  date.invited = UTUser.loggedUser!.userProfile!
+//                                  
+//                                  dateDocument.setData(date.jsonValue()) {
+//                                      (error) in
+//                                  }
+//                              }
+//                          }
+//                      }
+//            }
             completion(error)
         }
     }

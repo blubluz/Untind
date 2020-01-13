@@ -10,6 +10,8 @@ import UIKit
 
 class UTAlertController: UIViewController {
 
+    static let messageFontSize : CGFloat = 14
+    static let titleFontSize : CGFloat = 20
     private var actions : [UTAlertAction] = []
     var backgroundColor : UIColor = UIColor.flatOrange
     var isDismissable : Bool = true
@@ -49,7 +51,7 @@ class UTAlertController: UIViewController {
             l.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 15),
             l.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -15)])
         l.numberOfLines = 2
-        l.font = UIFont.helveticaNeue(weight: .bold, size: 20)
+        l.font = UIFont.helveticaNeue(weight: .bold, size: UTAlertController.titleFontSize)
         l.textAlignment = .center
         l.textColor = UIColor.darkBlue
         return l
@@ -64,7 +66,7 @@ class UTAlertController: UIViewController {
             l.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -17)])
         
         l.numberOfLines = 9
-        l.font = UIFont.helveticaNeue(weight: .regular, size: 14)
+        l.font = UIFont.helveticaNeue(weight: .regular, size: UTAlertController.messageFontSize)
         l.textColor = UIColor.gray(value: 151)
         l.textAlignment = .center
         return l
@@ -90,7 +92,6 @@ class UTAlertController: UIViewController {
         view.backgroundColor = UIColor.clear
         self.actions = actions
         _ = backgroundTransparentView
-        _ = actionsStackView
         self.titleLabel.text = title
         if let message = message as? String {
             self.messageLabel.text = message
@@ -101,7 +102,7 @@ class UTAlertController: UIViewController {
             self.messageLabel.text = ""
         }
         
-        reloadActions()
+//        reloadActions()
     }
     
     init(title: String, message: String, actions: [UTAlertAction] = []) {
@@ -125,8 +126,14 @@ class UTAlertController: UIViewController {
     }
     
     func addNewAction(action: UTAlertAction) {
+        action.dismissAlert = {
+            self.dismiss(animated: true) {
+                if let handler = action.handler {
+                    handler()
+                }
+            }
+        }
         actions.append(action)
-        addActionButton(withAction: action)
     }
     
     
@@ -150,7 +157,7 @@ class UTAlertController: UIViewController {
         
         guard actions.count > 0 else {
             if isDismissable == true {
-                addActionButton(withAction: UTAlertAction(title: "Dismiss"))
+                addActionButton(withAction: UTAlertAction.dismiss)
             } else if isLoading == true {
                 //Add progress view
             }
@@ -164,7 +171,11 @@ class UTAlertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadActions()
     }
 }
 

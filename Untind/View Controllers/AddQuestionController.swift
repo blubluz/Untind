@@ -24,6 +24,15 @@ class AddQuestionController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //If we are posting publicly do proper setup
+        if profile == nil {
+            titleLabel.text = "Create post"
+            postButton.setTitle("Post", for: .normal)
+        } else {
+            titleLabel.text = "Ask a question"
+            postButton.setTitle("Send", for: .normal)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,11 +54,7 @@ class AddQuestionController: UIViewController {
     }
     
     @IBAction func postQuestionsTapped(_ sender: Any) {
-        let alertController = UTAlertController(title: "Success!!", message: "Your Question was sent successfully to _username_. We will notify you when they answer you")
-        self.present(alertController, animated: true, completion: nil)
-        return
-        
-        guard answerTextField.textField.text.count > 10 else {
+        guard answerTextField.textField.text.count > 0 else {
             present(UIAlertController.errorAlert(text: "Please write a longer question"), animated: true, completion: nil)
             return
         }
@@ -63,11 +68,15 @@ class AddQuestionController: UIViewController {
             if error != nil {
                 self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
             } else {
-                let alertController = UIAlertController(title: "Posted!", message: "Your question has been posted. You can find it in the questions screen.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                var alertMessage : NSAttributedString = NSAttributedString(string: "Your post is now in the public cards stack. You can find it in the profile section")
+                if self.profile != nil {
+                    alertMessage =  NSAttributedString(string: "Your question has been sent to \(self.profile!.username). You can find it in the profile section").boldAppearenceOf(string: self.profile!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFontSize))
+                }
+                let alertController = UTAlertController(title: "Success!", message:alertMessage)
+                let action = UTAlertAction(title: "Dismiss", {
                     self.dismiss(animated: true, completion: nil)
-                }))
-                
+                })
+                alertController.addNewAction(action: action)
                 self.present(alertController, animated: true, completion: nil)
             }
         }

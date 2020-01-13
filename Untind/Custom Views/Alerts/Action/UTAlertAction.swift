@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 class UTAlertAction : NSObject {
     var handler : (() -> Void)?
+    var dismissAlert : (() -> Void)?
     private(set) var title : String?
     private(set) var color : UIColor?
     
@@ -24,10 +25,10 @@ class UTAlertAction : NSObject {
     }
     
     @objc func executeAction() {
-        guard let handler = self.handler else {
+        guard let dismissAlert = self.dismissAlert else {
             return
         }
-        handler()
+        dismissAlert()
     }
     
     deinit {

@@ -12,14 +12,13 @@ import IHKeyboardAvoiding
 class AcceptDatePopup: UIViewController {
 
     var didAnimate : Bool = false
-    @IBOutlet weak var containerView: SwipeableCardView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var illustrationImageView: UIImageView!
     @IBOutlet weak var rescheduleButton: UIButton!
     @IBOutlet weak var orangeBackground: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        containerView.cardDelegate = self
         
         rescheduleButton.layer.shadowRadius = 12
         rescheduleButton.layer.shadowOffset = CGSize(width: 3.0, height: 6.0)
@@ -69,6 +68,21 @@ class AcceptDatePopup: UIViewController {
             
         }
     }
+    @IBAction func confirmButtonTapped(_ sender: Any) {
+         
+     }
+     
+     @IBAction func rescheduleButtonTapped(_ sender: Any) {
+         
+         let vc = RescheduleDatePopup.instantiate()
+         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+             self.view.backgroundColor = UIColor.clear
+             self.orangeBackground.alpha = 0.89
+             self.containerView.transform = CGAffineTransform(translationX: -450, y: -100).rotated(by: -CGFloat.pi/5)
+         }) { (completed) in self.navigationController?.pushViewController(vc, animated: false)
+         }
+         
+     }
 }
 
 extension AcceptDatePopup : SwipeableViewDelegate {
@@ -95,20 +109,7 @@ extension AcceptDatePopup : SwipeableViewDelegate {
             self.dismiss(animated: false, completion: nil)
             
         }
-    
-    @IBAction func confirmButtonTapped(_ sender: Any) {
-        
     }
     
-    @IBAction func rescheduleButtonTapped(_ sender: Any) {
-        
-        let vc = RescheduleDatePopup.instantiate()
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-            self.view.backgroundColor = UIColor.clear
-            self.orangeBackground.alpha = 0.89
-            self.containerView.transform = CGAffineTransform(translationX: -450, y: -100).rotated(by: -CGFloat.pi/5)
-        }) { (completed) in self.navigationController?.pushViewController(vc, animated: false)
-        }
-        
-    }
+ 
 }
