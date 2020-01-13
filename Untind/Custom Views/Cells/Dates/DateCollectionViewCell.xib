@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +17,88 @@
                 <rect key="frame" x="0.0" y="0.0" width="400" height="78"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eq-fQ-KVB">
+                        <rect key="frame" x="0.0" y="7" width="400" height="64"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0E-kh-rgv">
+                                <rect key="frame" x="0.0" y="7" width="357" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBS-hM-vbq">
+                                        <rect key="frame" x="0.0" y="0.0" width="178.5" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxF-MB-apg">
+                                                <rect key="frame" x="0.0" y="0.0" width="178.5" height="50"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                                <inset key="imageEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="cancel date" image="cancel-date-icon">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="NxF-MB-apg" secondAttribute="bottom" id="Kl3-ct-ahF"/>
+                                            <constraint firstItem="NxF-MB-apg" firstAttribute="top" secondItem="BBS-hM-vbq" secondAttribute="top" id="eK8-pl-C7S"/>
+                                            <constraint firstAttribute="trailing" secondItem="NxF-MB-apg" secondAttribute="trailing" id="fKd-8C-UB1"/>
+                                            <constraint firstItem="NxF-MB-apg" firstAttribute="leading" secondItem="BBS-hM-vbq" secondAttribute="leading" id="qSu-2G-dJF"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0M4-AQ-Xkk">
+                                        <rect key="frame" x="178.5" y="0.0" width="178.5" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gi3-Qh-0hX">
+                                                <rect key="frame" x="0.0" y="0.0" width="178.5" height="50"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                                <inset key="imageEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="reschedule date" image="reschedule-date-icon">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="gi3-Qh-0hX" secondAttribute="bottom" id="CVa-t0-0Tw"/>
+                                            <constraint firstAttribute="trailing" secondItem="gi3-Qh-0hX" secondAttribute="trailing" id="Fvt-eI-DoS"/>
+                                            <constraint firstItem="gi3-Qh-0hX" firstAttribute="leading" secondItem="0M4-AQ-Xkk" secondAttribute="leading" id="naG-5O-xkV"/>
+                                            <constraint firstItem="gi3-Qh-0hX" firstAttribute="top" secondItem="0M4-AQ-Xkk" secondAttribute="top" id="xvK-Ys-Vzf"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0M4-AQ-Xkk" firstAttribute="leading" secondItem="BBS-hM-vbq" secondAttribute="trailing" id="D99-rc-m4c"/>
+                                    <constraint firstItem="0M4-AQ-Xkk" firstAttribute="top" secondItem="W0E-kh-rgv" secondAttribute="top" id="I8o-40-WEe"/>
+                                    <constraint firstItem="0M4-AQ-Xkk" firstAttribute="width" secondItem="BBS-hM-vbq" secondAttribute="width" id="KgJ-kK-vRX"/>
+                                    <constraint firstAttribute="trailing" secondItem="0M4-AQ-Xkk" secondAttribute="trailing" id="bia-Gq-mWF"/>
+                                    <constraint firstItem="BBS-hM-vbq" firstAttribute="leading" secondItem="W0E-kh-rgv" secondAttribute="leading" id="dpY-kU-2ej"/>
+                                    <constraint firstAttribute="bottom" secondItem="0M4-AQ-Xkk" secondAttribute="bottom" id="jYH-0i-jfm"/>
+                                    <constraint firstItem="BBS-hM-vbq" firstAttribute="top" secondItem="W0E-kh-rgv" secondAttribute="top" id="vHs-0S-kWi"/>
+                                    <constraint firstAttribute="bottom" secondItem="BBS-hM-vbq" secondAttribute="bottom" id="wDr-dT-yDH"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLs-m1-xgZ" customClass="BiggerTapSizeButton" customModule="Untind" customModuleProvider="target">
+                                <rect key="frame" x="365" y="10" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="3ft-Kh-3JO"/>
+                                    <constraint firstAttribute="width" secondItem="XLs-m1-xgZ" secondAttribute="height" id="av4-ie-Zpm"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="rotate"/>
+                                <connections>
+                                    <action selector="didTapTurnButton:" destination="A3o-13-fGO" eventType="touchUpInside" id="Odr-uy-bBu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.49411764705882355" green="0.82745098039215681" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XLs-m1-xgZ" firstAttribute="top" secondItem="3eq-fQ-KVB" secondAttribute="top" constant="10" id="0kM-TZ-mnV"/>
+                            <constraint firstItem="W0E-kh-rgv" firstAttribute="leading" secondItem="3eq-fQ-KVB" secondAttribute="leading" id="3Mf-nT-gPl"/>
+                            <constraint firstAttribute="bottom" secondItem="W0E-kh-rgv" secondAttribute="bottom" constant="7" id="Tvd-HD-Uys"/>
+                            <constraint firstAttribute="trailing" secondItem="XLs-m1-xgZ" secondAttribute="trailing" constant="10" id="UHb-n6-FJn"/>
+                            <constraint firstItem="W0E-kh-rgv" firstAttribute="top" secondItem="3eq-fQ-KVB" secondAttribute="top" constant="7" id="n27-uC-eFL"/>
+                            <constraint firstItem="XLs-m1-xgZ" firstAttribute="leading" secondItem="W0E-kh-rgv" secondAttribute="trailing" constant="8" id="qj5-ib-c31"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELp-2j-p7x">
                         <rect key="frame" x="0.0" y="7" width="400" height="64"/>
                         <subviews>
@@ -66,6 +148,9 @@
                                         <color key="tintColor" red="0.94901960784313721" green="0.4823529411764706" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="reject-date-icon"/>
+                                        <connections>
+                                            <action selector="didTapCancelDate:" destination="A3o-13-fGO" eventType="touchUpInside" id="WTW-0b-ncE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6St-oC-Yqk">
                                         <rect key="frame" x="58" y="8" width="48" height="48"/>
@@ -90,6 +175,9 @@
                                 </constraints>
                                 <color key="tintColor" red="0.43529411759999997" green="0.80784313730000001" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="rotate"/>
+                                <connections>
+                                    <action selector="didTapTurnButton:" destination="A3o-13-fGO" eventType="touchUpInside" id="Icm-fn-3ui"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,7 +202,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ELp-2j-p7x" firstAttribute="leading" secondItem="AYC-Cn-Pes" secondAttribute="leading" id="3bx-50-a56"/>
+                    <constraint firstAttribute="trailing" secondItem="3eq-fQ-KVB" secondAttribute="trailing" id="Ah9-XT-gtt"/>
                     <constraint firstAttribute="bottom" secondItem="ELp-2j-p7x" secondAttribute="bottom" constant="7" id="COD-ot-bP0"/>
+                    <constraint firstAttribute="bottom" secondItem="3eq-fQ-KVB" secondAttribute="bottom" constant="7" id="NsU-3G-HX2"/>
+                    <constraint firstItem="3eq-fQ-KVB" firstAttribute="leading" secondItem="AYC-Cn-Pes" secondAttribute="leading" id="f5P-V0-QDD"/>
+                    <constraint firstItem="3eq-fQ-KVB" firstAttribute="top" secondItem="AYC-Cn-Pes" secondAttribute="top" constant="7" id="jAd-87-fzo"/>
                     <constraint firstItem="ELp-2j-p7x" firstAttribute="top" secondItem="AYC-Cn-Pes" secondAttribute="top" constant="7" id="kHy-n4-QSA"/>
                     <constraint firstAttribute="trailing" secondItem="ELp-2j-p7x" secondAttribute="trailing" id="lzo-MY-yLv"/>
                 </constraints>
@@ -124,10 +216,14 @@
                 <outlet property="acceptDateButton" destination="6St-oC-Yqk" id="8QX-Kq-3bs"/>
                 <outlet property="avatarImageView" destination="oEX-Bi-wdF" id="xzN-A9-Vc1"/>
                 <outlet property="cancelDateButton" destination="F8r-7v-WNR" id="Uxw-6T-aqO"/>
+                <outlet property="cancelDateView" destination="BBS-hM-vbq" id="hFd-TJ-xoF"/>
                 <outlet property="containerView" destination="ELp-2j-p7x" id="qv2-qu-bWF"/>
                 <outlet property="dateButtonsStackView" destination="cfZ-Gv-uE8" id="BH4-lv-Gko"/>
                 <outlet property="dateSentLabel" destination="8AQ-EL-dle" id="mJr-Cp-cut"/>
                 <outlet property="descriptionLabel" destination="ahs-i3-VaD" id="dcp-iZ-W59"/>
+                <outlet property="flippedContainerView" destination="3eq-fQ-KVB" id="Kaa-45-oyl"/>
+                <outlet property="flippedTurnButton" destination="XLs-m1-xgZ" id="tBY-LO-P0w"/>
+                <outlet property="rescheduleDateView" destination="0M4-AQ-Xkk" id="L4L-6T-VL7"/>
                 <outlet property="titleLabel" destination="BmM-nF-kgZ" id="Jor-0P-6Sv"/>
                 <outlet property="turnCellButton" destination="9uE-7Q-HKL" id="Mld-S2-TpR"/>
             </connections>
@@ -137,7 +233,9 @@
     <resources>
         <image name="accept-date-icon-1" width="48" height="48"/>
         <image name="avatar-1" width="142" height="150"/>
+        <image name="cancel-date-icon" width="24" height="24"/>
         <image name="reject-date-icon" width="48" height="48"/>
+        <image name="reschedule-date-icon" width="24" height="24"/>
         <image name="rotate" width="30" height="30"/>
     </resources>
 </document>

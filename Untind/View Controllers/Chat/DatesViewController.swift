@@ -122,13 +122,13 @@ extension DatesViewController : DateDelegate {
     }
     
     func didTapAcceptDate(date: UntindDate) {
-        let vc = AcceptDatePopup.instantiate()
-        vc.modalPresentationStyle = .overCurrentContext
-        Globals.tabBarController?.present(vc, animated: false, completion: nil)
+        let nav = UINavigationController(rootViewController: AcceptDatePopup.instantiate())
+        nav.modalPresentationStyle = .overCurrentContext
+        nav.setNavigationBarHidden(true, animated: false)
+        Globals.tabBarController?.present(nav, animated: false, completion: nil)
     }
     
     func didTapCancelDate(date: UntindDate) {
-        
     }
     
     func didTapRescheduleDate(date: UntindDate) {

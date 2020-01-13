@@ -15,7 +15,6 @@ target 'Untind' do
   pod 'FBSDKLoginKit'
 
   # Pods for Untind
-
   target 'UntindTests' do
     inherit! :search_paths
     # Pods for testing

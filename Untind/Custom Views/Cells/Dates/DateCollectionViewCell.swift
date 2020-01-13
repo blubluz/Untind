@@ -41,13 +41,20 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cancelDateButton: UIButton!
     @IBOutlet weak var acceptDateButton: UIButton!
     @IBOutlet weak var dateButtonsStackView: UIStackView!
+    @IBOutlet weak var flippedContainerView: UIView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var cancelDateView: UIView!
+    @IBOutlet weak var rescheduleDateView: UIView!
+    @IBOutlet weak var flippedTurnButton: BiggerTapSizeButton!
     weak var delegate : DateDelegate?
-    
+    var isFlipped : Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         containerView.layer.cornerRadius = 10.0
+        flippedContainerView.layer.cornerRadius = 10.0
+        
+        flippedTurnButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2)
     }
     
     @discardableResult
@@ -116,6 +123,25 @@ class DateCollectionViewCell: UICollectionViewCell {
     
     @IBAction func didTapAcceptDate(_ sender: Any) {
         delegate?.didTapAcceptDate(date: UntindDate())
+    }
+    @IBAction func didTapCancelDate(_ sender: Any) {
+        delegate?.didTapCancelDate(date: UntindDate())
+    }
+    
+    @IBAction func didTapTurnButton(_ sender: Any) {
+        if isFlipped {
+            isFlipped = false
+            UIView.transition(with: contentView, duration: 0.35, options: [.transitionFlipFromTop, .curveEaseInOut], animations: {
+                self.containerView.alpha = 1
+                self.flippedContainerView.alpha = 0
+            }, completion: nil)
+        } else {
+            isFlipped = true
+            UIView.transition(with: contentView, duration: 0.35, options: [.transitionFlipFromBottom], animations: {
+                self.containerView.alpha = 0
+                self.flippedContainerView.alpha = 1
+            }, completion: nil)
+        }
     }
     
 }
