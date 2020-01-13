@@ -11,14 +11,15 @@ import UIKit
 class AcceptDatePopup: UIViewController {
 
     var didAnimate : Bool = false
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerView: SwipeableCardView!
     @IBOutlet weak var illustrationImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        containerView.cardDelegate = self
         // Do any additional setup after loading the view.
     }
+    
     static func instantiate() -> AcceptDatePopup {
           let vc = AcceptDatePopup(nibName: "AcceptDatePopup", bundle: nil)
           return vc
@@ -52,15 +53,31 @@ class AcceptDatePopup: UIViewController {
             
         }
     }
-    
-    /*
-     // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension AcceptDatePopup : SwipeableViewDelegate {
+    func didTap(view: SwipeableView) {
+        
     }
-    */
-
+    
+    func didBeginSwipe(onView view: SwipeableView) {
+        
+    }
+    
+    func didEndSwipe(onView view: SwipeableView) {
+        
+    }
+    
+    func didSwipe(onView view: SwipeableView, percent: CGFloat) {
+        
+    }
+    
+    func didSwipeAway(onView view: SwipeableView) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
+            self.view.alpha = 0
+        }) { (finished) in
+            self.dismiss(animated: false, completion: nil)
+            
+        }
+    }
 }
