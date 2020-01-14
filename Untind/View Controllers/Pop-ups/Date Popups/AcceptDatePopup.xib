@@ -10,8 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AcceptDatePopup" customModule="Untind" customModuleProvider="target">
             <connections>
+                <outlet property="confirmButton" destination="B63-nO-JF2" id="aX8-A1-IqO"/>
                 <outlet property="containerView" destination="5uv-yP-Uuh" id="uad-Ip-CJM"/>
                 <outlet property="illustrationImageView" destination="Ahw-Sx-dOW" id="ZyI-jm-d2X"/>
+                <outlet property="messageLabel" destination="nXf-5W-VrC" id="r7B-u4-znS"/>
                 <outlet property="orangeBackground" destination="wlM-Sg-LN4" id="fgw-3B-BiT"/>
                 <outlet property="rescheduleButton" destination="vHU-Bm-aVg" id="b5D-FR-5Ap"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

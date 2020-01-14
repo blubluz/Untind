@@ -14,6 +14,7 @@
                 <outlet property="containerView" destination="J2l-Sh-yl4" id="w7J-lR-G9Q"/>
                 <outlet property="hourTextField" destination="bbU-wB-r16" id="e2F-bR-CZX"/>
                 <outlet property="illustrationImageView" destination="hTr-fA-Iln" id="mkc-SD-1Aw"/>
+                <outlet property="messageLabel" destination="Rz4-Xu-CFS" id="eMi-ww-KbH"/>
                 <outlet property="minutesTextField" destination="1sa-g9-R0z" id="gYh-jy-4gh"/>
                 <outlet property="pickerView" destination="6gQ-1o-leC" id="GEU-KK-Rg0"/>
                 <outlet property="view" destination="y91-T0-mwD" id="qKo-L8-N6K"/>
@@ -181,6 +182,9 @@
                                     <integer key="value" value="25"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="sendRequestTapped:" destination="-1" eventType="touchUpInside" id="OLH-Cn-B8D"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Alright! You ready?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="Tfe-vV-vA2">
                             <rect key="frame" x="31" y="77" width="179" height="24"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import IHKeyboardAvoiding
+import SVProgressHUD
 
 class RescheduleDatePopup: UIViewController {
     
@@ -17,9 +18,13 @@ class RescheduleDatePopup: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     let datePickerValues = ["Today", "Tommorow", "Wednesday"]
     var didAnimate : Bool = false
-    
+    var selectedPickerValue : Int = 0
+
     @IBOutlet weak var hourTextField: UITextField!
     @IBOutlet weak var minutesTextField: UITextField!
+    @IBOutlet weak var sendRequestButton: UIButton!
+    
+    var date : UntindDate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -40,7 +45,7 @@ class RescheduleDatePopup: UIViewController {
         hourTextField.layer.borderWidth = 2
         minutesTextField.layer.borderWidth = 2
         
-        
+        sendRequestButton.setAttributedTitle(NSAttributedString(string: "SEND REQUEST").boldAppearenceOf(string: "SEND", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 16), color: UIColor.flatOrange), for: .normal)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = true
@@ -98,6 +103,40 @@ class RescheduleDatePopup: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func sendRequestTapped(_ sender: Any) {
+        var selectedDate = Date()
+            if selectedPickerValue == 1 {
+                selectedDate = Date.tomorrow
+            } else if selectedPickerValue == 2 {
+                selectedDate = Date.tomorrow.dayAfter
+            }
+            
+            guard hourTextField.text?.count ?? 0 > 0, minutesTextField.text?.count ?? 0 > 0 else {
+                
+                return
+            }
+            
+            if let hour = Int(hourTextField.text!), let minute = Int(minutesTextField.text!), let date = Date.with(year: selectedDate.year, month: selectedDate.month, day: selectedDate.day, hour: hour, minute: minute) {
+                SVProgressHUD.show()
+                self.date?.invitee?.inviteOnDate(date: date) { (error, success, date) in
+                    SVProgressHUD.dismiss()
+                    if let error = error {
+                        self.present(UTAlertController(title: "Oops", message: "There was an error: \(error.localizedDescription)"), animated: true, completion: nil)
+                    } else {
+                        if success == true {
+                            let alert = UTAlertController(title: "Done!!", message: NSAttributedString(string: "You have suggested a different date and time to \( self.date?.invitee?.username ?? ""). You can track their response in your dates screen.").boldAppearenceOf(string:  self.date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue))
+                            let action = UTAlertAction(title: "Dismiss", {
+                                self.dismiss(animated: false, completion: nil)
+                            }, color: UIColor(red: 142, green: 196, blue: 246, alpha: 1))
+                            alert.addNewAction(action: action)
+                            self.present(alert, animated: true, completion: nil)
+
+                        }
+                    }
+                }
+    }
+    }
+    
 }
 
 extension RescheduleDatePopup : PickerViewDataSource, PickerViewDelegate {
@@ -118,6 +157,6 @@ extension RescheduleDatePopup : PickerViewDataSource, PickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UTPickerView, didSelectRow row: Int) {
-        print(datePickerValues[row])
+        selectedPickerValue = row
     }
 }

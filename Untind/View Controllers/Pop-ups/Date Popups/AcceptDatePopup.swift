@@ -8,6 +8,7 @@
 
 import UIKit
 import IHKeyboardAvoiding
+import SVProgressHUD
 
 class AcceptDatePopup: UIViewController {
 
@@ -15,7 +16,11 @@ class AcceptDatePopup: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var illustrationImageView: UIImageView!
     @IBOutlet weak var rescheduleButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var orangeBackground: UIImageView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    var date : UntindDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +28,13 @@ class AcceptDatePopup: UIViewController {
         rescheduleButton.layer.shadowRadius = 12
         rescheduleButton.layer.shadowOffset = CGSize(width: 3.0, height: 6.0)
         rescheduleButton.layer.shadowOpacity = 0.4
+        
+        let messageString = NSAttributedString(string: "You will be set up for a date with \n\(date?.invitee?.username ?? "") once you confirm their \nproposed date and time:").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkGray).withLineSpacing(5)
+        
+        messageLabel.attributedText = messageString
+        
+        confirmButton.setAttributedTitle(NSAttributedString(string: "OK, LETS DO THIS!").boldAppearenceOf(string: "OK", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 16), color: UIColor.teal2), for: .normal)
+        
         
     }
     
@@ -69,12 +81,31 @@ class AcceptDatePopup: UIViewController {
         }
     }
     @IBAction func confirmButtonTapped(_ sender: Any) {
-         
+        SVProgressHUD.show()
+        date?.answer(didAccept: true, completion: { (error, date) in
+            if error != nil {
+                let title = "Oops"
+                let message = NSAttributedString(string: "There was an error: \(error?.localizedDescription ?? "")")
+                let alert = UTAlertController(title: title, message: message, backgroundColor: UIColor.teal2, backgroundAlpha: 1)
+                let action = UTAlertAction(title: "Dismiss", color: UIColor.teal2)
+                alert.addNewAction(action: action)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let title = "All set, Get ready!"
+                let message = NSAttributedString(string: "You have accepted a date with \(date?.invitee?.username ?? ""), \(date?.dateTime?.toFormattedString() ?? ""). This will show up on your upcoming dates. Good luck!").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize)).boldAppearenceOf(string: date?.dateTime?.toFormattedString() , withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize))
+                let alert = UTAlertController(title: title, message: message, backgroundColor: UIColor.teal2, backgroundAlpha: 1)
+                let action = UTAlertAction(title: "Dismiss", {
+                    self.dismiss(animated: false, completion: nil)
+                }, color: UIColor.teal2)
+                alert.addNewAction(action: action)
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
      }
      
      @IBAction func rescheduleButtonTapped(_ sender: Any) {
-         
          let vc = RescheduleDatePopup.instantiate()
+         vc.date = self.date
          UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
              self.view.backgroundColor = UIColor.clear
              self.orangeBackground.alpha = 0.89

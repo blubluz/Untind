@@ -26,6 +26,10 @@ struct AddAnswerError : LocalizedError {
     }
 }
 
+enum AcceptDateError : Error {
+    case missingUser
+}
+
 enum GetUserProfileError : Error {
     case userNotLoggedIn
     case userProfileNotFound

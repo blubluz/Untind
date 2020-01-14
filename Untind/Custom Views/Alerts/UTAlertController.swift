@@ -10,19 +10,20 @@ import UIKit
 
 class UTAlertController: UIViewController {
 
-    static let messageFontSize : CGFloat = 14
-    static let titleFontSize : CGFloat = 20
+    static let messageFont : UIFont = UIFont.helveticaNeue(weight: .regular, size: 14)
+    static let titleFont : UIFont = UIFont.helveticaNeue(weight: .bold, size: 20)
     private var actions : [UTAlertAction] = []
-    var backgroundColor : UIColor = UIColor.flatOrange
     var isDismissable : Bool = true
     var isLoading : Bool = false
     
     lazy private(set) var backgroundTransparentView : UIView = {
         let v = UIView()
         v.tag = UIViewTags.alertBackground.rawValue
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissController))
-        tapGesture.numberOfTapsRequired = 1
-        v.addGestureRecognizer(tapGesture)
+        if(self.isDismissable == true){
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissController))
+            tapGesture.numberOfTapsRequired = 1
+            v.addGestureRecognizer(tapGesture)
+        }
         self.view.addSubview(v)
         self.view.edgeConstrain(subView: v)
         v.backgroundColor = UIColor(white: 0, alpha: 0.17)
@@ -51,7 +52,7 @@ class UTAlertController: UIViewController {
             l.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 15),
             l.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -15)])
         l.numberOfLines = 2
-        l.font = UIFont.helveticaNeue(weight: .bold, size: UTAlertController.titleFontSize)
+        l.font = UTAlertController.titleFont
         l.textAlignment = .center
         l.textColor = UIColor.darkBlue
         return l
@@ -66,7 +67,7 @@ class UTAlertController: UIViewController {
             l.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -17)])
         
         l.numberOfLines = 9
-        l.font = UIFont.helveticaNeue(weight: .regular, size: UTAlertController.messageFontSize)
+        l.font = UTAlertController.messageFont
         l.textColor = UIColor.gray(value: 151)
         l.textAlignment = .center
         return l
@@ -86,13 +87,15 @@ class UTAlertController: UIViewController {
         return sv
     }()
     
-    func commonInit(title: String, message: Any, actions: [UTAlertAction] = []) {
+    func commonInit(title: String, message: Any, actions: [UTAlertAction] = [], backgroundColor: UIColor = UIColor.flatOrange, backgroundAlpha: CGFloat = 0.5) {
         self.transitioningDelegate = self
         self.modalPresentationStyle = .custom
         view.backgroundColor = UIColor.clear
         self.actions = actions
         _ = backgroundTransparentView
         self.titleLabel.text = title
+        backgroundTransparentView.backgroundColor = backgroundColor
+        backgroundTransparentView.alpha = backgroundAlpha
         if let message = message as? String {
             self.messageLabel.text = message
             self.messageLabel.attributedText = NSAttributedString(string: message).withLineSpacing(5.5, andAlignment: .center)
@@ -105,14 +108,14 @@ class UTAlertController: UIViewController {
 //        reloadActions()
     }
     
-    init(title: String, message: String, actions: [UTAlertAction] = []) {
+    init(title: String, message: String, actions: [UTAlertAction] = [], backgroundColor: UIColor = UIColor.flatOrange, backgroundAlpha: CGFloat = 0.5) {
         super.init(nibName: nil, bundle: nil)
-        commonInit(title: title, message: message, actions: actions)
+        commonInit(title: title, message: message, actions: actions, backgroundColor: backgroundColor, backgroundAlpha: backgroundAlpha)
     }
     
-    init(title: String, message: NSAttributedString, actions: [UTAlertAction] = []) {
+    init(title: String, message: NSAttributedString, actions: [UTAlertAction] = [], backgroundColor: UIColor = UIColor.flatOrange, backgroundAlpha: CGFloat = 0.5) {
         super.init(nibName: nil, bundle: nil)
-       commonInit(title: title, message: message, actions: actions)
+       commonInit(title: title, message: message, actions: actions, backgroundColor: backgroundColor, backgroundAlpha: backgroundAlpha)
     }
     
     required init?(coder: NSCoder) {

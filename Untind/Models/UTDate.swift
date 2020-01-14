@@ -14,6 +14,8 @@ enum DateResult : Double {
     case noAnswer = 0
     case accepted = 1
 }
+
+
 class UntindDate: NSObject {
     enum RelationshipStatus {
         case canAskQuestion
@@ -38,7 +40,7 @@ class UntindDate: NSObject {
         }
         
         var interactionState : InteractionState  {
-            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult, .waitingQuestionAnswer]
+            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult, .waitingQuestionAnswer, .shouldAnswerQuestion,.shouldAnswerDateRequest]
             
             if interactiveStatuses.contains(self) {
                 return .interactive
@@ -53,6 +55,8 @@ class UntindDate: NSObject {
                 return "Ask a question"
             case .canRequestDate:
                 return "Send a date request"
+            case .shouldAnswerDateRequest:
+                return "Answer date request"
             case .shouldAnswerQuestion:
                 return "Answer private question"
             case .dateStarted:
@@ -210,6 +214,28 @@ class UntindDate: NSObject {
                 }
             }
             dispatchGroup.leave()
+        }
+    }
+    
+    func answer(didAccept: Bool, completion: @escaping (Error?, UntindDate?) -> Void) {
+        guard let invited = self.invited, let invitee = self.invitee else {
+            completion(AcceptDateError.missingUser, nil)
+            return
+        }
+        self.isAccepted = true
+        if didAccept == false {
+            self.invitedResult = .rejected
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("dates").document(invited.uid.combineUniquelyWith(string: invitee.uid)).setData(jsonValue()) { (error) in
+            if error != nil {
+                self.isAccepted = false
+                self.invitedResult = .noAnswer
+                completion(error,nil)
+            } else {
+                completion(nil,self)
+            }
         }
     }
     

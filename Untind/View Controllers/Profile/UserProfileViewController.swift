@@ -58,12 +58,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             userNameLabel.text = profile.username
         }
         
+        interactionButton.layer.cornerRadius = 24.5
         prepareForAnimations()
-        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadData()
+        prepareForAnimations()
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,7 +87,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func prepareForAnimations() {
-        interactionButton.layer.cornerRadius = 24.5
         
         self.interactionButton.transform = CGAffineTransform(translationX: 0, y: 150)
     }
@@ -112,7 +113,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 self.collectionView.reloadData()
             }
         }
-        
+        if profile?.uid != UTUser.loggedUser?.userProfile?.uid {
+            
+        }
         profile?.getDate(completion: { (error, date) in
             if let error = error {
                 print("Error loading date: \(error.localizedDescription)")
@@ -280,23 +283,30 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 self.present(writeQVC, animated: true, completion: nil)
             case .canRequestDate:
                 let vc = SendDatePopup.instantiate()
+                vc.invitedPerson = profile
                 vc.modalPresentationStyle = .overCurrentContext
                 Globals.tabBarController?.present(vc, animated: false, completion: nil)
                 break
             case .shouldGiveDateResult:
                 break
-            case .waitingQuestionAnswer:
+            case .waitingQuestionAnswer, .shouldAnswerQuestion:
                 if let question = date.privateQuestion {
                     let questionVc = QuestionViewController.instantiate()
                     questionVc.question = question
                     self.navigationController?.pushViewController(questionVc, animated: false)
                 }
                 break
+            case.shouldAnswerDateRequest:
+                let vc = AcceptDatePopup.instantiate()
+                vc.date = date
+                vc.modalPresentationStyle = .overCurrentContext
+                Globals.tabBarController?.present(vc, animated: false, completion: nil)
+                break
             default:
                 return
             }
         }
-    }
+    } 
     
     @IBAction func sendMessageTapped(_ sender: Any) {
         Globals.mainNavigationController?.pushViewController(ChatViewController.instantiate(), animated: true)

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension NSAttributedString {
-    func withLineSpacing(_ spacing: CGFloat, andAlignment alignment: NSTextAlignment = .center) -> NSAttributedString {
+    func withLineSpacing(_ spacing: CGFloat, andAlignment alignment: NSTextAlignment = .left) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = spacing
@@ -20,8 +20,11 @@ extension NSAttributedString {
     }
     
     
-    func boldAppearenceOf(string: String, withBoldFont boldFont: UIFont, color: UIColor? = nil) -> NSMutableAttributedString {
-
+    func boldAppearenceOf(string: String?, withBoldFont boldFont: UIFont, color: UIColor? = nil) -> NSMutableAttributedString {
+        guard let string = string else {
+            return NSMutableAttributedString(attributedString: self)
+        }
+        
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(attributedString: self)
         let pattern = string.lowercased()
         let range: NSRange = NSMakeRange(0, attributedString.string.count)
@@ -44,5 +47,4 @@ extension NSAttributedString {
         
         return attributedString
     }
-    
 }

@@ -135,11 +135,6 @@ struct Profile {
         ]
     }
     
-    
-    func inviteOnDate(completion: @escaping (Error?, Bool) -> Void) {
-        
-    }
-    
     func getDate(completion: @escaping (Error?, UntindDate?) -> Void) {
         let db = Firestore.firestore()
         db.collection("dates").document(uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)).getDocument { (snapshot, error) in
@@ -164,6 +159,47 @@ struct Profile {
                     completion(error,date)
                 }
                 
+            }
+        }
+    }
+    
+    func inviteOnDate(date: Date, completion: @escaping(Error?,Bool, UntindDate?) -> Void) {
+        let db = Firestore.firestore()
+        let dateDocument = db.collection("dates").document(self.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
+        
+        dateDocument.getDocument { (snapshot, error) in
+            if error != nil {
+                completion(error,false,nil)
+            } else {
+                if let data = snapshot?.data () {
+                    let utDate = UntindDate(with: data)
+                    utDate.invited = self
+                    utDate.invitee = UTUser.loggedUser?.userProfile
+                    utDate.dateTime = date
+                    utDate.privateQuestion = nil
+                    dateDocument.setData(utDate.jsonValue()) {
+                        (error) in
+                        if error != nil {
+                            completion(error, false,nil)
+                        } else {
+                            completion(nil,true,utDate)
+                        }
+                    }
+                } else {
+                    let utDate = UntindDate()
+                    utDate.invited = self
+                    utDate.invitee = UTUser.loggedUser?.userProfile
+                    utDate.dateTime = date
+                    
+                    dateDocument.setData(utDate.jsonValue()) {
+                        (error) in
+                        if error != nil {
+                            completion(error, false,nil)
+                        } else {
+                            completion(nil,true,utDate)
+                        }
+                    }
+                }
             }
         }
     }

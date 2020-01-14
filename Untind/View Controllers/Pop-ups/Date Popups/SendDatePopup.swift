@@ -8,17 +8,23 @@
 
 import UIKit
 import IHKeyboardAvoiding
+import SVProgressHUD
 
 class SendDatePopup: UIViewController {
 
     @IBOutlet weak var pickerView: UTPickerView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var closeButton: UIView!
     @IBOutlet weak var illustrationImageView: UIImageView!
+    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var hourTextField: UITextField!
     @IBOutlet weak var minutesTextField: UITextField!
-    let datePickerValues = ["Today", "Tommorow", "Wednesday"]
+    
+    let datePickerValues = ["Today", "Tommorow", Date.tomorrow.dayAfter.dayName]
+    var selectedPickerValue : Int = 0
     var didAnimate : Bool = false
-    @IBOutlet weak var closeButton: UIView!
+    var invitedPerson : Profile?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +45,11 @@ class SendDatePopup: UIViewController {
         view.addGestureRecognizer(tap)
         
         KeyboardAvoiding.avoidingView = self.containerView
+        
+        hourTextField.delegate = self
+        minutesTextField.delegate = self
+        
+        messageLabel.attributedText = NSAttributedString(string: "Lets set up a date with \(invitedPerson?.username ?? ""). \n To begin, pick up a day and a time slot and they will be notified. Good luck!").boldAppearenceOf(string: invitedPerson?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkGray).withLineSpacing(5)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +101,40 @@ class SendDatePopup: UIViewController {
                     
                 }
        }
+    
+    @IBAction func sendRequestTapped(_ sender: Any) {
+        var selectedDate = Date()
+        if selectedPickerValue == 1 {
+            selectedDate = Date.tomorrow
+        } else if selectedPickerValue == 2 {
+            selectedDate = Date.tomorrow.dayAfter
+        }
+        
+        guard hourTextField.text?.count ?? 0 > 0, minutesTextField.text?.count ?? 0 > 0, let profile = self.invitedPerson else {
+            
+            return
+        }
+        
+        if let hour = Int(hourTextField.text!), let minute = Int(minutesTextField.text!), let date = Date.with(year: selectedDate.year, month: selectedDate.month, day: selectedDate.day, hour: hour, minute: minute) {
+            SVProgressHUD.show()
+            profile.inviteOnDate(date: date) { (error, success, date) in
+                SVProgressHUD.dismiss()
+                if let error = error {
+                    self.present(UTAlertController(title: "Oops", message: "There was an error: \(error.localizedDescription)"), animated: true, completion: nil)
+                } else {
+                    if success == true {
+                        let alert = UTAlertController(title: "Success!", message: NSAttributedString(string: "Your date request was successfully sent to \(profile.username). You can track their response in your dates.").boldAppearenceOf(string: profile.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue))
+                        let action = UTAlertAction(title: "Dismiss", {
+                            self.dismiss(animated: false, completion: nil)
+                        }, color: UIColor(red: 142, green: 196, blue: 246, alpha: 1))
+                        alert.addNewAction(action: action)
+                        self.present(alert, animated: true, completion: nil)
+
+                    }
+                }
+            }
+        }
+    }
 }
 
 
@@ -111,6 +156,33 @@ extension SendDatePopup : PickerViewDataSource, PickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UTPickerView, didSelectRow row: Int) {
-        print(datePickerValues[row] )
+        selectedPickerValue = row
+    }
+}
+
+extension SendDatePopup : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text, let swiftRange = Range(range, in: oldText) else {
+            return true
+        }
+        
+        let newText = oldText.replacingCharacters(in: swiftRange, with: string)
+        if let numericValue = Int(newText) {
+            if textField == hourTextField {
+                if numericValue < 0 || numericValue>23 {
+                    return false
+                }
+                return true
+            }
+            if textField == minutesTextField {
+                if numericValue < 0 || numericValue > 59 {
+                    return false
+                }
+                return true
+            }
+            return true
+        } else {
+            return false
+        }
     }
 }

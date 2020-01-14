@@ -70,11 +70,11 @@ class AddQuestionController: UIViewController {
             } else {
                 var alertMessage : NSAttributedString = NSAttributedString(string: "Your post is now in the public cards stack. You can find it in the profile section")
                 if self.profile != nil {
-                    alertMessage =  NSAttributedString(string: "Your question has been sent to \(self.profile!.username). You can find it in the profile section").boldAppearenceOf(string: self.profile!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFontSize))
+                    alertMessage =  NSAttributedString(string: "Your question has been sent to \(self.profile!.username). You can find it in the profile section").boldAppearenceOf(string: self.profile!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize))
                 }
                 let alertController = UTAlertController(title: "Success!", message:alertMessage)
                 let action = UTAlertAction(title: "Dismiss", {
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: false, completion: nil)
                 })
                 alertController.addNewAction(action: action)
                 self.present(alertController, animated: true, completion: nil)

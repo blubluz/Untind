@@ -16,6 +16,7 @@
                 <outlet property="illustrationImageView" destination="9Ve-KY-1Yy" id="Kgg-Az-n6Z"/>
                 <outlet property="minutesTextField" destination="ndJ-1R-X4L" id="5sa-Pb-TX9"/>
                 <outlet property="pickerView" destination="Mvr-yk-acg" id="NE5-Aa-zAB"/>
+                <outlet property="sendRequestButton" destination="XTN-5m-3V1" id="OIk-Kx-EQu"/>
                 <outlet property="view" destination="qYn-GD-laP" id="gOn-2X-Jxt"/>
             </connections>
         </placeholder>
@@ -192,6 +193,9 @@
                                     <integer key="value" value="25"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="sendRequestTapped:" destination="-1" eventType="touchUpInside" id="JxR-ge-W8m"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44u-t0-0XJ">
                             <rect key="frame" x="-17" y="120" width="55" height="55"/>
