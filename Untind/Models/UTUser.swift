@@ -208,4 +208,13 @@ struct Profile {
 enum Gender : String, Codable{
     case male
     case female
+    
+    var shortGender : String {
+        switch self {
+        case .male:
+            return "M"
+        case .female:
+            return "F"
+        }
+    }
 }

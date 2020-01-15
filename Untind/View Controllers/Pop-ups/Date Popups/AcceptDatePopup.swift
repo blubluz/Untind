@@ -24,7 +24,7 @@ class AcceptDatePopup: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                                            
         rescheduleButton.layer.shadowRadius = 12
         rescheduleButton.layer.shadowOffset = CGSize(width: 3.0, height: 6.0)
         rescheduleButton.layer.shadowOpacity = 0.4

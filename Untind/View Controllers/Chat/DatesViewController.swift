@@ -11,7 +11,11 @@ import UIKit
 class DatesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    var dates : [UntindDate] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,20 @@ class DatesViewController: UIViewController {
 //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //            layout.sectionHeadersPinToVisibleBounds = true
 //        }
+    }
+    
+    func loadData() {
+        guard let userId = UTUser.loggedUser?.userProfile?.uid else {
+            return
+        }
+        
+        UntindDate.fetch(forUserId: userId) { (error, dates) in
+            if let error = error {
+                self.present(UTAlertController(title: "Oops", message: "There was an error loading dates: \(error.localizedDescription)"), animated: true, completion: nil)
+            } else {
+                self.dates = dates
+            }
+        }
     }
 }
 
@@ -129,6 +147,16 @@ extension DatesViewController : DateDelegate {
     }
     
     func didTapCancelDate(date: UntindDate) {
+        let alert = UTAlertController(title: "Decline request", message: "Are you sure you want to decline this date request?", backgroundColor: UIColor(red: 234, green: 244, blue: 223, alpha: 1), backgroundAlpha: 0.5)
+        let yesAction = UTAlertAction(title: "Yes", {
+            
+        }, color: UIColor(red: 126, green: 211, blue: 33, alpha: 1))
+        let noAction = UTAlertAction(title: "No", {
+            
+        }, color: UIColor.flatOrange)
+        alert.addNewAction(action: yesAction)
+        alert.addNewAction(action: noAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func didTapRescheduleDate(date: UntindDate) {

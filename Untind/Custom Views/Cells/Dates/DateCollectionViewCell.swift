@@ -48,6 +48,7 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var flippedTurnButton: BiggerTapSizeButton!
     weak var delegate : DateDelegate?
     var isFlipped : Bool = false
+    var date : UntindDate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +56,84 @@ class DateCollectionViewCell: UICollectionViewCell {
         flippedContainerView.layer.cornerRadius = 10.0
         
         flippedTurnButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2)
+    }
+    
+    @discardableResult
+    func update(with date: UntindDate) -> DateCollectionViewCell {
+        configureForStatus(date.myRelationshipStatus)
+        switch date.myRelationshipStatus {
+        case .shouldAnswerDateRequest:
+            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+            descriptionLabel.text = "sent you a date request"
+        case .dateScheduled:
+            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age), invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+            descriptionLabel.text = "Date starting in 15 min"
+        case .dateStarted:
+            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+            descriptionLabel.text = "Date ends in 00:04 min"
+        case .chatStarted:
+        titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+        descriptionLabel.text = "This is a message"
+        case .waitingDateAnswer:
+            if date.invitee!.uid == UTUser.loggedUser?.userProfile?.uid {
+                self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+            } else {
+                self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+            }
+            descriptionLabel.text = "awaiting a response"
+        case .waitingDateResult:
+            if date.invitedResult == .noAnswer {
+                if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
+                    self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                } else {
+                    self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                    
+                }
+                self.descriptionLabel.text = "waiting for your response"
+                
+            } else if date.inviteeResult == .noAnswer {
+                if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
+                    self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                } else {
+                    self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                    
+                }
+                self.descriptionLabel.text = "awaiting their response"
+            }
+        default:
+            break
+        }
+        return self
+    }
+    
+    func configureForStatus(_ status: UntindDate.RelationshipStatus) {
+        switch status {
+        case .shouldAnswerDateRequest:
+            turnCellButton.isHidden = true
+            dateSentLabel.isHidden = true
+        case .dateScheduled:
+        cancelDateButton.isHidden = true
+        acceptDateButton.isHidden = true
+        case .dateStarted:
+        cancelDateButton.isHidden = true
+        acceptDateButton.isHidden = true
+        dateSentLabel.isHidden = true
+        turnCellButton.isHidden = true
+        case .chatStarted:
+        cancelDateButton.isHidden = true
+        acceptDateButton.isHidden = true
+        turnCellButton.isHidden = true
+            containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
+        case .waitingDateAnswer,.waitingDateResult:
+        cancelDateButton.isHidden = true
+        acceptDateButton.isHidden = true
+        dateSentLabel.isHidden = true
+        containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
+        descriptionLabel.textColor = UIColor.white
+        turnCellButton.tintColor = UIColor.white
+        default:
+            return
+        }
     }
     
     @discardableResult

@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import SwiftyJSON
-import IHKeyboardAvoiding
 
 class FeedViewController: UIViewController {
 
@@ -31,8 +30,15 @@ class FeedViewController: UIViewController {
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         topBarView.tag = UIViewTags.feedTopBar.rawValue
-        
-        
+
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillAppear),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+                  selector: #selector(keyboardWillDisappear),
+                  name: UIResponder.keyboardWillHideNotification,
+                  object: nil)
         let db = Firestore.firestore()
         
         db.collection("questions").getDocuments { (querySnapshot : QuerySnapshot?, error) in
@@ -60,7 +66,6 @@ class FeedViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        KeyboardAvoiding.avoidingView = self.swipeableCardViewContainer
      
     }
     
@@ -71,7 +76,6 @@ class FeedViewController: UIViewController {
     
     //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     

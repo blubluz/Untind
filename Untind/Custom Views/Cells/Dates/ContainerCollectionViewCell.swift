@@ -13,6 +13,7 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     @IBOutlet weak var collectionView: UICollectionView!
     var cellType : DateCellTestType = .upcomingDate
     weak var delegate : DateDelegate?
+    var dates : [UntindDate] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()

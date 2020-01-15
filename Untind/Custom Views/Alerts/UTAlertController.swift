@@ -76,7 +76,7 @@ class UTAlertController: UIViewController {
     lazy private var actionsStackView : UIStackView = {
        let sv = UIStackView()
         alertView.addSubview(sv)
-        
+        sv.distribution = .fillEqually
         sv.activateConstraints([
             sv.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 0),
             sv.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 0),
@@ -94,8 +94,8 @@ class UTAlertController: UIViewController {
         self.actions = actions
         _ = backgroundTransparentView
         self.titleLabel.text = title
-        backgroundTransparentView.backgroundColor = backgroundColor
-        backgroundTransparentView.alpha = backgroundAlpha
+        backgroundTransparentView.backgroundColor = backgroundColor.withAlphaComponent(backgroundAlpha)
+        
         if let message = message as? String {
             self.messageLabel.text = message
             self.messageLabel.attributedText = NSAttributedString(string: message).withLineSpacing(5.5, andAlignment: .center)
@@ -238,7 +238,7 @@ class UTAlertControllerAnimator :NSObject, UIViewControllerAnimatedTransitioning
         }
         
         UIView.animate(withDuration: isPresenting ? duration : 0.2, delay: 0, usingSpringWithDamping: isPresenting ? 0.7 : 1, initialSpringVelocity: isPresenting ? 0.4 : 0, options: .curveEaseIn, animations: {
-            alert?.transform = self.isPresenting ? CGAffineTransform.identity : CGAffineTransform(scaleX: 1, y: 0.01)
+            alert?.transform = self.isPresenting ? CGAffineTransform.identity : CGAffineTransform(scaleX: 0.01, y: 0.01)
             }) { (finished) in
                 if !self.isPresenting{
                     temporaryView.removeFromSuperview()

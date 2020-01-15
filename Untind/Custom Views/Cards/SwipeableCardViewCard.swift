@@ -68,7 +68,6 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
                 answerTextField.textField.becomeFirstResponder()
                 Async.main {
                     self.answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
-                    
                 }
                 
                 self.commentsButton.setImage(#imageLiteral(resourceName: "rotate"), for: .normal)
@@ -82,7 +81,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
                     self.answerButton.setImage(UIImage(named: "answer-icon"), for: .normal)
                 }
                 self.commentsButton.setImage(nil, for: .normal)
-                self.commentsButton.setTitle("12 COMMENTS", for: .normal)
+                self.commentsButton.setTitle("\(question?.answersCount ?? 0) COMMENTS", for: .normal)
                 self.commentsButton.transform = CGAffineTransform.identity
                 animateAnswerOptions(onScreen: false)
 
@@ -162,7 +161,6 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     @IBAction func turnButtonTapped(_ sender: Any) {
         if isFlipped {
             isFlipped = false
-            
             UIView.transition(with: topView, duration: 0.35, options: [.transitionFlipFromLeft,.curveEaseInOut], animations: {
                 self.topViewOptions.alpha = 0
                 self.topViewQuestions.alpha = 1
