@@ -9,7 +9,9 @@
 import UIKit
 import IHKeyboardAvoiding
 import SVProgressHUD
-
+protocol DatePopupDelegate : NSObject {
+    func didAcceptDate(date: UTDate)
+}
 class AcceptDatePopup: UIViewController {
 
     var didAnimate : Bool = false
@@ -19,8 +21,9 @@ class AcceptDatePopup: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var orangeBackground: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
-    
-    var date : UntindDate?
+    @IBOutlet weak var dateTimeLabel: UILabel!
+    weak var delegate : DatePopupDelegate?
+    var date : UTDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,7 @@ class AcceptDatePopup: UIViewController {
         let messageString = NSAttributedString(string: "You will be set up for a date with \n\(date?.invitee?.username ?? "") once you confirm their \nproposed date and time:").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkGray).withLineSpacing(5)
         
         messageLabel.attributedText = messageString
-        
+        dateTimeLabel.text = ""
         confirmButton.setAttributedTitle(NSAttributedString(string: "OK, LETS DO THIS!").boldAppearenceOf(string: "OK", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 16), color: UIColor.teal2), for: .normal)
         
         

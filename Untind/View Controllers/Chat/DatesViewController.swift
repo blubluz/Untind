@@ -11,9 +11,36 @@ import UIKit
 class DatesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var dates : [UntindDate] = [] {
+    var dates : [UTDate] = [] {
         didSet {
             self.collectionView.reloadData()
+        }
+    }
+    
+    var dateRequests : [UTDate] {
+        return dates.filter { (date) -> Bool in
+           return date.myRelationshipStatus == .shouldAnswerDateRequest
+        }
+    }
+    
+    var upcomingDates : [UTDate] {
+        return dates.filter { (date) -> Bool in
+            return date.myRelationshipStatus == .dateScheduled
+        }
+    }
+    
+    var activeDates : [UTDate] {
+        let _dates = dates.filter { (date) -> Bool in
+            return date.myRelationshipStatus == .dateStarted || date.myRelationshipStatus == .chatStarted
+        }
+        return _dates.sorted { (date1, date2) -> Bool in
+            return date1.myRelationshipStatus == .dateStarted
+        }
+    }
+    
+    var pendingDates : [UTDate] {
+        return dates.filter { (date) -> Bool in
+            return date.myRelationshipStatus == .waitingDateResult || date.myRelationshipStatus == .waitingDateAnswer
         }
     }
     
@@ -30,10 +57,7 @@ class DatesViewController: UIViewController {
         collectionView.register(DateTableHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
         collectionView.register(UINib(nibName: "ContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContainerCollectionViewCell")
         collectionView.register(UINib(nibName: "DateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DateCollectionViewCell")
-        // Makes header stay visible while scrolling
-//        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            layout.sectionHeadersPinToVisibleBounds = true
-//        }
+        self.loadData()
     }
     
     func loadData() {
@@ -41,7 +65,7 @@ class DatesViewController: UIViewController {
             return
         }
         
-        UntindDate.fetch(forUserId: userId) { (error, dates) in
+        UTDate.fetch(forUserId: userId) { (error, dates) in
             if let error = error {
                 self.present(UTAlertController(title: "Oops", message: "There was an error loading dates: \(error.localizedDescription)"), animated: true, completion: nil)
             } else {
@@ -55,20 +79,35 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! DateTableHeader
+        headerView.frame.size.height = 35
         switch indexPath.section {
         case 0:
-            headerView.titleLabel.text = "3 DATE REQUESTS"
+            if dateRequests.count == 1 {
+                headerView.titleLabel.text = "\(dateRequests.count) DATE REQUEST"
+            } else {
+                headerView.titleLabel.text = "\(dateRequests.count) DATE REQUESTS"
+            }
+            if dateRequests.count == 0 {
+                headerView.frame.size.height = 0
+            }
         case 1:
-            headerView.titleLabel.text = "2 UPCOMING DATES"
+            headerView.titleLabel.text = "\(upcomingDates.count) UPCOMING DATES"
+            if upcomingDates.count == 0 {
+                headerView.frame.size.height = 0
+            }
         case 2:
-            headerView.titleLabel.text = "3 ACTIVE DATES"
+            headerView.titleLabel.text = "\(activeDates.count) ACTIVE DATES"
+            if activeDates.count == 0 {
+                headerView.frame.size.height = 0
+            }
         case 3:
-            headerView.titleLabel.text = "3 PENDING DATES"
+            headerView.titleLabel.text = "\(pendingDates.count) PENDING DATES"
+            if pendingDates.count == 0 {
+                headerView.frame.size.height = 0
+            }
         default:
             break
         }
-
-        headerView.frame.size.height = 35
 
         return headerView
     }
@@ -84,9 +123,9 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         case 1:
             return 1
         case 2:
-            return 3
+            return activeDates.count
         case 3:
-            return 3
+            return pendingDates.count
         default:
             return 0
         }
@@ -96,28 +135,21 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         switch indexPath.section {
         case 0:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContainerCollectionViewCell", for: indexPath) as! ContainerCollectionViewCell
-        cell.configureWithType(type: .newDateRequest)
+        
+        cell.configureWithDates(dates: self.dateRequests)
         cell.delegate = self
         return cell
         case 1:
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContainerCollectionViewCell", for: indexPath) as! ContainerCollectionViewCell
-        cell.configureWithType(type: .upcomingDate)
+        cell.configureWithDates(dates: self.upcomingDates)
         return cell
         case 2:
-            var cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "DateCollectionViewCell", for: indexPath) as! DateCollectionViewCell)
-            if indexPath.row == 0 {
-                cell = cell.update(with: .activeDate1)
-            } else {
-                cell = cell.update(with: .activeDate2)
-            }
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "DateCollectionViewCell", for: indexPath) as! DateCollectionViewCell)
+            cell.update(with: self.activeDates[indexPath.row])
             return cell
         case 3:
-            var cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "DateCollectionViewCell", for: indexPath) as! DateCollectionViewCell)
-            if indexPath.row == 0 {
-                cell = cell.update(with: .pendingInvite)
-            } else {
-                cell = cell.update(with: .pendingResponse)
-            }
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "DateCollectionViewCell", for: indexPath) as! DateCollectionViewCell)
+            cell.update(with: self.pendingDates[indexPath.row])
             return cell
         default:
             return UICollectionViewCell()
@@ -135,18 +167,21 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension DatesViewController : DateDelegate {
-    func didTapRejectDate(date: UntindDate) {
+    func didTapRejectDate(date: UTDate) {
         
     }
     
-    func didTapAcceptDate(date: UntindDate) {
-        let nav = UINavigationController(rootViewController: AcceptDatePopup.instantiate())
+    func didTapAcceptDate(date: UTDate) {
+        let vc = AcceptDatePopup.instantiate()
+        vc.date = date
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overCurrentContext
         nav.setNavigationBarHidden(true, animated: false)
         Globals.tabBarController?.present(nav, animated: false, completion: nil)
     }
     
-    func didTapCancelDate(date: UntindDate) {
+    func didTapCancelDate(date: UTDate) {
         let alert = UTAlertController(title: "Decline request", message: "Are you sure you want to decline this date request?", backgroundColor: UIColor(red: 234, green: 244, blue: 223, alpha: 1), backgroundAlpha: 0.5)
         let yesAction = UTAlertAction(title: "Yes", {
             
@@ -159,9 +194,16 @@ extension DatesViewController : DateDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func didTapRescheduleDate(date: UntindDate) {
+    func didTapRescheduleDate(date: UTDate) {
         
     }
-    
-    
+}
+
+extension DatesViewController : DatePopupDelegate {
+    func didAcceptDate(date: UTDate) {
+        if let row = self.dates.firstIndex(where: { $0.id == date.id }) {
+            dates[row] = date
+            collectionView.reloadData()
+        }
+    }
 }

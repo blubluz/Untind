@@ -173,7 +173,7 @@ class Answer: NSObject {
                 dispatchGroup.leave()
             } else {
                 if let data = snapshot?.data() {
-                    let date = UntindDate(with: data)
+                    let date = UTDate(with: data)
                     if date.invitee == nil {
                         date.invitee = self.question!.author
                     } else if date.invited == nil {
@@ -186,7 +186,7 @@ class Answer: NSObject {
                         dispatchGroup.leave()
                     }
                 } else {
-                    let date = UntindDate()
+                    let date = UTDate()
                     date.invited = self.question!.author
                     
                     dateDocument.setData(date.jsonValue()) {

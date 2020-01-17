@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="confirmButton" destination="B63-nO-JF2" id="aX8-A1-IqO"/>
                 <outlet property="containerView" destination="eaD-kP-BR1" id="S0f-qq-0GF"/>
+                <outlet property="dateTimeLabel" destination="gUL-jR-wmY" id="n3S-vw-DvX"/>
                 <outlet property="illustrationImageView" destination="Ahw-Sx-dOW" id="ZyI-jm-d2X"/>
                 <outlet property="messageLabel" destination="nXf-5W-VrC" id="r7B-u4-znS"/>
                 <outlet property="orangeBackground" destination="wlM-Sg-LN4" id="fgw-3B-BiT"/>

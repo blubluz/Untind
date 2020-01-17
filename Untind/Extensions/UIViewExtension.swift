@@ -56,7 +56,7 @@ extension UIView {
                                attribute: .top,
                                relatedBy: .equal,
                                toItem: self,
-                               attribute: .topMargin,
+                               attribute: .top,
                                multiplier: 1.0,
                                constant: 0),
             // Bottom

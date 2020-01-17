@@ -33,7 +33,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var sexAgeLabel: UILabel!
     
     var profile: Profile?
-    var date: UntindDate?
+    var date: UTDate?
     var questions : [Question]?
     var answers : [Answer]?
     
@@ -126,7 +126,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         })
     }
     
-    func setupButtonFor(status: UntindDate.RelationshipStatus, didSendQuestion : Bool = false) {
+    func setupButtonFor(status: UTDate.RelationshipStatus, didSendQuestion : Bool = false) {
         if let buttonText = status.buttonText {
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.6, options: .curveEaseIn, animations: {
                 self.interactionButton.transform = CGAffineTransform.identity

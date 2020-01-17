@@ -141,12 +141,14 @@ class UTAlertController: UIViewController {
     
     
     private func addActionButton(withAction action: UTAlertAction) {
-        if action.handler == nil {
-            action.handler = {
-                Async.main {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
+        if action.dismissAlert == nil {
+              action.dismissAlert = {
+                      self.dismiss(animated: true) {
+                          if let handler = action.handler {
+                              handler()
+                          }
+                      }
+                  }
         }
         
         let actionButton = UTAlertButton(action: action)

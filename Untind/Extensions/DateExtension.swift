@@ -25,6 +25,20 @@ extension Date {
         }
     }
     
+    func dateTimeString() -> String {
+          let dateFormatter = DateFormatter()
+          dateFormatter.dateFormat = "HH:mm"
+          dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        if Calendar.current.isDateInToday(self) {
+            return "Today, \(dateFormatter.string(from: self))"
+        } else if Calendar.current.isDateInTomorrow(self) {
+            return "Tommorow, \(dateFormatter.string(from: self))"
+        } else {
+            return "\(self.dayName). \(dateFormatter.string(from: self))"
+        }
+    }
+    
     static var yesterday: Date { return Date().dayBefore }
     static var tomorrow:  Date { return Date().dayAfter }
     var dayBefore: Date {

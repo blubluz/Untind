@@ -15,7 +15,7 @@ class UTAlertAction : NSObject {
     private(set) var color : UIColor?
     
     static var dismiss : UTAlertAction {
-        return UTAlertAction(title: "Dismiss", nil, color: .flatOrange)
+        return UTAlertAction(title: "Dismiss", nil, color: UIColor.flatOrange)
     }
     
     init(title: String, _ handler: (() -> Void)? = nil, color: UIColor = UIColor.flatOrange) {

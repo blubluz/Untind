@@ -24,7 +24,7 @@ class RescheduleDatePopup: UIViewController {
     @IBOutlet weak var minutesTextField: UITextField!
     @IBOutlet weak var sendRequestButton: UIButton!
     
-    var date : UntindDate?
+    var date : UTDate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

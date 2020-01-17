@@ -16,7 +16,7 @@ enum DateResult : Double {
 }
 
 
-class UntindDate: NSObject {
+class UTDate: NSObject {
     enum RelationshipStatus {
         case canAskQuestion
         case waitingQuestionAnswer
@@ -30,6 +30,7 @@ class UntindDate: NSObject {
         case chatStarted
         case shouldGiveDateResult
         case waitingDateResult
+        case dateRequestExpired
         case youRejected
         case heRejected
         case unknown
@@ -73,6 +74,8 @@ class UntindDate: NSObject {
                 return "Waiting for date result"
             case .waitingDateAnswer:
                 return "Waiting for date answer"
+            case .dateRequestExpired:
+                return "Date Request Expired"
             default:
                 return nil
             }
@@ -121,6 +124,9 @@ class UntindDate: NSObject {
             } else {
                 if let dateScheduledTime = dateTime {
                     if isAccepted == false {
+                        if dateScheduledTime < Date() {
+                            return .dateRequestExpired
+                        } else
                         if me?.uid == invited?.uid {
                             return .shouldAnswerDateRequest
                         } else {
@@ -174,9 +180,9 @@ class UntindDate: NSObject {
         }
     }
     
-    static func fetch(forUserId userId: String, completion: @escaping (Error?, [UntindDate]) -> Void) {
+    static func fetch(forUserId userId: String, completion: @escaping (Error?, [UTDate]) -> Void) {
         let db = Firestore.firestore()
-        var dates : [UntindDate] = []
+        var dates : [UTDate] = []
         var localError : Error?
         let dispatchGroup = DispatchGroup()
         
@@ -193,7 +199,7 @@ class UntindDate: NSObject {
             } else {
                 if let documents = snapshot?.documents {
                     for document in documents {
-                        let date = UntindDate(with: document)
+                        let date = UTDate(with: document)
                         dates.append(date)
                     }
                 }
@@ -208,7 +214,7 @@ class UntindDate: NSObject {
             } else {
                 if let documents = snapshot?.documents {
                     for document in documents {
-                        let date = UntindDate(with: document)
+                        let date = UTDate(with: document)
                         dates.append(date)
                     }
                 }
@@ -217,7 +223,7 @@ class UntindDate: NSObject {
         }
     }
     
-    func answer(didAccept: Bool, completion: @escaping (Error?, UntindDate?) -> Void) {
+    func answer(didAccept: Bool, completion: @escaping (Error?, UTDate?) -> Void) {
         guard let invited = self.invited, let invitee = self.invitee else {
             completion(AcceptDateError.missingUser, nil)
             return

@@ -13,7 +13,7 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     @IBOutlet weak var collectionView: UICollectionView!
     var cellType : DateCellTestType = .upcomingDate
     weak var delegate : DateDelegate?
-    var dates : [UntindDate] = []
+    var dates : [UTDate] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +22,12 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     
     override func prepareForReuse() {
         super.prepareForReuse()
+    }
+    func configureWithDates(dates: [UTDate]) {
+        self.dates = dates
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        self.collectionView.reloadData()
     }
     
     func configureWithType(type: DateCellTestType) {
@@ -32,11 +38,11 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-          return 2
+        return self.dates.count
       }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(DateCollectionViewCell.self, for: indexPath).update(with: cellType)
+        let cell = collectionView.dequeue(DateCollectionViewCell.self, for: indexPath).update(with: self.dates[indexPath.row])
         cell.delegate = self.delegate
         return cell
     }

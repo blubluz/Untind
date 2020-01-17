@@ -95,7 +95,7 @@ class Question: NSObject {
                           if error != nil {
                           } else {
                               if let data = snapshot?.data() {
-                                  let date = UntindDate(with: data)
+                                  let date = UTDate(with: data)
                                   date.privateQuestion = self
                                   if date.invitee == nil {
                                       date.invitee = UTUser.loggedUser?.userProfile
@@ -107,7 +107,7 @@ class Question: NSObject {
                                       (error) in
                                   }
                               } else {
-                                  let date = UntindDate()
+                                  let date = UTDate()
                                   date.privateQuestion = self
                                   date.invited = UTUser.loggedUser!.userProfile!
                                   

@@ -18,15 +18,15 @@ enum DateCellTestType {
 }
 
 protocol DateDelegate : NSObject {
-    func didTapRejectDate(date: UntindDate)
-    func didTapAcceptDate(date: UntindDate)
-    func didTapCancelDate(date: UntindDate)
-    func didTapRescheduleDate(date: UntindDate)
-    func didTapDate(date: UntindDate)
+    func didTapRejectDate(date: UTDate)
+    func didTapAcceptDate(date: UTDate)
+    func didTapCancelDate(date: UTDate)
+    func didTapRescheduleDate(date: UTDate)
+    func didTapDate(date: UTDate)
 }
 
 extension DateDelegate {
-    func didTapDate(date: UntindDate) {
+    func didTapDate(date: UTDate) {
         
     }
 }
@@ -48,7 +48,7 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var flippedTurnButton: BiggerTapSizeButton!
     weak var delegate : DateDelegate?
     var isFlipped : Bool = false
-    var date : UntindDate?
+    var date : UTDate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,20 +59,21 @@ class DateCollectionViewCell: UICollectionViewCell {
     }
     
     @discardableResult
-    func update(with date: UntindDate) -> DateCollectionViewCell {
+    func update(with date: UTDate) -> DateCollectionViewCell {
+        self.date = date
         configureForStatus(date.myRelationshipStatus)
         switch date.myRelationshipStatus {
         case .shouldAnswerDateRequest:
-            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.text = "sent you a date request"
         case .dateScheduled:
-            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age), invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age), invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.text = "Date starting in 15 min"
         case .dateStarted:
-            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.text = "Date ends in 00:04 min"
         case .chatStarted:
-        titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkGray)
+        titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
         descriptionLabel.text = "This is a message"
         case .waitingDateAnswer:
             if date.invitee!.uid == UTUser.loggedUser?.userProfile?.uid {
@@ -106,7 +107,7 @@ class DateCollectionViewCell: UICollectionViewCell {
         return self
     }
     
-    func configureForStatus(_ status: UntindDate.RelationshipStatus) {
+    func configureForStatus(_ status: UTDate.RelationshipStatus) {
         switch status {
         case .shouldAnswerDateRequest:
             turnCellButton.isHidden = true
@@ -201,10 +202,14 @@ class DateCollectionViewCell: UICollectionViewCell {
     //MARK: - Button actions
     
     @IBAction func didTapAcceptDate(_ sender: Any) {
-        delegate?.didTapAcceptDate(date: UntindDate())
+        if let date = self.date {
+            delegate?.didTapAcceptDate(date: date)
+        }
     }
     @IBAction func didTapCancelDate(_ sender: Any) {
-        delegate?.didTapCancelDate(date: UntindDate())
+        if let date = self.date {
+            delegate?.didTapCancelDate(date: date)
+        }
     }
     
     @IBAction func didTapTurnButton(_ sender: Any) {

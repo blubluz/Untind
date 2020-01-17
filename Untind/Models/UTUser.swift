@@ -135,15 +135,15 @@ struct Profile {
         ]
     }
     
-    func getDate(completion: @escaping (Error?, UntindDate?) -> Void) {
+    func getDate(completion: @escaping (Error?, UTDate?) -> Void) {
         let db = Firestore.firestore()
         db.collection("dates").document(uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)).getDocument { (snapshot, error) in
             if let error = error {
                 completion(error, nil)
             } else {
-                var date : UntindDate = UntindDate()
+                var date : UTDate = UTDate()
                 if let data = snapshot?.data() {
-                    date = UntindDate(with: data)
+                    date = UTDate(with: data)
                 }
 
                 if date.myRelationshipStatus == .canAskQuestion {
@@ -152,7 +152,7 @@ struct Profile {
                             date.privateQuestion = question
                             completion(error, date)
                         } else {
-                            completion(error,UntindDate())
+                            completion(error,UTDate())
                         }
                     }
                 } else {
@@ -163,7 +163,7 @@ struct Profile {
         }
     }
     
-    func inviteOnDate(date: Date, completion: @escaping(Error?,Bool, UntindDate?) -> Void) {
+    func inviteOnDate(date: Date, completion: @escaping(Error?,Bool, UTDate?) -> Void) {
         let db = Firestore.firestore()
         let dateDocument = db.collection("dates").document(self.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
         
@@ -172,7 +172,7 @@ struct Profile {
                 completion(error,false,nil)
             } else {
                 if let data = snapshot?.data () {
-                    let utDate = UntindDate(with: data)
+                    let utDate = UTDate(with: data)
                     utDate.invited = self
                     utDate.invitee = UTUser.loggedUser?.userProfile
                     utDate.dateTime = date
@@ -186,7 +186,7 @@ struct Profile {
                         }
                     }
                 } else {
-                    let utDate = UntindDate()
+                    let utDate = UTDate()
                     utDate.invited = self
                     utDate.invitee = UTUser.loggedUser?.userProfile
                     utDate.dateTime = date
