@@ -86,6 +86,7 @@ class AcceptDatePopup: UIViewController {
     @IBAction func confirmButtonTapped(_ sender: Any) {
         SVProgressHUD.show()
         date?.answer(didAccept: true, completion: { (error, date) in
+        SVProgressHUD.dismiss()
             if error != nil {
                 let title = "Oops"
                 let message = NSAttributedString(string: "There was an error: \(error?.localizedDescription ?? "")")
@@ -94,6 +95,7 @@ class AcceptDatePopup: UIViewController {
                 alert.addNewAction(action: action)
                 self.present(alert, animated: true, completion: nil)
             } else {
+                self.delegate?.didAcceptDate(date: self.date!)
                 let title = "All set, Get ready!"
                 let message = NSAttributedString(string: "You have accepted a date with \(date?.invitee?.username ?? ""), \(date?.dateTime?.toFormattedString() ?? ""). This will show up on your upcoming dates. Good luck!").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize)).boldAppearenceOf(string: date?.dateTime?.toFormattedString() , withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize))
                 let alert = UTAlertController(title: title, message: message, backgroundColor: UIColor.teal2, backgroundAlpha: 1)

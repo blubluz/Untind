@@ -67,7 +67,8 @@ class DateCollectionViewCell: UICollectionViewCell {
             titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.text = "sent you a date request"
         case .dateScheduled:
-            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age), invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
+            let titleMessage = date.invitee?.uid == UTUser.loggedUser?.userProfile?.uid ? "You invited \(date.invited?.username ?? "")." : "\(date.invitee?.username ?? " invited you.")"
+            titleLabel.attributedText = NSAttributedString(string: titleMessage).boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.text = "Date starting in 15 min"
         case .dateStarted:
             titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
