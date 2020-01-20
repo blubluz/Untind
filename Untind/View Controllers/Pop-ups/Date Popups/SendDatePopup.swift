@@ -19,12 +19,13 @@ class SendDatePopup: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var hourTextField: UITextField!
     @IBOutlet weak var minutesTextField: UITextField!
+    @IBOutlet weak var containerBottomConstraint: NSLayoutConstraint!
     
     let datePickerValues = ["Today", "Tommorow", Date.tomorrow.dayAfter.dayName]
     var selectedPickerValue : Int = 0
     var didAnimate : Bool = false
     var invitedPerson : Profile?
-    
+    weak var delegate : DatePopupDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +45,21 @@ class SendDatePopup: UIViewController {
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
         
-        KeyboardAvoiding.avoidingView = self.containerView
-        
         hourTextField.delegate = self
         minutesTextField.delegate = self
         
         messageLabel.attributedText = NSAttributedString(string: "Lets set up a date with \(invitedPerson?.username ?? ""). \n To begin, pick up a day and a time slot and they will be notified. Good luck!").boldAppearenceOf(string: invitedPerson?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkGray).withLineSpacing(5)
+        
+        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillAppear),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+                  selector: #selector(keyboardWillDisappear),
+                  name: UIResponder.keyboardWillHideNotification,
+                  object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +76,35 @@ class SendDatePopup: UIViewController {
                
                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                }, completion: nil)
-           }
+        }
+    }
+    
+    // MARK: - Keyboard Handling
+    @objc func keyboardWillAppear(_ notification : Notification) {
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+            let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+                self.containerBottomConstraint.constant = 303
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            containerBottomConstraint.constant = 303
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    
+    @objc func keyboardWillDisappear(_ notification : Notification) {
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+            let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+                self.containerBottomConstraint.constant = 53
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            containerBottomConstraint.constant = 53
+            self.view.layoutIfNeeded()
+        }
     }
     
     //MARK: - Helper functions
@@ -120,10 +158,14 @@ class SendDatePopup: UIViewController {
             profile.inviteOnDate(date: date) { (error, success, date) in
                 SVProgressHUD.dismiss()
                 if let error = error {
-                    self.present(UTAlertController(title: "Oops", message: "There was an error: \(error.localizedDescription)"), animated: true, completion: nil)
+                    self.present(UTAlertController(title: "Oops", message: "\(error.localizedDescription)"), animated: true, completion: nil)
                 } else {
                     if success == true {
-                        let alert = UTAlertController(title: "Success!", message: NSAttributedString(string: "Your date request was successfully sent to \(profile.username). You can track their response in your dates.").boldAppearenceOf(string: profile.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue))
+                        if let date = date {
+                            self.delegate?.didEdit(date: date)
+                        }
+                        
+                        let alert = UTAlertController(title: "Success!!", message: NSAttributedString(string: "Your date request was successfully sent to \(profile.username). You can track their response in your dates.").boldAppearenceOf(string: profile.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue), backgroundColor: UIColor(red: 142, green: 196, blue: 246, alpha: 1), backgroundAlpha: 1)
                         let action = UTAlertAction(title: "Dismiss", {
                             self.dismiss(animated: false, completion: nil)
                         }, color: UIColor(red: 142, green: 196, blue: 246, alpha: 1))
@@ -160,7 +202,17 @@ extension SendDatePopup : PickerViewDataSource, PickerViewDelegate {
     }
 }
 
+//MARK: - TextFieldDelegate
 extension SendDatePopup : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == hourTextField {
+            minutesTextField.becomeFirstResponder()
+        } else {
+            self.view.endEditing(true)
+        }
+        return true
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let oldText = textField.text, let swiftRange = Range(range, in: oldText) else {
             return true
@@ -182,7 +234,11 @@ extension SendDatePopup : UITextFieldDelegate {
             }
             return true
         } else {
-            return false
+            if newText == "" {
+                return true
+            } else {
+                return false
+            }
         }
     }
 }

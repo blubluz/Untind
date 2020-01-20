@@ -70,18 +70,17 @@ class TabBarViewController: UIViewController, PresentationViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
         
         presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
+        
+        circleView.backgroundColor = UIColor.lightOrange
+        circleView.layer.cornerRadius = 22
+        circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarButtons[0].isSelected = true
         selectedButton = tabBarButtons[0]
-        circleView.backgroundColor = UIColor.lightOrange
-        circleView.layer.cornerRadius = 22
-        circleView.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

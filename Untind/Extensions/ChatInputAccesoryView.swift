@@ -30,31 +30,44 @@ class ChatInputAccesoryView : UIView {
         self.addSubview(v)
         
         v.activateConstraints([
-            v.topAnchor.constraint(equalTo: self.topAnchor, constant: 2),
-            v.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -6),
-            v.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
-            v.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -2)
+            v.topAnchor.constraint(equalTo: self.topAnchor),
+            v.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor),
+            v.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            v.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
-        v.layer.borderWidth = 1
-        v.layer.cornerRadius = 18
-        v.layer.borderColor = UIColor.flatOrange.cgColor
-        v.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        v.backgroundColor = UIColor.white
         
         return v
     }()
     
     private var messageTextViewHeightConstraint : NSLayoutConstraint?
     
-    private lazy var messageTextView : UITextView = {
-        let tv = UITextView()
+    private lazy var leftBarView : UIView = {
+        let v = UIView()
+        self.messageTextViewBackground.addSubview(v)
+        v.activateConstraints([
+            v.leadingAnchor.constraint(equalTo: messageTextViewBackground.leadingAnchor, constant: 20),
+            v.centerYAnchor.constraint(equalTo: messageTextViewBackground.centerYAnchor, constant: 0),
+            v.heightAnchor.constraint(equalToConstant: 32),
+            v.widthAnchor.constraint(equalToConstant: 5)])
+        
+        v.backgroundColor = UIColor.lightGreen
+        v.layer.cornerRadius = 2.5
+        
+        return v
+    }()
+    
+    private lazy var messageTextView : VerticallyCenteredTextView = {
+        let tv = VerticallyCenteredTextView()
         self.messageTextViewBackground.addSubview(tv)
-        self.messageTextViewHeightConstraint =  tv.heightAnchor.constraint(equalToConstant: 37)
+        self.messageTextViewHeightConstraint =  tv.heightAnchor.constraint(equalToConstant: 62)
         tv.activateConstraints([
-            tv.leadingAnchor.constraint(equalTo: messageTextViewBackground.leadingAnchor, constant: 8),
+            tv.leadingAnchor.constraint(equalTo: leftBarView.leadingAnchor, constant: 15),
             tv.topAnchor.constraint(equalTo: messageTextViewBackground.topAnchor),
             tv.bottomAnchor.constraint(equalTo: messageTextViewBackground.bottomAnchor),
             self.messageTextViewHeightConstraint!])
+        
         tv.delegate = self
         tv.backgroundColor = UIColor.clear
         tv.textColor = UIColor.gray81
@@ -69,12 +82,16 @@ class ChatInputAccesoryView : UIView {
         btn.activateConstraints([
             btn.trailingAnchor.constraint(equalTo: self.messageTextViewBackground.trailingAnchor, constant: -15),
             btn.leadingAnchor.constraint(equalTo: self.messageTextView.trailingAnchor, constant: 10),
-            btn.centerYAnchor.constraint(equalTo: self.messageTextViewBackground.centerYAnchor)
+            btn.centerYAnchor.constraint(equalTo: self.messageTextViewBackground.centerYAnchor),
+            btn.widthAnchor.constraint(equalToConstant: 66),
+            btn.heightAnchor.constraint(equalToConstant: 32)
         ])
         
-        btn.setTitleColor(UIColor.flatOrange, for: .normal)
-        btn.titleLabel?.font = UIFont.helveticaNeue(weight: .bold, size: 15)
-        btn.setTitle("Send", for: .normal)
+        btn.setTitleColor(UIColor.white, for: .normal)
+        btn.titleLabel?.font = UIFont.helveticaNeue(weight: .medium, size: 12)
+        btn.setTitle("SEND", for: .normal)
+        btn.backgroundColor = UIColor.lightGreen
+        btn.layer.cornerRadius = 16
         btn.addTarget(self, action: #selector(didTapSendBtn(_:)), for: .touchUpInside)
         
         return btn
@@ -84,11 +101,11 @@ class ChatInputAccesoryView : UIView {
         let lb = UILabel()
         self.messageTextViewBackground.addSubview(lb)
         lb.activateConstraints( [
-            lb.leadingAnchor.constraint(equalTo: messageTextViewBackground.leadingAnchor, constant: 15),
-            lb.centerYAnchor.constraint(equalTo: messageTextViewBackground.centerYAnchor)])
-        lb.font = UIFont.helveticaNeue(weight: .regular, size: 15)
-        lb.textColor = UIColor.init(white: 0, alpha: 0.35)
-        lb.text = "Message..."
+            lb.leadingAnchor.constraint(equalTo: messageTextView.leadingAnchor, constant: 15),
+            lb.centerYAnchor.constraint(equalTo: messageTextView.centerYAnchor)])
+        lb.font = UIFont.helveticaNeue(weight: .regular, size: 14)
+        lb.textColor = UIColor.gray(value: 172)
+        lb.text = "start typing"
         return lb
     }()
     
@@ -123,7 +140,8 @@ class ChatInputAccesoryView : UIView {
     //MARK: - Actions
        @objc func didTapSendBtn(_ btn: UIButton) {
            chatDelegate?.didTapSend()
-           messageTextViewHeightConstraint?.constant = min(max(37,messageTextView.contentSize.height),120)
+           messageTextViewHeightConstraint?.constant =  min(max(62,messageTextView.contentSize.height),120)
+            messageTextView.resetCorrection()
        }
 }
 
@@ -140,7 +158,7 @@ extension ChatInputAccesoryView : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
           resetMessageTextView()
-          messageTextViewHeightConstraint?.constant = min(max(37,textView.contentSize.height),120)
+          messageTextViewHeightConstraint?.constant = min(max(62,textView.contentSize.height),120)
       }
     
 }

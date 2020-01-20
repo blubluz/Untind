@@ -11,6 +11,10 @@ import UIKit
 class ChatViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ChatInputAccesoryDelegate {
     
     @IBOutlet weak var messagesCollectionView: UICollectionView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var chatBackgroundImage: UIImageView!
+    @IBOutlet weak var emptyChatBackgroundImage: UIImageView!
+    @IBOutlet weak var emptyChatLabel: UILabel!
     
     private lazy var chatInputAccesory : ChatInputAccesoryView = {
         let cv = ChatInputAccesoryView()
@@ -39,6 +43,7 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         messagesCollectionView.dataSource = self
         messagesCollectionView.keyboardDismissMode = .interactive
         
+        topView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
 
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

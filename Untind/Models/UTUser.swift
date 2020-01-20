@@ -164,6 +164,11 @@ struct Profile {
     }
     
     func inviteOnDate(date: Date, completion: @escaping(Error?,Bool, UTDate?) -> Void) {
+        guard date > Date().addingTimeInterval(600) else {
+            completion(InviteOnDateError("Please select a date that is further away in time."), false, nil)
+            return
+        }
+        
         let db = Firestore.firestore()
         let dateDocument = db.collection("dates").document(self.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
         
@@ -171,8 +176,8 @@ struct Profile {
             if error != nil {
                 completion(error,false,nil)
             } else {
-                if let data = snapshot?.data () {
-                    let utDate = UTDate(with: data)
+                if let snapshot = snapshot {
+                    let utDate = UTDate(with: snapshot)
                     utDate.invited = self
                     utDate.invitee = UTUser.loggedUser?.userProfile
                     utDate.dateTime = date

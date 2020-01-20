@@ -26,6 +26,16 @@ struct AddAnswerError : LocalizedError {
     }
 }
 
+struct InviteOnDateError : LocalizedError {
+    var errorDescription: String? { return mMsg }
+    var failureReason: String? { return mMsg }
+    private var mMsg : String
+     init(_ description: String)
+       {
+           mMsg = description
+       }
+}
+
 enum AcceptDateError : Error {
     case missingUser
 }
@@ -36,4 +46,16 @@ enum GetUserProfileError : Error {
     case dataNotFound
 }
 
+extension GetUserProfileError : LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .dataNotFound:
+            return "Data not found"
+        case .userProfileNotFound:
+            return "User profile not found"
+        case .userNotLoggedIn:
+            return "User is not logged in"
+        }
+    }
+}
 

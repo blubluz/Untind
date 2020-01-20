@@ -10,8 +10,9 @@ import UIKit
 import IHKeyboardAvoiding
 import SVProgressHUD
 protocol DatePopupDelegate : NSObject {
-    func didAcceptDate(date: UTDate)
+    func didEdit(date: UTDate)
 }
+
 class AcceptDatePopup: UIViewController {
 
     var didAnimate : Bool = false
@@ -22,9 +23,11 @@ class AcceptDatePopup: UIViewController {
     @IBOutlet weak var orangeBackground: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dateTimeLabel: UILabel!
+    @IBOutlet weak var hoursLeftLabel: UILabel!
     weak var delegate : DatePopupDelegate?
     var date : UTDate?
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
                                             
@@ -32,13 +35,20 @@ class AcceptDatePopup: UIViewController {
         rescheduleButton.layer.shadowOffset = CGSize(width: 3.0, height: 6.0)
         rescheduleButton.layer.shadowOpacity = 0.4
         
-        let messageString = NSAttributedString(string: "You will be set up for a date with \n\(date?.invitee?.username ?? "") once you confirm their \nproposed date and time:").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkGray).withLineSpacing(5)
+        let messageString = NSAttributedString(string: "You will be set up for a date with \n\(date?.invitee?.username ?? "") once you confirm their \nproposed date and time:").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue).withLineSpacing(5)
         
         messageLabel.attributedText = messageString
-        dateTimeLabel.text = ""
+        if let dateTime = date?.dateTime {
+            dateTimeLabel.text = dateTime.dateTimeString()
+            let diff = Int(dateTime.timeIntervalSince1970 - Date().timeIntervalSince1970)
+            let hours = diff / 3600
+            if hours != 0 {
+                hoursLeftLabel.text = "(in \(hours) hours)"
+            } else {
+                hoursLeftLabel.text = "(in \(diff/60) minutes)"
+            }
+        }
         confirmButton.setAttributedTitle(NSAttributedString(string: "OK, LETS DO THIS!").boldAppearenceOf(string: "OK", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 16), color: UIColor.teal2), for: .normal)
-        
-        
     }
     
     static func instantiate() -> AcceptDatePopup {
@@ -72,6 +82,10 @@ class AcceptDatePopup: UIViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+       }
+    
     // MARK: - Button actions
     @IBAction func closeButtonTapped(_ sender: Any) {
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
@@ -95,7 +109,10 @@ class AcceptDatePopup: UIViewController {
                 alert.addNewAction(action: action)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                self.delegate?.didAcceptDate(date: self.date!)
+                if let newDate = date {
+                    self.delegate?.didEdit(date: newDate)
+                }
+                
                 let title = "All set, Get ready!"
                 let message = NSAttributedString(string: "You have accepted a date with \(date?.invitee?.username ?? ""), \(date?.dateTime?.toFormattedString() ?? ""). This will show up on your upcoming dates. Good luck!").boldAppearenceOf(string: date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize)).boldAppearenceOf(string: date?.dateTime?.toFormattedString() , withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize))
                 let alert = UTAlertController(title: title, message: message, backgroundColor: UIColor.teal2, backgroundAlpha: 1)
@@ -110,6 +127,7 @@ class AcceptDatePopup: UIViewController {
      
      @IBAction func rescheduleButtonTapped(_ sender: Any) {
          let vc = RescheduleDatePopup.instantiate()
+         vc.delegate = self.delegate
          vc.date = self.date
          UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
              self.view.backgroundColor = UIColor.clear

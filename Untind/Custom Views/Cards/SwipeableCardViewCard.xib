@@ -123,7 +123,7 @@
                                             <rect key="frame" x="30" y="30" width="195" height="178"/>
                                             <string key="text">Is it fair for a man, to pay for the woman at a restaurant, on their first date?
 Give reasons.</string>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="96"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="180"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>

@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendDatePopup" customModule="Untind" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="l1N-jC-3Rq" id="Ys6-qv-XtU"/>
+                <outlet property="containerBottomConstraint" destination="vhc-Ee-6qt" id="rq3-Aa-sin"/>
                 <outlet property="containerView" destination="0wf-Kc-iHc" id="9SP-TE-db3"/>
                 <outlet property="hourTextField" destination="bbU-wB-r16" id="e2F-bR-CZX"/>
                 <outlet property="illustrationImageView" destination="hTr-fA-Iln" id="mkc-SD-1Aw"/>
@@ -63,7 +64,7 @@
                                                             </constraints>
                                                             <color key="textColor" red="0.23529411759999999" green="0.30980392159999998" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="continue"/>
                                                         </textField>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58h-7l-gde">
                                                             <rect key="frame" x="19.5" y="105" width="21" height="14"/>
@@ -97,7 +98,7 @@
                                                             </constraints>
                                                             <color key="textColor" red="0.23529411759999999" green="0.30980392159999998" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                         </textField>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMI-Di-AX0">
                                                             <rect key="frame" x="24" y="105" width="24.5" height="14"/>

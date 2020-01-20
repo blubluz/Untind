@@ -19,6 +19,9 @@ extension UIColor {
     static let teal2 = UIColor(red: 33, green: 208, blue: 185, alpha: 1)
     static let gray81 = UIColor(red: 81, green: 81, blue: 81, alpha: 1)
     static let darkBlue = UIColor(red: 60, green: 79, blue: 92, alpha: 1)
+    static let strongGreen = UIColor(red: 111, green: 206, blue: 27, alpha: 1)
+    static let lightGreen = UIColor(red: 126, green: 211, blue: 33, alpha: 1)
+
     static let defaultColorPageControlUnselected = UIColor(red: 128, green: 75, blue: 66, alpha: 1)
     
     convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat) {

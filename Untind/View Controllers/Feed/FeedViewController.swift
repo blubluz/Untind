@@ -95,6 +95,7 @@ class FeedViewController: UIViewController {
         }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         print("FeedViewController did deinit")
     }
 }

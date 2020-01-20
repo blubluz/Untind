@@ -558,9 +558,6 @@
                                                 <rect key="frame" x="30" y="24.5" width="31" height="31"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="filter-icon"/>
-                                                <connections>
-                                                    <action selector="filterButtonTapped:" destination="t9P-4u-8VJ" eventType="touchUpInside" id="LLY-Mu-Rw2"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1091,7 +1088,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="6" translatesAutoresizingMaskIntoConstraints="NO" id="rZz-Co-y98" customClass="UTPageControl" customModule="Untind" customModuleProvider="target">
-                                <rect key="frame" x="132" y="841" width="150" height="6"/>
+                                <rect key="frame" x="168" y="841" width="78" height="6"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="numberOfPages">

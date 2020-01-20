@@ -19,12 +19,14 @@ class RescheduleDatePopup: UIViewController {
     let datePickerValues = ["Today", "Tommorow", "Wednesday"]
     var didAnimate : Bool = false
     var selectedPickerValue : Int = 0
-
+    
     @IBOutlet weak var hourTextField: UITextField!
     @IBOutlet weak var minutesTextField: UITextField!
     @IBOutlet weak var sendRequestButton: UIButton!
+    @IBOutlet weak var containerBottomConstraint: NSLayoutConstraint!
     
     var date : UTDate?
+    weak var delegate : DatePopupDelegate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -45,16 +47,26 @@ class RescheduleDatePopup: UIViewController {
         hourTextField.layer.borderWidth = 2
         minutesTextField.layer.borderWidth = 2
         
-        sendRequestButton.setAttributedTitle(NSAttributedString(string: "SEND REQUEST").boldAppearenceOf(string: "SEND", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 16), color: UIColor.flatOrange), for: .normal)
+        KeyboardAvoiding.avoidingView = self.containerView
+        
+        hourTextField.delegate = self
+        minutesTextField.delegate = self
+        
+        sendRequestButton.setAttributedTitle(NSAttributedString(string: "RESCHEDULE REQUEST").boldAppearenceOf(string: "RESCHEDULE", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 16), color: UIColor.flatOrange), for: .normal)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = true
         view.addGestureRecognizer(tap)
         
-        KeyboardAvoiding.avoidingView = self.containerView
-        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillAppear),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillDisappear),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,11 +80,43 @@ class RescheduleDatePopup: UIViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Keyboard Handling
+    @objc func keyboardWillAppear(_ notification : Notification) {
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+            let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+                self.containerBottomConstraint.constant = 306
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            containerBottomConstraint.constant = 306
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    
+    @objc func keyboardWillDisappear(_ notification : Notification) {
+        if let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+            let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt {
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+                self.containerBottomConstraint.constant = 56
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            containerBottomConstraint.constant = 56
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     //MARK: - Helper functions
     @objc func dismissKeyboard() {
-           //Causes the view (or one of its embedded text fields) to resign the first responder status.
-           view.endEditing(true)
-       }
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     static func instantiate() -> RescheduleDatePopup {
         let vc = RescheduleDatePopup(nibName: "RescheduleDatePopup", bundle: nil)
         return vc
@@ -89,14 +133,14 @@ class RescheduleDatePopup: UIViewController {
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
-           UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
-                 self.containerView.transform  = CGAffineTransform(translationX: 0, y: 800)
-                 self.illustrationImageView.transform  = CGAffineTransform(translationX: 0, y: 800)
-                 self.view.alpha = 0
-             }) { (finished) in
-                 self.dismiss(animated: false, completion: nil)
-                 
-             }
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
+            self.containerView.transform  = CGAffineTransform(translationX: 0, y: 800)
+            self.illustrationImageView.transform  = CGAffineTransform(translationX: 0, y: 800)
+            self.view.alpha = 0
+        }) { (finished) in
+            self.dismiss(animated: false, completion: nil)
+            
+        }
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -105,36 +149,39 @@ class RescheduleDatePopup: UIViewController {
     
     @IBAction func sendRequestTapped(_ sender: Any) {
         var selectedDate = Date()
-            if selectedPickerValue == 1 {
-                selectedDate = Date.tomorrow
-            } else if selectedPickerValue == 2 {
-                selectedDate = Date.tomorrow.dayAfter
-            }
+        if selectedPickerValue == 1 {
+            selectedDate = Date.tomorrow
+        } else if selectedPickerValue == 2 {
+            selectedDate = Date.tomorrow.dayAfter
+        }
+        
+        guard hourTextField.text?.count ?? 0 > 0, minutesTextField.text?.count ?? 0 > 0 else {
             
-            guard hourTextField.text?.count ?? 0 > 0, minutesTextField.text?.count ?? 0 > 0 else {
-                
-                return
-            }
-            
-            if let hour = Int(hourTextField.text!), let minute = Int(minutesTextField.text!), let date = Date.with(year: selectedDate.year, month: selectedDate.month, day: selectedDate.day, hour: hour, minute: minute) {
-                SVProgressHUD.show()
-                self.date?.invitee?.inviteOnDate(date: date) { (error, success, date) in
-                    SVProgressHUD.dismiss()
-                    if let error = error {
-                        self.present(UTAlertController(title: "Oops", message: "There was an error: \(error.localizedDescription)"), animated: true, completion: nil)
-                    } else {
-                        if success == true {
-                            let alert = UTAlertController(title: "Done!!", message: NSAttributedString(string: "You have suggested a different date and time to \( self.date?.invitee?.username ?? ""). You can track their response in your dates screen.").boldAppearenceOf(string:  self.date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue))
-                            let action = UTAlertAction(title: "Dismiss", {
-                                self.dismiss(animated: false, completion: nil)
-                            }, color: UIColor(red: 142, green: 196, blue: 246, alpha: 1))
-                            alert.addNewAction(action: action)
-                            self.present(alert, animated: true, completion: nil)
-
+            return
+        }
+        
+        if let hour = Int(hourTextField.text!), let minute = Int(minutesTextField.text!), let date = Date.with(year: selectedDate.year, month: selectedDate.month, day: selectedDate.day, hour: hour, minute: minute) {
+            SVProgressHUD.show()
+            self.date?.invitee?.inviteOnDate(date: date) { (error, success, date) in
+                SVProgressHUD.dismiss()
+                if let error = error {
+                    self.present(UTAlertController(title: "Oops", message: "\(error.localizedDescription)"), animated: true, completion: nil)
+                } else {
+                    if success == true {
+                        if let newDate = date {
+                            self.delegate?.didEdit(date: newDate)
                         }
+                        
+                        let alert = UTAlertController(title: "Done!!", message: NSAttributedString(string: "You have suggested a different date and time to \( self.date?.invitee?.username ?? ""). You can track their response in your dates screen.").boldAppearenceOf(string:  self.date?.invitee?.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue), backgroundAlpha: 0.8)
+                        let action = UTAlertAction(title: "Dismiss", {
+                            self.dismiss(animated: false, completion: nil)
+                        }, color: UIColor.flatOrange)
+                        alert.addNewAction(action: action)
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
-    }
+            }
+        }
     }
     
 }
@@ -158,5 +205,47 @@ extension RescheduleDatePopup : PickerViewDataSource, PickerViewDelegate {
     
     func pickerView(_ pickerView: UTPickerView, didSelectRow row: Int) {
         selectedPickerValue = row
+    }
+}
+
+
+//MARK: - TextFieldDelegate
+extension RescheduleDatePopup : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == hourTextField {
+            minutesTextField.becomeFirstResponder()
+        } else {
+            self.view.endEditing(true)
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text, let swiftRange = Range(range, in: oldText) else {
+            return true
+        }
+        
+        let newText = oldText.replacingCharacters(in: swiftRange, with: string)
+        if let numericValue = Int(newText) {
+            if textField == hourTextField {
+                if numericValue < 0 || numericValue>23 {
+                    return false
+                }
+                return true
+            }
+            if textField == minutesTextField {
+                if numericValue < 0 || numericValue > 59 {
+                    return false
+                }
+                return true
+            }
+            return true
+        } else {
+            if newText == "" {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 }

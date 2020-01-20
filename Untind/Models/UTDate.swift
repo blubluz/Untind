@@ -134,7 +134,7 @@ class UTDate: NSObject {
                         }
                     } else {
                         if Date().timeIntervalSince(dateScheduledTime) > 0 && Date().timeIntervalSince(dateScheduledTime) < 900 {
-                            return .chatStarted
+                            return .dateStarted
                         } else if Date().timeIntervalSince(dateScheduledTime) >= 900 {
                             if me?.uid == invited?.uid {
                                 if invitedResult == .noAnswer {
@@ -267,10 +267,13 @@ class UTDate: NSObject {
             dateTime = dateTimestamp.dateValue()
         }
         
+        if let invited = invited, let invitee = invitee {
+            id = invited.uid.combineUniquelyWith(string: invitee.uid)
+        }
+        
         isAccepted = jsonDictionary["isAccepted"] as! Bool
         invitedResult = DateResult(rawValue: jsonDictionary["invitedResult"] as! Double) ?? .noAnswer
         inviteeResult = DateResult(rawValue: jsonDictionary["inviteeResult"] as! Double) ?? .noAnswer
-
     }
     
     func jsonValue() -> [String:Any] {
