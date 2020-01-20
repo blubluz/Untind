@@ -22,6 +22,7 @@ extension UIColor {
     static let strongGreen = UIColor(red: 111, green: 206, blue: 27, alpha: 1)
     static let lightGreen = UIColor(red: 126, green: 211, blue: 33, alpha: 1)
 
+    static let chatColorMyself = UIColor(red: 253, green: 255, blue: 247, alpha: 1)
     static let defaultColorPageControlUnselected = UIColor(red: 128, green: 75, blue: 66, alpha: 1)
     
     convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat) {

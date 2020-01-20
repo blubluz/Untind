@@ -19,6 +19,11 @@ extension NSAttributedString {
         return attributedString
     }
     
+    static func lineSpacingParagraphStyle(spacing: CGFloat) -> NSMutableParagraphStyle {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+        return paragraphStyle
+    }
     
     func boldAppearenceOf(string: String?, withBoldFont boldFont: UIFont, color: UIColor? = nil) -> NSMutableAttributedString {
         guard let string = string else {

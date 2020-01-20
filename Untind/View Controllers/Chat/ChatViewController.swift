@@ -24,6 +24,7 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     
     var messageList: [String] = []
     var shouldScrollToBottom = true
+    let scrollviewContentInset : CGFloat = 20
     
     static func instantiate() -> ChatViewController {
         let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
@@ -41,7 +42,10 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         messagesCollectionView.register(MessageCell.self, forCellWithReuseIdentifier: "MessageCell")
         messagesCollectionView.delegate = self
         messagesCollectionView.dataSource = self
+        
         messagesCollectionView.keyboardDismissMode = .interactive
+        messagesCollectionView.contentInset = UIEdgeInsets(top: scrollviewContentInset, left: 0, bottom: scrollviewContentInset, right: 0)
+
         
         topView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
 
@@ -56,12 +60,13 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        _ = chatInputAccesory
+//        Async.delay(0.2) {
+//            _ = self.chatInputAccesory
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLayoutSubviews() {
@@ -155,7 +160,7 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
      
         var insets = messagesCollectionView.contentInset
         
-        insets.bottom = keyboardHeight
+        insets.bottom = keyboardHeight + scrollviewContentInset
 
         UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
             self.messagesCollectionView.contentInset = insets
@@ -176,15 +181,16 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     }
     
     // MARK: - CollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         
         let messageText = messageList[indexPath.item]
         let size = CGSize(width: 250, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], context: nil)
-        
-        return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
+        let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
+
+        return CGSize(width: view.frame.width, height: estimatedFrame.height + 28)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

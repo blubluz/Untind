@@ -141,7 +141,6 @@ class ChatInputAccesoryView : UIView {
        @objc func didTapSendBtn(_ btn: UIButton) {
            chatDelegate?.didTapSend()
            messageTextViewHeightConstraint?.constant =  min(max(62,messageTextView.contentSize.height),120)
-            messageTextView.resetCorrection()
        }
 }
 
