@@ -181,7 +181,12 @@ class UTDate: NSObject {
         }
     }
     
-    func fetchChatRoom(completion: @escaping (Error?, UTChatRoom?) -> Void) {
+    func fetchChatRoom(force: Bool = true, completion: @escaping (Error?, UTChatRoom?) -> Void) {
+        if (chatRoom != nil) && force == false {
+            completion(nil, chatRoom)
+            return
+        }
+        
         UTChatRoom.fetch(forDate: self) { (error, chatRoom) in
             self.chatRoom = chatRoom
             completion(error,chatRoom)
@@ -200,6 +205,7 @@ class UTDate: NSObject {
             
             guard dates.count > 0 && withChatRooms == true else {
                 completion(localError, dates)
+                return
             }
             
 

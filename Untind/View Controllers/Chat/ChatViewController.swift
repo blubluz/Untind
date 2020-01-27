@@ -23,6 +23,10 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var bottomTimerView: UIView!
     var date : UTDate?
+    var timer = Timer()
+    var isTimerRunning = false
+    var timerSecondsLeft : TimeInterval = 0
+    
     
     private lazy var chatInputAccesory : ChatInputAccesoryView = {
         let cv = ChatInputAccesoryView()
@@ -68,11 +72,7 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         messagesCollectionView.addGestureRecognizer(tap)
-//        loadData()
-        
-        if let date = self.date {
-            //logic
-        }
+        configureController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,72 +107,146 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
         print("ChatViewController did deinit")
     }
     
-    //MARK: - Data handling
-    func loadData() {
-          if let profile = self.chatPartnerProfile {
-              let db = Firestore.firestore()
-              let chatDocument = db.collection("chats").document(profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
-           
-            
-              self.chatInputAccesory.isUserInteractionEnabled = false
-              SVProgressHUD.show()
-              chatDocument.getDocument { (snapshot, error) in
-                  if error != nil {
-                    SVProgressHUD.dismiss()
-                    //error loading chat room
-                  } else {
-                    if let snapshot = snapshot, snapshot.data() != nil {
-                        let room = UTChatRoom(with: snapshot)
-                        if room.participants.first?.uid.isMyId == true {
-                            self.chatPartnerNameLabel.text = room.participants.last?.username
-                        } else {
-                            self.chatPartnerNameLabel.text = room.participants.first?.username
-                        }
-                        
-                        self.chatRoom = room
-                        self.chatRoom?.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
-                            SVProgressHUD.dismiss()
-                            self.chatInputAccesory.isUserInteractionEnabled = true
-                            if error != nil {
-                                self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
-                            } else {
-                                if success == true {
-                                    self.messagesCollectionView.reloadData()
-                                }
-                            }
-                        })
-                    } else {
-                        let newRoom = UTChatRoom()
-                        newRoom.participants.append(profile)
-                        newRoom.participants.append(UTUser.loggedUser!.userProfile!)
-                        newRoom.isOpen = true
-                        newRoom.id = profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)
-                        
-                        chatDocument.setData(newRoom.jsonValue()) {
-                            (error) in
-                            SVProgressHUD.dismiss()
-                            if error != nil {
-                                
-                            } else {
-                                //We have created the chat room
-                                self.chatRoom = newRoom
-                                self.chatRoom?.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
-                                    if error != nil {
-                                        self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
-                                    } else {
-                                        if success == true {
-                                            
-                                        }
-                                    }
-                                })
-                                self.chatInputAccesory.isUserInteractionEnabled = true
-                            }
-                        }
+    //MARK: - Configuration
+    func configureController() {
+        if let date = self.date {
+            self.emptyChatBackgroundImage.isHidden = true
+            self.emptyChatLabel.isHidden = true
+            self.bottomTimerView.isHidden = true
+            self.inputAccessoryView?.isHidden = false
+            if date.myRelationshipStatus == .chatStarted || date.myRelationshipStatus == .dateStarted {
+                date.fetchChatRoom(force: true) { (error, chatRoom) in
+                    guard let lChatRoom = chatRoom else {
+                        self.navigationController?.popViewController(animated: true)
+                        return
                     }
+                    
+                    lChatRoom.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
+                        SVProgressHUD.dismiss()
+                        self.chatInputAccesory.isUserInteractionEnabled = true
+                        if error != nil {
+                            self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
+                        } else {
+                            if success == true {
+                                self.messagesCollectionView.reloadData()
+                            }
+                        }
+                    })
+                }
+            } else if date.myRelationshipStatus == .dateScheduled {
+                self.emptyChatBackgroundImage.isHidden = false
+                self.emptyChatLabel.isHidden = false
+                self.bottomTimerView.isHidden = false
+                self.inputAccessoryView?.isHidden = true
+                
+                if isTimerRunning == false {
+                    isTimerRunning = true
+                    self.timerSecondsLeft = date.dateTime?.timeIntervalSinceNow ?? 0
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+                }
+                
+            } else if date.myRelationshipStatus == .waitingDateResult || date.myRelationshipStatus == .shouldGiveDateResult {
+                if date.myRelationshipStatus == .waitingDateResult {
+                    self.emptyChatBackgroundImage.isHidden = false
+                    self.emptyChatLabel.isHidden = false
+                    self.bottomTimerView.isHidden = false
+                    self.inputAccessoryView?.isHidden = true
+                    self.timerLabel.text = "Waiting for your partners response."
+                } else {
+                    let partner = self.date?.invited?.uid.isMyId ?? true ? self.date?.invitee?.username : self.date?.invited?.username
+                    
+                    let alert = UTAlertController(title: "So, did you two click?", message: NSAttributedString(string: "Your 10 minutes has expired and the date has ended. But no worries, if you felt like you had a connection and you would like to continue to talk to \(partner ?? "") in the future, tap yes below.").boldAppearenceOf(string: partner, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize)).withLineSpacing(5), backgroundColor: UIColor(red: 151, green: 172, blue: 131, alpha: 0.81))
+                    let yesAction = UTAlertAction(title: "YES", {
+                        
+                    }, color: UIColor(red: 126, green: 211, blue: 33, alpha: 1))
+                    let noAction = UTAlertAction(title: "NO", {
+                        
+                    }, color: UIColor.darkBlue)
+                    
+                    alert.addNewAction(action: yesAction)
+                    alert.addNewAction(action: noAction)
+                    
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
-          }
+        } else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
     }
+    
+    @objc func updateTimer() {
+        if timerSecondsLeft < 1 {
+            //Start date!
+            self.timer.invalidate()
+        } else {
+            timerSecondsLeft -= 1
+            let hours = Int(timerSecondsLeft) / 3600
+            let minutes = Int(timerSecondsLeft) / 60 % 60
+            let seconds = Int(timerSecondsLeft) % 60
+            if hours > 0 {
+                timerLabel.text = "Date starting in \(hours) hours and \(minutes) minutes"
+            } else {
+                timerLabel.text = "Date starting in \(minutes):\(seconds)"
+            }
+        }
+        
+    }
+    
+//    func loadData2() {
+//          if let profile = self.chatPartnerProfile {
+//              let db = Firestore.firestore()
+//              let chatDocument = db.collection("chats").document(profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
+//
+//
+//              self.chatInputAccesory.isUserInteractionEnabled = false
+//              SVProgressHUD.show()
+//              chatDocument.getDocument { (snapshot, error) in
+//                  if error != nil {
+//                    SVProgressHUD.dismiss()
+//                    //error loading chat room
+//                  } else {
+//                    if let snapshot = snapshot, snapshot.data() != nil {
+//                        let room = UTChatRoom(with: snapshot)
+//                        if room.participants.first?.uid.isMyId == true {
+//                            self.chatPartnerNameLabel.text = room.participants.last?.username
+//                        } else {
+//                            self.chatPartnerNameLabel.text = room.participants.first?.username
+//                        }
+//
+//                        self.chatRoom = room
+//                    } else {
+//                        let newRoom = UTChatRoom()
+//                        newRoom.participants.append(profile)
+//                        newRoom.participants.append(UTUser.loggedUser!.userProfile!)
+//                        newRoom.isOpen = true
+//                        newRoom.id = profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)
+//
+//                        chatDocument.setData(newRoom.jsonValue()) {
+//                            (error) in
+//                            SVProgressHUD.dismiss()
+//                            if error != nil {
+//
+//                            } else {
+//                                //We have created the chat room
+//                                self.chatRoom = newRoom
+//                                self.chatRoom?.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
+//                                    if error != nil {
+//                                        self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
+//                                    } else {
+//                                        if success == true {
+//
+//                                        }
+//                                    }
+//                                })
+//                                self.chatInputAccesory.isUserInteractionEnabled = true
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//          }
+//    }
     
     
     //MARK: - Helper functions
@@ -192,7 +266,7 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
         
         //Create new message
         let message = UTMessage(message: self.chatInputAccesory.text, authorUid: UTUser.loggedUser!.userProfile!.uid, postDate: Date())
-        self.chatRoom?.addMessage(message, completion: { (error, success) in
+        self.date?.chatRoom?.addMessage(message, completion: { (error, success) in
             if success == true {
                 //do nothing
             } else {
@@ -285,7 +359,7 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
            
            
-           let messageText = self.chatRoom!.messages[indexPath.row].messageText
+        let messageText = self.date!.chatRoom!.messages[indexPath.row].messageText
            let size = CGSize(width: 250, height: 1000)
            let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
@@ -298,7 +372,7 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
        }
        
        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           guard let chatRoom = self.chatRoom else {
+        guard let chatRoom = self.date!.chatRoom else {
                return 0
            }
            
@@ -307,8 +381,8 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
        
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
-           let message = self.chatRoom!.messages[indexPath.row]
-           let avatar = self.chatRoom!.participants.first {
+        let message = self.date!.chatRoom!.messages[indexPath.row]
+        let avatar = self.date!.chatRoom!.participants.first {
                $0.uid == message.authorUid
            }?.avatarType
            
@@ -320,7 +394,7 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
 extension ChatViewController : ChatRoomDelegate {
     func utChatRoom(room: UTChatRoom, newMessageArrived: UTMessage) {
-        self.messagesCollectionView.insertItems(at: [IndexPath(item: self.chatRoom!.messages.count-1, section: 0)])
-        self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.chatRoom!.messages.count-1, section: 0), at: .top, animated: true)
+        self.messagesCollectionView.insertItems(at: [IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0)])
+        self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0), at: .top, animated: true)
     }
 }
