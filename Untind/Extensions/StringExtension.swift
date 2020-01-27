@@ -24,4 +24,12 @@ extension String {
         
         return result + secondString.replacingOccurrences(of: stringToRemove, with: "")
     }
+    
+    var isMyId : Bool {
+        if let myId = UTUser.loggedUser?.userProfile?.uid {
+            return myId == self
+        } else {
+            return false
+        }
+    }
 }

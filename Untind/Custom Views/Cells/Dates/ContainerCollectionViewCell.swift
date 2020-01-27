@@ -37,6 +37,11 @@ class ContainerCollectionViewCell: UICollectionViewCell, UICollectionViewDelegat
         collectionView.reloadData()
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.didTapDate(date: self.dates[indexPath.row])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dates.count
       }

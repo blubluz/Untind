@@ -90,12 +90,13 @@ class MessageCell: UICollectionViewCell {
             profileImageView.widthAnchor.constraint(equalToConstant: 40)])
     }
     
-    func configureWithMessage(message: String, chatViewWidth: CGFloat, sender: MessageCellSender) {
-        messageTextView.attributedText = NSAttributedString(string: message, attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)])
+    func configureWithMessage(message: UTMessage, avatar: String, chatViewWidth: CGFloat) {
+        messageTextView.attributedText = NSAttributedString(string: message.messageText, attributes: [ NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)])
+        profileImageView.image = UIImage(named: avatar)
         
         let size = CGSize(width: 250, height: CGFloat.infinity)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: message).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
+        let estimatedFrame = NSString(string: message.messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
         
         
         let leftRightPadding : CGFloat = 43
@@ -104,7 +105,7 @@ class MessageCell: UICollectionViewCell {
         
         var x : CGFloat = leftRightPadding
         
-        if sender == .me {
+        if message.authorUid.isMyId {
             leadingConstraint.isActive = false
             trailingConstraint.isActive = true
             textPaddingLeft  = 5
@@ -119,6 +120,10 @@ class MessageCell: UICollectionViewCell {
         self.messageTextView.frame = CGRect(x: x + textPaddingLeft, y: 5, width: estimatedFrame.width + 10, height: estimatedFrame.height + 28)
         
         self.textBubbleView.frame = CGRect(x: x, y: 0, width: estimatedFrame.width + textPaddingLeft + textPaddingRight, height: estimatedFrame.height + 28)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
     
     override func awakeFromNib() {

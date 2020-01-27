@@ -12,9 +12,10 @@ import FBSDKLoginKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var logOutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        logOutButton.setTitle(UTUser.loggedUser!.userProfile!.username, for: .normal)
         // Do any additional setup after loading the view.
     }
     

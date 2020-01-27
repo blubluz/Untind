@@ -164,7 +164,7 @@ class DateCollectionViewCell: UICollectionViewCell {
             titleButton.isEnabled = false
             descriptionLabel.textColor = UIColor.darkBlue
             containerView.backgroundColor = UIColor(red: 246, green: 253, blue: 238, alpha: 1)
-        case .dateRequestExpired:
+        case .dateRequestExpired,.youRejected,.heRejected:
             turnCellButton.isHidden = true
             fallthrough
         case .waitingDateAnswer,.waitingDateResult,.shouldGiveDateResult:

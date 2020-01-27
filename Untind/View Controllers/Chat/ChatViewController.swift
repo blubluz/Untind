@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import Firebase
+import SVProgressHUD
 
-class ChatViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ChatInputAccesoryDelegate {
+class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     
     @IBOutlet weak var messagesCollectionView: UICollectionView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var chatBackgroundImage: UIImageView!
     @IBOutlet weak var emptyChatBackgroundImage: UIImageView!
     @IBOutlet weak var emptyChatLabel: UILabel!
+    @IBOutlet weak var chatPartnerNameLabel: UILabel!
+    @IBOutlet weak var chatPartnerSexAgeLabel: UILabel!
+    @IBOutlet weak var chatPartnerAvatarImageView: UIImageView!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var bottomTimerView: UIView!
+    var date : UTDate?
     
     private lazy var chatInputAccesory : ChatInputAccesoryView = {
         let cv = ChatInputAccesoryView()
@@ -22,10 +30,22 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         return cv
     }()
     
-    var messageList: [String] = []
     var shouldScrollToBottom = true
     let scrollviewContentInset : CGFloat = 20
     
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    override var canResignFirstResponder: Bool {
+        return true
+    }
+    override var inputAccessoryView: UIView? {
+        get {
+            return chatInputAccesory
+        }
+    }
+    
+    //MARK: - View Controller Lifecycle
     static func instantiate() -> ChatViewController {
         let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
         return vc
@@ -34,18 +54,11 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        messageList = ["Hello. I have sent you a message to let you know about our meeting next week. We should find some time to meet before friday, if possible", "Hey, sure let me check up my schedule", "Okay", "What about monday? I have a few meetings in the morning, but i think i can squeeze this one in." , "Sounds nice. Dinner?", "Yup"]
-        
         
         messagesCollectionView.register(MessageCell.self, forCellWithReuseIdentifier: "MessageCell")
-        messagesCollectionView.delegate = self
-        messagesCollectionView.dataSource = self
-        
+       
         messagesCollectionView.keyboardDismissMode = .interactive
         messagesCollectionView.contentInset = UIEdgeInsets(top: scrollviewContentInset, left: 0, bottom: scrollviewContentInset, right: 0)
-
         
         topView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
 
@@ -54,15 +67,25 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
 
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
-
         messagesCollectionView.addGestureRecognizer(tap)
+//        loadData()
+        
+        if let date = self.date {
+            //logic
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        messagesCollectionView.delegate = self
+        messagesCollectionView.dataSource = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        Async.delay(0.2) {
-//            _ = self.chatInputAccesory
-//        }
+       
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,10 +96,86 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         super.viewDidLayoutSubviews()
         if shouldScrollToBottom {
             shouldScrollToBottom = false
-            scrollToBottom(animated: false)
-        }
+                   NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+                   NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+                   scrollToBottom(animated: false)
+               }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("ChatViewController did deinit")
+    }
+    
+    //MARK: - Data handling
+    func loadData() {
+          if let profile = self.chatPartnerProfile {
+              let db = Firestore.firestore()
+              let chatDocument = db.collection("chats").document(profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
+           
+            
+              self.chatInputAccesory.isUserInteractionEnabled = false
+              SVProgressHUD.show()
+              chatDocument.getDocument { (snapshot, error) in
+                  if error != nil {
+                    SVProgressHUD.dismiss()
+                    //error loading chat room
+                  } else {
+                    if let snapshot = snapshot, snapshot.data() != nil {
+                        let room = UTChatRoom(with: snapshot)
+                        if room.participants.first?.uid.isMyId == true {
+                            self.chatPartnerNameLabel.text = room.participants.last?.username
+                        } else {
+                            self.chatPartnerNameLabel.text = room.participants.first?.username
+                        }
+                        
+                        self.chatRoom = room
+                        self.chatRoom?.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
+                            SVProgressHUD.dismiss()
+                            self.chatInputAccesory.isUserInteractionEnabled = true
+                            if error != nil {
+                                self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
+                            } else {
+                                if success == true {
+                                    self.messagesCollectionView.reloadData()
+                                }
+                            }
+                        })
+                    } else {
+                        let newRoom = UTChatRoom()
+                        newRoom.participants.append(profile)
+                        newRoom.participants.append(UTUser.loggedUser!.userProfile!)
+                        newRoom.isOpen = true
+                        newRoom.id = profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)
+                        
+                        chatDocument.setData(newRoom.jsonValue()) {
+                            (error) in
+                            SVProgressHUD.dismiss()
+                            if error != nil {
+                                
+                            } else {
+                                //We have created the chat room
+                                self.chatRoom = newRoom
+                                self.chatRoom?.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
+                                    if error != nil {
+                                        self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
+                                    } else {
+                                        if success == true {
+                                            
+                                        }
+                                    }
+                                })
+                                self.chatInputAccesory.isUserInteractionEnabled = true
+                            }
+                        }
+                    }
+                }
+            }
+          }
+    }
+    
+    
+    //MARK: - Helper functions
     func scrollToBottom(animated: Bool) {
         view.layoutIfNeeded()
         messagesCollectionView.setContentOffset(bottomOffset(), animated: animated)
@@ -85,41 +184,27 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
     func bottomOffset() -> CGPoint {
         return CGPoint(x: 0, y: max(-messagesCollectionView.contentInset.top, messagesCollectionView.contentSize.height - (messagesCollectionView.bounds.size.height - messagesCollectionView.contentInset.bottom)))
     }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-    
-    override var canResignFirstResponder: Bool {
-        return true
-    }
-    
-    override var inputAccessoryView: UIView? {
-        get {
-           return chatInputAccesory
-        }
-    }
-    
-    //Calls this function when the tap is recognized.
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    
  
-    
     func didTapSend() {
         if self.chatInputAccesory.text == "" {
             return
         }
         
-        messageList.append(self.chatInputAccesory.text)
-        self.messagesCollectionView.insertItems(at: [IndexPath(item: messageList.count-1, section: 0)])
+        //Create new message
+        let message = UTMessage(message: self.chatInputAccesory.text, authorUid: UTUser.loggedUser!.userProfile!.uid, postDate: Date())
+        self.chatRoom?.addMessage(message, completion: { (error, success) in
+            if success == true {
+                //do nothing
+            } else {
+                //show that message failed to send
+            }
+        })
+        
         self.chatInputAccesory.text = ""
         self.chatInputAccesory.resetMessageTextView()
-        self.messagesCollectionView.scrollToItem(at: IndexPath(item: messageList.count-1, section: 0), at: .top, animated: true)
     }
     
+    //MARK: - Button actions
     @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -133,6 +218,12 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         adjustContentForKeyboard(shown: false, notification: notification)
     }
     
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     func adjustContentForKeyboard(shown: Bool, notification: Notification) {
         guard let keyboardEndFrameValue: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let keyboardBeginFrameValue : NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
             return
@@ -142,27 +233,26 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
         let keyboardBeginFrame = keyboardBeginFrameValue.cgRectValue
         
         let keyboardHeight = keyboardEndFrame.height
-        if shown == true {
-            if keyboardEndFrame.size.height <= keyboardBeginFrame.size.height {
-                        return
-            }
-            
-//            keyboardHeight = min(keyboardEndFrame.height, keyboardBeginFrame.height)
-        }
+         if shown == true {
+                    if keyboardEndFrame.size.height <= keyboardBeginFrame.size.height {
+                                return
+                    }
+                    
+        //            keyboardHeight = min(keyboardEndFrame.height, keyboardBeginFrame.height)
+                }
         
         if messagesCollectionView.contentInset.bottom == keyboardHeight {
             return
         }
-        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
-        
+     let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+            let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         let distanceFromBottom = bottomOffset().y - messagesCollectionView.contentOffset.y
      
         var insets = messagesCollectionView.contentInset
-        
-        insets.bottom = keyboardHeight + scrollviewContentInset
-
+        insets.bottom = keyboardHeight
+     
         UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
+     
             self.messagesCollectionView.contentInset = insets
             self.messagesCollectionView.scrollIndicatorInsets = insets
      
@@ -171,47 +261,66 @@ class ChatViewController: UIViewController, UITextViewDelegate, UICollectionView
             }
         }, completion: nil)
     }
-    
-    //MARK: - UITextView Delegate
-    
-  
-    
+}
+
+
+//MARK: - UITextView Delegate
+
+extension ChatViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return true
-    }
+           return true
+       }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension ChatViewController : UIScrollViewDelegate {
     
-    // MARK: - CollectionViewDelegate
+}
+
+// MARK: - CollectionViewDelegate
+
+extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        let messageText = messageList[indexPath.item]
-        let size = CGSize(width: 250, height: 1000)
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
+           
+           
+           let messageText = self.chatRoom!.messages[indexPath.row].messageText
+           let size = CGSize(width: 250, height: 1000)
+           let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+           let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
 
-        return CGSize(width: view.frame.width, height: estimatedFrame.height + 28)
+           return CGSize(width: view.frame.width, height: estimatedFrame.height + 28)
+       }
+       
+       func numberOfSections(in collectionView: UICollectionView) -> Int {
+           return 1
+       }
+       
+       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+           guard let chatRoom = self.chatRoom else {
+               return 0
+           }
+           
+           return chatRoom.messages.count
+       }
+       
+       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
+           let message = self.chatRoom!.messages[indexPath.row]
+           let avatar = self.chatRoom!.participants.first {
+               $0.uid == message.authorUid
+           }?.avatarType
+           
+           cell.configureWithMessage(message: message, avatar: avatar ?? "empty", chatViewWidth: messagesCollectionView.frame.size.width)
+           
+           return cell
+       }
+}
+
+extension ChatViewController : ChatRoomDelegate {
+    func utChatRoom(room: UTChatRoom, newMessageArrived: UTMessage) {
+        self.messagesCollectionView.insertItems(at: [IndexPath(item: self.chatRoom!.messages.count-1, section: 0)])
+        self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.chatRoom!.messages.count-1, section: 0), at: .top, animated: true)
     }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messageList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        cell.configureWithMessage(message: messageList[indexPath.row], chatViewWidth: messagesCollectionView.frame.size.width, sender: indexPath.row % 2 == 0 ? .me : .other)
-        
-        return cell
-        
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        print("ChatViewController did deinit")
-    }
-    
 }

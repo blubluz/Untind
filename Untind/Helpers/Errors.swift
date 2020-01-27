@@ -12,7 +12,7 @@ import UIKit
 //Bad. Should be improved later.
 
 
-struct AddAnswerError : LocalizedError {
+struct GenericError : LocalizedError {
     var errorDescription: String? { return mMsg }
     var failureReason: String? { return mMsg }
     var recoverySuggestion: String? { return "" }

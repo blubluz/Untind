@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -76,7 +76,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_background" translatesAutoresizingMaskIntoConstraints="NO" id="CLq-6I-3aw">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_background" translatesAutoresizingMaskIntoConstraints="NO" id="CLq-6I-3aw">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oV-uD-FjN">
@@ -156,10 +156,10 @@
                                     <constraint firstAttribute="trailing" secondItem="Dex-VG-9Se" secondAttribute="trailing" constant="20" id="z0s-Us-j16"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="chat_room_female_ilustration" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-u4-h8W">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="chat_room_female_ilustration" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-u4-h8W">
                                 <rect key="frame" x="0.0" y="324.5" width="414" height="509.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" text="Everything beautiful takes  time and patience!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEo-mp-KMh">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" text="Everything beautiful takes  time and patience!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEo-mp-KMh">
                                 <rect key="frame" x="0.0" y="181" width="394" height="143.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
                                 <color key="textColor" red="0.59215686274509804" green="0.67450980392156867" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -193,12 +193,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7kF-KH-tx1">
                                 <rect key="frame" x="0.0" y="151" width="414" height="711"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="NDa-QD-caI">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                                <collectionViewLayout key="collectionViewLayout" id="1Pd-ks-Tfr" customClass="ChatCollectionViewFlowLayout" customModule="Untind" customModuleProvider="target"/>
                                 <cells/>
                             </collectionView>
                         </subviews>
@@ -236,10 +231,15 @@
                         <viewLayoutGuide key="safeArea" id="6Nk-fx-HnF"/>
                     </view>
                     <connections>
+                        <outlet property="bottomTimerView" destination="Jh6-28-4lQ" id="JUF-jr-BHK"/>
                         <outlet property="chatBackgroundImage" destination="CLq-6I-3aw" id="qrb-Fl-Cqp"/>
+                        <outlet property="chatPartnerAvatarImageView" destination="69o-9m-ri5" id="izl-2s-opG"/>
+                        <outlet property="chatPartnerNameLabel" destination="zJe-Jx-5se" id="f69-k5-CJD"/>
+                        <outlet property="chatPartnerSexAgeLabel" destination="QzH-y2-GGc" id="qHJ-pM-GjA"/>
                         <outlet property="emptyChatBackgroundImage" destination="gvw-u4-h8W" id="ShN-fy-v6U"/>
                         <outlet property="emptyChatLabel" destination="vEo-mp-KMh" id="hGE-wt-iic"/>
                         <outlet property="messagesCollectionView" destination="7kF-KH-tx1" id="OjU-Gp-pLC"/>
+                        <outlet property="timerLabel" destination="lFf-Od-RC2" id="MeS-jF-hrc"/>
                         <outlet property="topView" destination="qvd-R4-JKX" id="CzU-Ez-G6k"/>
                     </connections>
                 </viewController>

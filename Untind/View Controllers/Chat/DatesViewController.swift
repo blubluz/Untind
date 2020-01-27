@@ -80,7 +80,7 @@ class DatesViewController: UIViewController {
             return
         }
         
-        UTDate.fetch(forUserId: userId) { (error, dates) in
+        UTDate.fetch(forUserId: userId, withChatRooms: true) { (error, dates) in
             self.collectionView.refreshControl?.endRefreshing()
             if let error = error {
                 self.present(UTAlertController(title: "Oops", message: "There was an error loading dates: \(error.localizedDescription)"), animated: true, completion: nil)
@@ -232,6 +232,23 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         
         return CGSize(width: min((UIScreen.main.bounds.size.width - 50), 420), height: 82)
       }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            return
+        case 1:
+            return
+        case 2:
+            self.didTapDate(date: activeDates[indexPath.row])
+        case 3:
+            self.didTapDate(date: pendingDates[indexPath.row])
+        case 4:
+            self.didTapDate(date: failedDates[indexPath.row])
+        default:
+            return
+        }
+    }
 }
 
 extension DatesViewController : DateDelegate {
@@ -298,6 +315,17 @@ extension DatesViewController : DateDelegate {
         vc.delegate = self
         vc.date = date
         Globals.tabBarController?.present(vc, animated: false, completion: nil)
+    }
+    
+    func didTapDate(date: UTDate) {
+        switch date.myRelationshipStatus {
+        case .dateStarted, .chatStarted, .waitingDateResult, .shouldGiveDateResult, .dateScheduled:
+            let chatVc = ChatViewController.instantiate()
+            chatVc.date = date
+            Globals.mainNavigationController?.pushViewController(chatVc, animated: true)
+        default:
+            return
+        }
     }
 }
 

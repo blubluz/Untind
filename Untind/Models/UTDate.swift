@@ -93,6 +93,7 @@ class UTDate: NSObject {
     var inviteeResult : DateResult = .noAnswer
     var latestMessages : [UTMessage] = []
     var privateQuestion : Question?
+    var chatRoom : UTChatRoom?
     
     var myRelationshipStatus : RelationshipStatus {
         guard let myId = UTUser.loggedUser?.userProfile?.uid else {
@@ -127,10 +128,10 @@ class UTDate: NSObject {
                         if dateScheduledTime < Date() {
                             return .dateRequestExpired
                         } else
-                        if me?.uid == invited?.uid {
-                            return .shouldAnswerDateRequest
-                        } else {
-                            return .waitingDateAnswer
+                            if me?.uid == invited?.uid {
+                                return .shouldAnswerDateRequest
+                            } else {
+                                return .waitingDateAnswer
                         }
                     } else {
                         if Date().timeIntervalSince(dateScheduledTime) > 0 && Date().timeIntervalSince(dateScheduledTime) < 900 {
@@ -180,7 +181,14 @@ class UTDate: NSObject {
         }
     }
     
-    static func fetch(forUserId userId: String, completion: @escaping (Error?, [UTDate]) -> Void) {
+    func fetchChatRoom(completion: @escaping (Error?, UTChatRoom?) -> Void) {
+        UTChatRoom.fetch(forDate: self) { (error, chatRoom) in
+            self.chatRoom = chatRoom
+            completion(error,chatRoom)
+        }
+    }
+    
+    static func fetch(forUserId userId: String, withChatRooms: Bool = true, completion: @escaping (Error?, [UTDate]) -> Void) {
         let db = Firestore.firestore()
         var dates : [UTDate] = []
         var localError : Error?
@@ -189,7 +197,28 @@ class UTDate: NSObject {
         dispatchGroup.enter()
         dispatchGroup.enter()
         dispatchGroup.notify(queue: .main) {
-            completion(localError, dates)
+            
+            guard dates.count > 0 && withChatRooms == true else {
+                completion(localError, dates)
+            }
+            
+
+            let dispatchGroup2 = DispatchGroup()
+            
+            for date in dates {
+                dispatchGroup2.enter()
+                UTChatRoom.fetch(forDate: date) { (error, chatroom) in
+                    if chatroom != nil {
+                        date.chatRoom = chatroom
+                    }
+                    dispatchGroup2.leave()
+                }
+            }
+            
+            dispatchGroup2.notify(queue: .main) {
+                completion(localError, dates)
+            }
+            
         }
         
         db.collectionGroup("dates").whereField(FieldPath(["invited","uid"]), isEqualTo: userId).getDocuments { (snapshot : QuerySnapshot?, error) in
@@ -250,9 +279,9 @@ class UTDate: NSObject {
     }
     
     convenience init(with document: DocumentSnapshot) {
-          self.init(with: document.data()!)
-          id = document.documentID
-      }
+        self.init(with: document.data()!)
+        id = document.documentID
+    }
     
     init(with jsonDictionary: JSONDictionary) {
         if let invitedDict = jsonDictionary["invited"] as? JSONDictionary {

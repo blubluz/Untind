@@ -767,6 +767,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="meV-nZ-k6W"/>
                     </view>
+                    <connections>
+                        <outlet property="logOutButton" destination="Jik-Az-L4d" id="Mwt-XE-3ky"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OEE-e2-lXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

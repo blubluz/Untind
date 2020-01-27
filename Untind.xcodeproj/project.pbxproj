@@ -39,8 +39,7 @@
 		0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */; };
 		0E1C8B4222FA00A80011A5D7 /* MyQuestionsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */; };
 		0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */; };
-		0E1EA6D7239ED98100147B88 /* UTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1EA6D6239ED98100147B88 /* UTMessage.swift */; };
-		0E22593F238332EC009E6C24 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22593E238332EC009E6C24 /* Message.swift */; };
+		0E22593F238332EC009E6C24 /* UTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22593E238332EC009E6C24 /* UTMessage.swift */; };
 		0E22594223833710009E6C24 /* VerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */; };
 		0E22C22323A40D900010D975 /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22C22223A40D900010D975 /* CGRectExtension.swift */; };
 		0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */; };
@@ -124,6 +123,8 @@
 		F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8D23A2950000186E34 /* UTAlertController.swift */; };
 		F777227A239AA352000E7CA8 /* UTDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* UTDate.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
+		F7E584B123D7355000AD6836 /* UTChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E584B023D7355000AD6836 /* UTChatRoom.swift */; };
+		F7E584B323D8783600AD6836 /* ChatCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E584B223D8783600AD6836 /* ChatCollectionViewFlowLayout.swift */; };
 		F7EED81723A909C500420514 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81623A909C500420514 /* UITableViewExtension.swift */; };
 		F7EED81923A909E800420514 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81823A909E800420514 /* UICollectionViewExtension.swift */; };
 		F7EED81C23A9265500420514 /* DateCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */; };
@@ -190,8 +191,7 @@
 		0E1C8B3D22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0E1C8B4022FA00A80011A5D7 /* MyQuestionsContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuestionsContainerCell.swift; sourceTree = "<group>"; };
 		0E1C8B4122FA00A80011A5D7 /* MyQuestionsContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyQuestionsContainerCell.xib; sourceTree = "<group>"; };
-		0E1EA6D6239ED98100147B88 /* UTMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMessage.swift; sourceTree = "<group>"; };
-		0E22593E238332EC009E6C24 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		0E22593E238332EC009E6C24 /* UTMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMessage.swift; sourceTree = "<group>"; };
 		0E22594123833710009E6C24 /* VerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyCenteredTextView.swift; sourceTree = "<group>"; };
 		0E22C22223A40D900010D975 /* CGRectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
 		0E3BE69F2314490100746E90 /* VerticalAlignLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalAlignLabel.swift; sourceTree = "<group>"; };
@@ -281,6 +281,8 @@
 		F7557D8D23A2950000186E34 /* UTAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertController.swift; sourceTree = "<group>"; };
 		F7772279239AA352000E7CA8 /* UTDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTDate.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		F7E584B023D7355000AD6836 /* UTChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTChatRoom.swift; sourceTree = "<group>"; };
+		F7E584B223D8783600AD6836 /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F7EED81623A909C500420514 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		F7EED81823A909E800420514 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -701,8 +703,8 @@
 				0EFA552D2303081A0000E6F6 /* UTUser.swift */,
 				F7772279239AA352000E7CA8 /* UTDate.swift */,
 				0EFA552F230308260000E6F6 /* Answer.swift */,
-				0E22593E238332EC009E6C24 /* Message.swift */,
-				0E1EA6D6239ED98100147B88 /* UTMessage.swift */,
+				0E22593E238332EC009E6C24 /* UTMessage.swift */,
+				F7E584B023D7355000AD6836 /* UTChatRoom.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -759,6 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */,
+				F7E584B223D8783600AD6836 /* ChatCollectionViewFlowLayout.swift */,
 			);
 			path = Layouts;
 			sourceTree = "<group>";
@@ -1063,6 +1066,7 @@
 				0EFF6DA722F7523900A6A76B /* Constants.swift in Sources */,
 				F7F92B7923A68FF4007DC648 /* DateTableHeader.swift in Sources */,
 				F777227A239AA352000E7CA8 /* UTDate.swift in Sources */,
+				F7E584B123D7355000AD6836 /* UTChatRoom.swift in Sources */,
 				0E61DD5522EF78B700C1C8C7 /* SwipeableViewDelegate.swift in Sources */,
 				F705B81423C7687200E8AB1E /* UTPickerView.swift in Sources */,
 				0E15661F23982C26004A1FD5 /* UIFontExtension.swift in Sources */,
@@ -1101,10 +1105,11 @@
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,
 				F7EED81923A909E800420514 /* UICollectionViewExtension.swift in Sources */,
+				F7E584B323D8783600AD6836 /* ChatCollectionViewFlowLayout.swift in Sources */,
 				0EFA55322303121B0000E6F6 /* DateExtension.swift in Sources */,
 				0EFF24F7230DE2F6006F4A8E /* ProfileViewController.swift in Sources */,
 				0E14BF3F237C922400E25880 /* ChatViewController.swift in Sources */,
-				0E22593F238332EC009E6C24 /* Message.swift in Sources */,
+				0E22593F238332EC009E6C24 /* UTMessage.swift in Sources */,
 				0E22C22323A40D900010D975 /* CGRectExtension.swift in Sources */,
 				0E7AC2B4231EF5FD0050E750 /* Errors.swift in Sources */,
 				0EDA1355231DAE7900B759C5 /* UIStoryboardExtension.swift in Sources */,
@@ -1112,7 +1117,6 @@
 				0E5132B32347BC160035C959 /* AddQuestionCollectionViewCell.swift in Sources */,
 				0E47593422EDFCD600B2DE82 /* UIImageExtension.swift in Sources */,
 				F706BF8D23A3C73E0032864A /* UTAlertAction.swift in Sources */,
-				0E1EA6D7239ED98100147B88 /* UTMessage.swift in Sources */,
 				0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

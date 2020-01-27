@@ -150,14 +150,15 @@ extension ChatInputAccesoryView : UITextViewDelegate {
              placeholder.isHidden = true
              sendButton.isHidden = false
          } else {
-             placeholder.isHidden = false
-             sendButton.isHidden = true
-         }
-     }
+            placeholder.isHidden = false
+            sendButton.isHidden = true
+        }
+    }
     
     func textViewDidChange(_ textView: UITextView) {
-          resetMessageTextView()
-          messageTextViewHeightConstraint?.constant = min(max(62,textView.contentSize.height),120)
-      }
+        resetMessageTextView()
+        messageTextView.layoutIfNeeded()
+        messageTextViewHeightConstraint?.constant = min(max(62,textView.contentSize.height),120)
+    }
     
 }

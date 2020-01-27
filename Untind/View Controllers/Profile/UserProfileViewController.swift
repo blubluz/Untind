@@ -309,7 +309,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     } 
     
     @IBAction func sendMessageTapped(_ sender: Any) {
-        Globals.mainNavigationController?.pushViewController(ChatViewController.instantiate(), animated: true)
+        let chatVc = ChatViewController.instantiate()
+        chatVc.chatPartnerProfile = self.profile
+        Globals.mainNavigationController?.pushViewController(chatVc, animated: true)
     }
     
     @IBAction func myQuestionsTapped(_ sender: Any) {
