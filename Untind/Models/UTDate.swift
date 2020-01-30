@@ -41,7 +41,7 @@ class UTDate: NSObject {
         }
         
         var interactionState : InteractionState  {
-            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult, .waitingQuestionAnswer, .shouldAnswerQuestion,.shouldAnswerDateRequest]
+            let interactiveStatuses : [RelationshipStatus] = [.canAskQuestion,.canRequestDate,.shouldGiveDateResult, .waitingQuestionAnswer, .shouldAnswerQuestion,.shouldAnswerDateRequest, .chatStarted]
             
             if interactiveStatuses.contains(self) {
                 return .interactive
@@ -63,7 +63,7 @@ class UTDate: NSObject {
             case .dateStarted:
                 fallthrough
             case .chatStarted:
-                return "See chat"
+                return "Send Message"
             case .heRejected, .youRejected, .dateFailed:
                 return "Date Failed"
             case .dateScheduled:
@@ -134,9 +134,9 @@ class UTDate: NSObject {
                                 return .waitingDateAnswer
                         }
                     } else {
-                        if Date().timeIntervalSince(dateScheduledTime) > 0 && Date().timeIntervalSince(dateScheduledTime) < 900 {
+                        if Date().timeIntervalSince(dateScheduledTime) >= 0 && Date().timeIntervalSince(dateScheduledTime) <= Constants.dateDuration {
                             return .dateStarted
-                        } else if Date().timeIntervalSince(dateScheduledTime) >= 900 {
+                        } else if Date().timeIntervalSince(dateScheduledTime) >= Constants.dateDuration {
                             if me?.uid == invited?.uid {
                                 if invitedResult == .noAnswer {
                                     return .shouldGiveDateResult
@@ -258,13 +258,13 @@ class UTDate: NSObject {
         }
     }
     
-    func answer(didAccept: Bool, completion: @escaping (Error?, UTDate?) -> Void) {
+    func accept(answer: Bool, completion: @escaping (Error?, UTDate?) -> Void) {
         guard let invited = self.invited, let invitee = self.invitee else {
             completion(AcceptDateError.missingUser, nil)
             return
         }
         self.isAccepted = true
-        if didAccept == false {
+        if answer == false {
             self.invitedResult = .rejected
         }
         
@@ -278,6 +278,33 @@ class UTDate: NSObject {
                 completion(nil,self)
             }
         }
+    }
+    
+    func giveResult(_ result: DateResult, completion: @escaping (Error?, UTDate?) -> Void ) {
+        guard let invited = self.invited, let invitee = self.invitee else {
+            completion(AcceptDateError.missingUser, nil)
+            return
+        }
+        
+        let db = Firestore.firestore()
+        if invited.uid.isMyId {
+            invitedResult = result
+            db.collection("dates").document(invited.uid.combineUniquelyWith(string: invitee.uid)).updateData(["invitedResult" : result.rawValue]) { (error) in
+                if error == nil {
+                    self.invitedResult = result
+                }
+                completion(error, self)
+            }
+        } else {
+            db.collection("dates").document(invited.uid.combineUniquelyWith(string: invitee.uid)).updateData(["inviteeResult" : result.rawValue]) { (error) in
+                if error == nil {
+                    self.inviteeResult = result
+                }
+                completion(error, self)
+            }
+        }
+        
+        
     }
     
     override init() {

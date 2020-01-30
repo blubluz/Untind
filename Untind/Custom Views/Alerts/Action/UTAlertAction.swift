@@ -13,6 +13,8 @@ class UTAlertAction : NSObject {
     var dismissAlert : (() -> Void)?
     private(set) var title : String?
     private(set) var color : UIColor?
+    var hasUnderbar : Bool = false
+    var buttonFont : UIFont?
     
     static var dismiss : UTAlertAction {
         return UTAlertAction(title: "Dismiss", nil, color: UIColor.flatOrange)

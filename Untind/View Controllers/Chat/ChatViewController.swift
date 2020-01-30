@@ -15,12 +15,14 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     @IBOutlet weak var messagesCollectionView: UICollectionView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var chatBackgroundImage: UIImageView!
+    @IBOutlet weak var dateTimerLabel: UILabel!
     @IBOutlet weak var emptyChatBackgroundImage: UIImageView!
     @IBOutlet weak var emptyChatLabel: UILabel!
     @IBOutlet weak var chatPartnerNameLabel: UILabel!
     @IBOutlet weak var chatPartnerSexAgeLabel: UILabel!
     @IBOutlet weak var chatPartnerAvatarImageView: UIImageView!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var dateTimerView: UIStackView!
     @IBOutlet weak var bottomTimerView: UIView!
     var date : UTDate?
     var timer = Timer()
@@ -110,58 +112,81 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     //MARK: - Configuration
     func configureController() {
         if let date = self.date {
-            self.emptyChatBackgroundImage.isHidden = true
-            self.emptyChatLabel.isHidden = true
-            self.bottomTimerView.isHidden = true
-            self.inputAccessoryView?.isHidden = false
+            if let partner = self.date?.invited?.uid.isMyId ?? true ? self.date?.invitee : self.date?.invited {
+                chatPartnerNameLabel.text = partner.username
+                chatPartnerAvatarImageView.image = UIImage(named: partner.avatarType)
+                chatPartnerSexAgeLabel.text = "\(partner.gender.shortGender), \(partner.age)"
+            }
+            
             if date.myRelationshipStatus == .chatStarted || date.myRelationshipStatus == .dateStarted {
-                date.fetchChatRoom(force: true) { (error, chatRoom) in
-                    guard let lChatRoom = chatRoom else {
-                        self.navigationController?.popViewController(animated: true)
-                        return
-                    }
-                    
-                    lChatRoom.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
-                        SVProgressHUD.dismiss()
-                        self.chatInputAccesory.isUserInteractionEnabled = true
-                        if error != nil {
-                            self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
-                        } else {
-                            if success == true {
-                                self.messagesCollectionView.reloadData()
-                            }
-                        }
-                    })
-                }
+                self.startChat(animated: false)
             } else if date.myRelationshipStatus == .dateScheduled {
                 self.emptyChatBackgroundImage.isHidden = false
                 self.emptyChatLabel.isHidden = false
                 self.bottomTimerView.isHidden = false
+                self.timerLabel.isHidden = false
+                self.dateTimerView.isHidden = true
                 self.inputAccessoryView?.isHidden = true
-                
+                self.chatBackgroundImage.isHidden = true
                 if isTimerRunning == false {
                     isTimerRunning = true
                     self.timerSecondsLeft = date.dateTime?.timeIntervalSinceNow ?? 0
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+                    timer.fire()
                 }
                 
             } else if date.myRelationshipStatus == .waitingDateResult || date.myRelationshipStatus == .shouldGiveDateResult {
+                self.dateTimerView.isHidden = true
+                self.emptyChatBackgroundImage.isHidden = false
+                self.emptyChatLabel.isHidden = false
+                self.bottomTimerView.isHidden = false
+                self.timerLabel.isHidden = false
+                self.inputAccessoryView?.isHidden = true
+                self.chatBackgroundImage.isHidden = true
                 if date.myRelationshipStatus == .waitingDateResult {
-                    self.emptyChatBackgroundImage.isHidden = false
-                    self.emptyChatLabel.isHidden = false
-                    self.bottomTimerView.isHidden = false
-                    self.inputAccessoryView?.isHidden = true
                     self.timerLabel.text = "Waiting for your partners response."
                 } else {
+                    self.timerLabel.text = "Waiting for your response."
                     let partner = self.date?.invited?.uid.isMyId ?? true ? self.date?.invitee?.username : self.date?.invited?.username
                     
-                    let alert = UTAlertController(title: "So, did you two click?", message: NSAttributedString(string: "Your 10 minutes has expired and the date has ended. But no worries, if you felt like you had a connection and you would like to continue to talk to \(partner ?? "") in the future, tap yes below.").boldAppearenceOf(string: partner, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize)).withLineSpacing(5), backgroundColor: UIColor(red: 151, green: 172, blue: 131, alpha: 0.81))
+                    let alert = UTAlertController(title: "So, did you two click?", message: NSAttributedString(string: "Your 10 minutes has expired and the date has ended. But no worries, if you felt like you had a connection and you would like to continue to talk to \(partner ?? "") in the future, tap yes below.").boldAppearenceOf(string: partner, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue).withLineSpacing(5), backgroundColor: UIColor(red: 126, green: 211, blue: 33, alpha: 0.73))
                     let yesAction = UTAlertAction(title: "YES", {
-                        
+                        SVProgressHUD.show()
+                        self.date?.giveResult(.accepted, completion: { (error, date) in
+                            SVProgressHUD.dismiss()
+                            if error == nil {
+                                if self.date?.myRelationshipStatus == .some(.chatStarted) {
+                                    self.startChat(animated: true)
+                                       self.present(UTAlertController(title: "Congratulations!", message: "Your partner also enjoyed the date! You can now chat forever & always :)"), animated: true, completion: nil)
+                                } else {
+                                    self.configureController()
+                                    self.present(UTAlertController(title: "Thank you", message: "Your partner did not respond yet. Please wait for his/her response"), animated: true, completion: nil)
+
+                                }
+                            } else {                                self.present(UTAlertController(title: "Oops", message: "\(error?.localizedDescription ?? "There was an error")"), animated: true, completion: nil)
+                            }
+                        })
                     }, color: UIColor(red: 126, green: 211, blue: 33, alpha: 1))
+                    yesAction.hasUnderbar = true
+                    yesAction.buttonFont = UIFont.helveticaNeue(weight: .bold, size: 20)
+                    
                     let noAction = UTAlertAction(title: "NO", {
-                        
+                        SVProgressHUD.show()
+                        self.date?.giveResult(.rejected, completion: { (error, date) in
+                            SVProgressHUD.dismiss()
+                            if error == nil {
+                                let alert = UTAlertController(title: "Thank you", message: "We're sorry you didn't enjoy your date. We hope you'll like the next one better.")
+                                let action = UTAlertAction(title: "Leave", {
+                                    self.navigationController?.popViewController(animated: true)
+                                }, color: UIColor.darkBlue)
+                                alert.addNewAction(action: action)
+                                self.present(alert, animated: true, completion: nil)
+                            } else {
+                                self.present(UTAlertController(title: "Oops", message: "\(error?.localizedDescription ?? "There was an error")"), animated: true, completion: nil)
+                            }
+                        })
                     }, color: UIColor.darkBlue)
+                    noAction.buttonFont = UIFont.helveticaNeue(weight: .regular, size: 20)
                     
                     alert.addNewAction(action: yesAction)
                     alert.addNewAction(action: noAction)
@@ -176,23 +201,99 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     }
     
     @objc func updateTimer() {
-        if timerSecondsLeft < 1 {
-            //Start date!
+        if timerSecondsLeft <= 0 {
             self.timer.invalidate()
+            self.isTimerRunning = false
+            if self.date?.myRelationshipStatus == .some(.dateStarted) {
+                self.startChat(animated: true)
+            } else {
+                self.configureController()
+            }
         } else {
             timerSecondsLeft -= 1
-            let hours = Int(timerSecondsLeft) / 3600
-            let minutes = Int(timerSecondsLeft) / 60 % 60
-            let seconds = Int(timerSecondsLeft) % 60
-            if hours > 0 {
-                timerLabel.text = "Date starting in \(hours) hours and \(minutes) minutes"
+            if self.date?.myRelationshipStatus == .some(.dateStarted) {
+                let minutes = Int(timerSecondsLeft) / 60 % 60
+                let seconds = Int(timerSecondsLeft) % 60
+                dateTimerLabel.text = String(format:"%02i:%02i", minutes, seconds)
             } else {
-                timerLabel.text = "Date starting in \(minutes):\(seconds)"
+                let hours = Int(timerSecondsLeft) / 3600
+                let minutes = Int(timerSecondsLeft) / 60 % 60
+                let seconds = Int(timerSecondsLeft) % 60
+                if hours > 0 {
+                    timerLabel.attributedText = NSAttributedString(string: "Date starting in \(hours) hours and \(minutes) minutes").boldAppearenceOf(string: "\(hours) hours", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue).boldAppearenceOf(string: "\(minutes) minutes", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue)
+                } else {
+                    timerLabel.attributedText = NSAttributedString(string: "Date starting in \(String(format:"%02i:%02i", minutes, seconds))").boldAppearenceOf(string: "\(minutes):\(seconds)", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue)
+                }
             }
         }
         
     }
     
+    func startChat(animated: Bool) {
+        if let date = date {
+            if date.myRelationshipStatus == .dateStarted {
+                self.dateTimerView.isHidden = false
+                if isTimerRunning == false {
+                    self.dateTimerView.isHidden = false
+                    isTimerRunning = true
+                    self.timerSecondsLeft = date.dateTime!.timeIntervalSinceNow + 900
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+                    timer.fire()
+                    
+                }
+            } else {
+                self.dateTimerView.isHidden = true
+            }
+            
+            if animated == true {
+
+                self.chatBackgroundImage.alpha = 0
+                self.chatBackgroundImage.isHidden = false
+                self.inputAccessoryView?.transform = CGAffineTransform(translationX: 0, y: 80)
+                
+                self.inputAccessoryView?.isHidden = false
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.emptyChatBackgroundImage.transform = CGAffineTransform(translationX: -600, y: 0)
+                    self.emptyChatLabel.transform = CGAffineTransform(translationX: 600, y: 0)
+                    self.bottomTimerView.transform = CGAffineTransform(translationX: 0, y: 130)
+                     self.inputAccessoryView?.transform = CGAffineTransform.identity
+                    self.chatBackgroundImage.alpha = 1
+                    
+                }) { (finished) in
+                    self.emptyChatBackgroundImage.isHidden = true
+                    self.emptyChatLabel.isHidden = true
+                    self.bottomTimerView.isHidden = true
+                    self.emptyChatBackgroundImage.transform = CGAffineTransform.identity
+                    self.emptyChatLabel.transform = CGAffineTransform.identity
+                }
+            } else {
+                self.emptyChatBackgroundImage.isHidden = true
+                self.emptyChatLabel.isHidden = true
+                self.bottomTimerView.isHidden = true
+                self.chatBackgroundImage.isHidden = false
+                self.inputAccessoryView?.isHidden = false
+            }
+            
+            date.fetchChatRoom(force: false) { (error, chatRoom) in
+                guard let lChatRoom = chatRoom else {
+                    self.navigationController?.popViewController(animated: true)
+                    return
+                }
+                
+                lChatRoom.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
+                    SVProgressHUD.dismiss()
+                    self.chatInputAccesory.isUserInteractionEnabled = true
+                    if error != nil {
+                        self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
+                    } else {
+                        if success == true {
+                            self.messagesCollectionView.reloadData()
+                        }
+                    }
+                })
+            }
+        }
+    }
 //    func loadData2() {
 //          if let profile = self.chatPartnerProfile {
 //              let db = Firestore.firestore()

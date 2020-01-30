@@ -259,7 +259,7 @@ extension DatesViewController : DateDelegate {
     func didTapRejectDate(date: UTDate) {
         let alert = UTAlertController(title: "Decline request", message: "Are you sure you want to decline this date request?", backgroundColor: UIColor(red: 234, green: 244, blue: 223, alpha: 1), backgroundAlpha: 0.5)
               let yesAction = UTAlertAction(title: "Yes", {
-                  date.answer(didAccept: false) { (error, blockDate) in
+                  date.accept(answer: false) { (error, blockDate) in
                                  if error != nil {
                                      self.present(UTAlertController(title: "Oops", message: "There was a problem - \(error?.localizedDescription ?? "")"), animated: true, completion: nil)
                                  } else {
@@ -291,7 +291,7 @@ extension DatesViewController : DateDelegate {
     func didTapCancelDate(date: UTDate) {
         let alert = UTAlertController(title: "Cancel date", message: "Are you sure you want to cancel this date?", backgroundColor: UIColor(red: 234, green: 244, blue: 223, alpha: 1), backgroundAlpha: 0.5)
         let yesAction = UTAlertAction(title: "Yes", {
-            date.answer(didAccept: false) { (error, blockDate) in
+            date.accept(answer: false) { (error, blockDate) in
                 if error != nil {
                     self.present(UTAlertController(title: "Oops", message: "There was a problem - \(error?.localizedDescription ?? "")"), animated: true, completion: nil)
                 } else {

@@ -83,6 +83,8 @@ class OnboardingViewController: UIViewController {
         }
     }
     
+    
+    //MARK: - View Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

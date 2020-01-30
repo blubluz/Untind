@@ -19,6 +19,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
     @IBOutlet var tabBarButtons: [UITabBarButton]!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var presentationViewContainer: UIView!
+    @IBOutlet weak var feedButton: UITabBarButton!
     
     //Constraints
     @IBOutlet weak var presentationContainerBottomConstraint: NSLayoutConstraint!
@@ -47,26 +48,32 @@ class TabBarViewController: UIViewController, PresentationViewController {
         super.viewDidLoad()
         
         //TEST: Add initial controller here
-        let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedNavigationController") as! UINavigationController
-        currentDisplayedViewController = feedVC
-        self.addChild(feedVC)
+//        let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedNavigationController") as! UINavigationController
+//        currentDisplayedViewController = feedVC
+//        self.addChild(feedVC)
+//
+//        tabBarButtons[0].isSelected = true
+//        selectedButton = tabBarButtons[0]
+//
+//        if let feedVcView = feedVC.view {
+//            let feedVcView = feedVcView
+//            self.controllerContainerView.addSubview(feedVcView)
+//
+//            feedVcView.translatesAutoresizingMaskIntoConstraints = false
+//            controllerContainerView.addConstraints([
+//                feedVcView.leadingAnchor.constraint(equalTo: controllerContainerView.leadingAnchor),
+//                feedVcView.topAnchor.constraint(equalTo: controllerContainerView.topAnchor),
+//                feedVcView.trailingAnchor.constraint(equalTo: controllerContainerView.trailingAnchor),
+//                feedVcView.bottomAnchor.constraint(equalTo: controllerContainerView.bottomAnchor)])
+//
+//            for constraint in feedVcView.constraints {
+//                constraint.isActive = true
+//            }
+//
+//
+//        }
         
-        if let feedVcView = feedVC.view {
-            let feedVcView = feedVcView
-            self.controllerContainerView.addSubview(feedVcView)
-            
-            feedVcView.translatesAutoresizingMaskIntoConstraints = false
-            controllerContainerView.addConstraints([
-                feedVcView.leadingAnchor.constraint(equalTo: controllerContainerView.leadingAnchor),
-                feedVcView.topAnchor.constraint(equalTo: controllerContainerView.topAnchor),
-                feedVcView.trailingAnchor.constraint(equalTo: controllerContainerView.trailingAnchor),
-                feedVcView.bottomAnchor.constraint(equalTo: controllerContainerView.bottomAnchor)])
-            
-            for constraint in feedVcView.constraints {
-                constraint.isActive = true
-            }
-        }
-        
+        self.feedButtonTapped(self.feedButton)
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
         
         presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
@@ -79,8 +86,6 @@ class TabBarViewController: UIViewController, PresentationViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarButtons[0].isSelected = true
-        selectedButton = tabBarButtons[0]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -146,6 +151,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
             self.circleView.backgroundColor = UIColor(red: 249, green: 219, blue: 202, alpha: 1)
+            sender.tintColor = UIColor(red: 242, green: 123, blue: 99, alpha: 1)
         }, completion: nil)
         
         //Remove old
@@ -173,10 +179,12 @@ class TabBarViewController: UIViewController, PresentationViewController {
             }
         }
     }
+    
     @IBAction func chatButtonTapped(_ sender: UITabBarButton) {
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
             self.circleView.backgroundColor = UIColor(red: 209, green: 229, blue: 188, alpha: 1)
+            sender.tintColor = UIColor(red: 110, green: 207, blue: 26, alpha: 1)
         }, completion: nil)
         moveCircle(toButton: sender)
         
@@ -211,6 +219,10 @@ class TabBarViewController: UIViewController, PresentationViewController {
     }
     
     @IBAction func profileButtonTapped(_ sender: UITabBarButton) {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+            self.circleView.backgroundColor = UIColor(red: 199, green: 231, blue: 255, alpha: 1)
+            sender.tintColor = UIColor(red: 50, green: 150, blue: 254, alpha: 1)
+        }, completion: nil)
         moveCircle(toButton: sender)
         
         //Remove old
@@ -219,7 +231,8 @@ class TabBarViewController: UIViewController, PresentationViewController {
         self.currentDisplayedViewController?.removeFromParent()
         
         
-        let profileVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        let profileVc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+        profileVc.profile = UTUser.loggedUser?.userProfile
         self.currentDisplayedViewController = profileVc
         self.addChild(profileVc)
         
@@ -358,6 +371,7 @@ class TabBarViewController: UIViewController, PresentationViewController {
     }
     
     func moveCircle(toButton button: UIButton) {
+        selectedButton?.tintColor = UIColor.gray(value: 54)
         selectedButton?.isSelected = false
         selectedButton = button
         button.isSelected = true

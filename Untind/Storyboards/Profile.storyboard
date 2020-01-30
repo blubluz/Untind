@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,13 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaR-Dt-ViT">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="GcC-e2-q6K"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIa-fp-gYj">
                                 <rect key="frame" x="0.0" y="44" width="414" height="256"/>
                                 <subviews>
@@ -118,16 +111,6 @@
                                             <constraint firstItem="sih-ra-SyP" firstAttribute="width" secondItem="d3p-MH-EKf" secondAttribute="width" multiplier="0.6" id="n8d-DS-ULn"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVS-VT-Bio">
-                                        <rect key="frame" x="306" y="67" width="85" height="27"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
-                                        <state key="normal" title="Send message">
-                                            <color key="titleColor" red="1" green="0.56470588239999997" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sendMessageTapped:" destination="kwP-xZ-I8K" eventType="touchUpInside" id="pUh-Zg-yjG"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="M, 31" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Sb-Tw-X9C">
                                         <rect key="frame" x="192" y="167.5" width="30.5" height="14"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -146,7 +129,6 @@
                                     <constraint firstAttribute="trailing" secondItem="Ooa-ZZ-343" secondAttribute="trailing" constant="20" id="FYE-tI-kiZ"/>
                                     <constraint firstItem="2Sb-Tw-X9C" firstAttribute="centerX" secondItem="KIa-fp-gYj" secondAttribute="centerX" id="IdA-7P-uDD"/>
                                     <constraint firstItem="gv0-tl-ChD" firstAttribute="top" secondItem="KIa-fp-gYj" secondAttribute="top" constant="27" id="J3p-XZ-h0L"/>
-                                    <constraint firstItem="CVS-VT-Bio" firstAttribute="top" secondItem="gv0-tl-ChD" secondAttribute="bottom" constant="8" id="JdW-em-W2Z"/>
                                     <constraint firstAttribute="trailing" secondItem="ISJ-t4-HoL" secondAttribute="trailing" constant="15" id="Qir-Vo-sMb"/>
                                     <constraint firstItem="ISJ-t4-HoL" firstAttribute="centerX" secondItem="KIa-fp-gYj" secondAttribute="centerX" id="WJJ-32-Fhq"/>
                                     <constraint firstItem="2Sb-Tw-X9C" firstAttribute="top" secondItem="ISJ-t4-HoL" secondAttribute="bottom" constant="10" id="YCD-pX-BJz"/>
@@ -154,11 +136,14 @@
                                     <constraint firstItem="ISJ-t4-HoL" firstAttribute="centerY" secondItem="KIa-fp-gYj" secondAttribute="centerY" constant="15" id="cUx-fS-x05"/>
                                     <constraint firstItem="Ooa-ZZ-343" firstAttribute="leading" secondItem="KIa-fp-gYj" secondAttribute="leading" constant="20" id="cvB-k6-MtE"/>
                                     <constraint firstItem="Qvk-Gs-rNN" firstAttribute="top" secondItem="KIa-fp-gYj" secondAttribute="top" constant="29" id="dAh-bl-QYN"/>
-                                    <constraint firstAttribute="trailing" secondItem="CVS-VT-Bio" secondAttribute="trailing" constant="23" id="iuf-IN-1Hg"/>
                                     <constraint firstAttribute="height" constant="256" id="kDm-bb-IYF"/>
                                     <constraint firstItem="Ooa-ZZ-343" firstAttribute="top" secondItem="aOY-tf-aDr" secondAttribute="bottom" id="mCx-lo-A10"/>
                                     <constraint firstItem="mwR-vQ-mtU" firstAttribute="centerX" secondItem="KIa-fp-gYj" secondAttribute="centerX" id="r5x-8g-XLG"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaR-Dt-ViT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zDx-PB-ImH">
                                 <rect key="frame" x="20" y="300" width="374" height="596"/>
@@ -210,18 +195,21 @@
                             <constraint firstItem="KIa-fp-gYj" firstAttribute="leading" secondItem="wwC-N7-sK5" secondAttribute="leading" id="ho2-gd-R9x"/>
                             <constraint firstItem="wwC-N7-sK5" firstAttribute="trailing" secondItem="zDx-PB-ImH" secondAttribute="trailing" constant="20" id="j6P-Gx-myb"/>
                             <constraint firstItem="zDx-PB-ImH" firstAttribute="top" secondItem="KIa-fp-gYj" secondAttribute="bottom" id="jwM-Ai-ddG"/>
+                            <constraint firstItem="KIa-fp-gYj" firstAttribute="top" secondItem="IaR-Dt-ViT" secondAttribute="bottom" id="kVZ-TY-IiU"/>
                             <constraint firstItem="IaR-Dt-ViT" firstAttribute="leading" secondItem="wwC-N7-sK5" secondAttribute="leading" id="oIA-Ah-zAI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wwC-N7-sK5"/>
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="mwR-vQ-mtU" id="JOc-YY-89a"/>
+                        <outlet property="backButton" destination="Qvk-Gs-rNN" id="aDA-NH-O5d"/>
                         <outlet property="collectionView" destination="zDx-PB-ImH" id="EY1-ij-ItK"/>
                         <outlet property="headerViewHeightConstraint" destination="kDm-bb-IYF" id="IaD-S0-CKT"/>
                         <outlet property="interactionButton" destination="drV-zY-nJH" id="dks-Ft-Ulu"/>
                         <outlet property="myAnswersButton" destination="4Au-IU-bAX" id="HTi-40-Gza"/>
                         <outlet property="myQuestionsButton" destination="d3p-MH-EKf" id="vOi-9F-wi5"/>
                         <outlet property="profileContainerView" destination="KIa-fp-gYj" id="kz2-Bl-Qkg"/>
+                        <outlet property="reportButton" destination="gv0-tl-ChD" id="XRM-ej-QMj"/>
                         <outlet property="selecterPointerYConstraint" destination="cur-37-r5D" id="dSA-h8-i8C"/>
                         <outlet property="selectorPointerView" destination="sih-ra-SyP" id="tuu-Cs-hWu"/>
                         <outlet property="selectorView" destination="Ooa-ZZ-343" id="nn3-nz-wMZ"/>

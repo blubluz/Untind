@@ -63,6 +63,8 @@ class DateCollectionViewCell: UICollectionViewCell {
     @discardableResult
     func update(with date: UTDate) -> DateCollectionViewCell {
         self.date = date
+        
+        avatarImageView.image = date.invitee?.uid == UTUser.loggedUser?.userProfile?.uid ? UIImage(named: date.invited?.avatarType ?? "") : UIImage(named: date.invitee?.avatarType ?? "")
         configureForStatus(date.myRelationshipStatus)
         switch date.myRelationshipStatus {
         case .shouldAnswerDateRequest:
@@ -73,7 +75,8 @@ class DateCollectionViewCell: UICollectionViewCell {
             titleLabel.attributedText = NSAttributedString(string: titleMessage).boldAppearenceOf(string: date.invitee?.uid == UTUser.loggedUser?.userProfile?.uid ? date.invited!.username : date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.attributedText = NSAttributedString(string: "Date starting in \(date.dateTime?.timeLeftString() ?? "-")").boldAppearenceOf(string: date.dateTime?.timeLeftString(), withBoldFont: UIFont.helveticaNeue(weight: .bold, size: descriptionLabel.font.pointSize), color: UIColor.darkBlue)
         case .dateStarted:
-            titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age), is on a date with you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
+            let otherPerson = date.invitee?.uid == UTUser.loggedUser?.userProfile?.uid ? date.invited : date.invitee
+            titleLabel.attributedText = NSAttributedString(string: "\(otherPerson!.username), \(otherPerson!.gender.shortGender) \(otherPerson!.age), is on a date with you").boldAppearenceOf(string: otherPerson!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.attributedText = NSAttributedString(string: "Date ends in \(date.dateTime?.addingTimeInterval(15 * 60).timeLeftString() ?? "-")").boldAppearenceOf(string: date.dateTime?.addingTimeInterval(15 * 60).timeLeftString() ?? "-", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: descriptionLabel.font.pointSize), color: UIColor.darkBlue)
         case .chatStarted:
         titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
@@ -89,7 +92,7 @@ class DateCollectionViewCell: UICollectionViewCell {
                 if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
                     self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) dated you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
                 } else {
-                    self.titleLabel.attributedText = NSAttributedString(string: "You dated \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                    self.titleLabel.attributedText = NSAttributedString(string: "You dated \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
                     
                 }
             self.descriptionLabel.text = "awaiting their feedback"

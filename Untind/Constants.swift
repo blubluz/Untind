@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 typealias JSONDictionary = Dictionary<String,Any>
 struct Constants {
-    
+    static let dateDuration : Double = 900
 }
 
 enum ThemeMode : String {

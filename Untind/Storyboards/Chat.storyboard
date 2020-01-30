@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -144,11 +144,27 @@
                                         <rect key="frame" x="346" y="44.5" width="48" height="22"/>
                                         <state key="normal" image="more_dots"/>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="yQJ-tY-XAw">
+                                        <rect key="frame" x="321.5" y="73" width="72.5" height="32"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-remaining-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ku8-UP-gwW">
+                                                <rect key="frame" x="0.0" y="0.0" width="26" height="32"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7u-fo-SxV">
+                                                <rect key="frame" x="32" y="0.0" width="40.5" height="32"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" red="1" green="0.56470588235294117" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="yQJ-tY-XAw" firstAttribute="top" secondItem="Dex-VG-9Se" secondAttribute="bottom" constant="6.5" id="9xK-eA-qTk"/>
                                     <constraint firstItem="EoE-Oe-87g" firstAttribute="top" secondItem="qvd-R4-JKX" secondAttribute="top" constant="5" id="VST-KD-nms"/>
                                     <constraint firstItem="Dex-VG-9Se" firstAttribute="top" secondItem="nFj-sU-hHf" secondAttribute="top" id="Wf9-4Q-v1F"/>
+                                    <constraint firstItem="yQJ-tY-XAw" firstAttribute="trailing" secondItem="Dex-VG-9Se" secondAttribute="trailing" id="ceN-g4-pCH"/>
                                     <constraint firstAttribute="height" constant="107" id="co0-GY-YtT"/>
                                     <constraint firstAttribute="bottom" secondItem="vSV-rW-9iJ" secondAttribute="bottom" constant="24" id="i2G-cJ-cXV"/>
                                     <constraint firstItem="vSV-rW-9iJ" firstAttribute="leading" secondItem="qvd-R4-JKX" secondAttribute="leading" constant="30" id="sIG-6L-DAy"/>
@@ -157,7 +173,7 @@
                                 </constraints>
                             </view>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="chat_room_female_ilustration" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-u4-h8W">
-                                <rect key="frame" x="0.0" y="324.5" width="414" height="509.5"/>
+                                <rect key="frame" x="0.0" y="324.5" width="414" height="475.5"/>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" text="Everything beautiful takes  time and patience!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEo-mp-KMh">
                                 <rect key="frame" x="0.0" y="181" width="394" height="143.5"/>
@@ -165,8 +181,15 @@
                                 <color key="textColor" red="0.59215686274509804" green="0.67450980392156867" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsW-zq-q7L">
+                                <rect key="frame" x="0.0" y="856" width="414" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="9db-NB-aUn"/>
+                                </constraints>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jh6-28-4lQ">
-                                <rect key="frame" x="0.0" y="834" width="414" height="62"/>
+                                <rect key="frame" x="0.0" y="800" width="414" height="62"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date starting in 15 minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFf-Od-RC2">
                                         <rect key="frame" x="20" y="24" width="374" height="14"/>
@@ -181,13 +204,6 @@
                                     <constraint firstItem="lFf-Od-RC2" firstAttribute="leading" secondItem="Jh6-28-4lQ" secondAttribute="leading" constant="20" id="Tsv-r7-cdK"/>
                                     <constraint firstAttribute="height" constant="62" id="mk3-NZ-uE0"/>
                                     <constraint firstAttribute="trailing" secondItem="lFf-Od-RC2" secondAttribute="trailing" constant="20" id="wn1-wX-7cs"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsW-zq-q7L">
-                                <rect key="frame" x="0.0" y="856" width="414" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="9db-NB-aUn"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7kF-KH-tx1">
@@ -215,6 +231,7 @@
                             <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="CLq-6I-3aw" secondAttribute="trailing" id="aNh-hA-pAJ"/>
                             <constraint firstItem="qvd-R4-JKX" firstAttribute="top" secondItem="7oV-uD-FjN" secondAttribute="bottom" id="aih-yX-etR"/>
                             <constraint firstItem="Jh6-28-4lQ" firstAttribute="top" secondItem="gvw-u4-h8W" secondAttribute="bottom" id="cRC-aH-MqA"/>
+                            <constraint firstItem="6Nk-fx-HnF" firstAttribute="bottom" secondItem="Jh6-28-4lQ" secondAttribute="bottom" id="hgV-de-d3I"/>
                             <constraint firstItem="lsW-zq-q7L" firstAttribute="leading" secondItem="2Sw-nP-RNl" secondAttribute="leading" id="iJa-AN-Q6D"/>
                             <constraint firstItem="vEo-mp-KMh" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="j35-jT-dtt"/>
                             <constraint firstAttribute="trailing" secondItem="lsW-zq-q7L" secondAttribute="trailing" id="kzt-sv-EYM"/>
@@ -222,7 +239,6 @@
                             <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="qvd-R4-JKX" secondAttribute="trailing" id="oq1-3W-bRT"/>
                             <constraint firstItem="vEo-mp-KMh" firstAttribute="top" secondItem="qvd-R4-JKX" secondAttribute="bottom" constant="30" id="orW-Tt-c9b"/>
                             <constraint firstAttribute="bottom" secondItem="lsW-zq-q7L" secondAttribute="bottom" id="pyr-cc-dhZ"/>
-                            <constraint firstAttribute="bottom" secondItem="Jh6-28-4lQ" secondAttribute="bottom" id="qmi-OK-ohh"/>
                             <constraint firstItem="7oV-uD-FjN" firstAttribute="top" secondItem="2Sw-nP-RNl" secondAttribute="top" id="qtL-z9-NIr"/>
                             <constraint firstItem="6Nk-fx-HnF" firstAttribute="trailing" secondItem="vEo-mp-KMh" secondAttribute="trailing" constant="20" id="t7x-Y8-WIg"/>
                             <constraint firstItem="qvd-R4-JKX" firstAttribute="leading" secondItem="6Nk-fx-HnF" secondAttribute="leading" id="tOM-zA-Jzl"/>
@@ -236,6 +252,8 @@
                         <outlet property="chatPartnerAvatarImageView" destination="69o-9m-ri5" id="izl-2s-opG"/>
                         <outlet property="chatPartnerNameLabel" destination="zJe-Jx-5se" id="f69-k5-CJD"/>
                         <outlet property="chatPartnerSexAgeLabel" destination="QzH-y2-GGc" id="qHJ-pM-GjA"/>
+                        <outlet property="dateTimerLabel" destination="B7u-fo-SxV" id="R21-pz-ICO"/>
+                        <outlet property="dateTimerView" destination="yQJ-tY-XAw" id="hHQ-Qj-imi"/>
                         <outlet property="emptyChatBackgroundImage" destination="gvw-u4-h8W" id="ShN-fy-v6U"/>
                         <outlet property="emptyChatLabel" destination="vEo-mp-KMh" id="hGE-wt-iic"/>
                         <outlet property="messagesCollectionView" destination="7kF-KH-tx1" id="OjU-Gp-pLC"/>
@@ -274,5 +292,6 @@
         <image name="chat_room_female_ilustration" width="413" height="301"/>
         <image name="green_gradient" width="375" height="45"/>
         <image name="more_dots" width="24" height="6"/>
+        <image name="time-remaining-icon" width="13" height="16"/>
     </resources>
 </document>

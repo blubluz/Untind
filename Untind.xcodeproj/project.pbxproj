@@ -14,7 +14,7 @@
 		0E068A4722FB520E00A9BDE9 /* MyAnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */; };
 		0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */; };
 		0E068A4B22FB558F00A9BDE9 /* AnswersContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */; };
-		0E068A4C22FB558F00A9BDE9 /* MyAnswersContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */; };
+		0E068A4C22FB558F00A9BDE9 /* AnswersContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E068A4A22FB558F00A9BDE9 /* AnswersContainerCell.xib */; };
 		0E079B552396E4E4004B1D7B /* ChatInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E079B542396E4E4004B1D7B /* ChatInputAccesoryView.swift */; };
 		0E09534D2310636600326172 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534C2310636600326172 /* WriteQuestionViewController.swift */; };
 		0E09534F231069CA00326172 /* AddQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09534E231069CA00326172 /* AddQuestionController.swift */; };
@@ -121,6 +121,8 @@
 		F748EF6823C6168200F22989 /* RescheduleDatePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F748EF6623C6168200F22989 /* RescheduleDatePopup.xib */; };
 		F7557D8C23A290BA00186E34 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8B23A290BA00186E34 /* Async.swift */; };
 		F7557D8F23A2950000186E34 /* UTAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7557D8D23A2950000186E34 /* UTAlertController.swift */; };
+		F766FEFA23E2FF6A00C2AE27 /* ProfileEmptyStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F766FEF823E2FF6A00C2AE27 /* ProfileEmptyStateCell.swift */; };
+		F766FEFB23E2FF6A00C2AE27 /* ProfileEmptyStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F766FEF923E2FF6A00C2AE27 /* ProfileEmptyStateCell.xib */; };
 		F777227A239AA352000E7CA8 /* UTDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7772279239AA352000E7CA8 /* UTDate.swift */; };
 		F7DB9DC823228C1C0007CD42 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */; };
 		F7E584B123D7355000AD6836 /* UTChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E584B023D7355000AD6836 /* UTChatRoom.swift */; };
@@ -161,7 +163,7 @@
 		0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersTableViewCell.swift; sourceTree = "<group>"; };
 		0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersTableViewCell.xib; sourceTree = "<group>"; };
 		0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersContainerCell.swift; sourceTree = "<group>"; };
-		0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersContainerCell.xib; sourceTree = "<group>"; };
+		0E068A4A22FB558F00A9BDE9 /* AnswersContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswersContainerCell.xib; sourceTree = "<group>"; };
 		0E079B542396E4E4004B1D7B /* ChatInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatInputAccesoryView.swift; path = Untind/Extensions/ChatInputAccesoryView.swift; sourceTree = SOURCE_ROOT; };
 		0E09534C2310636600326172 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		0E09534E231069CA00326172 /* AddQuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionController.swift; sourceTree = "<group>"; };
@@ -279,6 +281,8 @@
 		F748EF6623C6168200F22989 /* RescheduleDatePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RescheduleDatePopup.xib; sourceTree = "<group>"; };
 		F7557D8B23A290BA00186E34 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		F7557D8D23A2950000186E34 /* UTAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTAlertController.swift; sourceTree = "<group>"; };
+		F766FEF823E2FF6A00C2AE27 /* ProfileEmptyStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmptyStateCell.swift; sourceTree = "<group>"; };
+		F766FEF923E2FF6A00C2AE27 /* ProfileEmptyStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileEmptyStateCell.xib; sourceTree = "<group>"; };
 		F7772279239AA352000E7CA8 /* UTDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTDate.swift; sourceTree = "<group>"; };
 		F7DB9DC723228C1C0007CD42 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		F7E584B023D7355000AD6836 /* UTChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTChatRoom.swift; sourceTree = "<group>"; };
@@ -570,7 +574,7 @@
 				0E068A4522FB520E00A9BDE9 /* MyAnswersTableViewCell.swift */,
 				0E068A4622FB520E00A9BDE9 /* MyAnswersTableViewCell.xib */,
 				0E068A4922FB558F00A9BDE9 /* AnswersContainerCell.swift */,
-				0E068A4A22FB558F00A9BDE9 /* MyAnswersContainerCell.xib */,
+				0E068A4A22FB558F00A9BDE9 /* AnswersContainerCell.xib */,
 			);
 			path = Answers;
 			sourceTree = "<group>";
@@ -586,6 +590,8 @@
 				0EAC900B2354FB6700887CE3 /* ProfileQuestionCell.xib */,
 				0E468F752356540800C671AE /* ProfileAnswerCell.swift */,
 				0E468F762356540800C671AE /* ProfileAnswerCell.xib */,
+				F766FEF823E2FF6A00C2AE27 /* ProfileEmptyStateCell.swift */,
+				F766FEF923E2FF6A00C2AE27 /* ProfileEmptyStateCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -886,7 +892,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E068A4C22FB558F00A9BDE9 /* MyAnswersContainerCell.xib in Resources */,
+				0E068A4C22FB558F00A9BDE9 /* AnswersContainerCell.xib in Resources */,
 				0E1C8B4322FA00A80011A5D7 /* MyQuestionsContainerCell.xib in Resources */,
 				0E068A4822FB520E00A9BDE9 /* MyAnswersTableViewCell.xib in Resources */,
 				0E17A39022EC8DF600390BA5 /* LaunchScreen.storyboard in Resources */,
@@ -910,6 +916,7 @@
 				0E17A3BB22EC9E7D00390BA5 /* GOTHICB.TTF in Resources */,
 				0EB020CF2335407000462805 /* AnswerTableViewCell.xib in Resources */,
 				F7F92B7D23A796A7007DC648 /* DateCollectionViewCell.xib in Resources */,
+				F766FEFB23E2FF6A00C2AE27 /* ProfileEmptyStateCell.xib in Resources */,
 				0E1C8B3F22F9FD3A0011A5D7 /* MyQuestionsCollectionViewCell.xib in Resources */,
 				F748EF6823C6168200F22989 /* RescheduleDatePopup.xib in Resources */,
 				0E61DD6222EF7E4A00C1C8C7 /* SwipeableCardView.xib in Resources */,
@@ -1047,6 +1054,7 @@
 				0E17A38822EC8DF500390BA5 /* OnboardingViewController.swift in Sources */,
 				F7EED81C23A9265500420514 /* DateCollectionViewLayout.swift in Sources */,
 				0E60045423720F0400BCB4F4 /* VoteButton.swift in Sources */,
+				F766FEFA23E2FF6A00C2AE27 /* ProfileEmptyStateCell.swift in Sources */,
 				0E3BE6A02314490100746E90 /* VerticalAlignLabel.swift in Sources */,
 				0E5EC81A22F37669003C8C73 /* CALayerExtension.swift in Sources */,
 				0E7AC2B0231EE7C40050E750 /* FirebaseAuthManager.swift in Sources */,

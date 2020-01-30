@@ -99,7 +99,7 @@ class AcceptDatePopup: UIViewController {
     }
     @IBAction func confirmButtonTapped(_ sender: Any) {
         SVProgressHUD.show()
-        date?.answer(didAccept: true, completion: { (error, date) in
+        date?.accept(answer: true, completion: { (error, date) in
         SVProgressHUD.dismiss()
             if error != nil {
                 let title = "Oops"

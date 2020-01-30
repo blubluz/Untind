@@ -68,7 +68,7 @@ class UTChatRoom : NSObject {
                 if let error = error {
                     completion(error,nil)
                 } else {
-                    if let snapshot = snapshot {
+                    if let snapshot = snapshot, snapshot.data() != nil {
                         completion(nil, UTChatRoom(with: snapshot))
                     } else {
                         let newRoom = UTChatRoom()

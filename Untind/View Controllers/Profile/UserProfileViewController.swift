@@ -12,7 +12,7 @@ import Firebase
 class UserProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     
-    
+    //MARK: - Outlets
     @IBOutlet weak var selecterPointerYConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var usernameLabelYConstraint: NSLayoutConstraint!
@@ -24,6 +24,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var myQuestionsButton: UIButton!
     @IBOutlet weak var myAnswersButton: UIButton!
     @IBOutlet weak var interactionButton: UIButton!
+    @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -32,6 +34,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var sexAgeLabel: UILabel!
     
+    //MARK: - Properties
     var profile: Profile?
     var date: UTDate?
     var questions : [Question]?
@@ -43,9 +46,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     let headerViewMaxHeight: CGFloat = 256
     let headerViewMinHeight: CGFloat = 141
         
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(UINib(nibName: "MyAnswersContainerCell", bundle: nil), forCellWithReuseIdentifier: "AnswersContainerCell")
+        collectionView.registerNib(ProfileEmptyStateCell.self)
+        collectionView.registerNib(AnswersContainerCell.self)
         
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
@@ -56,10 +61,22 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         if let profile = profile {
             avatarImageView.image = UIImage(named: profile.avatarType)
             userNameLabel.text = profile.username
+            if profile.uid.isMyId {
+                reportButton.setTitle("Edit Profile", for: .normal)
+                if let nav = self.navigationController, nav.viewControllers.count > 1 {
+                    self.backButton.setImage(UIImage(named: "back-button"), for: .normal)
+                } else {
+                    self.backButton.setImage(UIImage(named: "settings-icon"), for: .normal)
+                }
+            }
         }
         
         interactionButton.layer.cornerRadius = 24.5
         prepareForAnimations()
+        
+        profileContainerView.layer.shadowRadius = 25.0
+        profileContainerView.layer.shadowOffset = CGSize(width: 0, height: -9)
+        profileContainerView.layer.shadowOpacity = 0.6
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +104,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func prepareForAnimations() {
-        
         self.interactionButton.transform = CGAffineTransform(translationX: 0, y: 150)
     }
     
@@ -127,7 +143,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func setupButtonFor(status: UTDate.RelationshipStatus, didSendQuestion : Bool = false) {
-        if let buttonText = status.buttonText {
+        if let buttonText = status.buttonText, let profile = self.profile, !profile.uid.isMyId {
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.6, options: .curveEaseIn, animations: {
                 self.interactionButton.transform = CGAffineTransform.identity
             }, completion: nil)
@@ -200,19 +216,34 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnswersContainerCell", for: indexPath) as! AnswersContainerCell
         cell.emptyStateView.isHidden = true
         if indexPath.row == 0 {
+            if !isLoadingQuestions {
+                if questions?.count == 0 {
+                    let title = profile?.uid.isMyId ?? false ? "Why No \nQuestions" : "No questions \nposted!"
+                    let message = profile?.uid.isMyId ?? false ? "Ask a new question, and increase \nyour chances of finding someone with \nthe right response!" : "When this user will post a question, \nyou will see it here."
+                    
+                    return collectionView.dequeue(ProfileEmptyStateCell.self, for: indexPath).update(withTitle: title, message: message, mode: .leftOriented, image: UIImage(named: "no-questions-icon"))
+                }
+                cell.activityIndicator.stopAnimating()
+            }
+            
             cell.answersTableView.register(UINib(nibName: "ProfileQuestionCell", bundle: nil), forCellReuseIdentifier: "ProfileQuestionCell")
             cell.answersTableView.tag = 0
             cell.answersTableView.estimatedRowHeight = 250
-            if !isLoadingQuestions {
+            
+        } else {
+            if !isLoadingAnswers {
+                if answers?.count == 0 {
+                    let title = profile?.uid.isMyId ?? false ? "Get involved \nmore" : "No answers \nposted!"
+                    let message = profile?.uid.isMyId ?? false ? "Start by browsing for new questions \nposted by others. If they like what you \nsay, they will send you a date request!" : "When this user will post an answer, you will see it here."
+                    
+                    return collectionView.dequeue(ProfileEmptyStateCell.self, for: indexPath).update(withTitle: title, message: message, mode: .rightOriented, image: UIImage(named: "no-answers-icon"))
+                }
                 cell.activityIndicator.stopAnimating()
             }
-        } else {
+            
             cell.answersTableView.register(UINib(nibName: "ProfileAnswerCell", bundle: nil), forCellReuseIdentifier: "ProfileAnswerCell")
             cell.answersTableView.tag = 1
             cell.answersTableView.estimatedRowHeight = 400
-            if !isLoadingAnswers {
-                cell.activityIndicator.stopAnimating()
-            }
         }
         
         cell.answersTableView.delegate = self
@@ -302,15 +333,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 vc.modalPresentationStyle = .overCurrentContext
                 Globals.tabBarController?.present(vc, animated: false, completion: nil)
                 break
+            case .chatStarted :
+                let chatVc = ChatViewController.instantiate()
+                chatVc.date = date
+                Globals.mainNavigationController?.pushViewController(chatVc, animated: true)
             default:
                 return
             }
         }
-    } 
-    
-    @IBAction func sendMessageTapped(_ sender: Any) {
-        let chatVc = ChatViewController.instantiate()
-        Globals.mainNavigationController?.pushViewController(chatVc, animated: true)
     }
     
     @IBAction func myQuestionsTapped(_ sender: Any) {
@@ -324,6 +354,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     @IBAction func reportButtonTapped(_ sender: Any) {
+        if let profile = profile {
+            if profile.uid.isMyId {
+                //open Edit Profile modal
+                return
+            }
+        }
+        
         let vc = ReportUserPopup.instantiate()
         vc.modalPresentationStyle = .overCurrentContext
         Globals.tabBarController?.present(vc, animated: false, completion: nil)
@@ -340,6 +377,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
+        if let profile = profile {
+            if profile.uid.isMyId {
+                //open settings modal
+                return
+            }
+        }
         self.navigationController?.popViewController(animated: true)
     }
     

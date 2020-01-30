@@ -89,7 +89,7 @@ class Question: NSObject {
         let db = Firestore.firestore()
         db.collection("questions").addDocument(data: jsonValue()) { (error) in
             if error == nil && self.respondent != nil {
-                let dateDocument = db.collection("dates").document(self.author.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
+                let dateDocument = db.collection("dates").document(self.respondent!.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
                       
                       dateDocument.getDocument { (snapshot, error) in
                           if error != nil {

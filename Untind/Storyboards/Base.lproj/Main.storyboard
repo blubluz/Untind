@@ -424,7 +424,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="103.5" height="83"/>
                                                 <color key="tintColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="questions"/>
-                                                <state key="selected" image="questions-icon-orange"/>
                                                 <state key="highlighted" image="questions"/>
                                                 <connections>
                                                     <action selector="feedButtonTapped:" destination="31b-Vw-T1r" eventType="touchUpInside" id="FbB-Vd-fcb"/>
@@ -434,7 +433,6 @@
                                                 <rect key="frame" x="103.5" y="0.0" width="103.5" height="83"/>
                                                 <color key="tintColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="chat"/>
-                                                <state key="selected" image="chat-icon-teal"/>
                                                 <state key="highlighted" image="chat"/>
                                                 <connections>
                                                     <action selector="chatButtonTapped:" destination="31b-Vw-T1r" eventType="touchUpInside" id="QW1-ZR-C7y"/>
@@ -444,7 +442,6 @@
                                                 <rect key="frame" x="207" y="0.0" width="103.5" height="83"/>
                                                 <color key="tintColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="notifications"/>
-                                                <state key="selected" image="notifications-icon-orange"/>
                                                 <state key="highlighted" image="notifications"/>
                                                 <connections>
                                                     <action selector="notificationsButtonTapped:" destination="31b-Vw-T1r" eventType="touchUpInside" id="BUW-76-hU7"/>
@@ -452,9 +449,8 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppu-l1-C7D" customClass="UITabBarButton" customModule="Untind" customModuleProvider="target">
                                                 <rect key="frame" x="310.5" y="0.0" width="103.5" height="83"/>
-                                                <color key="tintColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="profile"/>
-                                                <state key="selected" image="profile-icon-orange"/>
                                                 <state key="highlighted" image="profile"/>
                                                 <connections>
                                                     <action selector="profileButtonTapped:" destination="31b-Vw-T1r" eventType="touchUpInside" id="ha2-Ll-OZ8"/>
@@ -507,6 +503,7 @@
                         <outlet property="backgroundImage" destination="DAe-7B-pt4" id="1Rx-ku-yAS"/>
                         <outlet property="circleView" destination="JgN-Ls-pQO" id="1X0-Ji-gDg"/>
                         <outlet property="controllerContainerView" destination="rzs-lW-wSw" id="t8E-xg-Tx7"/>
+                        <outlet property="feedButton" destination="k9b-mG-g8m" id="PNP-WL-NBL"/>
                         <outlet property="presentationContainerBottomConstraint" destination="xfP-g8-fZy" id="ark-JW-Tdy"/>
                         <outlet property="presentationViewContainer" destination="eNW-m9-Jzt" id="oLp-6L-Igp"/>
                         <outlet property="tabBarView" destination="CGf-p5-X3F" id="ImT-4B-dRe"/>
@@ -1091,7 +1088,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="6" translatesAutoresizingMaskIntoConstraints="NO" id="rZz-Co-y98" customClass="UTPageControl" customModule="Untind" customModuleProvider="target">
-                                <rect key="frame" x="168" y="841" width="78" height="6"/>
+                                <rect key="frame" x="132" y="841" width="150" height="6"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="numberOfPages">
@@ -1166,7 +1163,6 @@
         <image name="back-button" width="30" height="26"/>
         <image name="bg" width="375" height="812"/>
         <image name="chat" width="24" height="24"/>
-        <image name="chat-icon-teal" width="24" height="24"/>
         <image name="confirm-button-orange" width="71" height="71"/>
         <image name="confirm-button-teal" width="71" height="71"/>
         <image name="down-arrow" width="48" height="48"/>
@@ -1176,14 +1172,11 @@
         <image name="login-facebook" width="71" height="71"/>
         <image name="logo" width="53" height="43"/>
         <image name="notifications" width="24" height="24"/>
-        <image name="notifications-icon-orange" width="24" height="24"/>
         <image name="onboarding-card-shadow" width="375" height="586"/>
         <image name="orange-background" width="375" height="667"/>
         <image name="post-question-button-shadow" width="276" height="103"/>
         <image name="profile" width="24" height="24"/>
-        <image name="profile-icon-orange" width="24" height="24"/>
         <image name="questions" width="24" height="24"/>
-        <image name="questions-icon-orange" width="24" height="24"/>
         <image name="rotate" width="30" height="30"/>
         <image name="sign-in-background" width="375" height="812"/>
         <image name="sign-up-background" width="375" height="812"/>
