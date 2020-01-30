@@ -47,33 +47,33 @@ class TabBarViewController: UIViewController, PresentationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TEST: Add initial controller here
-//        let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedNavigationController") as! UINavigationController
-//        currentDisplayedViewController = feedVC
-//        self.addChild(feedVC)
-//
-//        tabBarButtons[0].isSelected = true
-//        selectedButton = tabBarButtons[0]
-//
-//        if let feedVcView = feedVC.view {
-//            let feedVcView = feedVcView
-//            self.controllerContainerView.addSubview(feedVcView)
-//
-//            feedVcView.translatesAutoresizingMaskIntoConstraints = false
-//            controllerContainerView.addConstraints([
-//                feedVcView.leadingAnchor.constraint(equalTo: controllerContainerView.leadingAnchor),
-//                feedVcView.topAnchor.constraint(equalTo: controllerContainerView.topAnchor),
-//                feedVcView.trailingAnchor.constraint(equalTo: controllerContainerView.trailingAnchor),
-//                feedVcView.bottomAnchor.constraint(equalTo: controllerContainerView.bottomAnchor)])
-//
-//            for constraint in feedVcView.constraints {
-//                constraint.isActive = true
-//            }
-//
-//
-//        }
         
-        self.feedButtonTapped(self.feedButton)
+        let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedNavigationController") as! UINavigationController
+        currentDisplayedViewController = feedVC
+        self.addChild(feedVC)
+        
+        feedButton.tintColor = UIColor(red: 242, green: 123, blue: 99, alpha: 1)
+        tabBarButtons[0].isSelected = true
+        selectedButton = tabBarButtons[0]
+        
+        if let feedVcView = feedVC.view {
+            let feedVcView = feedVcView
+            self.controllerContainerView.addSubview(feedVcView)
+            
+            feedVcView.translatesAutoresizingMaskIntoConstraints = false
+            controllerContainerView.addConstraints([
+                feedVcView.leadingAnchor.constraint(equalTo: controllerContainerView.leadingAnchor),
+                feedVcView.topAnchor.constraint(equalTo: controllerContainerView.topAnchor),
+                feedVcView.trailingAnchor.constraint(equalTo: controllerContainerView.trailingAnchor),
+                feedVcView.bottomAnchor.constraint(equalTo: controllerContainerView.bottomAnchor)])
+            
+            for constraint in feedVcView.constraints {
+                constraint.isActive = true
+            }
+            
+            
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchTheme(_:)), name: .didSwitchTheme, object: nil)
         
         presentationContainerBottomConstraint.constant = -UIScreen.main.bounds.size.height
@@ -133,15 +133,6 @@ class TabBarViewController: UIViewController, PresentationViewController {
     }
     
     //MARK: - Button Actions
-    @IBAction func topProfileButtonTapped(_ sender: Any) {
-        guard !(self.presentedContainerViewController is MyQuestionsViewController) else {
-            return
-        }
-        
-        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyQuestionsViewController"), animated: true, completion: nil, inContainer: true)
-        
-    }
-    
     @IBAction func closeModalButtonTapped(_ sender: Any) {
        self.dismissContainerViewController(animated: true)
     }

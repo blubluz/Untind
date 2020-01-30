@@ -17,7 +17,7 @@ class TabBarCircleView : UIView {
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 3, options: .curveLinear, animations: {
                 self.transform = CGAffineTransform.identity
             }, completion: { (success: Bool) in
-                
+
             })
         }
         

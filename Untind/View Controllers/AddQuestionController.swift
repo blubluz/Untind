@@ -9,7 +9,9 @@
 import UIKit
 import FirebaseFirestore
 import SVProgressHUD
-
+protocol AddQuestionDelegate : NSObject {
+    func postQuestionCompleted(error: Error?, question: Question?)
+}
 class AddQuestionController: UIViewController {
 
     @IBOutlet weak var answerSheetView: UIView!
@@ -20,6 +22,7 @@ class AddQuestionController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postButton: UIButton!
     
+    weak var delegate : AddQuestionDelegate?
     var profile : Profile?
     
     override func viewDidLoad() {
@@ -65,20 +68,21 @@ class AddQuestionController: UIViewController {
         
         question.post(toProfile: self.profile) { (error) in
             SVProgressHUD.dismiss()
-            if error != nil {
-                self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
-            } else {
-                var alertMessage : NSAttributedString = NSAttributedString(string: "Your post is now in the public cards stack. You can find it in the profile section")
-                if self.profile != nil {
-                    alertMessage =  NSAttributedString(string: "Your question has been sent to \(self.profile!.username). You can find it in the profile section").boldAppearenceOf(string: self.profile!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize))
-                }
-                let alertController = UTAlertController(title: "Success!", message:alertMessage)
-                let action = UTAlertAction(title: "Dismiss", {
-                    self.dismiss(animated: false, completion: nil)
-                })
-                alertController.addNewAction(action: action)
-                self.present(alertController, animated: true, completion: nil)
-            }
+            self.delegate?.postQuestionCompleted(error: error, question: question)
+//            if error != nil {
+//                self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
+//            } else {
+//                var alertMessage : NSAttributedString = NSAttributedString(string: "Your post is now in the public cards stack. You can find it in the profile section")
+//                if self.profile != nil {
+//                    alertMessage =  NSAttributedString(string: "Your question has been sent to \(self.profile!.username). You can find it in the profile section").boldAppearenceOf(string: self.profile!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize))
+//                }
+//                let alertController = UTAlertController(title: "Success!", message:alertMessage)
+//                let action = UTAlertAction(title: "Dismiss", {
+//                    self.dismiss(animated: false, completion: nil)
+//                })
+//                alertController.addNewAction(action: action)
+//                self.present(alertController, animated: true, completion: nil)
+//            }
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class QuestionViewController: UIViewController {
 
@@ -22,8 +23,14 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var questionAuthorView: UIView!
     @IBOutlet weak var addAnswerBackgroundView: UIView!
     
+    @IBOutlet weak var emptyStateView: UIView!
+    @IBOutlet weak var emptyStateImage: UIImageView!
+    @IBOutlet weak var emptyStateTitle: UILabel!
+    @IBOutlet weak var emptyStateMessage: UILabel!
+    
     public weak var question : Question?
     private var didAppearOnce = false
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +45,26 @@ class QuestionViewController: UIViewController {
             questionAuthorAvatar.image = UIImage(named: question.author.avatarType)
             self.answersTableView.reloadData()
             
+            activityIndicator.startAnimating()
             question.fetchAnswers { (error) in
-                self.answersTableView.reloadData()
+                self.activityIndicator.stopAnimating()
+                if question.answers?.count == 0 {
+                    self.emptyStateTitle.transform = CGAffineTransform(translationX: -300, y: 0)
+                    self.emptyStateMessage.transform = CGAffineTransform(translationX: -300, y: 0)
+                    self.emptyStateImage.transform = CGAffineTransform(translationX: 300, y: 0)
+                    self.emptyStateView.isHidden = false
+                    UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
+                        self.emptyStateTitle.transform = CGAffineTransform.identity
+                        self.emptyStateMessage.transform = CGAffineTransform.identity
+                        self.emptyStateImage.transform = CGAffineTransform.identity
+                    })
+                    
+                    UIView.animate(withDuration: 0.9, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
+                    }) 
+                } else {
+                    self.emptyStateView.isHidden = true
+                    self.answersTableView.reloadData()
+                }
             }
         }
         

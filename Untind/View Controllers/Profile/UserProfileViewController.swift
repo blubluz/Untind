@@ -20,6 +20,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var selectorPointerView: UIView!
     @IBOutlet weak var selectorView: UIView!
     @IBOutlet weak var profileContainerView: UIView!
+    @IBOutlet weak var profileContainerShadowView: UIView!
     
     @IBOutlet weak var myQuestionsButton: UIButton!
     @IBOutlet weak var myAnswersButton: UIButton!
@@ -37,11 +38,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     //MARK: - Properties
     var profile: Profile?
     var date: UTDate?
-    var questions : [Question]?
-    var answers : [Answer]?
+    var questions : [Question]? = []
+    var answers : [Answer]? = []
     
-    var isLoadingQuestions : Bool = false
-    var isLoadingAnswers : Bool = false
+    var isLoadingQuestions : Bool = true
+    var isLoadingAnswers : Bool = true
     var didSetupSelector : Bool = false
     let headerViewMaxHeight: CGFloat = 256
     let headerViewMinHeight: CGFloat = 141
@@ -73,10 +74,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         
         interactionButton.layer.cornerRadius = 24.5
         prepareForAnimations()
-        
-        profileContainerView.layer.shadowRadius = 25.0
-        profileContainerView.layer.shadowOffset = CGSize(width: 0, height: -9)
-        profileContainerView.layer.shadowOpacity = 0.6
+        profileContainerView.layer.roundCorners(radius: 20)
+        profileContainerShadowView.layer.applySketchShadow(color: .black, alpha: 0.14, x: 0, y: 37, blur: 51, spread: -34)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +92,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         selectorView.layer.cornerRadius = 24
         profileContainerView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
+
     }
     
     
@@ -114,6 +114,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             if let err = error {
                 print("Error getting documents: \(err)")
             } else {
+                self.isLoadingQuestions = false
                 self.questions = questions
                 self.collectionView.reloadData()
             }
@@ -125,6 +126,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
                 //Handle error
                 print("Error fetching answers: \(err.localizedDescription)")
             } else {
+                self.isLoadingAnswers = false
                 self.answers = answers
                 self.collectionView.reloadData()
             }
@@ -214,32 +216,27 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnswersContainerCell", for: indexPath) as! AnswersContainerCell
-        cell.emptyStateView.isHidden = true
         if indexPath.row == 0 {
-            if !isLoadingQuestions {
                 if questions?.count == 0 {
                     let title = profile?.uid.isMyId ?? false ? "Why No \nQuestions" : "No questions \nposted!"
                     let message = profile?.uid.isMyId ?? false ? "Ask a new question, and increase \nyour chances of finding someone with \nthe right response!" : "When this user will post a question, \nyou will see it here."
-                    
-                    return collectionView.dequeue(ProfileEmptyStateCell.self, for: indexPath).update(withTitle: title, message: message, mode: .leftOriented, image: UIImage(named: "no-questions-icon"))
+                    let cell = collectionView.dequeue(ProfileEmptyStateCell.self, for: indexPath).update(withTitle: title, message: message, buttonTitle: profile?.uid.isMyId ?? false ? "Create a Post" : nil, mode: .leftOriented, image: UIImage(named: "no-questions-icon"), isLoading: self.isLoadingQuestions)
+                    cell.delegate = self
+                    return cell
                 }
-                cell.activityIndicator.stopAnimating()
-            }
             
             cell.answersTableView.register(UINib(nibName: "ProfileQuestionCell", bundle: nil), forCellReuseIdentifier: "ProfileQuestionCell")
             cell.answersTableView.tag = 0
             cell.answersTableView.estimatedRowHeight = 250
             
         } else {
-            if !isLoadingAnswers {
                 if answers?.count == 0 {
-                    let title = profile?.uid.isMyId ?? false ? "Get involved \nmore" : "No answers \nposted!"
-                    let message = profile?.uid.isMyId ?? false ? "Start by browsing for new questions \nposted by others. If they like what you \nsay, they will send you a date request!" : "When this user will post an answer, you will see it here."
-                    
-                    return collectionView.dequeue(ProfileEmptyStateCell.self, for: indexPath).update(withTitle: title, message: message, mode: .rightOriented, image: UIImage(named: "no-answers-icon"))
+                    let title = profile?.uid.isMyId ?? false ? "Get more \ninvolved" : "No answers \nposted!"
+                    let message = profile?.uid.isMyId ?? false ? "Start by browsing for new questions \nposted by others. If they like what you \nsay, they will send you a date request!" : "When this user will post \nan answer, you will see it here."
+                    let cell = collectionView.dequeue(ProfileEmptyStateCell.self, for: indexPath).update(withTitle: title, message: message, buttonTitle: profile?.uid.isMyId ?? false ? "Browse Question" : nil , mode: .rightOriented, image: UIImage(named: "no-answers-icon"), isLoading: self.isLoadingAnswers)
+                    cell.delegate = self
+                    return cell
                 }
-                cell.activityIndicator.stopAnimating()
-            }
             
             cell.answersTableView.register(UINib(nibName: "ProfileAnswerCell", bundle: nil), forCellReuseIdentifier: "ProfileAnswerCell")
             cell.answersTableView.tag = 1
@@ -265,12 +262,16 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             let completionPercentage = min((scrollView.contentOffset.x * 100) / scrollView.frame.size.width, 100)
             selecterPointerYConstraint.constant = (selectorView.frame.size.width/4) * ((2 * completionPercentage/100) - 1)
             selectorPointerView.backgroundColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
+            backButton.tintColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
+            reportButton.setTitleColor(UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.teal2, withPercentage: completionPercentage/100), for: .normal)
+            interactionButton.backgroundColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
             
             let questionsButtonColor = UIColor.fadeFromColor(fromColor: UIColor.flatOrange, toColor: UIColor.darkBlue, withPercentage: completionPercentage/100)
             myQuestionsButton.setTitleColor(questionsButtonColor, for: .normal)
             
             let answersButtonColor = UIColor.fadeFromColor(fromColor: UIColor.darkBlue, toColor: UIColor.teal2, withPercentage: completionPercentage/100)
             myAnswersButton.setTitleColor(answersButtonColor, for: .normal)
+            
             
             if completionPercentage == 100 {
                 self.collectionView.collectionViewLayout.invalidateLayout()
@@ -297,6 +298,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             avatarImageView.alpha = completionPercent * completionPercent
             sexAgeLabel.alpha = completionPercent * completionPercent
             usernameLabelYConstraint.constant = (1-completionPercent) * (-40) + 15
+            profileContainerShadowView.layer.applySketchShadow(color: .black, alpha: 0.14, x: 0, y: 37, blur: 51, spread: -34)
+
         }
     }
     
@@ -379,11 +382,52 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBAction func backButtonTapped(_ sender: Any) {
         if let profile = profile {
             if profile.uid.isMyId {
-                //open settings modal
+                let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController")
+                Globals.tabBarController?.present(vc, animated: true, completion: nil)
                 return
             }
         }
         self.navigationController?.popViewController(animated: true)
     }
     
+}
+
+//MARK: - ProfileEmptyStateDelegate
+extension UserProfileViewController : ProfileEmptyStateDelegate {
+    func didTapButton() {
+        guard let visibleCell = collectionView.visibleCells.last else {
+            return
+        }
+        
+        switch collectionView.indexPath(for: visibleCell)?.row {
+        case 0:
+            let qvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionController") as! AddQuestionController
+            qvc.delegate = self
+            Globals.tabBarController?.present(qvc, animated: true, completion: nil)
+        case 1:
+            Globals.tabBarController?.feedButtonTapped(Globals.tabBarController!.feedButton)
+        default:
+            break
+        }
+    }
+}
+
+extension UserProfileViewController : AddQuestionDelegate {
+    func postQuestionCompleted(error: Error?, question: Question?) {
+        self.dismiss(animated: true) {
+            if error != nil {
+                self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
+            } else {
+                if let question = question {
+                    let alertController = UTAlertController(title: "Success!", message:"Your post is now in the public cards stack. You can find it in the profile section")
+                    let action = UTAlertAction(title: "Okay", {
+                        self.questions?.append(question)
+                        self.collectionView.reloadData()
+                    })
+                    alertController.addNewAction(action: action)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
 }

@@ -90,7 +90,8 @@ class FeedViewController: UIViewController {
     }
     
       @IBAction func filterButtonTapped(_ sender: Any) {
-                let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionsNavigation")
+                let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionController") as! AddQuestionController
+        writeQVC.delegate = self
                 self.present(writeQVC, animated: true, completion: nil)
         }
     
@@ -143,5 +144,22 @@ extension FeedViewController: QuestionCardDelegate {
     
     func didTapProfile(profile: Profile) {
         self.navigationController?.pushViewController(UserProfileViewController.instantiate(profile: profile), animated: true)
+    }
+}
+
+
+//MARK: - AddQuestionDelegate
+extension FeedViewController : AddQuestionDelegate {
+    func postQuestionCompleted(error: Error?, question: Question?) {
+        self.dismiss(animated: true) {
+            if error != nil {
+                self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)
+            } else {
+                if let question = question {
+                    let alertController = UTAlertController(title: "Success!", message:"Your post is now in the public cards stack. You can find it in the profile section")
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }

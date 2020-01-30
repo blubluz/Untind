@@ -94,14 +94,14 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyQuestionsContainerCell", for: indexPath) as! MyQuestionsContainerCell
-            cell.set(questions: self.myQuestions, isLoading: isLoadingQuestions)
+            cell.set(questions: self.myQuestions)
             cell.draggingDelegate = self
             cell.questionsDelegate = self
             return cell
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyAnswersContainerCell", for: indexPath) as! AnswersContainerCell
-            cell.set(answers: self.myAnswers, isLoading: isLoadingAnswers)
+            cell.set(answers: self.myAnswers)
             cell.draggingDelegate = self
             cell.answerDelegate = self
             return cell

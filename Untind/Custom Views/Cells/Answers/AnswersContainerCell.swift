@@ -19,32 +19,17 @@ class AnswersContainerCell: UICollectionViewCell, UITableViewDelegate, UITableVi
     weak var draggingDelegate : DraggingDelegate?
     weak var answerDelegate: AnswersDelegate?
     private var shouldClose = true
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var answers : [Answer]?
-    @IBOutlet weak var emptyStateView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        activityIndicator.startAnimating()
-        
     }
     
-    func set(answers: [Answer]?, isLoading: Bool = false) {
+    func set(answers: [Answer]?) {
         self.answers = answers
         
         if answers != nil {
             answersTableView.isHidden = false
-            activityIndicator.stopAnimating()
-        }
-        
-        if isLoading {
-            emptyStateView.isHidden = true
-        } else {
-            if let answers = answers, answers.count == 0 {
-                emptyStateView.isHidden = false
-            } else {
-                emptyStateView.isHidden = true
-            }
         }
         
         answersTableView.register(UINib(nibName: "MyAnswersTableViewCell", bundle: nil), forCellReuseIdentifier: "MyAnswersTableViewCell")
