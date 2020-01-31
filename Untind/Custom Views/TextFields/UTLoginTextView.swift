@@ -19,6 +19,15 @@ class UTLoginTextView: UIView {
         return textField.text
     }
     
+    @IBInspectable var keyboardType : UIKeyboardType {
+        get {
+            return textField.keyboardType
+        }
+        set {
+            self.textField.keyboardType = newValue
+        }
+    }
+    
     @IBInspectable var secureTextEntry: Bool {
         get {
             return textField.isSecureTextEntry

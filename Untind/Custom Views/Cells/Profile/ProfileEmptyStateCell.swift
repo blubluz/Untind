@@ -100,6 +100,8 @@ class ProfileEmptyStateCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        leftImageView.isHidden = false
+        rightImageView.isHidden = false
         self.isLoading = true
         self.setOutletsAlpha(alpha: 0)
     }

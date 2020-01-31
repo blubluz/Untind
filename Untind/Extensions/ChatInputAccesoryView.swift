@@ -142,6 +142,16 @@ class ChatInputAccesoryView : UIView {
            chatDelegate?.didTapSend()
            messageTextViewHeightConstraint?.constant =  min(max(62,messageTextView.contentSize.height),120)
        }
+    
+    override func becomeFirstResponder() -> Bool {
+        super.becomeFirstResponder()
+        return self.messageTextView.becomeFirstResponder()
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        super.resignFirstResponder()
+        return self.messageTextView.resignFirstResponder()
+    }
 }
 
 extension ChatInputAccesoryView : UITextViewDelegate {

@@ -31,14 +31,6 @@ class FeedViewController: UIViewController {
         view.addGestureRecognizer(tap)
         topBarView.tag = UIViewTags.feedTopBar.rawValue
 
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(keyboardWillAppear),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
-        NotificationCenter.default.addObserver(self,
-                  selector: #selector(keyboardWillDisappear),
-                  name: UIResponder.keyboardWillHideNotification,
-                  object: nil)
         let db = Firestore.firestore()
         
         db.collection("questions").getDocuments { (querySnapshot : QuerySnapshot?, error) in
@@ -61,12 +53,19 @@ class FeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillAppear),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+                      selector: #selector(keyboardWillDisappear),
+                      name: UIResponder.keyboardWillHideNotification,
+                      object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-     
     }
     
     override func viewDidDisappear(_ animated: Bool) {

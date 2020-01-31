@@ -27,10 +27,27 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var emptyStateImage: UIImageView!
     @IBOutlet weak var emptyStateTitle: UILabel!
     @IBOutlet weak var emptyStateMessage: UILabel!
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     
     public weak var question : Question?
     private var didAppearOnce = false
-    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
+    private lazy var chatInputAccesory : ChatInputAccesoryView = {
+         let cv = ChatInputAccesoryView()
+         cv.chatDelegate = self
+         return cv
+     }()
+    
+    override var inputAccessoryView: UIView? {
+         get {
+             return chatInputAccesory
+         }
+     }
+    override var canBecomeFirstResponder: Bool {
+         return true
+     }
+     override var canResignFirstResponder: Bool {
+         return true
+     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +56,25 @@ class QuestionViewController: UIViewController {
         answersTableView.dataSource = self
         self.automaticallyAdjustsScrollViewInsets = false
         answersTableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 130, right: 0)
+        self.inputAccessoryView?.isHidden = true
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        answersTableView.addGestureRecognizer(tap)
         
         if let question = question {
             questionLabel.text = question.questionText
             questionAuthorAvatar.image = UIImage(named: question.author.avatarType)
             self.answersTableView.reloadData()
             
-            activityIndicator.startAnimating()
+            if question.answers?.count == 0 {
+                activityIndicator.startAnimating()
+            }
             question.fetchAnswers { (error) in
                 self.activityIndicator.stopAnimating()
                 if question.answers?.count == 0 {
@@ -79,9 +108,7 @@ class QuestionViewController: UIViewController {
         questionView.roundCorners(cornerRadius: 20, corners: [.bottomLeft,.bottomRight])
     }
     
-    @IBAction func backButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
-    }
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -97,6 +124,23 @@ class QuestionViewController: UIViewController {
            let vc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
            return vc
        }
+    
+    @objc func dismissKeyboard() {
+         //Causes the view (or one of its embedded text fields) to resign the first responder status.
+         chatInputAccesory.resignFirstResponder()
+     }
+    
+     @objc func keyboardWillHide(_ notification: Notification) {
+              
+              
+              UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                self.inputAccessoryView?.transform = CGAffineTransform(translationX: 0, y: 80)
+              }) {
+                (finished) in
+                self.inputAccessoryView?.isHidden = true
+        }
+        
+    }
     
     func doDisappearAnimations(completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveLinear, animations: {
@@ -129,10 +173,25 @@ class QuestionViewController: UIViewController {
     }
     
     //MARK: - Button Actions
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: false)
+    }
+    
     @IBAction func didTapAuthorProfile(_ sender: Any) {
         self.navigationController?.pushViewController(UserProfileViewController.instantiate(profile: question?.author), animated: true)
     }
     
+    @IBAction func didTapAnswerButton(_ sender: Any) {
+        
+        self.inputAccessoryView?.transform = CGAffineTransform(translationX: 0, y: 80)
+        
+        self.inputAccessoryView?.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.inputAccessoryView?.transform = CGAffineTransform.identity
+        })
+        self.chatInputAccesory.becomeFirstResponder()
+    }
 }
 
 //MARK: - Table View Delegate & DataSource
@@ -183,5 +242,12 @@ extension QuestionViewController: AnswerCellDelegate {
         answer.vote(newVote: value) {
             
         }
+    }
+}
+
+//MARK: - ChatInputAccesoryDelegate
+extension QuestionViewController : ChatInputAccesoryDelegate {
+    func didTapSend() {
+        //Send message
     }
 }
