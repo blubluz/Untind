@@ -8,11 +8,13 @@
 
 import UIKit
 import NVActivityIndicatorView
+import SVProgressHUD
 
 class QuestionViewController: UIViewController {
 
     @IBOutlet weak var questionView: UIView!
     @IBOutlet weak var answersView: UIView!
+    @IBOutlet weak var questionShadowView: UIView!
     @IBOutlet weak var questionViewShadow: UIImageView!
     
     @IBOutlet weak var answersTableView: UITableView!
@@ -72,7 +74,7 @@ class QuestionViewController: UIViewController {
             questionAuthorAvatar.image = UIImage(named: question.author.avatarType)
             self.answersTableView.reloadData()
             
-            if question.answers?.count == 0 {
+            if question.answers?.count == 0 || question.answers == nil {
                 activityIndicator.startAnimating()
             }
             question.fetchAnswers { (error) in
@@ -97,6 +99,7 @@ class QuestionViewController: UIViewController {
             }
         }
         
+        questionShadowView.layer.applySketchShadow(color: .black, alpha: 0.37, x: 13, y: 23, blur: 35, spread: -7)
         addAnswerBackgroundView.layer.cornerRadius = addAnswerBackgroundView.frame.size.width/2
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -227,7 +230,7 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        self.chatInputAccesory.resignFirstResponder()
     }
     
 }
@@ -248,6 +251,22 @@ extension QuestionViewController: AnswerCellDelegate {
 //MARK: - ChatInputAccesoryDelegate
 extension QuestionViewController : ChatInputAccesoryDelegate {
     func didTapSend() {
-        //Send message
+        let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: chatInputAccesory.text, upvotes: 0, rating: 0, question: self.question!)
+        
+        SVProgressHUD.show()
+        answer.post { (error) in
+            SVProgressHUD.dismiss()
+            self.chatInputAccesory.text = ""
+            self.chatInputAccesory.resignFirstResponder()
+            if let err = error {
+                self.present(UTAlertController(title: "Oops", message: "There was an error adding the answer \n\(error?.localizedDescription ?? "")"), animated: true)
+                print("Error posting answer: \(err.localizedDescription)")
+            } else {
+                self.question?.answers?.append(answer)
+                self.answersTableView.insertRows(at: [IndexPath(row: self.question!.answers!.count-1, section: 0)], with: .fade)
+                self.answersTableView.scrollToRow(at: IndexPath(row: self.question!.answers!.count-1, section: 0), at: .top, animated: true)
+                
+            }
+        }
     }
 }

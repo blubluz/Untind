@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -85,6 +85,10 @@ comment? Go ahead!</string>
                                     <constraint firstItem="Of8-8n-Ozg" firstAttribute="top" secondItem="4EL-7D-sFc" secondAttribute="top" id="scP-59-arp"/>
                                     <constraint firstItem="Of8-8n-Ozg" firstAttribute="leading" secondItem="4EL-7D-sFc" secondAttribute="leading" id="uDU-i2-WFr"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-Lh-ta9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="210" verticalHuggingPriority="210" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="700" image="onboarding-card-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="fpz-mG-ogT">
                                 <rect key="frame" x="0.0" y="0.0" width="457" height="212"/>
@@ -188,16 +192,20 @@ comment? Go ahead!</string>
                             <constraint firstItem="2OC-8K-Ecj" firstAttribute="leading" secondItem="Yr2-6g-Whf" secondAttribute="leading" id="82g-Gw-DFb"/>
                             <constraint firstItem="RSH-2M-9Qf" firstAttribute="height" secondItem="oAm-N6-5nN" secondAttribute="height" id="8Dz-my-rc7"/>
                             <constraint firstAttribute="bottom" secondItem="4EL-7D-sFc" secondAttribute="bottom" id="C3K-UV-9dH"/>
+                            <constraint firstItem="Tb9-Lh-ta9" firstAttribute="height" secondItem="rHw-uc-oif" secondAttribute="height" id="ETr-aY-RHA"/>
                             <constraint firstItem="RSH-2M-9Qf" firstAttribute="centerY" secondItem="oAm-N6-5nN" secondAttribute="centerY" id="Fid-4m-zmC"/>
+                            <constraint firstItem="Tb9-Lh-ta9" firstAttribute="centerY" secondItem="rHw-uc-oif" secondAttribute="centerY" id="GeP-lY-5fR"/>
                             <constraint firstItem="rHw-uc-oif" firstAttribute="leading" secondItem="Yr2-6g-Whf" secondAttribute="leading" id="NyO-3U-JcU"/>
                             <constraint firstItem="RSH-2M-9Qf" firstAttribute="centerX" secondItem="oAm-N6-5nN" secondAttribute="centerX" id="P52-S6-ntA"/>
                             <constraint firstItem="rHw-uc-oif" firstAttribute="top" secondItem="2OC-8K-Ecj" secondAttribute="bottom" multiplier="0.6" id="PzU-cx-ZSf"/>
                             <constraint firstItem="Yr2-6g-Whf" firstAttribute="trailing" secondItem="REg-d9-6CV" secondAttribute="trailing" id="bVK-NY-NmK"/>
                             <constraint firstItem="Yr2-6g-Whf" firstAttribute="trailing" secondItem="rHw-uc-oif" secondAttribute="trailing" id="cMx-sy-cVs"/>
                             <constraint firstItem="4EL-7D-sFc" firstAttribute="top" secondItem="rHw-uc-oif" secondAttribute="bottom" constant="-40" id="hQ0-5j-N2s"/>
+                            <constraint firstItem="Tb9-Lh-ta9" firstAttribute="width" secondItem="rHw-uc-oif" secondAttribute="width" id="kOz-eQ-LU9"/>
                             <constraint firstItem="Yr2-6g-Whf" firstAttribute="trailing" secondItem="2OC-8K-Ecj" secondAttribute="trailing" id="kdA-L9-96Q"/>
                             <constraint firstItem="rHw-uc-oif" firstAttribute="top" secondItem="Yr2-6g-Whf" secondAttribute="top" id="qo8-AR-gDw"/>
                             <constraint firstItem="Yr2-6g-Whf" firstAttribute="trailing" secondItem="oAm-N6-5nN" secondAttribute="trailing" constant="20" id="shf-mF-wmV"/>
+                            <constraint firstItem="Tb9-Lh-ta9" firstAttribute="centerX" secondItem="rHw-uc-oif" secondAttribute="centerX" id="wxu-yN-8gs"/>
                             <constraint firstItem="4EL-7D-sFc" firstAttribute="leading" secondItem="rHw-uc-oif" secondAttribute="leading" id="xwO-5A-GF8"/>
                             <constraint firstItem="REg-d9-6CV" firstAttribute="leading" secondItem="Yr2-6g-Whf" secondAttribute="leading" id="yNP-wK-Hyo"/>
                         </constraints>
@@ -220,6 +228,7 @@ comment? Go ahead!</string>
                         <outlet property="questionAuthorAvatar" destination="qpp-B5-kC7" id="dwE-ar-1PW"/>
                         <outlet property="questionAuthorView" destination="dt5-fb-CjF" id="yEy-Sn-VE0"/>
                         <outlet property="questionLabel" destination="bkw-CL-5PY" id="qwg-2X-kte"/>
+                        <outlet property="questionShadowView" destination="Tb9-Lh-ta9" id="U70-ac-Tvf"/>
                         <outlet property="questionView" destination="rHw-uc-oif" id="zSs-cd-meE"/>
                         <outlet property="questionViewShadow" destination="fpz-mG-ogT" id="feh-Ha-ELN"/>
                     </connections>

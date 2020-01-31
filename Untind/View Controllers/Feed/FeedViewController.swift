@@ -11,9 +11,9 @@ import Firebase
 import SwiftyJSON
 
 class FeedViewController: UIViewController {
-
-        @IBOutlet weak var topBarView: UIView!
-        @IBOutlet weak var filterButton: UIButton!
+    
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var swipeableCardViewContainer: SwipeableCardViewContainer!
     var questions : [Question] = []
     
@@ -68,9 +68,13 @@ class FeedViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+        
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     //Calls this function when the tap is recognized.
