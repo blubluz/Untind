@@ -89,9 +89,6 @@ class QuestionViewController: UIViewController {
                         self.emptyStateMessage.transform = CGAffineTransform.identity
                         self.emptyStateImage.transform = CGAffineTransform.identity
                     })
-                    
-                    UIView.animate(withDuration: 0.9, delay: 0.3, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
-                    }) 
                 } else {
                     self.emptyStateView.isHidden = true
                     self.answersTableView.reloadData()
@@ -263,9 +260,22 @@ extension QuestionViewController : ChatInputAccesoryDelegate {
                 print("Error posting answer: \(err.localizedDescription)")
             } else {
                 self.question?.answers?.append(answer)
-                self.answersTableView.insertRows(at: [IndexPath(row: self.question!.answers!.count-1, section: 0)], with: .fade)
-                self.answersTableView.scrollToRow(at: IndexPath(row: self.question!.answers!.count-1, section: 0), at: .top, animated: true)
                 
+                if self.question?.answers?.count == 1 {
+                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
+                        
+                        self.emptyStateTitle.transform = CGAffineTransform(translationX: -300, y: 0)
+                        self.emptyStateMessage.transform = CGAffineTransform(translationX: -300, y: 0)
+                        self.emptyStateImage.transform = CGAffineTransform(translationX: 300, y: 0)
+                    }) { (completed) in
+                        self.emptyStateView.isHidden = true
+                        self.answersTableView.insertSections([self.question!.answers!.count - 1], with: .fade)
+                        self.answersTableView.scrollToRow(at: IndexPath(row: 0, section: self.question!.answers!.count-1), at: .top, animated: true)
+                    }
+                } else {
+                    self.answersTableView.insertSections([self.question!.answers!.count - 1], with: .fade)
+                    self.answersTableView.scrollToRow(at: IndexPath(row: 0, section: self.question!.answers!.count-1), at: .top, animated: true)
+                }
             }
         }
     }

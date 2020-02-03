@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class DatesViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     var dates : [UTDate] = [] {
         didSet {
@@ -51,6 +53,7 @@ class DatesViewController: UIViewController {
     }
     
     var refresher:UIRefreshControl!
+    var isLoadingDates : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,21 +70,23 @@ class DatesViewController: UIViewController {
         flowLayout.minimumLineSpacing = 0
         collectionView.collectionViewLayout = flowLayout
         
+        collectionView.registerNib(DatesEmptyStateCell.self)
+        collectionView.registerNib(ContainerCollectionViewCell.self)
+        collectionView.registerNib(DateCollectionViewCell.self)
         collectionView.register(DateTableHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
-        collectionView.register(UINib(nibName: "ContainerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContainerCollectionViewCell")
-        collectionView.register(UINib(nibName: "DateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DateCollectionViewCell")
         self.loadData()
     }
     
     @objc func loadData() {
-        self.collectionView.refreshControl?.beginRefreshing()
         guard let userId = UTUser.loggedUser?.userProfile?.uid else {
-            self.collectionView.refreshControl?.endRefreshing()
             return
         }
         
+        activityIndicator.startAnimating()
+        isLoadingDates = true
         UTDate.fetch(forUserId: userId, withChatRooms: true) { (error, dates) in
-            self.collectionView.refreshControl?.endRefreshing()
+            self.isLoadingDates = false
+            self.activityIndicator.stopAnimating()
             if let error = error {
                 self.present(UTAlertController(title: "Oops", message: "There was an error loading dates: \(error.localizedDescription)"), animated: true, completion: nil)
             } else {
@@ -171,7 +176,7 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 5 + (self.dates.count == 0 && !isLoadingDates ? 1 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -186,6 +191,8 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
             return pendingDates.count
         case 4:
             return failedDates.count
+        case 5:
+            return 1
         default:
             return 0
         }
@@ -219,6 +226,9 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
             cell.update(with: self.failedDates[indexPath.row])
             cell.delegate = self
             return cell
+        case 5:
+            let cell = collectionView.dequeue(DatesEmptyStateCell.self, for: indexPath)
+            return cell
         default:
             return UICollectionViewCell()
         }
@@ -228,6 +238,10 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         if indexPath.section == 0 || indexPath.section == 1 {
             return CGSize(width: min(UIScreen.main.bounds.size.width, 420), height: 82)
 
+        }
+        
+        if indexPath.section == 5 {
+            return CGSize(width: UIScreen.main.bounds.size.width, height: self.collectionView.frame.size.height)
         }
         
         return CGSize(width: min((UIScreen.main.bounds.size.width - 50), 420), height: 82)

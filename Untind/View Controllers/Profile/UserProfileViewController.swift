@@ -56,8 +56,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        if let interactivePopGestureRecognizer = navigationController?.interactivePopGestureRecognizer {
+            collectionView.panGestureRecognizer.require(toFail: interactivePopGestureRecognizer)
+        }
         
         if let profile = profile {
             avatarImageView.image = UIImage(named: profile.avatarType)

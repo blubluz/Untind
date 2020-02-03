@@ -130,6 +130,8 @@
 		F7EED81723A909C500420514 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81623A909C500420514 /* UITableViewExtension.swift */; };
 		F7EED81923A909E800420514 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81823A909E800420514 /* UICollectionViewExtension.swift */; };
 		F7EED81C23A9265500420514 /* DateCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */; };
+		F7F38BE023E8548C00622BC6 /* DatesEmptyStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F38BDE23E8548C00622BC6 /* DatesEmptyStateCell.swift */; };
+		F7F38BE123E8548C00622BC6 /* DatesEmptyStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F38BDF23E8548C00622BC6 /* DatesEmptyStateCell.xib */; };
 		F7F92B7923A68FF4007DC648 /* DateTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */; };
 		F7F92B7C23A796A7007DC648 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */; };
 		F7F92B7D23A796A7007DC648 /* DateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */; };
@@ -290,6 +292,8 @@
 		F7EED81623A909C500420514 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		F7EED81823A909E800420514 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		F7EED81B23A9265500420514 /* DateCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewLayout.swift; sourceTree = "<group>"; };
+		F7F38BDE23E8548C00622BC6 /* DatesEmptyStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesEmptyStateCell.swift; sourceTree = "<group>"; };
+		F7F38BDF23E8548C00622BC6 /* DatesEmptyStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatesEmptyStateCell.xib; sourceTree = "<group>"; };
 		F7F92B7823A68FF4007DC648 /* DateTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableHeader.swift; sourceTree = "<group>"; };
 		F7F92B7A23A796A7007DC648 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -780,6 +784,8 @@
 				F7F92B7B23A796A7007DC648 /* DateCollectionViewCell.xib */,
 				F7F92B7E23A7E3C5007DC648 /* ContainerCollectionViewCell.swift */,
 				F7F92B7F23A7E3C5007DC648 /* ContainerCollectionViewCell.xib */,
+				F7F38BDE23E8548C00622BC6 /* DatesEmptyStateCell.swift */,
+				F7F38BDF23E8548C00622BC6 /* DatesEmptyStateCell.xib */,
 			);
 			path = Dates;
 			sourceTree = "<group>";
@@ -908,6 +914,7 @@
 				0E17A38D22EC8DF600390BA5 /* Assets.xcassets in Resources */,
 				0E47592D22EDE7E900B2DE82 /* GoogleService-Info.plist in Resources */,
 				0ECB79412329818700F99498 /* Registration.storyboard in Resources */,
+				F7F38BE123E8548C00622BC6 /* DatesEmptyStateCell.xib in Resources */,
 				0E17A38B22EC8DF500390BA5 /* Main.storyboard in Resources */,
 				0E61DD6C22EF8DE300C1C8C7 /* SwipeableCardViewCard.xib in Resources */,
 				0ECB7947232981D500F99498 /* Profile.storyboard in Resources */,
@@ -1109,6 +1116,7 @@
 				F7557D8C23A290BA00186E34 /* Async.swift in Sources */,
 				F748EF6723C6168200F22989 /* RescheduleDatePopup.swift in Sources */,
 				0E61DD6422EF7F2C00C1C8C7 /* SwipeableCardViewContainer.swift in Sources */,
+				F7F38BE023E8548C00622BC6 /* DatesEmptyStateCell.swift in Sources */,
 				F7F92B7C23A796A7007DC648 /* DateCollectionViewCell.swift in Sources */,
 				0E61DD5B22EF791200C1C8C7 /* CGRect+SwipeAdditions.swift in Sources */,
 				0E61DD5E22EF7D9E00C1C8C7 /* NibView.swift in Sources */,

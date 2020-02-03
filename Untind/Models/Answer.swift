@@ -152,13 +152,14 @@ class Answer: NSObject {
             completion(localError)
         }
         
-        db.collection("answers").addDocument(data: jsonValue()) { (error) in
+        let docRef = db.collection("answers").addDocument(data: jsonValue()) { (error) in
             localError = error
             dispatchGroup.leave()
             if let questionId = self.question?.id {
                 db.collection("questions").document("\(questionId)").updateData(["answersCount" : FieldValue.increment(Int64(1))])
             }
         }
+        self.id = docRef.documentID
         
         guard let questionAuthorId = question?.author.uid else {
             dispatchGroup.leave()
