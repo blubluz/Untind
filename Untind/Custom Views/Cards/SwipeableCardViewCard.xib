@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +19,8 @@
                 <outlet property="bottomViewTrailingConstraint" destination="dgf-5F-9oC" id="W3t-NT-g8c"/>
                 <outlet property="commentsButton" destination="8EO-rl-UQL" id="vro-Ek-QWD"/>
                 <outlet property="expireLabel" destination="uNd-5h-4aL" id="3bf-VI-mFq"/>
+                <outlet property="line1" destination="F5n-4a-VCd" id="HS3-St-dsp"/>
+                <outlet property="line2" destination="eDf-RN-qWi" id="EMC-BM-Vo4"/>
                 <outlet property="mainTurnButton" destination="2JP-XB-krE" id="A5N-VX-fqE"/>
                 <outlet property="postDateLabel" destination="6Hj-LZ-uti" id="OyV-h7-WAm"/>
                 <outlet property="profileButton" destination="xnt-5y-A6Y" id="J1O-vd-tD2"/>
@@ -259,8 +261,8 @@ Give reasons.</string>
                                         <constraint firstAttribute="bottom" secondItem="Ah2-aF-ed7" secondAttribute="bottom" id="tSu-LE-Yv0"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="coX-r3-URW" userLabel="TopViewOptions">
-                                    <rect key="frame" x="0.0" y="0.0" width="205" height="257"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coX-r3-URW" userLabel="TopViewOptions">
+                                    <rect key="frame" x="0.0" y="0.0" width="255" height="330"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaB-Na-x4J">
                                             <rect key="frame" x="127" y="82" width="1" height="166"/>
@@ -476,7 +478,7 @@ Give reasons.</string>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="277.60000000000002" y="469.1154422788606"/>
+            <point key="canvasLocation" x="356" y="461"/>
         </view>
     </objects>
     <resources>

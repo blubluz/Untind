@@ -74,18 +74,22 @@ class DatesViewController: UIViewController {
         collectionView.registerNib(ContainerCollectionViewCell.self)
         collectionView.registerNib(DateCollectionViewCell.self)
         collectionView.register(DateTableHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
-        self.loadData()
+        self.loadData(isFirstTime: true)
     }
     
-    @objc func loadData() {
+    @objc func loadData(isFirstTime: Bool = false) {
         guard let userId = UTUser.loggedUser?.userProfile?.uid else {
             return
         }
         
-        activityIndicator.startAnimating()
+        if isFirstTime {
+            activityIndicator.startAnimating()
+        }
+            
         isLoadingDates = true
         UTDate.fetch(forUserId: userId, withChatRooms: true) { (error, dates) in
             self.isLoadingDates = false
+            self.refresher.endRefreshing()
             self.activityIndicator.stopAnimating()
             if let error = error {
                 self.present(UTAlertController(title: "Oops", message: "There was an error loading dates: \(error.localizedDescription)"), animated: true, completion: nil)

@@ -40,6 +40,8 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var authorAvatarImageView: UIImageView!
+    @IBOutlet weak var line1: UIView!
+    @IBOutlet weak var line2: UIView!
     
     @IBOutlet weak var smallQuestionLabel: UILabel!
     @IBOutlet weak var answerTextField: UTAnswerTextField!
@@ -48,6 +50,8 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     weak var questionDelegate: QuestionCardDelegate?
     
     private var _question : Question?
+    private var didLayoutSubviews : Bool = false
+    
     var question : Question? {
         didSet {
             _question = question!
@@ -115,21 +119,24 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        topViewOptions.alpha = 0 // start with questions first
         
-        bottomView.layer.cornerRadius = 20
-        topView.layer.cornerRadius = 20
-        
-        // set the shadow properties
-        bottomView.layer.shadowColor = UIColor.black.cgColor
-        bottomView.layer.shadowOffset = CGSize(width: 6, height: 6)
-        bottomView.layer.shadowOpacity = 0.2
-        bottomView.layer.shadowRadius = 4.0
-        
-        
-        self.smallQuestionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
-        self.answerTextField.transform = CGAffineTransform(translationX: 0, y: 10 + self.frame.size.height)
+        if !didLayoutSubviews {
+            didLayoutSubviews = true
+            topViewOptions.alpha = 0 // start with questions first
+            
+            bottomView.layer.cornerRadius = 20
+            topView.layer.cornerRadius = 20
+            
+            // set the shadow properties
+            bottomView.layer.shadowColor = UIColor.black.cgColor
+            bottomView.layer.shadowOffset = CGSize(width: 6, height: 6)
+            bottomView.layer.shadowOpacity = 0.2
+            bottomView.layer.shadowRadius = 4.0
+            
+            
+            self.smallQuestionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
+            self.answerTextField.transform = CGAffineTransform(translationX: 0, y: 10 + self.frame.size.height)
+        }
         
     }
     
@@ -260,16 +267,16 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     private func animateAnswerOptions(onScreen: Bool) {
         if onScreen == false {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+                self.line1.alpha = 1
+                self.line2.alpha = 1
                 self.bottomView.backgroundColor = #colorLiteral(red: 0.2352941176, green: 0.3098039216, blue: 0.3607843137, alpha: 1)
                 self.layoutIfNeeded()
             }, completion: nil)
             
-            //ANIMATE ANSWER OPTIONS OFF THE SCREEN
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 2, options: .curveEaseOut, animations: {
                 self.smallQuestionLabel.transform = CGAffineTransform(translationX: 0, y: -self.smallQuestionLabel.frame.size.height-self.smallQuestionLabel.frame.origin.y)
                 self.answerTextField.transform = CGAffineTransform(translationX: 0, y: 10 + self.frame.size.height)
             }, completion: nil)
-            //END
             
             UIView.animate(withDuration: 0.4, delay: 0.25, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.questionLabel.transform = CGAffineTransform.identity
@@ -288,6 +295,8 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             
         } else {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
+                self.line1.alpha = 0
+                self.line2.alpha = 0
                 self.bottomView.backgroundColor = #colorLiteral(red: 1, green: 0.5647058824, blue: 0.4588235294, alpha: 1)
                 self.layoutIfNeeded()
             }, completion: nil)

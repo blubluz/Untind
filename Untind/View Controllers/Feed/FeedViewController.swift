@@ -16,6 +16,7 @@ class FeedViewController: UIViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var swipeableCardViewContainer: SwipeableCardViewContainer!
     var questions : [Question] = []
+    @IBOutlet weak var cardContainerYConstraint: NSLayoutConstraint!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
