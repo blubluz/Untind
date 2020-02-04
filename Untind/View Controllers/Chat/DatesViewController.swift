@@ -52,6 +52,10 @@ class DatesViewController: UIViewController {
         }
     }
     
+    var visibleDatesCount : Int {
+        return dateRequests.count + upcomingDates.count + activeDates.count + pendingDates.count + failedDates.count
+    }
+    
     var refresher:UIRefreshControl!
     var isLoadingDates : Bool = false
     
@@ -180,7 +184,7 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5 + (self.dates.count == 0 && !isLoadingDates ? 1 : 0)
+        return 5 + (self.visibleDatesCount == 0 && !isLoadingDates ? 1 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -232,6 +236,7 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         case 5:
             let cell = collectionView.dequeue(DatesEmptyStateCell.self, for: indexPath)
+            cell.ilustrationImageView.image = UTUser.loggedUser?.userProfile?.gender == .some(.male) ? UIImage(named: "no-dates-male") : UIImage(named: "no-dates-female")
             return cell
         default:
             return UICollectionViewCell()

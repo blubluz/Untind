@@ -15,6 +15,7 @@ class UTMessage : NSObject {
     var messageText : String
     var authorUid : String
     var postDate : Date
+    var isWarningMessage : Bool = false
     
     convenience init(with document: DocumentSnapshot) {
         self.init(with: document.data()!)

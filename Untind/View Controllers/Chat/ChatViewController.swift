@@ -61,8 +61,8 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
         super.viewDidLoad()
         
         
-        messagesCollectionView.register(MessageCell.self, forCellWithReuseIdentifier: "MessageCell")
-       
+        messagesCollectionView.register(MessageCell.self)
+        messagesCollectionView.register(WarningCell.self)
         messagesCollectionView.keyboardDismissMode = .interactive
         messagesCollectionView.contentInset = UIEdgeInsets(top: scrollviewContentInset, left: 0, bottom: scrollviewContentInset, right: 0)
         
@@ -294,61 +294,6 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
             }
         }
     }
-//    func loadData2() {
-//          if let profile = self.chatPartnerProfile {
-//              let db = Firestore.firestore()
-//              let chatDocument = db.collection("chats").document(profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid))
-//
-//
-//              self.chatInputAccesory.isUserInteractionEnabled = false
-//              SVProgressHUD.show()
-//              chatDocument.getDocument { (snapshot, error) in
-//                  if error != nil {
-//                    SVProgressHUD.dismiss()
-//                    //error loading chat room
-//                  } else {
-//                    if let snapshot = snapshot, snapshot.data() != nil {
-//                        let room = UTChatRoom(with: snapshot)
-//                        if room.participants.first?.uid.isMyId == true {
-//                            self.chatPartnerNameLabel.text = room.participants.last?.username
-//                        } else {
-//                            self.chatPartnerNameLabel.text = room.participants.first?.username
-//                        }
-//
-//                        self.chatRoom = room
-//                    } else {
-//                        let newRoom = UTChatRoom()
-//                        newRoom.participants.append(profile)
-//                        newRoom.participants.append(UTUser.loggedUser!.userProfile!)
-//                        newRoom.isOpen = true
-//                        newRoom.id = profile.uid.combineUniquelyWith(string: UTUser.loggedUser!.userProfile!.uid)
-//
-//                        chatDocument.setData(newRoom.jsonValue()) {
-//                            (error) in
-//                            SVProgressHUD.dismiss()
-//                            if error != nil {
-//
-//                            } else {
-//                                //We have created the chat room
-//                                self.chatRoom = newRoom
-//                                self.chatRoom?.startLoadingMessages(numberOfMessages: 20, delegate: self, completion: { (error, success) in
-//                                    if error != nil {
-//                                        self.present(UTAlertController(title: "Oops", message: error?.localizedDescription ?? "There was an error"), animated: true, completion: nil)
-//                                    } else {
-//                                        if success == true {
-//
-//                                        }
-//                                    }
-//                                })
-//                                self.chatInputAccesory.isUserInteractionEnabled = true
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//          }
-//    }
-    
     
     //MARK: - Helper functions
     func scrollToBottom(animated: Bool) {
@@ -382,6 +327,15 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     //MARK: - Button actions
     @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func moreOptionsTapped(_ sender: Any) {
+        let warningMessage = UTMessage(message: "Your 10 min starts now! Good luck!", authorUid: "", postDate: Date())
+        warningMessage.isWarningMessage = true
+        self.date?.chatRoom?.messages.append(warningMessage)
+        
+        self.messagesCollectionView.insertItems(at: [IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0)])
+        self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0), at: .top, animated: true)
     }
     
     //MARK: - Keyboard Handling
@@ -458,16 +412,16 @@ extension ChatViewController : UIScrollViewDelegate {
 extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           
-           
+        
+        
         let messageText = self.date!.chatRoom!.messages[indexPath.row].messageText
-           let size = CGSize(width: 250, height: 1000)
-           let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-           let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
-
-           return CGSize(width: view.frame.width, height: estimatedFrame.height + 28)
-       }
-       
+        let size = CGSize(width: 250, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
+        
+        return CGSize(width: view.frame.width, height: estimatedFrame.height + 28)
+    }
+    
        func numberOfSections(in collectionView: UICollectionView) -> Int {
            return 1
        }
@@ -480,17 +434,24 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
            return chatRoom.messages.count
        }
        
-       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let message = self.date!.chatRoom!.messages[indexPath.row]
+        if message.isWarningMessage {
+            let cell = collectionView.dequeue(WarningCell.self, for: indexPath)
+            cell.configureWithMessage(message: NSAttributedString(string: message.messageText), hasWarningIcon: true)
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
         let avatar = self.date!.chatRoom!.participants.first {
-               $0.uid == message.authorUid
-           }?.avatarType
-           
-           cell.configureWithMessage(message: message, avatar: avatar ?? "empty", chatViewWidth: messagesCollectionView.frame.size.width)
-           
-           return cell
-       }
+            $0.uid == message.authorUid
+            }?.avatarType
+        
+        cell.configureWithMessage(message: message, avatar: avatar ?? "empty", chatViewWidth: messagesCollectionView.frame.size.width)
+        
+        return cell
+    }
 }
 
 extension ChatViewController : ChatRoomDelegate {
