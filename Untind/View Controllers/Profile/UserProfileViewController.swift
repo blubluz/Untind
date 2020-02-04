@@ -67,6 +67,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
         if let profile = profile {
             avatarImageView.image = UIImage(named: profile.avatarType)
             userNameLabel.text = profile.username
+            sexAgeLabel.text = "\(profile.gender.shortGender),\(profile.age)"
             if profile.uid.isMyId {
                 reportButton.setTitle("Edit Profile", for: .normal)
                 if let nav = self.navigationController, nav.viewControllers.count > 1 {

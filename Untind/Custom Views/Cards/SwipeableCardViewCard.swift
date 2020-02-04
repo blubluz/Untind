@@ -133,7 +133,8 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             bottomView.layer.shadowOpacity = 0.2
             bottomView.layer.shadowRadius = 4.0
             
-            
+            self.smallQuestionLabel.isHidden = true
+            self.answerTextField.isHidden = true
             self.smallQuestionLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.size.height)
             self.answerTextField.transform = CGAffineTransform(translationX: 0, y: 10 + self.frame.size.height)
         }
@@ -266,6 +267,9 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     
     private func animateAnswerOptions(onScreen: Bool) {
         if onScreen == false {
+            
+            self.smallQuestionLabel.isHidden = true
+            self.answerTextField.isHidden = true
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
                 self.line1.alpha = 1
                 self.line2.alpha = 1
@@ -294,6 +298,9 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             }, completion: nil)
             
         } else {
+            
+            self.smallQuestionLabel.isHidden = false
+            self.answerTextField.isHidden = false
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveLinear, animations: {
                 self.line1.alpha = 0
                 self.line2.alpha = 0

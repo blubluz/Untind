@@ -213,7 +213,7 @@ class Answer: NSObject {
         }
         
         
-        var query = db.collectionGroup("answers").order(by: "postDate")
+        var query = db.collectionGroup("answers").order(by: "postDate", descending: true)
         if let questionId = questionId {
             query = query.whereField(FieldPath(["question","id"]), isEqualTo: questionId)
         } else

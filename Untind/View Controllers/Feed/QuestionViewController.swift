@@ -11,7 +11,6 @@ import NVActivityIndicatorView
 import SVProgressHUD
 
 class QuestionViewController: UIViewController {
-
     @IBOutlet weak var questionView: UIView!
     @IBOutlet weak var answersView: UIView!
     @IBOutlet weak var questionShadowView: UIView!
@@ -259,7 +258,7 @@ extension QuestionViewController : ChatInputAccesoryDelegate {
                 self.present(UTAlertController(title: "Oops", message: "There was an error adding the answer \n\(error?.localizedDescription ?? "")"), animated: true)
                 print("Error posting answer: \(err.localizedDescription)")
             } else {
-                self.question?.answers?.append(answer)
+                self.question?.answers?.insert(answer, at: 0)
                 
                 if self.question?.answers?.count == 1 {
                     UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
@@ -269,12 +268,12 @@ extension QuestionViewController : ChatInputAccesoryDelegate {
                         self.emptyStateImage.transform = CGAffineTransform(translationX: 300, y: 0)
                     }) { (completed) in
                         self.emptyStateView.isHidden = true
-                        self.answersTableView.insertSections([self.question!.answers!.count - 1], with: .fade)
-                        self.answersTableView.scrollToRow(at: IndexPath(row: 0, section: self.question!.answers!.count-1), at: .top, animated: true)
+                        self.answersTableView.insertSections([0], with: .fade)
+                        self.answersTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                     }
                 } else {
-                    self.answersTableView.insertSections([self.question!.answers!.count - 1], with: .fade)
-                    self.answersTableView.scrollToRow(at: IndexPath(row: 0, section: self.question!.answers!.count-1), at: .top, animated: true)
+                    self.answersTableView.insertSections([0], with: .fade)
+                    self.answersTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 }
             }
         }
