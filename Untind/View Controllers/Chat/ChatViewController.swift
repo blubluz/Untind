@@ -28,7 +28,7 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     var timer = Timer()
     var isTimerRunning = false
     var timerSecondsLeft : TimeInterval = 0
-    
+    var didWarnOneMinuteLeft = false
     
     private lazy var chatInputAccesory : ChatInputAccesoryView = {
         let cv = ChatInputAccesoryView()
@@ -215,6 +215,12 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
                 let minutes = Int(timerSecondsLeft) / 60 % 60
                 let seconds = Int(timerSecondsLeft) % 60
                 dateTimerLabel.text = String(format:"%02i:%02i", minutes, seconds)
+                
+                if minutes == 1 && didWarnOneMinuteLeft {
+                    didWarnOneMinuteLeft = true
+
+                    self.sendWarningMessage(message: NSAttributedString(string: "You have only 1 min left in this chat!").boldAppearenceOf(string: "1 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14), color: UIColor.flatOrange))
+                }
             } else {
                 let hours = Int(timerSecondsLeft) / 3600
                 let minutes = Int(timerSecondsLeft) / 60 % 60
@@ -222,7 +228,7 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
                 if hours > 0 {
                     timerLabel.attributedText = NSAttributedString(string: "Date starting in \(hours) hours and \(minutes) minutes").boldAppearenceOf(string: "\(hours) hours", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue).boldAppearenceOf(string: "\(minutes) minutes", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue)
                 } else {
-                    timerLabel.attributedText = NSAttributedString(string: "Date starting in \(String(format:"%02i:%02i", minutes, seconds))").boldAppearenceOf(string: "\(minutes):\(seconds)", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue)
+                    timerLabel.attributedText = NSAttributedString(string: "Date starting in \(String(format:"%02i:%02i", minutes, seconds))").boldAppearenceOf(string: String(format:"%02i:%02i", minutes, seconds), withBoldFont: UIFont.helveticaNeue(weight: .bold, size: timerLabel.font.pointSize), color: UIColor.darkBlue)
                 }
             }
         }
@@ -236,10 +242,13 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
                 if isTimerRunning == false {
                     self.dateTimerView.isHidden = false
                     isTimerRunning = true
-                    self.timerSecondsLeft = date.dateTime!.timeIntervalSinceNow + 900
+                    self.timerSecondsLeft = date.dateTime!.timeIntervalSinceNow + Constants.dateDuration
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
                     timer.fire()
-                    
+                }
+                
+                if date.chatRoom?.messages.count == 0 {
+                    self.sendWarningMessage(message: NSAttributedString(string: "Your 10 min starts now. Good luck!").boldAppearenceOf(string: "10 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14), color: UIColor.flatOrange))
                 }
             } else {
                 self.dateTimerView.isHidden = true
@@ -305,23 +314,13 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
         return CGPoint(x: 0, y: max(-messagesCollectionView.contentInset.top, messagesCollectionView.contentSize.height - (messagesCollectionView.bounds.size.height - messagesCollectionView.contentInset.bottom)))
     }
  
-    func didTapSend() {
-        if self.chatInputAccesory.text == "" {
-            return
-        }
+    func sendWarningMessage(message: NSAttributedString) {
+        let warningMessage = UTMessage(message: message, authorUid: "", postDate: Date())
+        warningMessage.isWarningMessage = true
+        self.date?.chatRoom?.messages.append(warningMessage)
         
-        //Create new message
-        let message = UTMessage(message: self.chatInputAccesory.text, authorUid: UTUser.loggedUser!.userProfile!.uid, postDate: Date())
-        self.date?.chatRoom?.addMessage(message, completion: { (error, success) in
-            if success == true {
-                //do nothing
-            } else {
-                //show that message failed to send
-            }
-        })
-        
-        self.chatInputAccesory.text = ""
-        self.chatInputAccesory.resetMessageTextView()
+        self.messagesCollectionView.insertItems(at: [IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0)])
+        self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0), at: .top, animated: true)
     }
     
     //MARK: - Button actions
@@ -330,7 +329,7 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
     }
     
     @IBAction func moreOptionsTapped(_ sender: Any) {
-        let warningMessage = UTMessage(message: "Your 10 min starts now! Good luck!", authorUid: "", postDate: Date())
+        let warningMessage = UTMessage(message: NSAttributedString(string: "Your 10 min starts now! Good luck!").boldAppearenceOf(string: "10 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14), color: UIColor.flatOrange), authorUid: "", postDate: Date())
         warningMessage.isWarningMessage = true
         self.date?.chatRoom?.messages.append(warningMessage)
         
@@ -338,6 +337,24 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
         self.messagesCollectionView.scrollToItem(at: IndexPath(item: self.date!.chatRoom!.messages.count-1, section: 0), at: .top, animated: true)
     }
     
+    func didTapSend() {
+           if self.chatInputAccesory.text == "" {
+               return
+           }
+           
+           //Create new message
+           let message = UTMessage(message: self.chatInputAccesory.text, authorUid: UTUser.loggedUser!.userProfile!.uid, postDate: Date())
+           self.date?.chatRoom?.addMessage(message, completion: { (error, success) in
+               if success == true {
+                   //do nothing
+               } else {
+                   //show that message failed to send
+               }
+           })
+           
+           self.chatInputAccesory.text = ""
+           self.chatInputAccesory.resetMessageTextView()
+       }
     //MARK: - Keyboard Handling
     @objc func keyboardWillShow(_ notification: Notification) {
         adjustContentForKeyboard(shown: true, notification: notification)
@@ -417,7 +434,7 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
         let messageText = self.date!.chatRoom!.messages[indexPath.row].messageText
         let size = CGSize(width: 250, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
+        let estimatedFrame = NSString(string: messageText.string).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
         
         return CGSize(width: view.frame.width, height: estimatedFrame.height + 28)
     }
@@ -439,7 +456,7 @@ extension ChatViewController : UICollectionViewDelegate, UICollectionViewDataSou
         let message = self.date!.chatRoom!.messages[indexPath.row]
         if message.isWarningMessage {
             let cell = collectionView.dequeue(WarningCell.self, for: indexPath)
-            cell.configureWithMessage(message: NSAttributedString(string: message.messageText), hasWarningIcon: true)
+            cell.configureWithMessage(message: message.messageText, hasWarningIcon: true)
             return cell
         }
         

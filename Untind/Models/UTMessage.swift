@@ -12,7 +12,7 @@ import Firebase
 
 class UTMessage : NSObject {
     var id : String?
-    var messageText : String
+    var messageText : NSAttributedString
     var authorUid : String
     var postDate : Date
     var isWarningMessage : Bool = false
@@ -25,28 +25,35 @@ class UTMessage : NSObject {
     init(with json:JSONDictionary){
         authorUid = json["authorUid"] as! String
         postDate = (json["postDate"] as! Timestamp).dateValue()
-        messageText = json["messageText"] as! String
+        messageText = NSAttributedString(string: json["messageText"] as! String)
     }
     
-    init(message: String, authorUid: String, postDate: Date) {
+    init(message: NSAttributedString, authorUid: String, postDate: Date) {
         messageText = message
         self.authorUid = authorUid
         self.postDate = postDate
     }
     
+    init(message: String, authorUid: String, postDate: Date) {
+         messageText = NSAttributedString(string: message)
+         self.authorUid = authorUid
+         self.postDate = postDate
+     }
+    
     init(with author: Profile, postDate: Date, messageText: String) {
         self.id = ""
         self.authorUid = author.uid
         self.postDate = postDate
-        self.messageText = messageText
+        self.messageText = NSAttributedString(string: messageText)
     }
     
     func jsonValue() -> [String : Any] {
         let json = [
-            "messageText" : messageText,
+            "messageText" : messageText.string,
             "authorUid" : authorUid,
         "postDate" : postDate] as [String : Any]
         
         return json
     }
 }
+

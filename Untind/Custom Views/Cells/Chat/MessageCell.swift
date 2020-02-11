@@ -91,12 +91,12 @@ class MessageCell: UICollectionViewCell {
     }
     
     func configureWithMessage(message: UTMessage, avatar: String, chatViewWidth: CGFloat) {
-        messageTextView.attributedText = NSAttributedString(string: message.messageText, attributes: [ NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)])
+        messageTextView.attributedText = NSAttributedString(string: message.messageText.string, attributes: [ NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)])
         profileImageView.image = UIImage(named: avatar)
         
         let size = CGSize(width: 250, height: CGFloat.infinity)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: message.messageText).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
+        let estimatedFrame = NSString(string: message.messageText.string).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.helveticaNeue(weight: .regular, size: 16), NSAttributedString.Key.paragraphStyle : NSAttributedString.lineSpacingParagraphStyle(spacing: 5)], context: nil)
         
         
         let leftRightPadding : CGFloat = 43
