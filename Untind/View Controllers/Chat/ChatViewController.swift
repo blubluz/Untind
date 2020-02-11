@@ -258,7 +258,6 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
                     self.bottomTimerView.transform = CGAffineTransform(translationX: 0, y: 130)
                      self.inputAccessoryView?.transform = CGAffineTransform.identity
                     self.chatBackgroundImage.alpha = 1
-                    
                 }) { (finished) in
                     self.emptyChatBackgroundImage.isHidden = true
                     self.emptyChatLabel.isHidden = true

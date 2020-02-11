@@ -58,6 +58,7 @@ class DatesViewController: UIViewController {
     
     var refresher:UIRefreshControl!
     var isLoadingDates : Bool = false
+    var didInitialLoad : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +82,13 @@ class DatesViewController: UIViewController {
         self.loadData(isFirstTime: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.didInitialLoad {
+            self.collectionView.reloadSections([2])
+        }
+    }
+    
     @objc func loadData(isFirstTime: Bool = false) {
         guard let userId = UTUser.loggedUser?.userProfile?.uid else {
             return
@@ -92,18 +100,36 @@ class DatesViewController: UIViewController {
             
         isLoadingDates = true
         UTDate.fetch(forUserId: userId, withChatRooms: true) { (error, dates) in
+            self.didInitialLoad = true
             self.isLoadingDates = false
             self.refresher.endRefreshing()
             self.activityIndicator.stopAnimating()
             if let error = error {
                 self.present(UTAlertController(title: "Oops", message: "There was an error loading dates: \(error.localizedDescription)"), animated: true, completion: nil)
             } else {
+                for date in dates {
+                    date.chatRoom?.startLoadingMessages(numberOfMessages: 10, delegate: self, completion: { (error, success) in
+                        
+                    })
+                }
                 self.dates = dates
             }
         }
     }
 }
 
+//MARK: - ChatRoomDelegate
+extension DatesViewController : ChatRoomDelegate {
+    func utChatRoom(room: UTChatRoom, newMessageArrived: UTMessage) {
+        if let dateIndex = activeDates.firstIndex(where: { (date) -> Bool in
+            return date.id == room.id
+        }) {
+            self.collectionView.reloadItems(at: [IndexPath(item: dateIndex, section: 2)])
+        }
+    }
+}
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = UIScreen.main.bounds.size.width
@@ -222,6 +248,8 @@ extension DatesViewController : UICollectionViewDelegate, UICollectionViewDataSo
         case 2:
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "DateCollectionViewCell", for: indexPath) as! DateCollectionViewCell)
             cell.update(with: self.activeDates[indexPath.row])
+            let date = self.activeDates[indexPath.row]
+            date.chatRoom?.delegate = self
             cell.delegate = self
             return cell
         case 3:

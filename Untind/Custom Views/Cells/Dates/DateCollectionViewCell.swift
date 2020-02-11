@@ -79,8 +79,16 @@ class DateCollectionViewCell: UICollectionViewCell {
             titleLabel.attributedText = NSAttributedString(string: "\(otherPerson!.username), \(otherPerson!.gender.shortGender) \(otherPerson!.age), is on a date with you").boldAppearenceOf(string: otherPerson!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
             descriptionLabel.attributedText = NSAttributedString(string: "Date ends in \(date.dateTime?.addingTimeInterval(15 * 60).timeLeftString() ?? "-")").boldAppearenceOf(string: date.dateTime?.addingTimeInterval(15 * 60).timeLeftString() ?? "-", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: descriptionLabel.font.pointSize), color: UIColor.darkBlue)
         case .chatStarted:
-        titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username),\(date.invitee!.gender.shortGender) \(date.invitee!.age)").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
-        descriptionLabel.text = "This is a message"
+            let otherPerson = date.invitee?.uid == UTUser.loggedUser?.userProfile?.uid ? date.invited : date.invitee
+            titleLabel.attributedText = NSAttributedString(string: "\(otherPerson!.username), \(otherPerson!.gender.shortGender) \(otherPerson!.age)").boldAppearenceOf(string: otherPerson!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
+            var descriptionText = date.chatRoom?.messages.last?.messageText ?? "No messages"
+            if date.chatRoom?.messages.last?.authorUid.isMyId ?? false {
+                descriptionText = "You: " + descriptionText
+            }
+            
+            descriptionLabel.text = descriptionText
+            dateSentLabel.text = date.chatRoom?.messages.last?.postDate.toFormattedString() ?? ""
+            
         case .waitingDateAnswer:
             if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
                 self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
@@ -89,12 +97,12 @@ class DateCollectionViewCell: UICollectionViewCell {
             }
             descriptionLabel.text = "awaiting a response"
         case .waitingDateResult:
-                if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
-                    self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) dated you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                } else {
-                    self.titleLabel.attributedText = NSAttributedString(string: "You dated \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                    
-                }
+            if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
+                self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) dated you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+            } else {
+                self.titleLabel.attributedText = NSAttributedString(string: "You dated \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                
+            }
             self.descriptionLabel.text = "awaiting their feedback"
         case .shouldGiveDateResult:
             if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
@@ -114,29 +122,29 @@ class DateCollectionViewCell: UICollectionViewCell {
             }
         case .dateFailed:
             if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
-                        self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                        self.descriptionLabel.text = "Date request failed."
-                    } else {
-                        self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                        self.descriptionLabel.text = "Date request failed."
-                    }
+                self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                self.descriptionLabel.text = "Date request failed."
+            } else {
+                self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                self.descriptionLabel.text = "Date request failed."
+            }
         case .heRejected:
             if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
-                        self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                        self.descriptionLabel.text = "Date request cancelled."
-                    } else {
-                        self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                        self.descriptionLabel.text = "Date request rejected."
-                    }
+                self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                self.descriptionLabel.text = "Date request cancelled."
+            } else {
+                self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                self.descriptionLabel.text = "Date request rejected."
+            }
         case .youRejected:
             if date.invited!.uid == UTUser.loggedUser?.userProfile?.uid {
-                    self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                    self.descriptionLabel.text = "Date request cancelled."
-                } else {
-                    self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
-                    self.descriptionLabel.text = "Date request rejected."
-                }
-        
+                self.titleLabel.attributedText = NSAttributedString(string: "\(date.invitee!.username), \(date.invitee!.gender.shortGender) \(date.invitee!.age) invited you").boldAppearenceOf(string: date.invitee!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                self.descriptionLabel.text = "Date request cancelled."
+            } else {
+                self.titleLabel.attributedText = NSAttributedString(string: "You invited \(date.invited!.username), \(date.invited!.gender.shortGender) \(date.invited!.age)").boldAppearenceOf(string: date.invited!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: self.titleLabel.font.pointSize), color: UIColor.white)
+                self.descriptionLabel.text = "Date request rejected."
+            }
+            
         default:
             break
         }
@@ -184,57 +192,57 @@ class DateCollectionViewCell: UICollectionViewCell {
         }
     }
     
-//    @discardableResult
-//    func update(with type: DateCellTestType) -> DateCollectionViewCell {
-//        switch type {
-//        case .newDateRequest:
-//            turnCellButton.isHidden = true
-//            dateSentLabel.isHidden = true
-//
-//
-//            titleLabel.attributedText = NSAttributedString(string: "randomusername, F 24", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14)]).boldAppearenceOf(string: "randomusername", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-//            descriptionLabel.text = "sent you a date request"
-//        case .upcomingDate:
-//            cancelDateButton.isHidden = true
-//            acceptDateButton.isHidden = true
-//            dateSentLabel.isHidden = true
-//            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 25, invited you", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-//            descriptionLabel.attributedText = NSAttributedString(string: "Date starting in 00:15 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 12), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:15 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
-//        case .activeDate1:
-//            cancelDateButton.isHidden = true
-//            acceptDateButton.isHidden = true
-//            dateSentLabel.isHidden = true
-//            turnCellButton.isHidden = true
-//            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue, ]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-//            descriptionLabel.attributedText = NSAttributedString(string: "Date ends in 00:04 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 12), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:04 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
-//        case .activeDate2:
-//            cancelDateButton.isHidden = true
-//            acceptDateButton.isHidden = true
-//            turnCellButton.isHidden = true
-//            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-//            descriptionLabel.text = "an example of last line of messsage that can contain a lot of text"
-//            containerView.backgroundColor = UIColor(red: 246, green: 253, blue: 238, alpha: 1)
-//        case .pendingInvite:
-//            cancelDateButton.isHidden = true
-//            acceptDateButton.isHidden = true
-//            dateSentLabel.isHidden = true
-//            titleLabel.attributedText = NSAttributedString(string: "you invited anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-//            descriptionLabel.text = "awaiting a response"
-//            descriptionLabel.textColor = UIColor.white
-//            containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
-//        case .pendingResponse:
-//            cancelDateButton.isHidden = true
-//            acceptDateButton.isHidden = true
-//            dateSentLabel.isHidden = true
-//            titleLabel.attributedText = NSAttributedString(string: "you dated anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
-//            descriptionLabel.text = "awaiting their response"
-//            descriptionLabel.textColor = UIColor.white
-//            turnCellButton.tintColor = UIColor.white
-//            containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
-//        }
-//
-//        return self
-//    }
+    //    @discardableResult
+    //    func update(with type: DateCellTestType) -> DateCollectionViewCell {
+    //        switch type {
+    //        case .newDateRequest:
+    //            turnCellButton.isHidden = true
+    //            dateSentLabel.isHidden = true
+    //
+    //
+    //            titleLabel.attributedText = NSAttributedString(string: "randomusername, F 24", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14)]).boldAppearenceOf(string: "randomusername", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+    //            descriptionLabel.text = "sent you a date request"
+    //        case .upcomingDate:
+    //            cancelDateButton.isHidden = true
+    //            acceptDateButton.isHidden = true
+    //            dateSentLabel.isHidden = true
+    //            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 25, invited you", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+    //            descriptionLabel.attributedText = NSAttributedString(string: "Date starting in 00:15 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 12), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:15 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
+    //        case .activeDate1:
+    //            cancelDateButton.isHidden = true
+    //            acceptDateButton.isHidden = true
+    //            dateSentLabel.isHidden = true
+    //            turnCellButton.isHidden = true
+    //            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue, ]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+    //            descriptionLabel.attributedText = NSAttributedString(string: "Date ends in 00:04 min", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 12), NSAttributedString.Key.foregroundColor : UIColor.gray(value: 172)]).boldAppearenceOf(string: "00:04 min", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 12), color: UIColor.darkBlue)
+    //        case .activeDate2:
+    //            cancelDateButton.isHidden = true
+    //            acceptDateButton.isHidden = true
+    //            turnCellButton.isHidden = true
+    //            titleLabel.attributedText = NSAttributedString(string: "anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.darkBlue]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+    //            descriptionLabel.text = "an example of last line of messsage that can contain a lot of text"
+    //            containerView.backgroundColor = UIColor(red: 246, green: 253, blue: 238, alpha: 1)
+    //        case .pendingInvite:
+    //            cancelDateButton.isHidden = true
+    //            acceptDateButton.isHidden = true
+    //            dateSentLabel.isHidden = true
+    //            titleLabel.attributedText = NSAttributedString(string: "you invited anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+    //            descriptionLabel.text = "awaiting a response"
+    //            descriptionLabel.textColor = UIColor.white
+    //            containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
+    //        case .pendingResponse:
+    //            cancelDateButton.isHidden = true
+    //            acceptDateButton.isHidden = true
+    //            dateSentLabel.isHidden = true
+    //            titleLabel.attributedText = NSAttributedString(string: "you dated anotheruser, F 22", attributes: [NSAttributedString.Key.font : UIFont.helveticaNeue(weight: .regular, size: 14), NSAttributedString.Key.foregroundColor : UIColor.white]).boldAppearenceOf(string: "anotheruser", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: 14))
+    //            descriptionLabel.text = "awaiting their response"
+    //            descriptionLabel.textColor = UIColor.white
+    //            turnCellButton.tintColor = UIColor.white
+    //            containerView.backgroundColor = UIColor(red: 151, green: 172, blue: 131, alpha: 1)
+    //        }
+    //
+    //        return self
+    //    }
     
     override func prepareForReuse() {
         super.prepareForReuse()

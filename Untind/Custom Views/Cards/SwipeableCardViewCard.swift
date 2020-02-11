@@ -26,6 +26,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     @IBOutlet weak var topViewOptions: UIView!
     @IBOutlet weak var topViewQuestions: UIView!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var rateAppView: UIView!
     @IBOutlet weak var turnButton: UIButton!
     @IBOutlet weak var mainTurnButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
@@ -51,6 +52,14 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     
     private var _question : Question?
     private var didLayoutSubviews : Bool = false
+    
+    var isFeedbackCard : Bool = false {
+        didSet {
+            self.topView.isHidden = true
+            self.bottomView.isHidden = true
+            self.rateAppView.isHidden = false
+        }
+    }
     
     var question : Question? {
         didSet {
@@ -126,6 +135,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             
             bottomView.layer.cornerRadius = 20
             topView.layer.cornerRadius = 20
+            rateAppView.layer.cornerRadius = 20
             
             // set the shadow properties
             bottomView.layer.shadowColor = UIColor.black.cgColor
