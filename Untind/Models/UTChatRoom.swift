@@ -123,7 +123,7 @@ class UTChatRoom : NSObject {
         self.messagesListener?.remove()
     }
     
-    func startLoadingMessages(numberOfMessages: Int, delegate: ChatRoomDelegate, completion: @escaping (Error?, Bool) -> Void) {
+    func startLoadingMessages(numberOfMessages: Int, delegate: ChatRoomDelegate?, completion: @escaping (Error?, Bool) -> Void) {
         let db = Firestore.firestore()
         let messagesRef = db.collection("chats").document(id!).collection("messages").order(by: "postDate", descending: true).limit(to: numberOfMessages)
         self.delegate = delegate

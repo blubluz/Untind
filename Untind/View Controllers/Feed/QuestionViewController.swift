@@ -247,6 +247,10 @@ extension QuestionViewController: AnswerCellDelegate {
 //MARK: - ChatInputAccesoryDelegate
 extension QuestionViewController : ChatInputAccesoryDelegate {
     func didTapSend() {
+        guard chatInputAccesory.text != "" && chatInputAccesory.text.count > 0 else {
+            return
+        }
+        
         let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: chatInputAccesory.text, upvotes: 0, rating: 0, question: self.question!)
         
         SVProgressHUD.show()

@@ -45,9 +45,10 @@ class FeedViewController: UIViewController {
                     }
                     
                     self.questions.append(question)
-                    self.swipeableCardViewContainer.dataSource = self
-                    self.swipeableCardViewContainer.delegate = self
                 }
+
+                self.swipeableCardViewContainer.dataSource = self
+                self.swipeableCardViewContainer.delegate = self
             }
         }
     }
@@ -109,10 +110,16 @@ class FeedViewController: UIViewController {
 //MARK: - SwipeableCardViewDataSource
 extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDelegate {
     func numberOfCards() -> Int {
-        return questions.count
+        return questions.count + 1
     }
     
     func card(forItemAtIndex index: Int) -> SwipeableCardViewCard {
+        if index == questions.count {
+            let cardView = SwipeableCardViewCard()
+            cardView.isFeedbackCard = true
+            return cardView
+        }
+        
         let cardView = SwipeableCardViewCard()
         cardView.question = questions[index]
         cardView.questionDelegate = self
@@ -124,6 +131,9 @@ extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDele
     }
     
     func didSelect(card: SwipeableCardViewCard, atIndex index: Int) {
+        if card.question == nil {
+            return
+        }
         
         let questionVc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
         questionVc.question = card.question

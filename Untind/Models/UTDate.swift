@@ -216,8 +216,13 @@ class UTDate: NSObject {
                 UTChatRoom.fetch(forDate: date) { (error, chatroom) in
                     if chatroom != nil {
                         date.chatRoom = chatroom
+                        date.chatRoom?.startLoadingMessages(numberOfMessages: 10, delegate: nil, completion: { (error, success) in
+                            date.chatRoom?.stopLoadingMessages()
+                            dispatchGroup2.leave()
+                        })
+                    } else {
+                        dispatchGroup2.leave()
                     }
-                    dispatchGroup2.leave()
                 }
             }
             
