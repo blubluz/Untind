@@ -4,11 +4,12 @@
 target 'Untind' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Firebase/Analytics'
   pod 'pop'
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
   pod 'SwiftyJSON'
   pod 'SVProgressHUD'
   pod 'IHKeyboardAvoiding'

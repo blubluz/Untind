@@ -81,12 +81,12 @@ class DateCollectionViewCell: UICollectionViewCell {
         case .chatStarted:
             let otherPerson = date.invitee?.uid == UTUser.loggedUser?.userProfile?.uid ? date.invited : date.invitee
             titleLabel.attributedText = NSAttributedString(string: "\(otherPerson!.username), \(otherPerson!.gender.shortGender) \(otherPerson!.age)").boldAppearenceOf(string: otherPerson!.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: titleLabel.font.pointSize), color: UIColor.darkBlue)
-            var descriptionText = date.chatRoom?.messages.last?.messageText ?? "No messages"
+            var descriptionText = date.chatRoom?.messages.last?.messageText ?? NSAttributedString(string: "No messages")
             if date.chatRoom?.messages.last?.authorUid.isMyId ?? false {
-                descriptionText = "You: " + descriptionText
+                descriptionText = NSAttributedString(string: "You: " + descriptionText.string)  
             }
             
-            descriptionLabel.text = descriptionText
+            descriptionLabel.text = descriptionText.string
             dateSentLabel.text = date.chatRoom?.messages.last?.postDate.toFormattedString() ?? ""
             
         case .waitingDateAnswer:
