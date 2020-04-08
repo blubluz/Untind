@@ -13,14 +13,18 @@ import SwiftyJSON
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var addCardButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var swipeableCardViewContainer: SwipeableCardViewContainer!
-    var questions : [Question] = []
+    var questions : [Post] = []
     @IBOutlet weak var cardContainerYConstraint: NSLayoutConstraint!
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
+    
+    var lastPostSnapshot : DocumentSnapshot?
+    private var didLoadAllPosts = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,24 +35,19 @@ class FeedViewController: UIViewController {
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         topBarView.tag = UIViewTags.feedTopBar.rawValue
-
-        let db = Firestore.firestore()
         
-        db.collection("questions").getDocuments { (querySnapshot : QuerySnapshot?, error) in
+        
+        Post.fetchPublicPosts(limit: 5, lastSnapshot: self.lastPostSnapshot) { (error, posts, newLastSnapshot) in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print ("Error getting documents: \(error)")
+                self.present(UTAlertController(title: "Oops", message: "There was an issue getting the latest posts"), animated: true, completion: nil)
             } else {
-                for document in querySnapshot!.documents {
-                    let question = Question(with: document)
-                    guard question.author.uid != UTUser.loggedUser!.user.uid, question.respondent == nil else {
-                        continue
-                    }
-                    
-                    self.questions.append(question)
-                }
-
+                self.questions.append(contentsOf: posts)
+                self.lastPostSnapshot = newLastSnapshot
+                
                 self.swipeableCardViewContainer.dataSource = self
                 self.swipeableCardViewContainer.delegate = self
+                
             }
         }
     }
@@ -68,6 +67,7 @@ class FeedViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        PushNotificationManager.shared.registerforRemoteNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,6 +77,21 @@ class FeedViewController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    func loadMorePosts() {
+        Post.fetchPublicPosts(limit: 5, lastSnapshot: self.lastPostSnapshot) { (error, posts, newLastSnapshot) in
+            if let error = error {
+                print ("Error getting documents: \(error)")
+                self.present(UTAlertController(title: "Oops", message: "There was an issue getting the latest posts"), animated: true, completion: nil)
+            } else {
+                self.questions.append(contentsOf: posts)
+                self.swipeableCardViewContainer.addRemainingCards(posts.count)
+                if newLastSnapshot != nil {
+                    self.lastPostSnapshot = newLastSnapshot
+                }
+            }
+        }
     }
     
     //Calls this function when the tap is recognized.
@@ -94,7 +109,14 @@ class FeedViewController: UIViewController {
         self.swipeableCardViewContainer.transform = CGAffineTransform.identity
     }
     
-      @IBAction func filterButtonTapped(_ sender: Any) {
+    //MARK: - Actions
+    @IBAction func filterButtonTapped(_ sender: Any) {
+        let filtersVc = FiltersViewController.instantiate(withUserSettings: UTUser.loggedUser!.userProfile!.settings)
+        filtersVc.modalPresentationStyle = .overCurrentContext
+        Globals.tabBarController?.present(filtersVc, animated: false, completion: nil)
+    }
+    
+    @IBAction func createCardTapped(_ sender: Any) {
                 let writeQVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddQuestionController") as! AddQuestionController
         writeQVC.delegate = self
                 self.present(writeQVC, animated: true, completion: nil)
@@ -114,6 +136,10 @@ extension FeedViewController: SwipeableCardViewDataSource, SwipeableCardViewDele
     }
     
     func card(forItemAtIndex index: Int) -> SwipeableCardViewCard {
+        if index == questions.count - 3 {
+            self.loadMorePosts()
+        }
+        
         if index == questions.count {
             let cardView = SwipeableCardViewCard()
             cardView.isFeedbackCard = true
@@ -152,19 +178,26 @@ extension FeedViewController: QuestionCardDelegate {
         Globals.tabBarController?.present(vc, animated: false, completion: nil)
     }
     
-    func didAnswerQuestion(question: Question, answer: Answer) {
+    func didAnswerQuestion(question: Post, answer: Answer) {
         swipeableCardViewContainer.swipeAwayTopCard(animated: true)
     }
     
     func didTapProfile(profile: Profile) {
         self.navigationController?.pushViewController(UserProfileViewController.instantiate(profile: profile), animated: true)
     }
+    
+    func didTapSendDateRequest(profile: Profile) {
+        let vc = SendDatePopup.instantiate()
+        vc.invitedPerson = profile
+        vc.modalPresentationStyle = .overCurrentContext
+        Globals.tabBarController?.present(vc, animated: false, completion: nil)
+    }
 }
 
 
 //MARK: - AddQuestionDelegate
 extension FeedViewController : AddQuestionDelegate {
-    func postQuestionCompleted(error: Error?, question: Question?) {
+    func postQuestionCompleted(error: Error?, question: Post?) {
         self.dismiss(animated: true) {
             if error != nil {
                 self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)

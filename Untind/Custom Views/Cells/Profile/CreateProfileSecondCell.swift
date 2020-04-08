@@ -15,10 +15,14 @@ protocol CreateProfileDelegate: class {
     func selected(avatar: String?)
     func selected(gender: Gender?)
     func selected(age: Int?)
+    func selected(userSettings: UserSettings?)
 }
 
 class CreateProfileSecondCell: UICollectionViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var ageTextField: UITextField!
@@ -28,6 +32,13 @@ class CreateProfileSecondCell: UICollectionViewCell {
         super.awakeFromNib()
         maleButton.imageView?.contentMode = .scaleAspectFit
         femaleButton.imageView?.contentMode = .scaleAspectFit
+        
+        ageTextField.layer.cornerRadius = 12
+        ageTextField.layer.borderWidth = 2
+        ageTextField.layer.borderColor = UIColor.flatOrange.cgColor
+        
+        maleButton.imageView?.contentMode = .redraw
+        femaleButton.imageView?.contentMode = .redraw
     }
 
     @IBAction func didTapMaleButton(_ sender: Any) {

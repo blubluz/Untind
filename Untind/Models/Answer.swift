@@ -16,7 +16,7 @@ class Answer: NSObject {
     var answerText : String
     var upvotes : Int
     var rating : CGFloat
-    var question : Question?
+    var question : Post?
     private(set) var myVote : Vote = .novote
     
     
@@ -34,11 +34,11 @@ class Answer: NSObject {
         rating = json["rating"] as! CGFloat
         
         if let questionJson = json["question"] as? JSONDictionary {
-            question = Question(with: questionJson)
+            question = Post(with: questionJson)
         }
     }
     
-    init(with author: Profile, postDate: Date, answerText: String, upvotes: Int, rating: CGFloat, question: Question) {
+    init(with author: Profile, postDate: Date, answerText: String, upvotes: Int, rating: CGFloat, question: Post) {
         self.id = ""
         self.author = author
         self.postDate = postDate

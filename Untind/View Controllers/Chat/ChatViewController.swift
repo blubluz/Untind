@@ -137,12 +137,12 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
                 
             } else if date.myRelationshipStatus == .waitingDateResult || date.myRelationshipStatus == .shouldGiveDateResult {
                 self.dateTimerView.isHidden = true
-                self.emptyChatBackgroundImage.isHidden = false
-                self.emptyChatLabel.isHidden = false
+                self.emptyChatBackgroundImage.isHidden = true
+                self.emptyChatLabel.isHidden = true
                 self.bottomTimerView.isHidden = false
                 self.timerLabel.isHidden = false
                 self.inputAccessoryView?.isHidden = true
-                self.chatBackgroundImage.isHidden = true
+                self.chatBackgroundImage.isHidden = false
                 if date.myRelationshipStatus == .waitingDateResult {
                     self.timerLabel.text = "Waiting for your partners response."
                 } else {
@@ -160,7 +160,9 @@ class ChatViewController: UIViewController, ChatInputAccesoryDelegate {
                                        self.present(UTAlertController(title: "Congratulations!", message: "Your partner also enjoyed the date! You can now chat forever & always :)"), animated: true, completion: nil)
                                 } else {
                                     self.configureController()
-                                    self.present(UTAlertController(title: "Thank you", message: "Your partner did not respond yet. Please wait for his/her response"), animated: true, completion: nil)
+                                    self.present(UTAlertController(title: "Thank you", message: "Your partner did not respond yet. Please wait for his/her response").addingAction(action: UTAlertAction(title: "Ok", {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }, color: UIColor.flatOrange)), animated: true, completion: nil)
 
                                 }
                             } else {                                self.present(UTAlertController(title: "Oops", message: "\(error?.localizedDescription ?? "There was an error")"), animated: true, completion: nil)

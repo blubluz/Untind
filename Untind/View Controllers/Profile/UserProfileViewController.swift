@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+import FBSDKLoginKit
+
 
 class UserProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -38,7 +41,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     //MARK: - Properties
     var profile: Profile?
     var date: UTDate?
-    var questions : [Question]? = []
+    var questions : [Post]? = []
     var answers : [Answer]? = []
     
     var isLoadingQuestions : Bool = true
@@ -116,13 +119,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     func loadData() {
         let db = Firestore.firestore()
         
-        Question.fetchAll(forUserId: profile?.uid ?? "") { (error, questions) in
+        Post.fetchAll(forUserId: profile?.uid ?? "") { (error, questions) in
             if let err = error {
                 print("Error getting documents: \(err)")
             } else {
                 self.isLoadingQuestions = false
                 self.questions = questions
-                self.collectionView.reloadData()
+                self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
             }
         }
         
@@ -134,7 +137,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
             } else {
                 self.isLoadingAnswers = false
                 self.answers = answers
-                self.collectionView.reloadData()
+                self.collectionView.reloadItems(at: [IndexPath(item: 1, section: 0)])
             }
         }
         if profile?.uid != UTUser.loggedUser?.userProfile?.uid {
@@ -386,14 +389,36 @@ class UserProfileViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
-        if let profile = profile {
-            if profile.uid.isMyId {
-                let vc = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController")
-                Globals.tabBarController?.present(vc, animated: true, completion: nil)
-                return
+        if let nav = self.navigationController, nav.viewControllers.count > 1 {
+            self.navigationController?.popViewController(animated: true)
+        } else if let profile = profile {
+                if profile.uid.isMyId {
+                    let alertVc = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                    alertVc.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (action) in
+                        LoginManager().logOut()
+                        do {
+                            PushNotificationManager.shared.deleteToken()
+                            try Auth.auth().signOut()
+                            
+                            //Delete current logged user profile
+                            UTUser.deleteUserProfile(locally: true)
+                            
+                            //Go to tab bar controller
+                            let onboardingNav = UIStoryboard.main.instantiateViewController(withIdentifier: "OnobardingNavigationController")
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.window?.rootViewController = onboardingNav
+                        } catch let error as NSError {
+                            print(error)
+                        }
+                    }))
+                
+                alertVc.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                
+                Globals.tabBarController?.present(alertVc, animated: true, inContainer: false)
             }
         }
-        self.navigationController?.popViewController(animated: true)
+        
+        
     }
     
 }
@@ -419,7 +444,7 @@ extension UserProfileViewController : ProfileEmptyStateDelegate {
 }
 
 extension UserProfileViewController : AddQuestionDelegate {
-    func postQuestionCompleted(error: Error?, question: Question?) {
+    func postQuestionCompleted(error: Error?, question: Post?) {
         self.dismiss(animated: true) {
             if error != nil {
                 self.present(UIAlertController.errorAlert(text: "There was an error \(error!.localizedDescription)"), animated: true, completion: nil)

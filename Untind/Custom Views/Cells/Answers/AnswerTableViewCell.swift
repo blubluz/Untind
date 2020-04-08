@@ -80,6 +80,7 @@ class AnswerTableViewCell: UITableViewCell {
         answerLabel.text = answer.answerText
         answerAuthorLabel.text = answer.author.username
         answerPostDateLabel.text = "M, 31"
+        answerAuthorAvatar.image = UIImage(named: answer.author.avatarType)
         if answer.upvotes > 0 {
             answerUpvotesLabel.text = "+\(answer.upvotes)"
         } else {

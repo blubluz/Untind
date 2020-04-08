@@ -25,7 +25,7 @@ class ProfileQuestionCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureWith(question: Question) {
+    func configureWith(question: Post) {
         questionLabel.text = question.questionText
         commentsLabel.text = "\(question.answers?.count ?? 0) COMMENTS"
     }

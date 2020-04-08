@@ -1,4 +1,5 @@
 PODS:
+  - AvailableHapticFeedback (1.0.2)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -120,6 +121,9 @@ PODS:
   - GTMSessionFetcher/Core (1.2.2)
   - IHKeyboardAvoiding (4.7)
   - leveldb-library (1.20)
+  - MultiSlider (1.10.8):
+    - AvailableHapticFeedback
+    - SweeterSwift
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -131,6 +135,7 @@ PODS:
   - pop (1.0.12)
   - Protobuf (3.9.0)
   - SVProgressHUD (2.2.5)
+  - SweeterSwift (1.1.3)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
@@ -141,6 +146,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Messaging
   - IHKeyboardAvoiding
+  - MultiSlider
   - NVActivityIndicatorView
   - pop
   - SVProgressHUD
@@ -148,6 +154,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AvailableHapticFeedback
     - BoringSSL-GRPC
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -167,14 +174,17 @@ SPEC REPOS:
     - GTMSessionFetcher
     - IHKeyboardAvoiding
     - leveldb-library
+    - MultiSlider
     - nanopb
     - NVActivityIndicatorView
     - pop
     - Protobuf
     - SVProgressHUD
+    - SweeterSwift
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   FBSDKCoreKit: 5154c35d9058fd7dfa0445ba19e194c4b172fc32
   FBSDKLoginKit: dc98b6bf12334f1a42f28d0457fffc9aa3d1eca5
@@ -194,13 +204,15 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   IHKeyboardAvoiding: 4cae0880c3975feffa278495df894c5166e71ad0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MultiSlider: a4fdcb3fb058a0af95720570b44d8683da5312c8
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SweeterSwift: d909211f6833405628c8c7c6bf9f8f2e8a0e9df9
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: c650a207397efa291ea2f4346ddada91bfb5d1ef
+PODFILE CHECKSUM: 0c58260405c266a6cde1b28a551d3cc9994fdbf4
 
 COCOAPODS: 1.7.5

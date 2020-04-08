@@ -22,7 +22,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var selectorPointerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var backgroundViewTopConstraint: NSLayoutConstraint!
     
-    var myQuestions : [Question]?
+    var myQuestions : [Post]?
     var myAnswers : [Answer]?
     var isLoadingQuestions : Bool = false
     var isLoadingAnswers : Bool = false
@@ -49,7 +49,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
                  } else {
                      self.myQuestions = []
                      for document in snapshot!.documents {
-                         self.myQuestions?.append(Question(with: document.data()))
+                         self.myQuestions?.append(Post(with: document.data()))
                      }
                      self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
                  }
@@ -154,7 +154,7 @@ class MyQuestionsViewController: UIViewController, UICollectionViewDataSource, U
                   
     }
     
-    func didTap(question: Question) {
+    func didTap(question: Post) {
         let questionVc = UIStoryboard(name: "Feed", bundle: nil).instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
         questionVc.question = question
         

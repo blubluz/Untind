@@ -71,9 +71,17 @@ class UTUser: NSObject {
             //Save user in Firestore
         }
     }
+    
+   static func deleteUserProfile(locally: Bool) {
+        if locally == true {
+            UserDefaults.standard.setValue(nil, forKey: "loggedUserProfile")
+            UserDefaults.standard.synchronize()
+        }
+    }
 }
 
 struct UserSettings {
+    
     var ageRange : (Int,Int) = (18,24)
     var prefferedGender : Gender = .female
     init() {
@@ -81,7 +89,7 @@ struct UserSettings {
     }
     
     init(with json: JSON) {
-        ageRange = (json["ageRange"]["minAge"].int!, json["ageRange"]["maxAge"].int!)
+        ageRange = (json["ageRange"]["minAge"   ].int!, json["ageRange"]["maxAge"].int!)
         prefferedGender = Gender(rawValue: json["prefferedGender"].string!)!
     }
     
@@ -147,7 +155,7 @@ struct Profile {
                 }
 
                 if date.myRelationshipStatus == .canAskQuestion {
-                    Question.fetch(fromUserId: UTUser.loggedUser?.userProfile?.uid ?? "", toUserId: self.uid) { (error, question) in
+                    Post.fetch(fromUserId: UTUser.loggedUser?.userProfile?.uid ?? "", toUserId: self.uid) { (error, question) in
                         if question != nil {
                             date.privateQuestion = question
                             completion(error, date)
@@ -164,7 +172,7 @@ struct Profile {
     }
     
     func inviteOnDate(date: Date, completion: @escaping(Error?,Bool, UTDate?) -> Void) {
-        guard date > Date().addingTimeInterval(600) else {
+        guard date > Date().addingTimeInterval(599) else {
             completion(InviteOnDateError("Please select a date that is further away in time."), false, nil)
             return
         }
@@ -176,7 +184,7 @@ struct Profile {
             if error != nil {
                 completion(error,false,nil)
             } else {
-                if let snapshot = snapshot {
+                if let snapshot = snapshot, snapshot.data() != nil {
                     let utDate = UTDate(with: snapshot)
                     utDate.invited = self
                     utDate.invitee = UTUser.loggedUser?.userProfile
@@ -213,6 +221,7 @@ struct Profile {
 enum Gender : String, Codable{
     case male
     case female
+    case both
     
     var shortGender : String {
         switch self {
@@ -220,6 +229,8 @@ enum Gender : String, Codable{
             return "M"
         case .female:
             return "F"
+        case .both:
+            return "M/F"
         }
     }
 }

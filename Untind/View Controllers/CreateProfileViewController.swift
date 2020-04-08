@@ -20,6 +20,7 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     var currentUser : UTUser?
     
     private var selectedAvatar : String?
+    private var selectedUserSettings : UserSettings?
     private var selectedAge : Int?
     private var selectedGender : Gender?
     private var selectedUsername : String?
@@ -29,9 +30,10 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
         
         collectionView.register(UINib(nibName: "CreateProfileFirstCell", bundle: nil), forCellWithReuseIdentifier: "CreateProfileFirstCell")
         collectionView.register(UINib(nibName: "CreateProfileSecondCell", bundle: nil), forCellWithReuseIdentifier: "CreateProfileSecondCell")
+        collectionView.register(UINib(nibName: "CreateProfileThirdCell", bundle: nil), forCellWithReuseIdentifier: "CreateProfileThirdCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        pageControl.numberOfPages = 2
+        pageControl.numberOfPages = 3
         
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
@@ -54,6 +56,7 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         pageControl.selectedPageIndex = 0
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,7 +77,7 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
         return 1
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,6 +90,13 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateProfileSecondCell", for: indexPath) as! CreateProfileSecondCell
+            cell.titleLabel.attributedText = NSAttributedString(string: "Hello \(selectedUsername ?? "")!").boldAppearenceOf(string: selectedUsername ?? "", withBoldFont: UIFont.helveticaNeue(weight: .bold, size: cell.titleLabel.font.pointSize))
+            
+            cell.delegate = self
+            cell.layer.cornerRadius = 40
+            return cell
+        case 2:
+            let cell = collectionView.dequeue(CreateProfileThirdCell.self, for: indexPath)
             cell.delegate = self
             cell.layer.cornerRadius = 40
             return cell
@@ -116,6 +126,8 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
             return min(UIScreen.main.bounds.width * 0.9, 315)
         case 1:
             return min(UIScreen.main.bounds.width * 0.9, 315)
+        case 2:
+            return min(UIScreen.main.bounds.width * 0.9, 315)
         default:
             return 315
         }
@@ -124,8 +136,10 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
     func cellHeight(for section: Int) -> CGFloat {
         switch section {
         case 0:
-            return min(UIScreen.main.bounds.height * 0.8, 570)
+            return min(UIScreen.main.bounds.height * 0.8, 500)
         case 1:
+            return min(UIScreen.main.bounds.height * 0.8, 470)
+        case 2:
             return min(UIScreen.main.bounds.height * 0.8, 470)
         default:
             return 315
@@ -159,8 +173,12 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
         selectedGender = gender
     }
     
+    func selected(userSettings: UserSettings?) {
+        selectedUserSettings = userSettings
+    }
+    
     func didTapNext() {
-        if pageControl.selectedPageIndex == 1 {
+        if pageControl.selectedPageIndex == 2 {
             if validateFields() == false {
                 return
             } else {
@@ -168,16 +186,10 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
                 currentUser?.userProfile?.avatarType = selectedAvatar!
                 currentUser?.userProfile?.username = selectedUsername!
                 currentUser?.userProfile?.gender = selectedGender!
+                currentUser?.userProfile?.settings = selectedUserSettings!
             }
             
             //We are at the last page
-            //Create account
-            let age = currentUser?.userProfile?.age ?? 18
-            currentUser?.userProfile?.settings.ageRange = (min(age - 4,18),age + 4)
-            
-            let gender = currentUser?.userProfile?.gender
-            currentUser?.userProfile?.settings.prefferedGender = gender == .female ? .male : .female
-            
             if let uuid = UIDevice.current.identifierForVendor?.uuidString {
                 currentUser?.userProfile?.uuid = uuid
             } else {
@@ -229,28 +241,29 @@ class CreateProfileViewController: UIViewController, UICollectionViewDataSource,
         }
         
         guard selectedUsername != nil && selectedUsername != "" else {
-            present(UIAlertController.errorAlert(text: "Please pick a username"), animated: true, completion: nil)
+            present(
+            UTAlertController.init(title: "Oops", message: "Please pick a username"), animated: true, completion: nil)
             collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
             return false
         }
         
         guard selectedAge != nil else {
-            present(UIAlertController.errorAlert(text: "Please select your age"), animated: true, completion: nil)
+            present(UTAlertController.init(title: "Oops", message: "Please select your age"), animated: true, completion: nil)
             return false
         }
         
         guard selectedAge! >= 16 else {
-            present(UIAlertController.errorAlert(text: "You must be over 16 to user Untind"), animated: true, completion: nil)
+            present(UTAlertController.init(title: "Oops", message: "You must be over 16 to user Untind"), animated: true, completion: nil)
             return false
         }
         
         guard selectedGender != nil else {
-            present(UIAlertController.errorAlert(text: "You must select your gender"), animated: true, completion: nil)
+            present(UTAlertController.init(title: "Oops", message: "You must select your gender"), animated: true, completion: nil)
             return false
         }
         
         guard selectedAvatar != nil else {
-            present(UIAlertController.errorAlert(text: "You must select your avatar"), animated: true, completion: nil)
+            present(UTAlertController.init(title: "Oops", message: "You must select your avatar"), animated: true, completion: nil)
             collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
             return false
         }

@@ -165,7 +165,7 @@ class SendDatePopup: UIViewController {
                             self.delegate?.didEdit(date: date)
                         }
                         
-                        let alert = UTAlertController(title: "Success!!", message: NSAttributedString(string: "Your date request was successfully sent to \(profile.username). You can track their response in your dates.").boldAppearenceOf(string: profile.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue), backgroundColor: UIColor(red: 142, green: 196, blue: 246, alpha: 1), backgroundAlpha: 1)
+                        let alert = UTAlertController(title: "Success!!", message: NSAttributedString(string: "Your date request was successfully sent to \(profile.username). You can track their response in your dates screen.").boldAppearenceOf(string: profile.username, withBoldFont: UIFont.helveticaNeue(weight: .bold, size: UTAlertController.messageFont.pointSize), color: UIColor.darkBlue), backgroundColor: UIColor(red: 142, green: 196, blue: 246, alpha: 1), backgroundAlpha: 1)
                         let action = UTAlertAction(title: "Dismiss", {
                             self.dismiss(animated: false, completion: nil)
                         }, color: UIColor(red: 142, green: 196, blue: 246, alpha: 1))

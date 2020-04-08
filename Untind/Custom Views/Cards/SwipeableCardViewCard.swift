@@ -10,9 +10,10 @@ import UIKit
 import SVProgressHUD
 
 protocol QuestionCardDelegate: class {
-    func didAnswerQuestion(question: Question, answer : Answer)
+    func didAnswerQuestion(question: Post, answer : Answer)
     func didTapProfile(profile: Profile)
     func didTapReport(profile: Profile)
+    func didTapSendDateRequest(profile: Profile)
 }
 
 class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UITextViewDelegate {
@@ -50,7 +51,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
     
     weak var questionDelegate: QuestionCardDelegate?
     
-    private var _question : Question?
+    private var _question : Post?
     private var didLayoutSubviews : Bool = false
     
     var isFeedbackCard : Bool = false {
@@ -61,7 +62,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         }
     }
     
-    var question : Question? {
+    var question : Post? {
         didSet {
             _question = question!
             questionLabel.text = question?.questionText
@@ -78,7 +79,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
             let themeMode = isInAnswerMode ? ThemeMode.answer : ThemeMode.question
             //            NotificationCenter.default.post(name: .didSwitchTheme, object: nil, userInfo: ["theme" : themeMode])
             if isInAnswerMode == true {
-                answerTextField.textField.becomeFirstResponder()
+                answerTextField.textView.becomeFirstResponder()
                 Async.main {
                     self.answerButton.setImage(UIImage(named: "submit-button"), for: .normal)
                 }
@@ -89,7 +90,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
                 animateAnswerOptions(onScreen: true)
                 
             } else {
-                answerTextField.textField.resignFirstResponder()
+                answerTextField.textView.resignFirstResponder()
                 Async.main {
                     self.answerButton.setImage(UIImage(named: "answer-icon"), for: .normal)
                 }
@@ -225,7 +226,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
         if !isInAnswerMode {
             isInAnswerMode = true
         } else {
-            let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: answerTextField.textField.text, upvotes: 0, rating: 0, question: question!)
+            let answer = Answer(with: UTUser.loggedUser!.userProfile!, postDate: Date(), answerText: answerTextField.textView.text, upvotes: 0, rating: 0, question: question!)
             
             SVProgressHUD.show()
             answer.post { (error) in
@@ -239,7 +240,7 @@ class SwipeableCardViewCard: SwipeableCardView, UIGestureRecognizerDelegate, UIT
                         self.questionDelegate?.didAnswerQuestion(question: question, answer: answer)
                     }
                     
-                    self.answerTextField.textField.text = ""
+                    self.answerTextField.textView.text = ""
                     self.isInAnswerMode = false
                 }
             }

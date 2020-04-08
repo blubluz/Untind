@@ -44,14 +44,31 @@ extension Date {
         let hours = diff / 3600
         
         if hours != 0 {
-            return "(\(hours) hours, \((diff-3600*hours)/60) minutes"
+            return "\(hours) hours, \((diff-3600*hours)/60) minutes"
         } else {
             return "\(diff/60) minutes"
         }
     }
     
+    
+    
     static var yesterday: Date { return Date().dayBefore }
     static var tomorrow:  Date { return Date().dayAfter }
+    
+    var hoursLeft: Int {
+        
+        let diff = Int(self.timeIntervalSince1970 - Date().timeIntervalSince1970)
+        let hours = diff / 3600
+        
+        return hours
+    }
+    
+    var minutesLeft: Int {
+        let diff = Int(self.timeIntervalSince1970 - Date().timeIntervalSince1970)
+        
+        return (diff/60)
+    }
+    
     var dayBefore: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
     }

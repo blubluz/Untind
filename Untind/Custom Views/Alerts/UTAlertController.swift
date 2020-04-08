@@ -128,6 +128,11 @@ class UTAlertController: UIViewController {
         }
     }
     
+    func addingAction(action: UTAlertAction) -> UTAlertController {
+        self.addNewAction(action: action)
+        return self
+    }
+    
     func addNewAction(action: UTAlertAction) {
         action.dismissAlert = {
             self.dismiss(animated: true) {

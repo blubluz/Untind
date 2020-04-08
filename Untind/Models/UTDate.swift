@@ -92,8 +92,24 @@ class UTDate: NSObject {
     var invitedResult : DateResult = .noAnswer
     var inviteeResult : DateResult = .noAnswer
     var latestMessages : [UTMessage] = []
-    var privateQuestion : Question?
+    var privateQuestion : Post?
     var chatRoom : UTChatRoom?
+    
+    var isRejected : Bool {
+               return invitedResult == .some(.rejected) || inviteeResult == .some(.rejected)
+           }
+    var isRejectedByMe : Bool {
+        if invitee?.uid.isMyId ?? false {
+            if inviteeResult == .rejected {
+                return true
+            }
+        } else if invited?.uid.isMyId ?? false {
+            if invitedResult == .rejected {
+                return true
+            }
+        }
+        return false
+    }
     
     var myRelationshipStatus : RelationshipStatus {
         guard let myId = UTUser.loggedUser?.userProfile?.uid else {
@@ -124,6 +140,13 @@ class UTDate: NSObject {
                 return .canRequestDate
             } else {
                 if let dateScheduledTime = dateTime {
+                    if isRejected == true {
+                        if isRejectedByMe {
+                            return .youRejected
+                        } else {
+                            return .heRejected
+                        }
+                    } else
                     if isAccepted == false {
                         if dateScheduledTime < Date() {
                             return .dateRequestExpired

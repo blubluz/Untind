@@ -12,7 +12,7 @@ import FBSDKCoreKit
 import SVProgressHUD
 
 @UIApplicationMain
- class AppDelegate: UIResponder, UIApplicationDelegate {
+ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
@@ -20,6 +20,7 @@ import SVProgressHUD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
         SVProgressHUD.setForegroundColor(UIColor.flatOrange)
         SVProgressHUD.setBackgroundColor(UIColor(red: 255, green: 255, blue: 255, alpha: 0.4))
         
@@ -45,7 +46,11 @@ import SVProgressHUD
     func applicationWillTerminate(_ application: UIApplication) {
         
     }
-
-
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        PushNotificationManager.shared.currentFcmToken = fcmToken
+        PushNotificationManager.shared.syncToken()
+        print("Firebase registration token: \(fcmToken)")
+    }
 }
 

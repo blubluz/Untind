@@ -30,7 +30,7 @@ class MyQuestionsCollectionViewCell: UICollectionViewCell {
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 20).cgPath
     }
     
-    func configureWith(question: Question) {
+    func configureWith(question: Post) {
         questionLabel.text = question.questionText
         answersNumberLabel.text = "\(question.answers?.count ?? 0)"
     }

@@ -15,6 +15,7 @@ target 'Untind' do
   pod 'IHKeyboardAvoiding'
   pod 'FBSDKLoginKit'
   pod 'NVActivityIndicatorView'
+  pod 'MultiSlider'
 
   # Pods for Untind
   target 'UntindTests' do

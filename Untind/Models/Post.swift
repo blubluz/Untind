@@ -9,14 +9,20 @@
 import UIKit
 import FirebaseFirestore
 
-class Question: NSObject {
+class Post: NSObject {
     var id : String?
     var author : Profile
     var postDate : Date
+    
+    /**
+        Post expiration date
+    */
+    var postExpirationDate : Date
     var questionText : String
     var answersCount : Int = 0
     var answers : [Answer]?
     var respondent : Profile?
+    
     
     convenience init(with document: DocumentSnapshot) {
         self.init(with: document.data()!)
@@ -28,6 +34,7 @@ class Question: NSObject {
         let authorDict = dictionary["author"] as! JSONDictionary
         author = Profile(with: authorDict)
         postDate = (dictionary["postDate"] as! Timestamp).dateValue()
+        postExpirationDate = (dictionary["postExpirationDate"] as! Timestamp).dateValue()
         questionText = dictionary["questionText"] as! String
         id = dictionary["id"] as? String
         
@@ -43,13 +50,15 @@ class Question: NSObject {
         self.author = author
         self.postDate = postDate
         self.questionText = questionText
+        self.postExpirationDate = postDate.addingTimeInterval(86400)
     }
     
     func jsonValue() -> [String : Any] {
         var json = [ "author" : author.jsonValue(),
                  "postDate" : postDate,
                  "questionText" : questionText,
-                 "answersCount" : answersCount
+                 "answersCount" : answersCount,
+                 "postExpirationDate" : postExpirationDate
              ] as [String : Any]
         
         if let respondent = self.respondent {
@@ -64,26 +73,9 @@ class Question: NSObject {
      
     }
     
-    func fetchAnswers(completion: @escaping (Error?) -> Void) {
-        if self.answers == nil {
-            self.answers = [Answer]()
-        }
-        if let id = id {
-            Answer.fetchAll(forQuestionId: id, userId: nil) { (error, answers) in
-                if let error = error {
-                    print("Error getting answers: \(error)")
-                    completion(error)
-                } else if let localAnswers = answers {
-                    self.answers = localAnswers
-                    completion(nil)
-                }
-            }
-        } else {
-            completion(nil) //Should be error
-            print("Oops. We have no documentId")
-        }
-    }
+   //MARK: - Networking
     
+    //MARK:  Posting
     func post(toProfile: Profile? = nil, completion: @escaping (Error?) -> Void) {
         self.respondent = toProfile
         let db = Firestore.firestore()
@@ -122,9 +114,43 @@ class Question: NSObject {
         }
     }
     
-    static func fetch(fromUserId fromId: String, toUserId toId: String, completion: @escaping (Error?, Question?) -> Void) {
+    //MARK: - Fetching
+    static func fetchPublicPosts(limit: Int, lastSnapshot: DocumentSnapshot?, completion: @escaping (Error?, [Post], DocumentSnapshot?) -> Void) {
+        let db = Firestore.firestore()
+        var query = db.collection("questions").whereField("postExpirationDate", isGreaterThan: Date()).limit(to: limit)
+        if let lastSnapshot = lastSnapshot {
+            query = query.start(afterDocument: lastSnapshot)
+        }
+        var posts = [Post]()
+        
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                 print("Error getting documents: \(error)")
+                completion(error, [], nil)
+            } else {
+                guard let newLastSnapshot = snapshot!.documents.last else {
+                    completion(nil,[],nil)
+                    return
+                }
+                
+                for document in snapshot!.documents {
+                    
+                    
+                    let post = Post(with: document)
+                    guard !post.author.uid.isMyId else {
+                        continue
+                    }
+                    posts.append(post)
+                }
+                
+                completion(nil,posts,newLastSnapshot)
+            }
+        }
+    }
+    
+    static func fetch(fromUserId fromId: String, toUserId toId: String, completion: @escaping (Error?, Post?) -> Void) {
            let db = Firestore.firestore()
-             var question: Question?
+             var question: Post?
              var localError: Error?
              let dispatchGroup = DispatchGroup()
              
@@ -140,7 +166,7 @@ class Question: NSObject {
                   print("Error getting question: \(err)")
               } else {
                   if let document = snapshot?.documents.last {
-                      question = Question(with: document)
+                      question = Post(with: document)
                       dispatchGroup.enter()
                       question?.fetchAnswers { (error) in
                           if error != nil {
@@ -159,7 +185,7 @@ class Question: NSObject {
                 print("Error getting questions: \(err)")
             } else {
                 if let document = snapshot?.documents.last {
-                    question = Question(with: document)
+                    question = Post(with: document)
                     dispatchGroup.enter()
                     question?.fetchAnswers { (error) in
                         if error != nil {
@@ -173,9 +199,9 @@ class Question: NSObject {
         }
     }
     
-    static func fetch(id: String, withAnswers: Bool = true, completion: @escaping (Error?, Question?) -> Void) {
+    static func fetch(with id: String, withAnswers: Bool = true, completion: @escaping (Error?, Post?) -> Void) {
         let db = Firestore.firestore()
-        var question: Question?
+        var question: Post?
         var localError: Error?
         let dispatchGroup = DispatchGroup()
         
@@ -190,7 +216,7 @@ class Question: NSObject {
                 print("Oops. Error fetching question.")
                 dispatchGroup.leave()
             } else {
-                question = Question(with: snapshot!)
+                question = Post(with: snapshot!)
                 if withAnswers {
                     dispatchGroup.enter()
                     question?.fetchAnswers(completion: { (error) in
@@ -205,9 +231,9 @@ class Question: NSObject {
         }
     }
     
-    static func fetchAll(forUserId userId: String, withAnswers: Bool = true, completion: @escaping (Error?, [Question]) -> Void) {
+    static func fetchAll(forUserId userId: String, withAnswers: Bool = true, completion: @escaping (Error?, [Post]) -> Void) {
         let db = Firestore.firestore()
-        var questions = [Question]()
+        var questions = [Post]()
         var localError : Error?
         let dispatchGroup = DispatchGroup()
         
@@ -225,7 +251,7 @@ class Question: NSObject {
             } else {
                 for document in snapshot!.documents {
                     
-                    let question = Question(with: document)
+                    let question = Post(with: document)
                     questions.append(question)
                     if withAnswers {
                         dispatchGroup.enter()
@@ -241,6 +267,26 @@ class Question: NSObject {
             dispatchGroup.leave()
         }
     }
+    
+    func fetchAnswers(completion: @escaping (Error?) -> Void) {
+           if self.answers == nil {
+               self.answers = [Answer]()
+           }
+           if let id = id {
+               Answer.fetchAll(forQuestionId: id, userId: nil) { (error, answers) in
+                   if let error = error {
+                       print("Error getting answers: \(error)")
+                       completion(error)
+                   } else if let localAnswers = answers {
+                       self.answers = localAnswers
+                       completion(nil)
+                   }
+               }
+           } else {
+               completion(nil) //Should be error
+               print("Oops. We have no documentId")
+           }
+       }
 }
 
 

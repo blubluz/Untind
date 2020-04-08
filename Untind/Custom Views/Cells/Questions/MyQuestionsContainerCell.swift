@@ -13,7 +13,7 @@ protocol DraggingDelegate : class{
 }
 
 protocol QuestionsDelegate: class {
-    func didTap(question: Question)
+    func didTap(question: Post)
     func didTapAddQuestion()
 }
 
@@ -23,7 +23,7 @@ class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, 
     @IBOutlet weak var questionsCollectionView: UICollectionView!
     weak var draggingDelegate : DraggingDelegate?
     weak var questionsDelegate : QuestionsDelegate?
-    var questions : [Question]?
+    var questions : [Post]?
     private var shouldClose = true
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -33,7 +33,7 @@ class MyQuestionsContainerCell: UICollectionViewCell, UICollectionViewDelegate, 
         activityIndicator.startAnimating()
     }
     
-    func set(questions: [Question]?, isLoading: Bool = false){
+    func set(questions: [Post]?, isLoading: Bool = false){
         self.questions = questions
         
         if isLoading {

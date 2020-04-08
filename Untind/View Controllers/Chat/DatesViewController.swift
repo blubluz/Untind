@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import SVProgressHUD
 
 class DatesViewController: UIViewController {
 
@@ -342,14 +343,17 @@ extension DatesViewController : DateDelegate {
     func didTapCancelDate(date: UTDate) {
         let alert = UTAlertController(title: "Cancel date", message: "Are you sure you want to cancel this date?", backgroundColor: UIColor(red: 234, green: 244, blue: 223, alpha: 1), backgroundAlpha: 0.5)
         let yesAction = UTAlertAction(title: "Yes", {
+            
+            SVProgressHUD.show()
             date.accept(answer: false) { (error, blockDate) in
+                SVProgressHUD.dismiss()
                 if error != nil {
                     self.present(UTAlertController(title: "Oops", message: "There was a problem - \(error?.localizedDescription ?? "")"), animated: true, completion: nil)
                 } else {
                     if let row = self.dates.firstIndex(where: { $0.id == date.id }) {
                         self.dates[row] = date
                         self.collectionView.reloadData()
-                           }
+                    }
                 }
             }
         }, color: UIColor(red: 126, green: 211, blue: 33, alpha: 1))

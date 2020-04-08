@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestore
 import SVProgressHUD
 protocol AddQuestionDelegate : NSObject {
-    func postQuestionCompleted(error: Error?, question: Question?)
+    func postQuestionCompleted(error: Error?, question: Post?)
 }
 class AddQuestionController: UIViewController {
 
@@ -57,12 +57,12 @@ class AddQuestionController: UIViewController {
     }
     
     @IBAction func postQuestionsTapped(_ sender: Any) {
-        guard answerTextField.textField.text.count > 0 else {
+        guard answerTextField.textView.text.count > 0 else {
             present(UIAlertController.errorAlert(text: "Please write a longer question"), animated: true, completion: nil)
             return
         }
         
-        let question = Question(author: UTUser.loggedUser!.userProfile!, postDate: Date(), questionText: answerTextField.textField.text!)
+        let question = Post(author: UTUser.loggedUser!.userProfile!, postDate: Date(), questionText: answerTextField.textView.text!)
         
         SVProgressHUD.show()
         

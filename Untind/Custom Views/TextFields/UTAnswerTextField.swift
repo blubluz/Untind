@@ -41,7 +41,7 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
     }
     
     
-    var textField : UITextView!
+    var textView : UITextView!
     var quoteMark : UIImageView!
     var questionMark : UIImageView!
     var lines : [UIView] = []
@@ -84,28 +84,28 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
     func initialInit() {
         self.clipsToBounds = false
         backgroundColor = UIColor.clear
-        textField = UITextView(frame: CGRect.zero)
-        addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textView = UITextView(frame: CGRect.zero)
+        addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
         
         self.activateConstraints( [
-            textField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            textField.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            textField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)])
+            textView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            textView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            textView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            textView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)])
         
-        textField.textAlignment = .left
-        textField.delegate = self
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
-        textField.contentInset = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
-        textField.isScrollEnabled = false
-        textField.backgroundColor = UIColor.clear
+        textView.textAlignment = .left
+        textView.delegate = self
+        textView.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0)
+        textView.contentInset = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        textView.isScrollEnabled = false
+        textView.backgroundColor = UIColor.clear
         
         let paraStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paraStyle.lineSpacing = 18
         paraStyle.firstLineHeadIndent = 20
         
-        textField.typingAttributes = [NSAttributedString.Key.foregroundColor : UIColor(red: 55, green: 73, blue: 85, alpha: 1), NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 16)!, NSAttributedString.Key.paragraphStyle : paraStyle]
+        textView.typingAttributes = [NSAttributedString.Key.foregroundColor : UIColor(red: 55, green: 73, blue: 85, alpha: 1), NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 16)!, NSAttributedString.Key.paragraphStyle : paraStyle]
         
         quoteMark = UIImageView(image: UIImage(named: "quote-icon"))
         quoteMark.tintColor = themeColor
@@ -141,7 +141,7 @@ class UTAnswerTextField: UIView, UITextViewDelegate {
         super.layoutSubviews()
         calculateLines()
         placeCharactersCounter()
-        charactersLabel.text = "( \(self.textField.text.count) / \(maxCharacters) characters)"
+        charactersLabel.text = "( \(self.textView.text.count) / \(maxCharacters) characters)"
         charactersLabel.sizeToFit()
     }
     

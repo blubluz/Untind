@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>330268615299-7cr1mak8blfhggro5vb1598b6er017r9.apps.googleusercontent.com</string>
+	<string>330268615299-h3k1c3tpo0i3pogb4aqaff58vni3v6a2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.330268615299-7cr1mak8blfhggro5vb1598b6er017r9</string>
+	<string>com.googleusercontent.apps.330268615299-h3k1c3tpo0i3pogb4aqaff58vni3v6a2</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDO7hBjhywZVTx-xnO04NC1HsGKLsgZBDc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>FincPicsels.Untind.MVP</string>
+	<string>com.FinkPicsel.Untind</string>
 	<key>PROJECT_ID</key>
 	<string>untind</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:330268615299:ios:f4def7326530f9e8</string>
+	<string>1:330268615299:ios:d7b61ed19b9a47d06771b6</string>
 	<key>DATABASE_URL</key>
 	<string>https://untind.firebaseio.com</string>
 </dict>

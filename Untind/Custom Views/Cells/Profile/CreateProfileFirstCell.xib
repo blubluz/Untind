@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,38 +29,31 @@
                                         <color key="textColor" red="0.23529411759999999" green="0.30980392159999998" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="oGM-wf-Frf">
-                                        <rect key="frame" x="25" y="69" width="248" height="72"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Lets create a profile for you. You can pick a random avatar and a username">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Step 1. Create an Avatar" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="oGM-wf-Frf">
+                                        <rect key="frame" x="25" y="69" width="248" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="0.98999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="5PW-ak-74e">
-                                        <rect key="frame" x="30" y="171" width="243" height="54"/>
+                                        <rect key="frame" x="30" y="116.5" width="243" height="103.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8l-hy-bjr">
-                                                <rect key="frame" x="0.0" y="0.0" width="26" height="54"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26" height="103.5"/>
                                                 <state key="normal" image="left-arrow"/>
                                                 <connections>
                                                     <action selector="previousAvatarTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Rgy-66-vjo"/>
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-1" translatesAutoresizingMaskIntoConstraints="NO" id="C3o-sa-EEY">
-                                                <rect key="frame" x="46.5" y="0.0" width="150" height="54"/>
+                                                <rect key="frame" x="46.5" y="0.0" width="150" height="103.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" priority="500" constant="150" id="AC0-Ff-d2T"/>
                                                     <constraint firstAttribute="height" priority="500" constant="150" id="vtW-mU-sU6"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTO-Ma-C2e">
-                                                <rect key="frame" x="217" y="0.0" width="26" height="54"/>
+                                                <rect key="frame" x="217" y="0.0" width="26" height="103.5"/>
                                                 <state key="normal" image="right-arrow"/>
                                                 <connections>
                                                     <action selector="nextAvatarTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="eg4-zn-EPM"/>
@@ -71,25 +62,19 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Bcl-FY-OQ5">
-                                        <rect key="frame" x="30" y="255" width="243" height="35"/>
+                                        <rect key="frame" x="30" y="250" width="243" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQm-1q-pOh">
-                                                <rect key="frame" x="0.0" y="0.0" width="26" height="35"/>
-                                                <state key="normal" image="left-arrow"/>
-                                            </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o2q-aq-pOw">
-                                                <rect key="frame" x="53" y="0.0" width="137" height="35"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="243" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="a8j-Y4-avl"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <action selector="textFieldDidEndEditing:" destination="gTV-IL-0wX" eventType="editingDidEnd" id="1v9-F6-HAR"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKQ-LA-w8k">
-                                                <rect key="frame" x="217" y="0.0" width="26" height="35"/>
-                                                <state key="normal" image="right-arrow"/>
-                                            </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJS-T3-6e4">
@@ -145,7 +130,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="avatar-1" width="47" height="51"/>
+        <image name="avatar-1" width="142" height="150"/>
         <image name="left-arrow" width="26" height="10"/>
         <image name="next-button" width="71" height="71"/>
         <image name="right-arrow" width="26" height="10"/>

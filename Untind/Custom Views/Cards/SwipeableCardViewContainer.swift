@@ -12,7 +12,7 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
    
     
    
-    
+        
 
     static let horizontalInset: CGFloat = 12.0
 
@@ -42,7 +42,12 @@ class SwipeableCardViewContainer: UIView, SwipeableViewDelegate {
         backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
     }
-
+    /// When adding new cards to the cards stack by paginating
+    /// we need to also update the remaining cards to be swiped
+    func addRemainingCards(_ amount: Int) {
+        remainingCards += amount
+    }
+    
     /// Reloads the data used to layout card views in the
     /// card stack. Removes all existing card views and
     /// calls the dataSource to layout new card views.
@@ -167,7 +172,9 @@ extension SwipeableCardViewContainer {
             }
         }
         
-        
+        if remainingCards == 0 {
+            remainingCards = dataSource.numberOfCards()
+        }
         // Only add a new card if there are cards remaining
         if remainingCards > 0 {
             

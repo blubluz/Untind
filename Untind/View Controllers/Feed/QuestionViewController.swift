@@ -30,7 +30,7 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var emptyStateMessage: UILabel!
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     
-    public weak var question : Question?
+    public weak var question : Post?
     private var didAppearOnce = false
     private lazy var chatInputAccesory : ChatInputAccesoryView = {
          let cv = ChatInputAccesoryView()
